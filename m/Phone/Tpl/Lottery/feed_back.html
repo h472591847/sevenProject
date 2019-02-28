@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>意见反馈栏_{$Think.config.web_title}</title>
+<meta name="keywords" content="<if condition="$about['keyword'] neq ''">{$about.keyword}<else/>{$Think.config.web_keywords}</if>" />
+<meta name="description" content="<if condition="$about['description'] neq ''">{$about.description}<else/>{$Think.config.web_description}</if>" />
+</head>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+<style>
+body{ background:#f9f1cd;}
+</style>
+<script type="text/javascript">
+//默认文本
+textarea_default_value = '亲爱的金投资用户:\n     请在这里直接填写您遇到的问题或意见建议，您的意见对金投资非常重要，是金投资前进的动力（500字以内）';
+/**
+ * check_form    表单验证
+ * @param  obj   元素对象
+ */
+function check_form(obj){    
+  $content = $("#content");
+  $verify = $("#verify");
+  $uid = '{$Think.session.user_id}';
+  if($uid == ''){
+    alert('请先登录');location.href='{:U("user/Login")}';return false;
+  }
+  if($.trim($content.val()) == textarea_default_value || $.trim($content.val()) == ''){
+    alert('请输入意见内容');$content.val('');$content.focus();return false;
+  }
+  if($verify.val().length != 4){
+    alert('请输入正确的验证码');$verify.focus();return false;
+  }
+}  
+
+
+function user_list_page(obj){
+  var $page = $(obj).attr('data-value');
+  $.ajax({
+    url: '{:U("Lottery/feed_back")}',
+    type: 'POST',
+    dataType: 'json',
+    data: 'user_list_page='+$page,
+    success:function(msg){                
+        if(msg.data.res.length >0){
+          $("#user_list_page").attr('data-value',msg.data.limit);  
+          for(i=0; i<=msg.data.res.length;i++){          
+            if(msg.data.res[i].face_pic != '' && msg.data.res[i].face_pic != null){
+              face_pic = '{$Think.config.host}' + msg.data.res[i].face_pic;
+            }else{
+              face_pic = "__PUBLIC__/images/personal.jpg";
+            }            
+            html = '<li>\n';
+            html += '  <span>'+msg.data.res[i].i+'</span>\n';
+            html += '  <span><i><img src='+face_pic+' width="35" height="35"></i></span>\n';
+            html += '  <span>'+msg.data.res[i].user_name+'</span>\n';
+            html += '  <span>'+msg.data.res[i].score+'积分</span>\n';
+            html += '</li>\n';                           
+           $("#user_list ul").append(html);
+          }
+        }else{
+          alert('表再点啦，没辣么多内容啦!');return false;
+        }
+
+    }
+  })  
+  
+}
+
+function  feed_list_page(obj){
+  var $page = $(obj).attr('data-value');
+  $.ajax({
+    url: '{:U("Lottery/feed_back")}',
+    type: 'POST',
+    dataType: 'json',
+    data: 'user_list_page='+$page,
+    success:function(msg){                
+        if(msg.data.res.length >0){
+          $("#feed_list").attr('data-value',msg.data.limit);  
+          for(i=0; i<=msg.data.res.length;i++){          
+            if(msg.data.res[i].face_pic != '' && msg.data.res[i].face_pic != null){
+              face_pic = '{$Think.config.host}' + msg.data.res[i].face_pic;
+            }else{
+              face_pic = "__PUBLIC__/images/personal.jpg";
+            }              
+           html = '<li>\n';
+           html += '<div class="customer">\n';
+           html += '<p class="cust_img">\n';
+           html += '<i><img src="'+face_pic+'" width="40" height="40"></i>\n';
+           html += '</p>\n';
+           html += '<p class="cust_con">\n';
+           html += '<span class="cust_angle"><img src="__PUBLIC__/images/cust_angle.png"></span>\n';
+           html += '<span class="cust_txt">'+msg.data.res[i].content+'<!-- <a href="javascript:;">展开 ></a> --></span>\n';
+           html += '</p>\n';
+           html += '<div class="spacer"></div>\n';
+           html += '</div>\n';
+           html += '<div class="jtz_service">\n';
+           html += '<p class="jtz_con">\n';
+           html += '<span class="jtz_angle"><img src="__PUBLIC__/images/jtz_angle.png"></span>\n';
+           html += '<span class="jtz_txt">'+msg.data.res[i].remark+'</span>\n';
+           html += '</p>\n';
+           html += '<p class="jtz_img"><i><img src="__PUBLIC__/images/jtz_tx.jpg" width="40" height="40"></i></p>\n';
+           html += '<div class="spacer"></div>\n';
+           html += '</div>\n';
+           html += '</li>\n';                           
+           $("#f_list ul").append(html);
+          }
+        }else{
+          alert('表再点啦，没辣么多内容啦!');return false;
+        }
+
+    }
+  })  
+  
+}
+</script>
+<body>
+<div class="center">
+   <include file="Common:header"/>
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>{$about.title}</span>
+     <span></span>     
+     <include file="Common:ico"/>
+   </div>   
+   <div><img src="__PUBLIC__/images/back_img.png" width="100%"></div>
+   <form action="{:U('Lottery/DoFeedBack')}" method="post" onsubmit="return check_form(this);">
+   <div class="feed_back">
+      <h3>意见反馈栏</h3>
+      <p>我们将征集您的意见与反馈，为提高网站信息质量、提高服务质量而后更好地为您做好服务。您的意见与建议无所谓对错，只要是真实地反映了您看法，我们将及时并认真阅读，如被采纳将会得到50 -- 500的积分奖励，奖励的积分额度将根据您提交的意见对网站的影响程度。谢谢您的支持与合作！您的支持是我们最大的动力！</p>
+      <if condition="$Think.session.user_id eq ''">               
+      <p class="fd_text_p">您还没有登录，点击<a href="{:U('user/Login')}">这里</a>登录</p>
+      <else/>
+      <p><textarea name="content" cols="" rows="" class="feed_type" maxlength="500" id="content"></textarea></p>
+      <p>
+      <script type="text/javascript">
+          $("#content").val(textarea_default_value);
+          $("#content").click(function() {   
+          //alert($(this).val());return false;                       
+            if($(this).val() == textarea_default_value){
+               $(this).val('');$(this).focus();
+               return false;
+            }                          
+          }).blur(function() {
+            if($(this).val() == ''){
+              $(this).val(textarea_default_value);
+              return false;
+            }
+          })                         
+      </script>      
+         <span><input type="text" class="feed_yzm" name="verify" id="verify" /></span>
+         <span>
+               <a href="javascript:void(change_code(this));" title="点击更换验证码">
+                 <img src="{:U("user/verify",'','')}" id="code" height="29"/>                 
+               </a>
+         </span>
+      </p>
+      <p><input type="submit" class="feed_sub" /></p>
+      </if>
+   </div>
+   </form>
+   <div class="reward" id="user_list">
+      <h3>采纳好友奖励名单</h3>
+      <h4>
+        <span>排名</span>
+        <span>头像</span>
+        <span>昵称</span>
+        <span>获得的奖励</span>
+      </h4>
+      <ul>
+      <foreach name="feed_list" item="v">
+        <li>
+           <span>{$v.i}</span>
+           <span><i><img src="<if condition="$v['face_pic'] neq ''">{$v.face_pic}<else/>__PUBLIC__/images/personal.jpg</if>" width="35" height="35"></i></span>
+           <span>{$v.user_name}</span>
+           <span>{$v.score}积分</span>
+        </li>
+     </foreach>
+      </ul>
+      <p class="page" id="user_list_page" data-value="4" onclick="user_list_page(this)">查看更多</p>
+   </div>
+   <div class="opinion" id="f_list">
+      <h3>采纳意见精选目录</h3>
+      <ul>
+         <foreach name="feed_list" item="v">
+         <li>
+            <div class="customer">
+              <p class="cust_img"><i><img src="<if condition="$v['face_pic'] neq ''">{$v.face_pic}<else/>__PUBLIC__/images/personal.jpg</if>" width="40" height="40"></i></p>
+              <p class="cust_con">
+                <span class="cust_angle"><img src="__PUBLIC__/images/cust_angle.png"></span>
+                <span class="cust_txt">{$v.content}<!-- <a href="javascript:;">展开 ></a> --></span>
+              </p>
+              <div class="spacer"></div>
+            </div>
+            <div class="jtz_service">
+              <p class="jtz_con">
+                <span class="jtz_angle"><img src="__PUBLIC__/images/jtz_angle.png"></span>
+                <span class="jtz_txt">{$v.remark}</span>
+              </p>
+              <p class="jtz_img"><i><img src="__PUBLIC__/images/jtz_tx.jpg" width="40" height="40"></i></p>
+              <div class="spacer"></div>
+            </div>
+         </li>
+         </foreach>
+
+      </ul>
+      <p class="page" id="feed_list" data-value="4" onclick="feed_list_page(this)">查看更多</p>
+   </div>
+   
+   <include file="Common:bottom"/>
+</div>
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>主页_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="{$Think.config.web_description}" />
+
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+<script type="text/javascript">
+//stick the footer at the bottom of the page if we're on an iPad/iPhone due to viewport/page bugs in mobile webkit 
+if(navigator.platform == 'iPad' || navigator.platform == 'iPhone' || navigator.platform == 'iPod') 
+{ 
+     $(".ac_float").css("position", "static"); 
+};
+</script>
+</head>
+<body>
+
+<div class="center">
+  
+  
+  <include file="Common:header"/>
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>金投资</span>
+  <include file="Common:ico"/>
+   </div>   
+  <div id="wrap">
+       <div id="slideshow" class="slideshow swiper-container" style=" max-height: 310px; cursor: -webkit-grab;">
+            <ul class="items swiper-wrapper">
+                <li class="swiper-slide"><a href="http://m.p2p222.com/index.php/Article/articleDetail.html?id=1793" title=""><img src="__PUBLIC__/images/phone4.jpg" alt=""></a></li>
+                <li class="swiper-slide"><a href="{:U('Lottery/feed_back')}" title=""><img src="__PUBLIC__/images/img2.jpg" alt=""></a></li>
+                <li class="swiper-slide"><a href="javascript:;" title=""><img src="__PUBLIC__/images/img3.jpg" alt=""></a></li>
+            </ul>
+            <div class="number" id="slidePage">
+                <span class="swiper-pagination-switch"></span>
+                <span class="swiper-pagination-switch"></span>
+                <span class="swiper-pagination-switch"></span>
+            </div>
+       </div>
+  </div>
+    <script src="__PUBLIC__/js/global-1.1.0.min.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/js/touch.swiper.min.js" type="text/javascript"></script> 
+  <!--circle-->
+  <script type="text/javascript" src="__PUBLIC__/js/raphael-min.js"></script>
+  <script type="text/javascript" src="__PUBLIC__/js/circle.js"></script>    
+	<script type="text/javascript">
+    $(function(){
+        showSlide();
+		var $pro_li = $(".project-menu ul li");
+		$pro_li.click(function(){
+		    $(this).addClass("pro-hover").siblings().removeClass("pro-hover");
+			var index = $pro_li.index(this);
+			$(".product-list > .pro-list").eq(index).show().siblings().hide();
+		});
+    });
+    function showSlide(){
+        var swiper = $('.swiper-container');
+        var maxH = 310, maxW = 600, minH = 130; 
+        var swImg = swiper.find('img');
+        if(Util.isMobile.any()){
+            var win = $(window).width();
+            if(win >= 320 && win < 640){
+                var resetH = (maxH/maxW)*(win-20);
+                swiper.css({'height': resetH})
+                swImg.css({'max-height': resetH});
+            } else if(win >= 640){
+                swiper.css({'height': maxH})
+                swImg.css({'max-height': maxH});
+            } else{
+                swiper.css({'height': minH})
+                swImg.css({'max-height': minH});
+            };
+        } else {
+            swiper.css({'height': maxH})
+            swImg.css({'max-height': maxH});
+        };
+        var newSwiper = new Swiper('.swiper-container', {
+            pagination: '#slidePage',
+            loop: true,
+            grabCursor: true,
+            autoplay: 5000,
+            paginationClickable: true
+        });
+        swiper.find('.swiper-wrapper').show();	
+    }
+    </script>
+    
+    
+    <!--<div class="project-menu">
+       <ul>
+          <li class="first-m pro-hover">投资项目</li>
+          <li class="second-m">理财产品</li>
+       </ul>
+    </div>-->
+    <div class="product-list">
+        <div class="pro-list">
+            <!--project start-->
+            <div class="project">
+                <h3>
+                   <span class="attr"><img src="__PUBLIC__/images/db.png"></span>
+                   <a href="{:U('Deal/DealContent',array('lid'=>$rec_top['id']))}" title="">{$rec_top.loan_title|msubstr=0,11}</a>
+                   <if condition="$rec_top['deal_status'] eq 1">
+                   <if condition="$rec_top['now_time'] LT $rec_top['start_time'] && $rec_top['deal_status'] eq 1">
+                   <span class="state sta_dkf" style="cursor:pointer">待开放</span>
+                   <else/>
+                   <span class="state" style="cursor:pointer" onclick="location.href='{:U("Deal/ToInvestView",array('id'=>$rec_top['id']))}'">投资</span>
+                   </if>
+                   </if>
+                   <if condition="$rec_top['deal_status'] eq 2">
+                   <span class="state sta_mb">满标</span>
+                   </if>           
+                   <if condition="$rec_top['deal_status'] eq 4">
+                   <span class="state state1">还款中</span>
+                   </if>
+                   <if condition="$rec_top['deal_status'] eq 5">
+                   <span class="state sta_dkf">已还清</span>
+                   </if>           
+                </h3>
+                <div class="proje_left">
+                   <ul>
+                      <li>借款金额：<font class="amount">￥{$rec_top.loan_money}元</font></li>
+                      <li>
+                        <span><font class="jk_num">{$rec_top.loan_rate}</font><font class="jk_nor">%</font><br>年化利率</span>
+                        <span><font class="jk_num">                
+                        {$rec_top.loan_deadline}</font><font class="jk_nor"><if condition="$rec_top['loan_deadline_type'] eq 1">天<else/>个月</if></font><br>项目期限</span>
+                      </li>
+                      <li>剩余时间：{$rec_top.retime|remain_time}</li>
+                      <li>担保范围：<font>{$rec_top.guarantee_purview}</font></li>
+                   </ul>
+                </div>
+                <div class="proje_right">
+                    
+                    <div class="percentBox">
+                        <div id="per_bg_rec_top"></div> 
+                        <!-- 承载进度文字 --> 
+                        <div id="per_txt_rec_top" class="pertxt"></div> 
+                    </div>
+                    
+                </div>
+                
+            </div>
+            <script>
+               var rec_top_load_rate = {$rec_top.load_rate};
+                   rec_top_load_rate = rec_top_load_rate/100;
+               init('per_bg_rec_top',rec_top_load_rate,'#per_txt_rec_top','#d2a7ff'); 
+            </script>
+            <!--project end-->
+            <foreach name="loan_list" item="v">
+            <div class="project">
+                <h3>
+                   <span class="attr"><img src="__PUBLIC__/images/db.png"></span>
+                   <a href="{:U('Deal/DealContent',array('lid'=>$v['id']))}" title="">{$v.loan_title|msubstr=0,11}</a>
+                   <if condition="$v['deal_status'] eq 1">
+                   <if condition="$v['now_time'] LT $v['start_time'] && $v['deal_status'] eq 1">
+                   <span class="state sta_dkf" style="cursor:pointer">待开放</span>
+                   <else/>
+                   <span class="state" style="cursor:pointer" onclick="location.href='{:U("Deal/ToInvestView",array('id'=>$loan['id']))}'">投资</span>
+                   </if>
+                   </if>
+                   <if condition="$v['deal_status'] eq 2">
+                   <span class="state sta_mb">满标</span>
+                   </if>
+                   <if condition="$v['deal_status'] eq 4">
+                   <span class="state state1">还款中</span>
+                   </if>
+                   <if condition="$v['deal_status'] eq 5">
+                   <span class="state sta_dkf">已还清</span>
+                   </if>           
+                </h3>
+                <div class="proje_left">
+                   <ul>
+                      <li>借款金额：<font class="amount">{$v.loan_money}元</font></li>
+                      <li>
+                        <span><font class="jk_num">{$v.loan_rate}%</font><br>年化利率</span>
+                        <span><font class="jk_num">{$v.loan_deadline}</font>
+                        <font class="jk_nor"><if condition="$v['loan_deadline_type'] eq 1">天<else/>个月
+                        </if></font><br>项目期限</span>
+                      </li>
+                      <li>剩余时间：{$v.retime|remain_time}</li>
+                      <li>担保范围：<font>{$v.guarantee_purview}</font></li>
+                   </ul>
+                </div>
+                <div class="proje_right">
+                    <div class="percentBox">
+                        <div id="per_bg{$v.i}"></div> 
+                        <!-- 承载进度文字 --> 
+                        <div id="per_txt{$v.i}" class="pertxt"></div> 
+                    </div>
+                </div>        
+            </div> 
+            <script>
+                   var load_rate = {$v.load_rate};
+                       load_rate = load_rate/100;
+                   init('per_bg{$v.i}',load_rate,'#per_txt{$v.i}','#d2a7ff'); 
+            </script>    
+           </foreach> 
+           <include file="Common:bottom"/>
+        </div>
+        <div class="pro-list hide">
+           <ul class="cp-list">
+              <li>
+                 <h3>月月薪<span>每月稳定收益</span></h3>
+                 <div>
+                    <p>
+                       <span class="cp-rate"><font>9.00</font>%</span>
+                       <span>年化收益</span>
+                    </p>
+                    <p class="cp-second">
+                       <span class="cp-month"><font>6</font>个月</span>
+                       <span>投资期限</span>
+                    </p>
+                    <p class="cp-last">
+                       <a href="#">马上投资</a>
+                    </p>
+                 </div>
+                 <div class="spacer"></div>
+              </li>
+              <li>
+                 <h3>单季盈<span>灵活</span><span>期限短</span></h3>
+                 <div>
+                    <p>
+                       <span class="cp-rate"><font>9.00</font>%</span>
+                       <span>年化收益</span>
+                    </p>
+                    <p class="cp-second">
+                       <span class="cp-month"><font>6</font>个月</span>
+                       <span>投资期限</span>
+                    </p>
+                    <p class="cp-last">
+                       <a href="#">马上投资</a>
+                    </p>
+                 </div>
+                 <div class="spacer"></div>
+              </li>
+              <li>
+                 <h3>双季丰<span>收益稳定</span><span>期限较短</span></h3>
+                 <div>
+                    <p>
+                       <span class="cp-rate"><font>9.00</font>%</span>
+                       <span>年化收益</span>
+                    </p>
+                    <p class="cp-second">
+                       <span class="cp-month"><font>6</font>个月</span>
+                       <span>投资期限</span>
+                    </p>
+                    <p class="cp-last">
+                       <a href="#">马上投资</a>
+                    </p>
+                 </div>
+                 <div class="spacer"></div>
+              </li>
+              <li>
+                 <h3>年年红<span>循环出借</span><span>收益最大化</span></h3>
+                 <div>
+                    <p>
+                       <span class="cp-rate"><font>9.00</font>%</span>
+                       <span>年化收益</span>
+                    </p>
+                    <p class="cp-second">
+                       <span class="cp-month"><font>6</font>个月</span>
+                       <span>投资期限</span>
+                    </p>
+                    <p class="cp-last">
+                       <a href="#">马上投资</a>
+                    </p>
+                 </div>
+                 <div class="spacer"></div>
+              </li>
+           </ul>
+        </div>
+    </div>
+   
+   
+</div>
+<div class="ac_float"><a href="{:U('Activity/Index',array('cid'=>48))}"><img src="__PUBLIC__/images/ac_float.png"></a></div>
+
+
+
+</body>
+</html>

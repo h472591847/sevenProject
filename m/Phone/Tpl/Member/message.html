@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>消息中心-{$Think.config.web_title}</title>
+</head>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    var $mess_span = $(".message_h2 span");
+	$mess_span.click(function(){
+        $(this).addClass("selected").siblings().removeClass("selected");
+		var index = $mess_span.index(this);//index() 方法返回指定元素相对于其他指定元素的 index 位置
+		$("div.msg_list > ul").eq(index).show().siblings().hide();
+	});
+});	
+</script>
+
+<body>
+<div class="center">
+   <include file = "Common:header" />
+
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>消息中心</span>
+     <span></span>     
+     <!--登录后显示 start-->
+     <include file="Common:ico"/>
+     <!--end-->
+   </div> 
+   <div class="intro message">
+      <h2 class="message_h2">
+        <span class="<if condition="$change eq 'msg_box'">mess_sel</if> <if condition="$msg_box_count neq 0">mess_no</if>" onclick="location.href='{:U("Member/message",array("change"=>"msg_box"))}'">账户消息</span>
+        <span class="<if condition="$change eq 'deal_log'">mess_sel</if> <if condition="$deal_log_count neq 0">mess_no</if>" onclick="location.href='{:U("Member/message",array("change"=>"deal_log"))}'">资金消息</span>
+      </h2>
+      
+      <div class="msg_list">
+         <ul>
+         <switch name="change">
+          <case value="deal_log">          
+          <foreach name="list" item="v">         
+            <li>
+               <a href="{:U('Member/MessageContent',array('id'=>$v['id'],'change'=>$change))}">
+               <h3 class="<if condition="$v['is_read'] neq 1">none_read<else/>read</if>"> {$v.type|get_deal_log_type}</h3>  <!--已读为read-->
+               <p class="msg_date">{$v.create_time|date='Y-m-d H:i:s',###}</p>
+               <p class="msg_con"> {$v.detail}</p>
+               </a>
+               <div class="spacer"></div>
+            </li>
+          </foreach>
+          </case>
+          <case value="msg_box">          
+          <foreach name="list" item="v">         
+            <li>
+               <a href="{:U('Member/MessageContent',array('id'=>$v['id'],'change'=>$change))}">
+               <h3 class="<if condition="$v['is_read'] neq 1">none_read<else/>read</if>"> {$v.title}</h3>  <!--已读为read-->
+               <p class="msg_date">{$v.create_time|date='Y-m-d H:i:s',###}</p>
+               <p class="msg_con"> {$v.content}</p>
+               </a>
+               <div class="spacer"></div>
+            </li>
+          </foreach>   
+          </case>          
+          </switch>       
+         </ul>
+      </div>
+      <div class="page">{$page}</div>
+   </div>
+   <include file="Common:member_bottom"/>
+</div>
+</body>
+</html>

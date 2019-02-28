@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>资产统计-{$Think.config.web_title}</title>
+</head>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+
+<body>
+<div class="center">
+   <include file = "Common:header" />
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>资产统计</span>
+     <span></span>     
+     <!--登录后显示 start-->
+     <include file="Common:ico"/>
+     <!--end-->
+   </div> 
+   <div>
+      <ul class="assets">
+         <li style="border-bottom:none;">资产总额：<span>{$deal_static.count_user_money|format_price}</span></li>
+         <li class="assets_mark">资产总额 = 可用余额 + 冻结金额 + 待收本金 + 待收利息</li>
+         <li>可用余额：<span>{$deal_static.true_money|format_price}</span></li>
+         <li style="border-bottom:none;">奖励金额：<span>￥200.00</span></li>
+         <li class="assets_mark">奖励金额 = 注册奖励 + 认证奖励 + 积分兑换 + 邀请好友</li>
+         <li>在投本金：<span>{$deal_static.sum_amount|format_price}</span></li>
+         <li>冻结金额：<span>{$deal_static.lock_money|format_price}</span></li>
+      </ul>
+      
+      <ul class="assets">
+         <li>注册奖励：<span>￥25.00</span></li>
+         <li>认证奖励：<span>{$auth_money|format_price}</span></li>
+         <li>积分兑换：<span>{$score_money|format_price}</span></li>
+         <li>邀请好友：<span>{$invite_money|format_price}</span></li>
+      </ul>
+      
+      <ul class="assets">
+         <li>已收总额：<span>{$deal_static.sum_income|format_price}</span></li>
+         <li>已收本金：<span>{$deal_static.sum_income_amount|format_price}</span></li>
+         <li>已收利息：<span>{$deal_static.sum_income_accrual|format_price}</span></li>
+      </ul>
+      
+      <ul class="assets">
+         <li>待收总额：<span>{$deal_static.sum_repay|format_price}</span></li>
+         <li>待收本金：<span>{$deal_static.sum_amount|format_price}</span></li>
+         <li>待收利息：<span>{$deal_static.count_accrual|format_price}</span></li>
+      </ul>
+      
+   </div>
+   <include file="Common:member_bottom"/>
+</div>
+</body>
+</html>

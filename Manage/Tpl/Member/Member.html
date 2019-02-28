@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="__PUBLIC__/css/bdmin.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/Js/Calendar.js"></script>
+<script type="text/javascript" charset="utf-8" src="__ROOT__/Ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__ROOT__/Ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="__ROOT__/Ueditor/lang/zh-cn/zh-cn.js"></script>
+<script src="__PUBLIC__/js/jQuery.js"></script>
+</HEAD>
+<BODY>
+<form action="{:U('Loan/LoanHandle')}" method="post" onSubmit="return check()">
+<input type="hidden" name="upid" value="{$upid}">
+<TABLE class="hs12pt" cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD height="22" >当前位置: 会员管理/会员详情</TD>
+  </TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR></TABLE>
+<TABLE class="hs12pt" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+         <td height="22" background="__PUBLIC__/images/title_bg2.jpg">&nbsp;&nbsp;&nbsp;<span class="baise12ct">{$display_txt}信息</span></td>
+    </tr>
+</table>
+  <TABLE class="hs12pt" width="100%" border="1" align="center" cellpadding="2" cellspacing="0" bordercolor="#175CB7" bordercolordark="#E3EFFB" > 
+    <tr>    
+      <td width="20%" height="25" align="center" >用户名:</td>
+      <td colspan="5" align="left">
+        {$user_info.user_name}
+      </td>
+    </tr>
+    <tr>    
+      <td width="20%" height="25" align="center" >余额:</td>
+      <td colspan="5" align="left">
+        {$user_info.money|format_price}
+      </td>
+    </tr>
+    <tr>    
+      <td width="20%" height="25" align="center" >冻结金额:</td>
+      <td colspan="5" align="left">
+        {$user_info.lock_money|format_price}
+      </td>
+    </tr>
+    <tr>    
+      <td width="20%" height="25" align="center" >奖励金额:</td>
+      <td colspan="5" align="left">
+        {$user_info.bonus_money|format_price}
+      </td>
+    </tr>
+    <tr>    
+      <td width="20%" height="25" align="center" >待收总金额:</td>
+      <td colspan="5" align="left">
+        {$user_info.deal_statistics.sum_repay|format_price}
+      </td>
+    </tr>
+    <tr>    
+      <td width="20%" height="25" align="center" >回款总额:</td>
+      <td colspan="5" align="left">
+        {$user_info.deal_statistics.sum_income_count|format_price}
+      </td>
+    </tr>
+    <tr>    
+      <td width="20%" height="25" align="center" >赚得金额:</td>
+      <td colspan="5" align="left">
+        {$user_info.deal_statistics.sum_income_accrual|format_price}
+      </td>
+    </tr>            
+    <tr>    
+      <td width="20%" height="25" align="center" >积分:</td>
+      <td colspan="5" align="left">
+        {$user_info.score}
+      </td>
+    </tr>    
+    <tr>    
+      <td width="20%" height="25" align="center" >真实姓名:</td>
+      <td colspan="5" align="left">
+        {$user_info.real_name}
+      </td>
+    </tr>
+    <tr>    
+      <td width="20%" height="25" align="center" >身份证号:</td>
+      <td colspan="5" align="left">
+        {$user_info.idno}
+      </td>
+    </tr>
+    <tr>    
+      <td width="20%" height="25" align="center" >手机号码:</td>
+      <td colspan="5" align="left">
+        {$user_info.phone}
+      </td>
+    </tr>  
+    <tr>    
+      <td width="20%" height="25" align="center" >email:</td>
+      <td colspan="5" align="left">
+        {$user_info.email}
+      </td>
+    </tr> 
+    <tr>
+      <td width="20%" height="25" align="center" >认证情况:</td>
+      <td colspan="5" align="left">
+          手机认证：
+          <if condition="$user_info['is_phone'] eq '1'">
+            <span style="color:#4C9F2E">已认证</span>
+          <else/>
+            <span style="color:#F00">未认证</span>
+          </if>
+          <br>邮箱认证：
+          <if condition="$user_info['is_email'] eq '1'">
+            <span style="color:#4C9F2E">已认证</span>
+          <else/>
+            <span style="color:#F00">未认证</span>
+          </if>
+          <br>身份认证：
+            <if condition="$user_info['idno'] neq '' && $user_info['real_name'] neq ''">
+              <span style="color:#4C9F2E">已认证</span>
+            <else/>
+              <span style="color:#F00">未认证</span>
+            </if>
+          <br>支付密码设置：
+          <if condition="$user_info['trade_pwd'] neq ''">
+            <span style="color:#4C9F2E">已设置</span>
+          <else/>
+            <span style="color:#F00">未设置</span>
+          </if>
+          <br>银行卡绑定：
+          <if condition="$user_info['is_bank'] eq '1'">
+            <span style="color:#4C9F2E">已绑定</span> 【卡号：{$bank_res.bank_number} 户名：{$bank_res.real_name} 银行名称：{$bank_res.bank_name} 
+            开户城市：{$bank_res.province}省 - {$bank_res.city}市 开户行：{$bank_res.bank_address}】
+            &nbsp;-> <a href="{:U('Member/BankInfo',array('upid'=>$user_info['id']))}" target="_blank">修改银行卡信息</a>    
+          <else/>
+            <span style="color:#F00">未绑定</span>
+          </if>                
+      </td>
+    </tr>         
+    <tr>    
+      <td width="20%" height="25" align="center" >注册来源:</td>
+      <td colspan="5" align="left">
+        <if condition="$user_info['referer'] neq ''"><a href="{$user_info.referer}" target="_blank">{$user_info.referer}</a><else/>站内注册</if>
+      </td>
+    </tr> 
+    <tr>    
+      <td width="20%" height="25" align="center" >注册时间:</td>
+      <td colspan="5" align="left">
+        {$user_info.create_time|date='Y-m-d H:i:s',###}
+      </td>
+    </tr>     
+    <tr>    
+      <td width="20%" height="25" align="center" >最后登录IP:</td>
+      <td colspan="5" align="left">
+        {$user_info.login_ip}     
+      </td>
+    </tr>  
+    <tr>
+      <td align="center">登录IP归属地:</td>
+      <td colspan="5" align="left">
+        <span id="res_txt"></span>
+        <script type="text/javascript"> 
+          /*新浪IP查询接口*/
+          $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip={$user_info.login_ip}', function(_result){  
+            $res_txt = $("#res_txt");
+            if (remote_ip_info.ret == '1'){   
+              $res_txt.html(remote_ip_info.country+' - '+remote_ip_info.province+' - '+remote_ip_info.city);   
+            }else{   
+              $res_txt.html('错误:没有找到匹配的 IP 地址信息！');   
+            }  
+          })
+        </script>         
+      </td>
+    </tr>
+    <tr>    
+      <td width="20%" height="25" align="center" >最后登录时间:</td>
+      <td colspan="5" align="left">
+        {$user_info.login_time|date='Y-m-d H:i:s',###}
+      </td>
+    </tr>                    
+<tr>
+  <td colspan="6" align="center"><input type="button" value="返回上一页" onclick="history.go(-1);"></td>
+</tr>
+  </table>
+
+</BODY></HTML>

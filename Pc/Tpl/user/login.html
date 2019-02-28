@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>会员登录-{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="{$Think.config.web_description}" />
+<script type='text/javascript'>
+window._CWiQ = window._CWiQ || []; 
+window.BX_CLIENT_ID = 35795; // 帐号ID 
+(function() {
+ var c = document.createElement('script') ,
+       p = 'https:'==document.location.protocol; 
+       c.type = 'text/javascript'; 
+       c.async = true; 
+       c.src = (p?'https://':'http://')+'whisky.ana.biddingx.com/boot/0'; 
+ var h = document.getElementsByTagName('script')[0]; 
+       h.parentNode.insertBefore(c, h); 
+})(); 
+_CWiQ.push(['_trackPdmp', '访问过登录页', 1]); // 访客分类名称是给访客贴的标签，可以自定义，例如： 访问过官网、注册用户等。
+</script>
+<include file = "Common:transparent" />
+</head>
+<link href="__PUBLIC__/style/base.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/register.css" type="text/css" rel="stylesheet" />
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<body>
+<include file = "Common:head" />
+<div class="login">
+  <div class="dlk">
+      <h2>金投资登录</h2>
+   <form action="{:U('user/DoLogin')}" method="post">
+   <input type="hidden" name="referer_url" value="{$referer_url}">
+     <table width="90%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+           <td class="fl" height="55"><input type="text" value="请输入账号/手机/邮箱" onclick="if(this.value=='请输入账号/手机/邮箱'){this.value='';}" onblur="if(this.value==''){this.value='请输入账号/手机/邮箱';}" name="user_name" class="login_txt" /></td>
+        </tr>
+        <tr>
+           <td class="fl" height="55"><input type="password" class="login_pwd" name="user_pwd" /></td>
+        </tr>
+        <tr>
+           <td height="55" class="fl"><input type="text" value="" class="login_code"  name="verify" style=" width:65px;" />
+            <span class="yzm_code1">
+            <a href="javascript:void(change_code(this));">
+                 <img src="{:U("user/verify",'','')}" id="code"/>
+                 <!-- <img src="/code.php" id="code"/> -->
+             </a>
+            </span></td>
+        </tr>
+        <tr>
+           <td height="50" class="fl"><span class="for"><a href="{:U('user/getPasswordIndex')}">忘记密码 </a>|<a href="{:U('user/register')}"> 免费注册</a></span>
+           </td>
+        </tr>
+        <tr>
+           <td class="fl"><input type="submit" value="立即登录" class="login_sub" id="submit_login" /></td>
+        </tr>
+     </table>
+   </form>     
+   </div>
+</div>
+ 
+<include file = "Common:bottom" />
+</body>
+</html>
+<script type="text/javascript">
+    verifyURL = '{:U("user/verify",'','')}';
+    //verifyURL = '/code.php';
+    function change_code(obj){
+        $("#code").attr("src",verifyURL+'/'+Math.random());
+        return false;
+    }    
+    $('#submit_login').click(function(){
+       $user_name = $("input[name=user_name]");
+       $pwd = $("input[name=user_pwd]");
+       $verify = $("input[name=verify]");
+       if($.trim($user_name.val())=='' || $.trim($user_name.val())=='请输入账号/手机/邮箱'){alert('用户名不能为空');$user_name.focus();return false;} //验证帐号  
+       if($.trim($user_name.val()).length<3){alert('用户名长度不能少于3位');$user_name.focus();return false;} //验证帐号长度    
+       if($.trim($pwd.val()).length<4){alert('密码不能为空，且长度不能少于4位');$pwd.focus();return false;} //验证密码长度           
+       if($verify.val()==""){
+          alert('请输入验证码！');
+          $verify.focus();
+          return false;              
+        }
+        if($verify.val().length!=4){
+          alert('请输入正确的验证码！');
+          $verify.focus();
+          return false;              
+        }
+		_CWiQ.push(['_trackLogin', 1]);        
+    })
+</script>

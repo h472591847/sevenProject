@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$cate.class_name}_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="{$Think.config.web_description}" />
+<include file = "Common:transparent" />
+</head>
+
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/index.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+
+<script type="text/javascript">
+  $(function() {        
+//投资项目进度条
+<foreach name="loan_list" item="v">
+ <php>$i++;</php>
+    var p_bar = $(".pro_percent #bard{$i}").attr("data-load{$i}");
+    $(".pro_percent #bard{$i}").css("width",p_bar);
+</foreach>
+});
+
+function day_cx(obj){    
+    $(obj).parents("dd").siblings().find("a").removeClass("on");
+    $(obj).addClass("on");    
+    $(".day_cx").show();
+    $(".month_cx").hide();
+}
+
+function month_cx(obj){
+    $(obj).parents("dd").siblings().find("a").removeClass("on");
+    $(obj).addClass("on");    
+    $(".month_cx").show();
+    $(".day_cx").hide();
+}
+</script>
+
+<body>
+<include file = "Common:head" />
+    
+    <!-- <h3 class="location" style="line-height:40px;">首页 > 我要投资</h3> -->
+<div class="global_cen" style=" overflow:hidden; margin-top:0;">
+<empty name="loan_list">
+    <div style=" height:200px; line-height:50px;"><center>暂无数据！~</center></div>
+<else/>
+	<!-- 投资列表 -->
+	<php>$i=0;</php>
+	<foreach name="loan_list" item="v">           
+	<php>$i++;</php>
+	<div class="invest_item" <if condition="$i % 4 eq 1">style=" margin-left:0;"</if>>       						
+		<div  <if condition="$v['now_time'] LT $v['start_time'] && $v['deal_status'] eq 1">
+	        class="invest_list02"待开放
+	      </if>
+	      <if condition="$v['now_time'] EGT $v['start_time'] && $v['deal_status'] eq 1">
+	       class="invest_list"
+	      </if> 		
+		  <switch name="v.deal_status">
+		  <case value="2">class="invest_list03"</case>                 
+		  <case value="4">class="invest_list02"</case>	          
+		  <case value="5">class="invest_list02"</case>                        
+		  </switch>><!-- invest_list是立即投标样式 -->
+<!-- 			<div class="invest_sort"><span>{$v.repayment_mode}</span><span>&nbsp;|&nbsp;</span><span>{$v.payment_source|msubstr=0,4}</span><img src="/Pc/Tpl/Public/images/Invest_icon.png" /></div> -->
+			<h4 class="invest_h4">
+            <switch name="v.class_id">
+                <case value="1">            
+                <a href="{:U('Deal/yueyuexin',array('lid'=>$v['id']))}" title="{$v.loan_title}">{$v.loan_title|msubstr=0,12}</a>
+                </case>
+                <case value="2">            
+                <a href="{:U('Deal/danjiying',array('lid'=>$v['id']))}" title="{$v.loan_title}">{$v.loan_title|msubstr=0,12}</a>
+                </case>
+                <case value="3">            
+                <a href="{:U('Deal/shuangjifeng',array('lid'=>$v['id']))}" title="{$v.loan_title}">{$v.loan_title|msubstr=0,12}</a>
+                </case>
+                <case value="4">            
+                <a href="{:U('Deal/niannianhong',array('lid'=>$v['id']))}" title="{$v.loan_title}">{$v.loan_title|msubstr=0,12}</a>
+                </case>
+            </switch>                                                
+            </h4>
+			<!-- <p class="p_company mar-t-15"><span>{$v.guarantee_mode}</span>&nbsp;·&nbsp;<span>企业</span></p> -->
+			<div class="pro_percent02">
+				<div id="bard5" class="pro_progress02" style="width: {$v.load_rate}%;" original-title="{$v.load_rate}%"></div>
+			</div>
+			<p class="p_company"><span style=" color:#666;">{$v.count_amount|number_format}</span>&nbsp;/&nbsp;<span>{$v.loan_money|number_format}</span> &nbsp;<font color="#fe8854">{$v.load_rate}%</font></p>
+			<p class="p_company mar-t-15">{$v.company_info|msubstr=0,48}</p>
+			<div class="NewP_am mar-t-30">
+				<p class="P_am1" style="width:90px;">
+					<span class="Am_txt">年化利率</span>
+					<span class="Am_rate">  {$v.loan_rate|intval}
+                   <if condition="$v['loan_add_rate'] neq '0'"><i>+{$v.loan_add_rate|intval}</i></if><i>%</i></span>
+				</p>
+				<p class="am_p_last">
+					<span class="Am_txt">借款期限</span>
+					<span class="Am_limit">
+                  {$v.loan_deadline}
+                  <switch name="v.loan_deadline_type">
+                  <case value="0"><i>个月</i></case>
+                  <case value="1"><i>天</i></case>
+                  </switch> 
+				   </span>
+				</p>
+			</div>
+		</div>		
+	      <if condition="$v['now_time'] LT $v['start_time'] && $v['deal_status'] eq 1">
+	        <a class="invest_a02" href="javascript:;">待开放</a>
+	      </if>
+	      <if condition="$v['now_time'] EGT $v['start_time'] && $v['deal_status'] eq 1">
+            <switch name="v.class_id">
+                <case value="1">
+    	        <a href="{:U('Deal/yueyuexin',array('lid'=>$v['id']))}" target="_blank" class="invest_a01">投标</a>
+                </case>
+                <case value="2">
+                <a href="{:U('Deal/danjiying',array('lid'=>$v['id']))}" target="_blank" class="invest_a01">投标</a>
+                </case>
+                <case value="3">
+                <a href="{:U('Deal/shuangjifeng',array('lid'=>$v['id']))}" target="_blank" class="invest_a01">投标</a>
+                </case>
+                <case value="4">
+                <a href="{:U('Deal/niannianhong',array('lid'=>$v['id']))}" target="_blank" class="invest_a01">投标</a>
+                </case>
+            </switch>
+	      </if>        		
+	      <switch name="v.deal_status">
+	          <case value="2"><a href="javascript:;" class="invest_a03">满标</a></case>                      
+	          <case value="4"><a href="javascript:;" class="invest_a02">还款中</a></case>
+	          <case value="5"><a href="javascript:;" class="invest_a02">已还清</a></case>                        
+	      </switch>  		
+	</div>
+	</foreach>
+</empty>
+</div>
+
+<div class="global_cen">
+	<div class="page">{$page}</div>
+	<div class="spacer"></div> 
+</div>
+
+<include file = "Common:bottom" />
+</body>
+</html>

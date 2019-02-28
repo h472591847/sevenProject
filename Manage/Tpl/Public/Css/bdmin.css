@@ -1,0 +1,119 @@
+BODY {
+	background-color: #E3EFFB;
+	font-weight: normal;
+	color: #000;
+	font-size: 12px;
+	margin:0;
+}
+A:link {
+	font-size: 12px;
+	font-weight: normal;
+	color: #000;
+	text-decoration: none;
+}
+A:visited {
+	font-size: 12px;
+	font-weight: normal;
+	color: #000;
+	text-decoration: none;
+}
+A:hover {
+	font-size: 12px;
+	font-weight: normal;
+	color: #F00;
+	text-decoration: none;
+}
+.bjys {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: none;
+	border: 1px solid #CCCCCC;
+}
+.hs12pt {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: none;
+	line-height: 20px;
+}
+.hs12:link {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: none;
+}
+.hs12:visited {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: none;
+}
+.hs12:hover {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #00349A;
+	text-decoration: none;
+}
+.baise12ct {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.lsbk_k {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: none;
+	border: 1px solid #00349A;
+}
+.hong12pt {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #FF0000;
+	text-decoration: none;
+}
+.text {
+	font-family: "宋体";
+	font-size: 12px;
+	border: 1px solid #CCC;
+	text-decoration: none;
+}
+.hong12:link {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	text-decoration: none;
+}
+.hong12:visited {
+
+
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #FF0000;
+	text-decoration: none;
+}
+.hong12:hover {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #00349A;
+	text-decoration: none;
+}
+.hs12b {
+	font-size: 12px;
+	font-weight: bold;
+	color: #000;
+	text-decoration: none;
+	font-family: "宋体";
+}

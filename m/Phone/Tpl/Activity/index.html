@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>{$cate.name}_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="<if condition="$cate['description'] neq ''">{$cate.description}<else/>{$Think.config.web_description}</if>" />
+</head>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+
+<body>
+<div class="center">
+   <include file="Common:header"/>
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>{$cate.name}</span>
+     <span></span>     
+    <include file="Common:ico"/>
+   </div>  
+   <div class="activity">
+      <ul id="container">
+      <foreach name="list" item="v">
+         <li>
+            <a <if condition="$v['url'] neq ''">href="{$v.url}"<else/>href="{:U('Article/articleDetail')}?id={$v.id}"</if>><img src="<if condition="$v['img'] neq ''">{$Think.config.host}{$v.img}<else/>/Public/Images/image_err.gif</if>" alt="" width="100%" height="170"></a>
+            <a <if condition="$v['url'] neq ''">href="{$v.url}"<else/>href="{:U('Article/articleDetail')}?id={$v.id}"</if>>{$v.title}</a>
+         </li>
+      </foreach>
+      </ul>
+      <div class="spacer"></div>
+   </div>
+   <include file="Common:bottom"/>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+/*
+   滚动加载数据，加载成功则拼接html插入到页面中
+ */
+var cid = "{$cid}";
+var totalheight = 0; 
+var page = 0; 
+$(window).scroll( function() { 
+ totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());     
+   if ($(document).height() <= totalheight){     
+      page++;
+      $.ajax({
+         url:"{:U('Activity/loadData')}",
+         type: "POST",
+         data: ({page:page,cid:cid}),      
+         beforeSend:function(){
+            $("#loading").show();//显示loading
+         },       
+         success:function(msg){
+            $("#loading").hide()//隐藏loading
+            if(msg.status == '1'){               
+               $container = $("#container");
+               var html = "";
+               var cover_img = "";//图片路径
+               for (var i = 0; i < msg.data.length; i++) {     
+                  if (msg.data[i].img != null){
+                    cover_img = msg.data[i].img;
+                  }else{
+                    cover_img = "/Public/Images/image_err.gif";
+                  }
+                  html = "<li><a href=\"{:U('Article/articleDetail')}?id="+msg.data[i].id+"\"><img src=\""+cover_img+"\" alt=\"\" width=\"100%\" height=\"170\"></a>";
+                  html += "<a href=\"{:U('Article/articleDetail')}?id="+msg.data[i].id+"\">"+msg.data[i].title+"</a></li>";                  
+                  $("#container").append(html);
+               };               
+               return false;
+            }
+         }          
+      });
+   } 
+}); 
+</script>

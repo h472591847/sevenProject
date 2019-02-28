@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>最新活动_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="{$Think.config.web_description}" />
+<script type='text/javascript'>
+window._CWiQ = window._CWiQ || []; 
+window.BX_CLIENT_ID = 35795; // 帐号ID 
+(function() {
+ var c = document.createElement('script') ,
+       p = 'https:'==document.location.protocol; 
+       c.type = 'text/javascript'; 
+       c.async = true; 
+       c.src = (p?'https://':'http://')+'whisky.ana.biddingx.com/boot/0'; 
+ var h = document.getElementsByTagName('script')[0]; 
+       h.parentNode.insertBefore(c, h); 
+})(); 
+_CWiQ.push(['_trackPdmp', '访问过专题页', 1]); // 访客分类名称是给访客贴的标签，可以自定义，例如： 访问过官网、注册用户等。
+</script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<include file = "Common:transparent" />
+<link href="__PUBLIC__/style/base.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/guide.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+<include file="Common:project_menu" />
+<div class="ac_list_img"></div>
+<div class="qx_list" id="container">
+	<ul>
+		<li class="box">
+			<div class="qx_picBox"><img src="__PUBLIC__/images/131.png" width="300" height="200" /></div>
+			<div class="qx_txt">
+			   <h3>5月积分超值送 心动不如行动</h3>
+               <p class="qx_date">-------------------------------------------已结束</p>
+               <p class="qx_con">投资人在活动期间，累计投资满2000元送300积分；累积投满5000元送800积分；累计投满10000元送2000积分；累计投满20000元送5000积分。</p>
+			</div>
+            <a href="{:U('Lottery/cumulative')}" class="qx-a qx-b">活动详情</a>
+		</li>
+        <li class="box">
+			<div class="qx_picBox"><img src="__PUBLIC__/images/ac3.png" width="300" height="200" /></div>
+			<div class="qx_txt">
+			   <h3>民意火热征集 采纳拿大礼</h3>
+               <p class="qx_date">-------------------------------------------长期有效</p>
+               <p class="qx_con">我们将征集您的意见与反馈，为提高网站信息质量、提高服务质量而后更好地为您做好服务。您的意见与建议无所谓对错，只要是真实地反映了您看法，我们将及时并认真阅读，如被采纳将会得到50 -- 500的积分奖励，奖励的积分额度将根据您提交的意见对网站的影响程度。谢谢您的支持与合作！您的支持是我们最大的动力！</p>
+			</div>
+            <a href="{:U('Lottery/feed_back')}" class="qx-a">活动详情</a>
+		</li>
+        <li class="box">
+			<div class="qx_picBox"><img src="__PUBLIC__/images/ac4.png" width="300" height="200" /></div>
+			<div class="qx_txt">
+			   <h3>金投资积分上线啦！！邀请送壕礼！！</h3>
+               <p class="qx_date">-------------------------------------------长期有效</p>
+               <p class="qx_con">邀请好友得积分；认证得积分；每天签到得积分；积分可以10：1的比例换取人民币。</p>
+			</div>
+            <a href="" class="qx-a">活动详情</a>
+		</li>
+        <li class="box">
+			<div class="qx_picBox"><img src="__PUBLIC__/images/ac5.png" width="300" height="200" /></div>
+			<div class="qx_txt">
+			   <h3>注册即送50元</h3>
+               <p class="qx_date">-------------------------------------------长期有效</p>
+               <p class="qx_con">注册即送50元，欢迎广大投资者前来投资！</p>
+			</div>
+            <a href="" class="qx-a">活动详情</a>
+		</li>
+        <li class="box">
+			<div class="qx_picBox"><img src="__PUBLIC__/images/ac2.png" width="300" height="200" /></div>
+			<div class="qx_txt">
+			   <h3>积分超值增送 越投越幸运</h3>
+               <p class="qx_date">---------------------------------------------已结束</p>
+               <p class="qx_con">投资人在活动期间，每一资投标（一标可多次投资），单笔满2000元送300积分；单笔满5000元送800积分；单笔满10000元送2000积分。</p>
+			</div>
+            <a href="{:U('Lottery/activity_integral')}" class="qx-a qx-b">活动详情</a>
+		</li>
+	</ul>
+	<div class="clear"></div>
+</div>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.masonry.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var $container = $('#container');
+	$container.imagesLoaded(function(){
+		$container.masonry({
+			itemSelector: '.box',
+			columnWidth: 12 //每两列之间的间隙为5像素
+		});
+	});
+});
+</script>
+
+<p class="tj_total">
+         <script type="text/javascript">
+         var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+         document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fe29aec143162fc1ca52145771a9ee305' type='text/javascript'%3E%3C/script%3E"));
+         </script>          
+         <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5958842'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/stat.php%3Fid%3D5958842%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>              
+       </p>
+</body>
+</html>

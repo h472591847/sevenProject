@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>消息中心-{$Think.config.web_title}</title>
+<include file = "Common:transparent" />
+
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+</head>
+<body>
+<include file = "Common:head" />
+<include file = "Common:web_announce" />
+<div class="middle">
+   <include file="Common:left_menu"/>
+   <div class="mid_right InLine">
+      <div class="mr_center">
+ <!--red_envelope start-->
+ <script type="text/javascript">
+ $(document).ready(function() {
+    $(".mess_li").click(function(){
+      var $mess_nr=$(this).parents(".mess_a").siblings(".mess_nr");
+      var $data_id = $(this).attr('data-id');
+      var $is_read = $(this).attr('is-read');
+      if($mess_nr.is(":visible")){
+    		$mess_nr.hide();
+        }else{
+    		$mess_nr.show();
+      }         
+      $(this).parent().removeClass('weight');//去掉加粗状态
+      $(this).parent().siblings('.mes_img').find('img').attr('src','__PUBLIC__/images/message_look.png');//使此消息的图标变成已读图标          
+      //若此消息未读，则执行阅读状态修改
+      if($is_read!=1){
+         $.ajax({
+             dataType: "JSON",
+             url: "{:U('Member/MsgIsRead')}",
+             data: "change={$change}&id="+$data_id,
+             success: function(msg){                 
+              if(msg.status==1){                                        
+                return false;
+              }else{
+                alert(msg.info);//输出错误信息
+              }
+             }
+          }); 
+         return false;
+      }
+    });
+});
+
+
+/**
+ * all_read       选中消息标记为已读
+ */
+function all_read(){
+  var ids = "";
+  //处理选中的信息集合
+  $("input[name='item']:checked").each(function(i) {
+     if(i == 0){
+        ids = $(this).val();
+     }else{
+        ids = ids + ',' + $(this).val();
+     }
+  });
+  if(ids == ''){
+    alert('未选中');return false;
+  }
+
+ $.ajax({
+     async:false,
+     dataType: "JSON",
+     url: "{:U('Member/MsgIsRead')}",
+     data: "change={$change}&ids=" + ids,
+     success: function(msg){                 
+      if(msg.status==1){  
+        $("input[name='item']").attr('checked',false);                                      
+        location.reload();return false;
+      }else{
+        alert(msg.info);return false;//输出错误信息
+      }
+     }
+  });   
+ return false;
+}
+ </script>
+         <php>
+           if($change == 'msg_box'){
+              $no1 = "sel_d ";
+           }
+           if($change == 'deal_log'){
+              $no2 = "sel_d ";
+           }
+           if($msg_box_count != 0){
+              $cir1 = "red_cir";
+           } 
+           if($deal_log_count != 0){
+              $cir2 = "red_cir";
+           }                   
+         </php>
+         <p class="xx_cen">
+           <span class="{$no1} {$cir1}">
+              <a href="{:U('Member/message',array('change'=>'msg_box'))}">账户消息</a>
+           </span>
+           <span class="{$no2} {$cir2}">
+              <a href="{:U('Member/message',array('change'=>'deal_log'))}">资金消息</a>
+           </span>
+         </p>
+         
+         <div class="message">
+            <ul>
+           <switch name="change">
+              <case value="deal_log">            
+                  <foreach name="list" item="v">
+                     <li>
+                      <div class="mess_a clearfix">
+                         <!--没看显示-->
+                         <span class="mes_box"><input name="item" type="checkbox" value="{$v.id}" /></span>
+                         <span class="mes_img">
+                           <if condition="$v['is_read'] neq 1">
+                              <img src="__PUBLIC__/images/message_img.png" />
+                           <else/>
+                              <img src="__PUBLIC__/images/message_look.png" />
+                           </if>
+                         </span>
+                         <!--看过显示-->
+                         <!--<span class="mes_img"><img src="__PUBLIC__/images/message_look.png" /></span>-->
+                         
+                         <!--没看的加类名 class="weight"-->
+                         <span class="mes_con <if condition="$v['is_read'] neq 1"> weight</if>"><a href="#" data-id="{$v.id}" is-read="{$v.is_read}" class="mess_li">
+                          {$v.type|get_deal_log_type}<if condition="$v['money'] neq '0'">{$v.money|format_price}</if>
+                         </a></span>
+                         <span class="mes_date">{$v.create_time|date='Y-m-d H:i:s',###}</span>
+                      </div>
+                      <div class="mess_nr">
+                         <if condition="$v.type eq 2">您投资的项目：<a href="{:U('Deal/DealContent',array('lid'=>$v['loan']['id']))}" target="_blank" style="color:#64BED1">{$v.loan.loan_title}</a></if> {$v.detail}
+                      </div>                  
+                   </li>                             
+                  </foreach>
+              </case>
+              <case value="msg_box">
+                  <foreach name="msg_box_list" item="v">
+                     <li>
+                      <div class="mess_a clearfix">
+                         <!--没看显示-->
+                         <span class="mes_box"><input name="item" type="checkbox" value="{$v.id}" /></span>
+                         <span class="mes_img">
+                           <if condition="$v['is_read'] neq 1">
+                              <img src="__PUBLIC__/images/message_img.png" />
+                           <else/>
+                              <img src="__PUBLIC__/images/message_look.png" />
+                           </if>
+                         </span>
+                         <!--看过显示-->
+                         <!--<span class="mes_img"><img src="__PUBLIC__/images/message_look.png" /></span>-->
+                         
+                         <!--没看的加类名 class="weight"-->
+                         <span class="mes_con <if condition="$v['is_read'] neq 1"> weight</if>"><a href="#" data-id="{$v.id}" is-read="{$v.is_read}"  class="mess_li">
+                         {$v.title} 
+                         </a></span>
+                         <span class="mes_date">{$v.create_time|date='Y-m-d H:i:s',###}</span>
+                      </div>
+                      <div class="mess_nr">
+                          {$v.content}
+                      </div>                  
+                   </li>                             
+                  </foreach>                                 
+              </case>
+           </switch>            
+            </ul>
+         </div>
+         <div class="all_read"><input name="" type="checkbox" value="" class="CheckedRead" /> 
+         <span class="tag_read" style="cursor:pointer;" onclick="all_read()">全部标记为已读</span></div>
+         <script type="text/javascript">
+         $(".CheckedRead").click(function(){
+		    $("[name=item]:checkbox").attr("checked",this.checked);
+		 });
+         </script>
+         <!--red_envelope end-->
+         <div class="page">
+           {$page}
+           </div>
+           
+         <div class="spacer"></div>
+      </div>
+   </div>
+   <div class="spacer"></div>
+</div>
+<include file = "Common:bottom" />
+</body>
+</html>

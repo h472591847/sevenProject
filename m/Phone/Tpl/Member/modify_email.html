@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>修改邮箱-{$Think.config.web_title}</title>
+</head>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('input[type=email]:first').focus();
+});
+</script>
+<body>
+<div class="center">
+   <include file = "Common:header" />
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>修改邮箱</span>
+     <span></span>     
+     <!--登录后显示 start-->
+     <include file="Common:ico"/>
+     <!--end-->
+   </div> 
+  
+
+   <!--certification end-->
+   <form action="{:U('Member/DoUpdateMailSend')}" name="form_mail" method="post">    
+   <input type="hidden" name="user_id" value="{$user_id}">
+   <!--modify start-->
+   <div class="personal">
+       <ul>
+             <li><span>新邮箱地址：</span><input type="text" id="email" name="email" class="user_form user_p" placeholder="请输入邮箱地址"></li>
+       </ul>
+   </div>
+   <p class="with_p"><input type="submit" id="submit_email" value="发送验证邮件" id="submit_trade" class="user_confirm"></p>
+   <!--modify end-->
+   </form>
+
+</div>
+<script type="text/javascript">
+    //绑定邮箱表单过滤
+    $("#submit_email").click(function(){
+       $mail = $("#email");
+       var reg = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/; //邮箱正则过滤
+       if(!reg.test($.trim($mail.val())) || $.trim($mail.val())==''){alert("这不是一个正确的邮箱地址");$mail.focus();return false;}//验证邮箱    
+    })  
+</script>
+</body>
+</html>

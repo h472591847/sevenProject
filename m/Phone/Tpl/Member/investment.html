@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>投资记录-{$Think.config.web_title}</title>
+</head>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+
+
+<body>
+<div class="center">
+   <include file = "Common:header" />
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>投资记录</span>
+     <span></span>     
+     <!--登录后显示 start-->
+     <include file="Common:ico"/>
+     <!--end-->
+   </div> 
+   <div class="tab_menu">
+		<ul>
+			<li onclick="location.href='{:U('Member/Investment',array('deal_status'=>4))}'" <if condition="$deal_status eq 4 || $deal_status eq ''">class="selected"</if>>回款中</li>
+			<li onclick="location.href='{:U('Member/Investment',array('deal_status'=>1))}'" <if condition="$deal_status eq 1">class="selected"</if>>投标中</li>
+			<li onclick="location.href='{:U('Member/Investment',array('deal_status'=>5))}'" <if condition="$deal_status eq 5">class="selected"</if>>已结束</li>
+		</ul>
+        <div class="spacer"></div>
+	</div>
+	<div class="tab_box"> 
+		 <div>
+            <ul>
+            <foreach name="list" item="v">  
+               <li>
+                  <h3><a href="{:U('Deal/DealContent',array('lid'=>$v['lid']))}" title="">{$v.loan_title|msubstr=0,16}</a></h3>
+                  <p>
+                    <span class="tab_txt">已投资(元)</span>
+                    <span class="tab_money">{$v.amount|format_price}</span>
+                  </p>
+                  <p>
+                    <span class="tab_txt">已回款(元)</span>
+                    <span class="tab_money">{$v.return_money|format_price}</span>
+                  </p>
+                  <p>
+                    <span class="tab_txt">待回款(元)</span>
+                    <span class="tab_money">{$v.repayment_amount|format_price}</span>
+                  </p>
+                  <p class="tab_date">
+                     {$v.in_create_time|date='Y-m-d',###}
+                  </p>
+               </li>
+              </foreach>
+
+            </ul>
+         </div>		
+         <div class="page">
+            {$page}
+         </div>         
+	</div>
+    <include file="Common:member_bottom"/>
+</div>
+</body>
+</html>

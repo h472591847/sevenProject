@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>我的红包-{$Think.config.web_title}</title>
+<include file = "Common:transparent" />
+
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+</head>
+<body>
+<include file = "Common:head" />
+<include file = "Common:web_announce" />
+<div class="middle">
+   <include file="Common:left_menu"/>
+   <div class="mid_right">
+      <div class="mr_top"></div>
+      <div class="mr_center">
+         <h3 class="bt" style="margin-bottom:30px;">我的红包</h3>
+         <!--red_envelope start-->
+         <div class="red_envelope">
+            <ul>
+            <foreach name="list" item="v">
+              <li>
+                 <span class="jine">￥<font>{$v.bonus_money}</font></span>
+                 <span>
+                   <switch name="v.type">
+                      <case value="1">注册奖励</case>
+                      <case value="2">邀请奖励</case>
+                   </switch>
+                 </span>
+               <if condition="$v['status'] neq 1 && $v['limit_days'] neq ''">
+                 <span>有效期至：{$v.effect_time|date='Y-m-d H:i:s',###}</span>
+               </if>
+                 <!--span class="ygq"><img src="__PUBLIC__/images/ygq.png" /-->
+                 </if>
+                 <!--已使用-->
+                <if condition="$v['status'] eq 1">
+                   <span class="ygq"><img src="__PUBLIC__/images/ysy.png" /></span>
+                </if>
+              </li>
+            </foreach>
+              <div class="spacer"></div>
+            </ul>
+         </div>
+         <!--red_envelope end-->
+         
+         <div class="page">
+           {$page}
+           </div>
+         <div class="spacer"></div>
+      </div>
+      <div class="mr_bottom"></div>
+   </div>
+   <div class="spacer"></div>
+</div>
+<include file = "Common:bottom" />
+</body>
+</html>

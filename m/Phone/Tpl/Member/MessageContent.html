@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>消息详情-{$Think.config.web_title}</title>
+</head>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+
+<body>
+<div class="center">
+   <include file = "Common:header" />
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>消息详情</span>
+     <span></span>     
+     <!--登录后显示 start-->
+     <include file="Common:ico"/>
+     <!--end-->
+   </div> 
+   <div class="intro message">
+      <div class="msg_content">
+         <h3><if condition="$change eq 'deal_log'">{$info.type|get_deal_log_type}<else/>{$info.title}</if></h3>
+         <span>{$info.create_time|date='Y-m-d H:i:s',###}</span>
+         <p><if condition="$change eq 'deal_log'">{$info.detail}<else/>{$info.content}</if></p>
+      </div>
+      <div class="back_type"><input type="button" onclick="location.href='{$refer}'" value="返回上一页"></div>
+   </div>
+</div>
+</body>
+</html>

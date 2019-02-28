@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>我的积分-{$Think.config.web_title}</title>
+<include file = "Common:transparent" />
+
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".jf_dh").click(function(){
+	     $("#black_em_a").css("display","block");
+	});
+	$(".close").click( function(){
+	     $(this).parents(".black_em").css("display","none");
+	});
+	
+	$("#exchange").keyup(function(){
+        $(".jf_pop").fadeIn();
+		var exchange = $('#exchange').val();
+		if(exchange == ''){
+			exchange = 0;
+		}
+		$('#money').text(exchange / 10);
+	}).blur(function(){
+         $(".jf_pop").fadeOut();	
+	});
+
+});
+function ajax(){
+ $.ajax({
+   url: "{:U('Member/integral_handle')}",
+   type: 'POST',
+   dataType: 'json',
+   data: "exchange="+$("#exchange").val(),
+   success:function(msg){
+	if(msg.status == 0){
+		   alert(msg.info);
+	  }else{
+		   alert(msg.info);location.reload();
+	  }
+   }
+ })
+}
+</script>
+</head>
+<body>
+<include file = "Common:head" />
+<include file = "Common:web_announce" />
+<div class="middle">
+   <include file="Common:left_menu"/>
+   <div class="mid_right InLine">
+      <h3 class="bt" style="margin-bottom:30px;"><span class="jf_dh">兑换</span>我的积分</h3>
+      <div class="mr_center">
+         
+         <ul class="integral_jf">
+            <li>
+               <span class="Integ_txt">累计获取积分</span>
+               <span class="Integ_icon"><img src="__PUBLIC__/images/interal1.png" /></span>
+               <span class="Integ_num">{$sum_score}</span>
+            </li>
+            <li>
+               <span class="Integ_txt">可用积分</span>
+               <span class="Integ_icon" style=" margin-top:13px;"><img src="__PUBLIC__/images/interal2.png" /></span>
+               <span class="Integ_num">{$user_info.score}</span>
+            </li>
+            <li style=" border-right:none;">
+               <span class="Integ_txt">已用积分</span>
+               <span class="Integ_icon"><img src="__PUBLIC__/images/interal3.png" /></span>
+               <span class="Integ_num">{$use_sum_score}</span>
+            </li>
+         </ul>
+        <script type="text/javascript" src="__PUBLIC__/js/table.js"></script>
+         <div class="d_tra">
+         <table cellpadding="0" cellspacing="0" border="0" width="100%" class="tra_tab">
+               <thead>
+                   <tr>
+                      <th width="26%">时间</th>
+                      <th width="54%">明细</th>
+                      <th width="20%">积分</th>
+                   </tr>
+               </thead>
+               <tbody id="tbody" class="jf_jl"> 
+               <foreach name="score_log_list" item="v">
+                   <tr>
+                      <td class="date">{$v.create_time|date='Y-m-d H:i:s',###}</td>
+                      <td>{$v.type|get_score_log_type}-明细：{$v.detail}</td>
+                      <td>
+                      <if condition="$v['pay_status'] eq 2">
+                      <span class="green">-{$v.score}</span>
+                      <else/>
+                      <span class="add">+{$v.score}</span>
+                      </if>
+                      </td>
+                   </tr>
+                </foreach>
+               </tbody>               
+           </table>   
+           </div>      
+           <div class="page">
+              {$page}
+           </div>
+           <div class="jf_mark">
+             <h3>积分使用常见问题</h3>
+             <ul>
+                <li>
+                   <h4>1.认证是否给积分</h4>
+                   <p>每项认证20分，认证包括邮箱认证、手机认证、身份认证、设置交易密码可分别获得20分，绑定银行卡也可获取20分</p>
+                </li>
+                <li>
+                   <h4>2.签到奖励积分规则</h4>
+                   <p>签到1天可获得5积分，以7天为一个周期循环，连续签到7天第7天则可获得额外奖励20积分，第8天则为下一个周期，获得5积分</p>
+                </li>
+                <li>
+                   <h4>3.积分的兑换比例</h4>
+                   <p>积分和人民币兑换比例是10:1，即10积分相当于1元奖励金额(投资后才能提现)</p>
+                </li>
+                <!--<li>
+                   <h4>4.可兑换积分上限规则</h4>
+                   <p style="color:#F00;">
+                      可兑换的积分最高上限等于您目前在金投资平台上存放的金额*10 (即积分最高兑换上限 = 充值并投资总额 - 提现金额)<br/>
+                      比如在一个项目充值并成功投资了1万元,那此时可兑换的积分最高上限为十万积分（即此时你可以兑换十万或者小于十万的积分，如果积分没有进行兑换，直接提现余额，则可兑换积分最高上限自动清零），如果兑换积分并且提现后那么此时的积分兑换最高上限为负十万（-100000），再次充值并投资后，则会先补满负的积分上限，此后累计增加。
+                   </p>
+                </li>-->
+             </ul>
+         </div>
+         <div class="spacer"></div>
+      </div>
+   </div>
+   <div class="spacer"></div>
+</div>
+<div id="black_em_a" class="black_em">
+    <div class="em">
+        <h3>积分兑换</h3>
+        <p class="fj_aaa">
+           <span class="modify_tit">当前可用积分</span>
+           <span class="old_infor">{$score_exchange}</span>
+           <span class="modify_tit" style=" margin-top:10px;">兑换积分</span>
+           <span class="jf_input">
+             <input type="text" value="" id="exchange" class="inp" onkeyup="this.value=this.value.replace(/\D/g,'');"/>
+             <b class="jf_pop" style=" display:none;">可兑换为：<i id="money"></i>元奖励金额</b>
+           </span>
+          <span><input type="button" class="sub sure_phone" id="confirm_submit" value="确认兑换" onclick="ajax()" /></span>
+        </p>
+        <a href="javascript:" class="close"><img src="__PUBLIC__/images/close.png" /></a>
+    </div>
+</div>
+<include file = "Common:bottom" />
+</body>
+</html>

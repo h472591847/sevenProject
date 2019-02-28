@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>意见反馈栏_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="{$Think.config.web_description}" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type='text/javascript'>
+window._CWiQ = window._CWiQ || []; 
+window.BX_CLIENT_ID = 35795; // 帐号ID 
+(function() {
+ var c = document.createElement('script') ,
+       p = 'https:'==document.location.protocol; 
+       c.type = 'text/javascript'; 
+       c.async = true; 
+       c.src = (p?'https://':'http://')+'whisky.ana.biddingx.com/boot/0'; 
+ var h = document.getElementsByTagName('script')[0]; 
+       h.parentNode.insertBefore(c, h); 
+})(); 
+_CWiQ.push(['_trackPdmp', '访问过专题页', 1]); // 访客分类名称是给访客贴的标签，可以自定义，例如： 访问过官网、注册用户等。
+</script>
+
+<include file = "Common:transparent" />
+
+<link href="__PUBLIC__/style/base.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/single.css" type="text/css" rel="stylesheet" />
+<style>
+body{ background:#f9f1cd;}
+</style>
+<script type="text/javascript">
+//默认文本
+textarea_default_value = '亲爱的金投资用户:\n      请在这里直接填写您遇到的问题或意见建议，您的意见对金投资非常重要，是金投资前进的动力（500字以内）';
+
+/**
+ * check_form    表单验证
+ * @param  obj   元素对象
+ */
+function check_form(obj){    
+  $content = $("#content");
+  $verify = $("#verify");
+  $uid = '{$Think.session.user_id}';
+  if($uid == ''){
+    alert('请先登录');location.href='{:U("user/Login")}';return false;
+  }
+  if($.trim($content.val()) == textarea_default_value || $.trim($content.val()) == ''){
+    alert('请输入意见内容');$content.val('');$content.focus();return false;
+  }
+  if($verify.val().length != 4){
+    alert('请输入正确的验证码');$verify.focus();return false;
+  }
+}
+
+
+ //滚动插件
+(function($){
+	$.fn.extend({
+		Scroll:function(opt,callback){
+				//参数初始化
+				if(!opt) var opt={};
+				var _this=this.eq(0).find("ul:first");
+				var lineH=_this.find("li:first").height(), //获取行高
+					line=opt.line?parseInt(opt.line,10):parseInt(this.height()/lineH,10), //每次滚动的行数，默认为一屏，即父容器高度
+					speed=opt.speed?parseInt(opt.speed,10):500, //卷动速度，数值越大，速度越慢（毫秒）
+					timer=opt.timer?parseInt(opt.timer,10):3000; //滚动的时间间隔（毫秒）
+				if(line==0) line=1;
+				var upHeight=0-line*lineH;
+				//滚动函数
+				scrollUp=function(){
+						_this.animate({
+								marginTop:upHeight
+						},speed,function(){
+								for(i=1;i<=line;i++){
+										_this.find("li:first").appendTo(_this);
+								}
+								_this.css({marginTop:0});
+						});
+				}
+				//鼠标事件绑定
+				_this.hover(function(){
+						clearInterval(timerID);
+				},function(){
+						timerID=setInterval("scrollUp()",timer);
+				}).mouseout();
+		}       
+	});
+})(jQuery);
+
+$(document).ready(function(){
+	$("#s2").Scroll({line:1,speed:500,timer:4000});
+});
+
+</script>
+</head>
+<body>
+<include file="Common:project_menu" />
+
+<div id="wrap">
+	<div class="feed_back_1"></div>
+    <div class="feed_back_2">
+       <div class="fd_center">
+       <form action="{:U('Lottery/DoFeedBack')}" method="post" name="feed_form" onsubmit="return check_form();">
+           <div class="fd_text">
+              <h2>意见反馈栏</h2>
+              
+              <ul class="feed_ul">
+                 <li>
+                    <p>我们将征集您的意见与反馈，为提高网站信息质量、提高服务质量而后更好地为您做好服务。您的意见与建议无所谓对错，只要是真实地反映了您看法，我们将及时并认真阅读，如被采纳将会得到50 -- 500的积分奖励，奖励的积分额度将根据您提交的意见对网站的影响程度。谢谢您的支持与合作！您的支持是我们最大的动力！</p>
+                 </li>
+                 <if condition="$Think.session.user_id eq ''">               
+                  <p class="fd_text_p">您还没有登录，点击<a href="{:U('user/Login')}">这里</a>登录</p>
+                  <else/>
+                 <li>
+                    <textarea name="content" cols="" rows="" class="feed_type" maxlength="500" id="content">亲爱的金投资用户:
+      请在这里直接填写您遇到的问题或意见建议，您的意见对金投资非常重要，是金投资前进的动力（500字以内）</textarea>
+                    <script type="text/javascript">
+                        $("#content").click(function() {                          
+                          if($(this).val() == textarea_default_value){
+                             $(this).val('');$(this).focus();
+                             return false;
+                          }                          
+                        }).blur(function() {
+                          if($(this).val() == ''){
+                            $(this).val(textarea_default_value);
+                            return false;
+                          }
+                        })                         
+                    </script>
+                 </li>
+                 <li>
+                    <span><input type="text" class="feed_yzm" name="verify" id="verify" /></span>
+                    <span>
+                    <a href="javascript:void(change_code(this));" title="点击更换验证码">
+                      <img src="{:U("user/verify",'','')}" id="code"/>                 
+                    </a>
+                   </span>
+                    <span class="fd_span"><input type="submit" class="feed_sub" /></span>
+                    <div class="spacer"></div>
+                 </li>
+                 </if>
+              </ul>
+              
+           </div>
+        </form>
+       </div>
+    </div>
+    <div class="fd_center">
+       <div class="fd_left">
+          <h3 class="fd_h3">采纳好友<span>奖励名单</span></h3>
+          <h4 class="reward_tit">
+                <span class="reward_pm">排名</span>
+                <span class="reward_tx">头像</span>
+                <span class="reward_nc">昵称</span>
+                <span class="reward_jl">获得的奖励</span>
+          </h4>
+          <div class="scrollDiv" id="s2">
+              <ul>
+              <foreach name="feed_list" item="v">
+                 <li>
+                    <span class="reward_pm">{$v.i}</span>
+                    <span class="reward_tx"><i><img src="<if condition="$v['face_pic'] neq ''">{$v.face_pic}<else/>__PUBLIC__/images/personal.jpg</if>" width="50" /></i></span>
+                    <span class="reward_nc">{$v.user_name}</span>
+                    <span class="reward_jl">{$v.score}积分</span>
+                 </li>
+              </foreach>
+              </ul>
+          </div>          
+       </div>
+        <iframe src="{:U('Lottery/feed_list')}" width="663" height="1000" frameborder="0" scrolling="no"></iframe>
+    </div>
+</div>
+
+<p class="tj_total">
+   <script type="text/javascript">
+   var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+   document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fe29aec143162fc1ca52145771a9ee305' type='text/javascript'%3E%3C/script%3E"));
+   </script>          
+   <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5958842'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/stat.php%3Fid%3D5958842%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>              
+ </p> 
+<script type="text/javascript">
+  verifyURL = '{:U("user/verify",'','')}';      
+  function change_code(obj){
+      $("#code").attr("src",verifyURL+'/'+Math.random());
+      return false;
+  }
+</script>             
+</body>
+</html>

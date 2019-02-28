@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$cate.name}_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="<if condition="$cate['description'] neq ''">{$cate.description}<else/>{$Think.config.web_description}</if>" />
+<include file = "Common:transparent" />
+</head>
+<link href="__PUBLIC__/style/base.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/page.css" type="text/css" rel="stylesheet" />
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+
+<body>
+<include file = "Common:head" />
+
+<div class="page_center">
+    <div class="page_mid">
+        <include file = "Common:left" />
+        <div class="page_right">
+            <div class="second_page">
+                <h3 class="second_h3">{$cate.name}</h3>
+                <div>
+                   <ul class="honor">
+                       <foreach name="list" item="v">
+                       <li>
+                         <p class="honor_img"><a href="{:U('Article/ArticleDetail',array('id'=>$v['id']))}"><img src="<if condition="$v['img'] neq ''">{$v.img}<else/>/Public/Images/image_err.gif</if>" width="194" height="162" /></a></p>
+                          <p class="honor_con">
+                            <span class="honor_tit">{$v.title|msubstr=0,35}</span>
+                            <span class="honor_txt">{$v.description|msubstr=0,120}
+                            <a href="{:U('Article/ArticleDetail',array('id'=>$v['id']))}">更多>></a>
+                            </span>
+                          </p>
+                       </li> 
+                       </foreach>
+                    </ul>
+                   <div class="spacer"></div>
+                </div>
+                
+                <div class="page">{$page}</div>
+                
+            </div>
+            
+        </div>
+    </div>
+    <div class="spacer"></div>
+</div>
+
+<include file = "Common:bottom" />
+
+</body>
+</html>

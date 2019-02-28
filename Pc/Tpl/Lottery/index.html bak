@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>金投资新春钜现_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="{$Think.config.web_description}" />
+<script type='text/javascript'>
+window._CWiQ = window._CWiQ || []; 
+window.BX_CLIENT_ID = 35795; // 帐号ID 
+(function() {
+ var c = document.createElement('script') ,
+       p = 'https:'==document.location.protocol; 
+       c.type = 'text/javascript'; 
+       c.async = true; 
+       c.src = (p?'https://':'http://')+'whisky.ana.biddingx.com/boot/0'; 
+ var h = document.getElementsByTagName('script')[0]; 
+       h.parentNode.insertBefore(c, h); 
+})(); 
+_CWiQ.push(['_trackPdmp', '访问过专题页', 1]); // 访客分类名称是给访客贴的标签，可以自定义，例如： 访问过官网、注册用户等。
+</script>
+</head>
+<link href="__PUBLIC__/style/base.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/single.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/animate.css" rel="stylesheet" type="text/css">
+<include file = "Common:transparent" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/spring.js"></script>
+
+
+<body>
+<div class="ny_top">
+   <div class="ny_top_1">
+      <h1><img src="__PUBLIC__/images/ny_logo.png" alt="{$Think.config.web_title}"></h1>
+      <ul>
+         <li class="on"><a href="{:U('Index/index')}" title="金投资_首页">首页</a></li>
+         <li><a href="{:U('Deal/index')}" title="金投资_我要投资">我要投资</a></li>
+         <li><a href="{:U('LoanApply/index')}" title="金投资_我要贷款">我要贷款</a></li>
+         <li><a href="{:U('Security/index')}" title="金投资_安全保障">安全保障</a></li>
+         <li><a href="{:U('Partner/Join')}" title="金投资_合作伙伴">合作伙伴</a></li>
+         <li><a href="{:U('About/index')}" title="金投资_关于我们">关于我们</a></li>
+         <li><a href="{:U('Ask/index')}" title="金投资_问答专区">常见问题</a></li>
+         <li><a href="{:U('Guide/index')}" title="金投资_新手指引">新手指引</a></li>
+         <li class="ny_register"><a href="{:U('user/register')}" title="会员注册">注册</a></li>
+      </ul>
+   </div>
+</div>
+<div class="newyear_one">
+   <div class="light animated fadeIn"></div>
+</div>
+<div class="newyear_two"></div>
+<div class="ny_center">
+   <div class="process_1">
+      <div class="ny_middle pro_mid_1">
+         <p class="hb_one"></p>
+      </div>
+   </div>
+   <div class="process_2">
+      <div class="ny_middle">
+         <p class="hb_two"></p>
+      </div>
+   </div>
+   <div class="process_3">
+      <div class="ny_middle">
+         <p class="rockets"></p>
+      </div>
+   </div>
+   <div class="process_4">
+      <div class="ny_middle">
+          <p class="lucky"><img src="__PUBLIC__/images/lucky.png" usemap="#Map">
+              <map name="Map">
+                <area shape="circle" coords="325,257,229" href="javascript:;" class="lucky_wheel">
+              </map>
+          </p>
+          <div class="result">
+             <p>您还没有抽奖机会，请先<a href="#" class="result_jump">投资</a></p>
+             <a href="javascript:" id="resultBtn" title="关闭"></a>
+          </div>
+      </div>
+   </div>
+   <div class="process_5">
+      
+   </div>
+   <div class="spacer"></div>
+</div>
+<div class="ny_bottom">
+  <div class="ny_middle">
+     <span class="zc_btn"><a href="{:U('user/register')}"><img src="__PUBLIC__/images/ny_zc.png" width="170"></a></span>
+     <span class="zc_mark">提示：所有奖励金额投资后可提现</span>
+  </div>
+</div>
+<p class="tj_total">
+         <script type="text/javascript">
+         var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+         document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fe29aec143162fc1ca52145771a9ee305' type='text/javascript'%3E%3C/script%3E"));
+         </script>          
+         <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5958842'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/stat.php%3Fid%3D5958842%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>              
+       </p>
+</body>
+</html>

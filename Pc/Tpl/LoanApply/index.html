@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>我要贷款_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="金涌贷是依托“大数据”优势和风险管控能力，推出的服务大众和中小微企业的金融创新贷款行业合作项目。" />
+<include file = "Common:transparent" />
+</head>
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/guide.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+<!--city-->
+<script type="text/javascript" src="__PUBLIC__/js/jquery.cityselect.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    city_lib_url = '__PUBLIC__/js/city.min-dongbei.js';//省市json库文件路径
+    $("#city_1").citySelect({
+       nodata:"none",
+       required:false
+    });
+	
+	var $div_li = $("div.loan_slide ul li");
+	$div_li.hover(function(){
+        $(this).addClass("loan_selected").siblings().removeClass("loan_selected");
+		var index = $div_li.index(this);//index() 方法返回指定元素相对于其他指定元素的 index 位置
+		$("div.loan_box > div").eq(index).show().siblings().hide();
+	});
+	
+	var $coo_li = $(".cooper_ad li");
+	$coo_li.mouseover(function(){
+	   $(this).addClass("cooper_h").removeClass("cooper_no");
+	}).mouseleave(function(){
+	   $(this).addClass("cooper_no").removeClass("cooper_h");
+	});
+	
+	
+});
+
+/**
+ *     DoJoin   申请加盟表单过滤
+ */
+function check_form(){
+  $join_real_name = $("#join_real_name");
+  $join_city = $("#join_city");
+  $company_name = $("input[name=company_name]");
+  $join_phone = $("#join_phone");          
+  if($.trim($company_name.val()) == '' || $.trim($company_name.val()) == '请输入您的公司名称'){            
+      alert('请输入您的公司名称');$company_name.val('');$company_name.focus();return false;
+  }
+  if($.trim($join_real_name.val()) == '' || $.trim($join_real_name.val()) == '请输入您的真实姓名'){            
+      alert('请输入真实姓名');$join_real_name.val('');$join_real_name.focus();return false;
+  }
+  var phone_reg = /^(1[3|4|5|7|8]\d{9})$/;//手机号正则过滤  
+  if(!phone_reg.test($.trim($join_phone.val()))){
+      alert('手机号码不正确请重新输入');$join_phone.val('');$join_phone.focus();return false;
+  }
+  if($.trim($join_city.val()) == '' || $.trim($join_city.val()) == '请输入您的所在城市'){            
+      alert('请输入公司地址');$join_city.val('');$join_city.focus();return false;
+  }           
+}    
+</script>
+<body>
+<include file = "Common:head" />
+<div class="loan_img">
+   <div class="The_mid" style="position:relative;">
+   <form action="{:U('LoanApply/LoanHandle')}" method="post" name="loan_form" id="loan_form">
+      <div class="loan_request">
+         <ul>
+            <li><h3 name="F1">我要贷款</h3></li>
+            <li>
+               <span class="loan_field">借款姓名</span>
+               <span><input type="text" value="请输入姓名" maxlength="10" name="real_name" id="real_name" onclick="if(this.defaultValue==this.value){this.value='';}" onblur="if(this.value==''){this.value=this.defaultValue;}" class="loan_txt" /></span>
+            </li>
+            <li>
+               <span class="loan_field">手机号码</span>
+               <span><input type="text" value="请输入手机号码" maxlength="16" name="phone" id="phone" onclick="if(this.defaultValue==this.value){this.value='';}" onblur="if(this.value==''){this.value=this.defaultValue;}" class="loan_txt" /></span>
+            </li>
+            <li>
+               <span class="loan_field">借款金额</span>
+               <span><input type="text" value="请输入借款金额" name="money" id="money" maxlength="11" onclick="if(this.defaultValue==this.value){this.value='';}" onblur="if(this.value==''){this.value=this.defaultValue;}" class="loan_txt" /></span>
+            </li>
+            <li>
+               <span class="loan_field">所在地区</span>
+               <div id="city_1" style="float:left;">
+                    <select class="prov card_num" name="province"></select> 
+                    <select class="city card_num" name="city"></select>
+               </div>
+            </li>
+            <li>
+               <span class="loan_field">借款用途</span>
+               <span><input type="text" value="请输入借款用途" maxlength="150" id="purpose" name="purpose" onclick="if(this.defaultValue==this.value){this.value='';}" onblur="if(this.value==''){this.value=this.defaultValue;}" class="loan_txt" /></span>
+            </li>
+            <li>
+               <span class="loan_field">验证码</span>
+               <span><input type="text" value="请输入验证码" name="verify" maxlength="4" id="verify" onclick="if(this.defaultValue==this.value){this.value='';}" onblur="if(this.value==''){this.value=this.defaultValue;}" class="loan_txt" style=" width:90px;" /></span>
+               <span>            
+               <a href="javascript:void(change_code(this));">
+                 <img src="{:U("user/verify",'','')}" width="100" id="code"/>                 
+               </a> 
+               </span>
+            </li>
+            <li><input type="submit" name="submit_loan" id="submit_loan" value="提交申请" class="loan_sub" /></li>
+         </ul>
+      </div>
+    </form>
+   </div>
+</div>
+
+<div class="loan_bg">
+    <div class="The_mid clearfix what_d">
+       <div>
+           <h3 class="loan_h3">什么是金涌贷</h3>
+           <p class="loan_t_line"></p>
+           <div class="loan_hua">
+           <div class="loan_box">
+              <div>
+                 <p class="box_img">
+                    <span class="box_img_left"><img src="__PUBLIC__/images/loanbox_1_1.jpg" /></span>
+                    <span class="box_img_right"><img src="__PUBLIC__/images/loanbox_1_2.jpg" /></span>
+                 </p>
+                 <p class="box_txt">
+                    <span>金涌贷</span>是依托吉林省金湧和发信息咨询有限公司所形成的“大数据”优势和风险管控能力，推出的服务大众和中小微企业的金融创新项目。金涌贷发挥自身优势，为合作的信贷公司提供充沛的资金支持和资源共享，合力打造品牌效应。在迅速拓宽获件渠道的同时，共同对抗行业已知与未知的风险。并提供贷前、贷中、贷后的规范化管理。强强联合，实现共赢。
+                 </p>
+              </div>
+              <div class="hide">
+                 <p class="box_img">
+                    <span class="box_img_left"><img src="__PUBLIC__/images/loanbox_1_1.jpg" /></span>
+                    <span class="box_img_right"><img src="__PUBLIC__/images/loanbox_1_2.jpg" /></span>
+                 </p>
+                 <p class="box_txt">
+                    <span>金涌贷</span>旨在为有融资及投资需求的小微企业和个人建立起高效、透明、安全、便捷的互联网金融服务。通过金涌贷平台和小额贷款公司的合作，共同扩大业务范围，增加利润。
+                 </p>
+              </div>
+           </div>
+           <div class="loan_slide clearfix">
+              <ul>
+                 <li class="loan_selected li-fir"></li>
+                 <li></li>
+              </ul>
+           </div>
+           </div>
+       </div>
+       <div>
+         <h3 class="loan_h3">金涌贷模式</h3>
+         <p class="loan_t_line"></p>
+         <p class="finan_pic">金涌贷微型金融模式图</p>
+         <p><img src="__PUBLIC__/images/wxjrmst.jpg" /></p>
+       </div>
+       <div>
+          <h3 class="loan_h3">合作优势</h3>
+          <p class="loan_t_line"></p>
+          <ul class="cooper_ad">
+             <li class="cooper_no" style=" margin-left:0;">
+                <p class="cooper_con">金涌贷的费率与同行业的企业相比，费率低，操作更透明。</p>
+                <p class="cooper_t">费率低</p>
+             </li>
+             <li class="cooper_no">
+                <p class="cooper_con">在资金上，线上有金投资平台，线下有金涌财富，双管齐下，资金充足。</p>
+                <p class="cooper_t">资金充沛</p>
+             </li>
+             <li class="cooper_no">
+                <p class="cooper_con">凭借金涌贷品牌影响力，加入金涌贷，可获更强公信力，增加获客渠道。</p>
+                <p class="cooper_t">增加获客渠道</p>
+             </li>
+             <li class="cooper_no" style=" margin-left:0;">
+                <p class="cooper_con">金涌贷完善的风控体系可以助小贷公司进行二次风控，从源头上杜绝风险。</p>
+                <p class="cooper_t">二次风控</p>
+             </li>
+             <li class="cooper_no">
+                <p class="cooper_con">协助引入担保，法律机构，加入金涌贷后更利于行业整理，金涌贷将协助引入担保，专业法律机构债务清收。</p>
+                <p class="cooper_t">行业整合</p>
+             </li>
+             <li class="cooper_no">
+                <p class="cooper_con">金涌贷现金的理念优势可同小贷企业共同对抗风险，使整个行业更加规范化。</p>
+                <p class="cooper_t">理念先进</p>
+             </li>
+          </ul>
+       </div>
+       <div>
+          <div class="hz_way">
+              <h3 class="loan_h3">合作方式</h3>
+              <p class="loan_t_line hz_line"></p>
+              <p class="hz_fs">金涌贷与民间金融机构达成战略协议，金涌贷凭借资金优势和完整的风控体系可为其提供贷前审查、贷款资金以及贷中、贷后的管理。小贷公司在加入金涌贷后，为金涌贷提供贷款企业或贷款人。双方
+利润分成，实现共赢。</p>
+          </div>
+          <div class="hz_apply">
+              <h3 class="loan_h3">合作申请</h3>
+              <p class="loan_t_line hz_line"></p>
+              <ul>
+               <form action="{:U('Partner/DoJoin')}" method="post" onsubmit="return check_form();">
+                 <li>
+                    <span>公司名称：</span>
+                    <input type="text" name="company_name" maxlength="20" class="co_apply" />
+                 </li>
+                 <li>
+                    <span>联系人：</span>
+                    <input type="text" name="real_name" id="join_real_name" maxlength="20" class="co_apply" />
+                 </li>
+                 <li>
+                    <span>手机号码：</span>
+                    <input type="text" name="phone" id="join_phone" maxlength="20" class="co_apply" />
+                 </li>
+                 <li>
+                    <span>公司地址：</span>
+                    <input type="text" name="city" id="join_city" maxlength="40" class="co_apply" />
+                 </li>
+                 <li>
+                    <span>备注说明：</span>
+                    <input type="text" name="remark" maxlength="100" class="co_apply" />
+                 </li>
+                 <li><input type="submit" name="submit_loan" id="submit_loan" value="提交申请" style="width:315px;float:right;margin-right:10px;" class="loan_sub" /></li>
+                </form>
+              </ul>
+          </div>
+       </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+  verifyURL = '{:U("user/verify","","")}';
+  // verifyURL = '/code.php';
+  function change_code(obj){
+      $("#code").attr("src",verifyURL+'/'+Math.random());
+      return false;
+  }  
+$("#submit_loan").click(function(){
+    $real_name = $("#real_name");    
+    $money = $("#money");
+    $phone = $("#phone");    
+    $purpose = $("#purpose"); 
+    $verify = $("#verify");    
+    var number_reg = /^\d+$/;
+    var phone_reg = /^(1[3|4|5|7|8]\d{9})$/;//手机号正则过滤           
+    var ch_reg = /^[u4E00-u9FA5{u-z}]+$/;//筛选包含汉字的字符                          
+    if($.trim($real_name.val())=='' || $real_name.val() == '请输入姓名'){
+      alert('请输入姓名');$real_name.val('');$real_name.focus();return false;
+    }
+    if(ch_reg.test($real_name.val())){
+      alert('请输入中文姓名');$real_name.val('');$real_name.focus();return false;
+    }    
+    if(!phone_reg.test($phone.val())){
+      alert('请输入手机号码');$phone.val('');$phone.focus();return false;
+    }            
+    if(!number_reg.test($money.val())){
+      alert('请输入借款金额');$money.val('');$money.focus();return false;
+    }  
+    if($("#city_1 select[name='province']").val() == ''){
+      alert('请选择省份');return false;
+    }
+    if($("#city_1 select[name='city']").val() == ''){
+      alert('请选择城市');return false;
+    }                         
+    if($.trim($purpose.val())=='' || $purpose.val() == '请输入借款用途'){
+      alert('请输入借款用途');$purpose.val('');$purpose.focus();return false;
+    }
+    if($verify.val().length < 4 || $verify.val() == '请输入验证码'){
+      alert('请输入验证码');$verify.val('');$verify.focus();return false;
+    }
+})
+</script>
+<include file = "Common:bottom" />
+</body>
+</html>

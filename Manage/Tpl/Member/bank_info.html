@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="__PUBLIC__/css/bdmin.css" type="text/css" rel="stylesheet">
+<script src="__PUBLIC__/js/jQuery.js"></script>
+</HEAD>
+<BODY>
+<form action="{:U('Member/DoBankInfo')}" method="post" onSubmit="return check()">
+<input type="hidden" name="upid" value="{$upid}">
+<TABLE class="hs12pt" cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD height="22" >当前位置: 会员列表/修改银行卡信息</TD>
+  </TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR></TABLE>
+<TABLE class="hs12pt" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="22" background="__PUBLIC__/images/title_bg2.jpg">&nbsp;&nbsp;&nbsp;<span class="baise12ct">信息</span></td>
+  </tr>
+</table>
+  <TABLE class="hs12pt" width="100%" border="1" align="center" cellpadding="2" cellspacing="0" bordercolor="#175CB7" bordercolordark="#E3EFFB" >
+   <tr>    
+      <td width="20%" height="25" align="right" >户名:</td>
+      <td colspan="5" align="left">
+        <input name="real_name" id="real_name" type="text" size="30" value="{$bank.real_name}" maxlength="12" class="text" >   
+      </td>
+    </tr>  
+   <tr>    
+      <td width="20%" height="25" align="right" >卡号:</td>
+      <td colspan="5" align="left">
+        <input name="bank_number" id="bank_number" value="{$bank.bank_number}" value="0" type="text" size="30" maxlength="22" class="text" > 
+      </td>
+    </tr>  
+   <tr>    
+      <td width="20%" height="25" align="right" >银行名称:</td>
+      <td colspan="5" align="left">
+        <input name="bank_name" id="bank_name" value="{$bank.bank_name}" value="0" type="text" size="30" maxlength="22" class="text" > 
+      </td>
+    </tr>      
+   <tr>    
+      <td width="20%" height="25" align="right" >开户城市:</td>
+      <td colspan="5" align="left">
+        <input name="province" id="province" value="{$bank.province}" value="0" type="text" size="30" maxlength="22" class="text" > 省 -  <input name="city" id="city" value="{$bank.city}" value="0" type="text" size="30" maxlength="22" class="text" > 市
+      </td>
+    </tr>                   
+   <tr>    
+      <td width="20%" height="25" align="right" >开户行:</td>
+      <td colspan="5" align="left">
+        <input name="bank_address" id="bank_address" value="{$bank.bank_address}" value="0" type="text" size="70" maxlength="100" class="text" > 
+      </td>
+    </tr>                                                         
+<tbody>
+    <tr>
+      <td height="25" colspan="6" align="center"><input type="submit" id="submit_money" value="确认{$display_txt}"></td>
+    </tr>
+  </table>
+</form>
+</BODY></HTML>

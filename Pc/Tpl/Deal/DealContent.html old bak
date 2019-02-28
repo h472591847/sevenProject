@@ -1,0 +1,461 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$loan.loan_title}-{$Think.config.web_title}</title>
+</head>
+
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/page.css" rel="stylesheet" type="text/css" />
+<include file="Common:transparent"/>
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<!--百分比进条条 start-->
+<script type="text/javascript" src="__PUBLIC__/js/jquery.tips.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){   
+  //百分比进度条
+	var percent = $('.progress_bar').attr('title');
+	$(".progress_bar").animate({width:percent},1000);
+	$(".tip").tipsy({gravity:'s',fade:true});
+  //选项卡
+  $("div.deal_tab_menu ul li").click(function(event) {
+    var $div_li = $("div.deal_tab_menu ul li");   
+    $(this).addClass("deal_selected").siblings().removeClass("deal_selected");
+    var index = $div_li.index(this);//index() 方法返回指定元素相对于其他指定元素的 index 位置
+    $("div.deal_tab_box > div").eq(index).show().siblings().hide();    
+  });
+  //投资记录
+  $(".tz_record tr:odd").css("background","#fbfbfb");
+  $(".tz_record tr:even").css("background","#f4f4f4"); 
+});
+
+/**
+ * checkDoAdd   处理投资表单
+ */
+function checkDoAdd(){
+    //数字判断，表单判断
+    if($.trim($money.val()) == 0 || !number_reg.test($.trim($money.val()))){
+      alert('请填写正确的投资金额');$money.val('');$money.focus();return false;
+    }  
+    $is_login = "{$Think.session.user_id}";
+    if($is_login == ''){
+      alert('请先登录');location.href='{:U("user/Login")}';return false;
+    }
+    //判断最低可投金额
+    $mod = parseFloat($.trim($money.val())) % parseFloat($min_loan_money);//输入金额是否能整除最小投资额
+    if($mod!=0){
+      alert('投资金额需为{$loan.min_loan_money}或{$loan.min_loan_money}的倍数');return false;                      
+    }          
+    //判断最高可投金额     
+    if($money.val() > $max_loan_money){
+      alert('投资金额不能大于最高投资金额{$max_loan_money}');return false;
+    }
+    //判断剩余借款总额
+    if($money.val() > $loan_over){
+        alert('输入错误，投资总额'+$money.val()+'不可超过可投金额!'+$loan_over);return false;
+    }
+    //判断比对当前可用余额
+    if($money.val() > $user_money){
+      alert('投资金额不能大于您当前可用余额'+$user_money);return false;
+    }
+    //通过上述判断，显示验证码层
+    $(".de_code").fadeIn();
+    return false;      
+}
+</script>
+<script language="javascript" type="text/javascript"> 
+$(document).ready(function(){
+  $.ajax({
+      url: '{:U("Index/index")}',
+      type: 'GET',
+      dataType: 'json',
+      async : false,//同步以接收变量
+      data: "get_ajax_time=1",               
+      success:function(msg){
+          if(msg.status == '1'){
+              now_gtime = msg.data * 1000;
+          }
+          return false;
+      }
+  })
+  var retime = '{$loan.re_start_time}';//剩余时间(秒)   
+  var submit_type = "";
+  var interval = 1000; 
+  window.setInterval(function(){
+	now_gtime = now_gtime + interval ;   
+    var retY = {$loan.start_time|date='Y',###};//读取年份
+    var retM = {$loan.start_time|date='m',###};//读取月份
+    var retD = {$loan.start_time|date='d',###};//读取日期       
+    var retH = {$loan.start_time|date='H',###};//读取小时
+    var retI = {$loan.start_time|date='i',###};//读取分钟
+    var retS = {$loan.start_time|date='s',###};//读取秒       
+    if(retime >= 0 && retime != ''){
+      ShowCountDown(now_gtime,retY,retM,retD,retH,retI,retS,'divdown1');
+    }     
+  }, interval);  
+  //剩余时间计算 
+  function ShowCountDown(now_time,year,month,day,hour,minute,second,divname,typename){ 
+  var now_time = new Date(now_time);
+  var endDate = new Date(year, month-1, day,hour,minute,second); 
+  var leftTime= endDate.getTime() - now_time.getTime();
+  var leftsecond = parseInt(leftTime/1000); 
+  var day1=Math.floor(leftsecond/(60*60*24)); 
+  var hour=Math.floor((leftsecond-day1*24*60*60)/3600); 
+  var minute=Math.floor((leftsecond-day1*24*60*60-hour*3600)/60); 
+  var second=Math.floor(leftsecond-day1*24*60*60-hour*3600-minute*60); 
+  var cc = document.getElementById(divname); 
+  if(day1 == 0 && hour == 0 && minute == 0 && second == 0){
+     location.reload();
+  }  
+  cc.innerHTML = ""+"<span class='recom_date'>"+day1+"</span>"+"天"+"<span class='recom_date'>"+hour+"</span>"+"小时"+"<span class='recom_date'>"+minute+"</span>"+"分"+"<span class='recom_date'>"+second+"</span>"+"秒"; 
+  } 
+});
+</script>
+<!---->
+<!--相册-->
+<link href="__PUBLIC__/style/litebox.css" type="text/css" rel="stylesheet" />
+<!---->
+
+
+<body>
+<include file="Common:head"/>
+
+
+<div class="global_cen">
+   <h3 class="location">首页 > 我要投资 > 项目详情</h3>
+   <div class="deal_left">
+       <div class="deal_all">
+           <h3 class="deal_title"><span>{$loan.loan_title}</span><span class="d_dbfs"><img src="__PUBLIC__/images/deal_db.jpg" /></span></h3>
+           <ul class="deal_amount">
+               <li class="d_am_fir">
+                  <span>借款金额</span>
+                  <span class="deal_big">{$loan.loan_money|format_price}<font>元</font></span>
+               </li>
+               <li>
+                  <span>年化利率</span>
+                  <span class="deal_big">{$loan.loan_rate}<font class="add_per">
+                  <if condition="$loan['loan_add_rate'] neq 0">+{$loan.loan_add_rate}</if>
+                  %</font></span>
+               </li>
+               <li class="d_am_last">
+                  <span>借款期限</span>
+                  <span class="deal_big" style="font-size:30px">{$loan.loan_deadline}
+                  <font>
+                    <switch name="loan.loan_deadline_type">
+                    <case value="0">个月</case>
+                    <case value="1">天</case>
+                    </switch>                    
+                  </font></span>
+               </li>
+           </ul> 
+           <ul class="deal_det">
+              <li>
+                  <span class="det_l">借款用途：</span>
+                  <span>{$loan.loan_purpose}</span>
+              </li>
+              <li>
+                  <span class="det_l">已投标：</span>
+                  <span>{$loan.sum_amount|format_price}元</span>
+              </li>
+              <li>
+                  <span class="det_l">还款方式：</span>
+                  <span>{$loan.repayment_mode}</span>
+              </li>
+              <li>
+                  <span class="det_l">尚需金额：</span>
+                  <span>{$loan.loan_over|format_price}元</span>
+              </li>
+              <li id="re_start" style="display:none;">
+                  <span class="det_l">起投时间:</span>
+                  <span id="divdown1"></span>
+              </li>
+              <li id="ing_retime" style="display:none;">
+                  <span class="det_l">剩余时间：</span>
+                  <span>{$loan.retime}</span>
+              </li>
+              <li>
+                  <span class="det_l">担保范围：</span>
+                  <span>{$loan.guarantee_purview}</span>
+              </li>
+              
+           </ul>
+           
+           <ul class="deal_process">
+              <!--li class="d_db">{$loan.guarantee_title}</li-->
+              <li class="d_db">担保方式：足值抵押</li>
+              <li class="d_jd">
+                  <span>投资进度</span>
+                  <div class="progress_container"><div class="progress_bar tip" title="{$loan.load}%"></div></div>
+                  <span>{$loan.load}%</span>
+              </li>
+           </ul>
+           
+           <div class="deal_tab">
+                <div class="deal_tab_menu">
+                    <ul>
+                        <li class="deal_selected">项目信息</li>
+                        <li class="d_sec">相关文件</li>
+                        <!--li class="d_sec">投资记录</li-->
+                    </ul>
+                </div>
+                <div class="deal_tab_box"> 
+                     <div>
+                        <table cellspacing="0" cellpadding="0" border="1" bordercolor="#e6e6e6" width="100%" class="deal_table">
+                           <tr>
+                              <td height="40" class="table_h">抵押物</td>
+                              <td class="table_h">产值</td>
+                              <td class="table_h">还款来源</td>
+                              <td class="table_h">还款能力</td>
+                           </tr>
+                           <tr>
+                              <td height="40">{$loan.pawn}</td>
+                              <td>{$loan.production_value}</td>
+                              <td>{$loan.payment_source}</td>
+                              <td>{$loan.repayment_ability}</td>
+                           </tr>
+                        </table>
+                        <div class="deal_nr">
+                            <h3>项目介绍</h3>
+                            <p>{$loan.loan_description}</p>
+                        </div>
+                     </div>
+                     <div class="deal_img deal_hide">
+                        <script type="text/javascript">
+                         $(document).ready(function() {
+                             $(".dul_pic li").each(function(){		 
+								var indx = $(this).index(); 
+								if(indx%3==0){
+									$(this).css("marginLeft","0px");
+								} 
+				
+							 }); 
+                         });
+                        </script> 
+                        <empty name="loan.contract_agreement">
+                        <else/>
+                        <h3>合同协议</h3>
+                        <ul class="dul_pic">
+                         <foreach name="loan.contract_agreement" item="img">
+                  
+                           <li>
+                              <a href="{$img}" target="_self" class="litebox" data-litebox-group="group-1" ><img src="{$img}" width="190" height="120" /></a>
+                           </li> 
+                          </foreach>
+                           <div class="spacer"></div>
+                        </ul>
+                        </empty>
+                        
+                        <empty name="loan.field_visit">
+                        <else/>                         
+                        <h3>实地照片</h3>
+                        <ul class="dul_pic">
+                         <foreach name="loan.field_visit" item="img">
+               
+                           <li>
+                              <a href="{$img}" target="_self" class="litebox" data-litebox-group="group-2" ><img src="{$img}" width="190" height="120" /></a>
+                           </li> 
+                          </foreach>
+                           <div class="spacer"></div>
+                        </ul>
+                        </empty>
+                     </div>
+                     <!--div class="deal_hide">
+                        <table cellpadding="0" cellspacing="0" border="0" width="95%" class="tz_record">
+                           <tr class="record_th">
+                              <td>序号</td>
+                              <td>成交时间</td>
+                              <td>投资人</td>
+                              <td>投资金额</td>
+                           </tr>
+                           <foreach name="invested_list" item="v">
+                           <tr>
+                              <td>{$v.id}</td>
+                              <td>{$v.create_time|date='Y-m-d H:i:s',###}</td>
+                              <td>{$v.user_name}</td>
+                              <td>{$v.amount|format_price}</td>
+                           </tr>
+                           </foreach>
+                        </table> 
+                     </div-->
+                </div>
+           </div>
+
+       </div>
+       <div class="spacer"></div> 
+   </div>
+   <div class="deal_right">
+       <div class="tz_je">
+       <form action="{:U('Deal/DoAddInvested')}" id="do_add_form" method="post" onsubmit="return checkDoAdd(this)">
+        <input type="hidden" name="uid" id="uid" value="{$user_info.id}">
+        <input type="hidden" name="lid" id="lid" value="{$loan.id}">
+          <table cellpadding="0" cellspacing="0" border="0" width="100%">
+              <tr>
+                 <td height="50"><font color="#000000">可投余额</font></td>
+              </tr>
+              <tr>
+                 <td>
+                 <span class="deal_big">{$loan.loan_over_view}
+                      <span id="loan_over" style="display:none">{$loan.loan_over}</span>
+                      <span id="min_loan_money" style="display:none">{$loan.min_loan_money}</span>
+                      <span id="max_loan_money" style="display:none">{$loan.max_loan_money}</span>
+                      <span id="user_money" style="display:none">{$user_info.money}</span>
+                 <font>元</font></span></td>
+              </tr>
+              <tr>
+                 <td height="50">
+						<p class="tz_aaa">
+						  <span><input type="text" value="投资额大于{$loan.min_loan_money}小于100000元" class="tz_amount" onclick="if(this.defaultValue==this.value){this.value='';}" onblur="if(this.value==''){this.value=this.defaultValue;}" name="money" id="money" /></span>
+						  <span class="suspension">预期收益 ￥<font id="expect_money"></font>元</span>
+						</p>
+                 </td>
+              </tr>            
+              <tr>
+                 <td height="40">
+                     <!--登录后显示-->
+                     <if condition="$user_info['id'] neq ''">
+                     可用余额：<span>{$user_info.money|format_price}元</span><span>[<a href="{:U('Member/TopUp')}">充值</a>]</span>
+
+                     <!--没登录显示-->
+                     <else/>
+                     可用余额：<span>[<a href="{:U('user/Login')}">请先登录</a>]</span>
+                     </if>
+                 </td>
+              </tr>
+              <tr>
+                 <td><input type="submit" value="立即投标" class="investment" name="submit_invested" id="submit_invested" /></td>
+              </tr>
+           </table>
+          </form>
+       </div>
+       <div class="skills">
+          <h3 class="main_tit">投资技巧</h3>
+          <ul>
+
+          <foreach name="right_activity" item="v">
+             <li>
+                <span class="skill_pic"><a href="{:U('Article/ArticleDetail',array('id'=>$v['id']))}" title="{$v.title}"><img src="<if condition="$v['img'] neq ''">{$v.img}<else/>/Public/Images/image_err.gif</if>" alt="{$v.title}" width="70" height="53"></a></span>
+                <span class="skill_txt"><a href="{:U('Article/ArticleDetail',array('id'=>$v['id']))}" title="{$v.title}">{$v.title|msubstr=0,9}</a></span>
+                <span class="skill_con">{$v.description|msubstr=0,18}</span>
+             </li>
+          </foreach>
+          </ul> 
+          <div class="spacer"></div>
+       </div>
+       
+   </div>
+   <div class="spacer"></div> 
+</div>
+
+<include file="Common:bottom"/>
+
+<!--大图-->
+<script src="__PUBLIC__/js/smoothscroll.js" type="text/javascript"></script>
+<script src="__PUBLIC__/js/images-loaded.min.js" type="text/javascript"></script>
+<script src="__PUBLIC__/js/litebox.js" type="text/javascript"></script>
+<script src="__PUBLIC__/js/backbone.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	$('.litebox').liteBox();
+  var retime = '{$loan.re_start_time}';//剩余时间(秒)   
+  //投资窗口，筹标剩余时间控制
+  if(retime >= 0 && retime != ''){
+      $("#re_start").show();
+      $("#ing_retime").hide();
+      $("#submit_invested").attr('disabled','disabled');
+      $("#submit_invested").val('待开放');
+  }else{    
+      $("#submit_invested").removeAttr('disabled');
+      $("#ing_retime").show();
+      $("#re_start").hide();
+  }    
+</script>
+<!---->
+<!--弹出验证码-->
+<div class="de_code">
+  <div class="code_input">
+    <h3>请输入验证码</h3>
+    <p>
+      <span><input type="text" value="输入验证码" onclick="if(this.defaultValue==this.value){this.value='';}" onblur="if(this.value==''){this.value=this.defaultValue;}" id="verify" class="inp_code" /></span>
+      <span>
+        <a href="javascript:void(change_code(this));">
+             <img src="{:U("Member/verify",'','')}" id="code"/>
+         </a>
+      </span>
+      <span><input type="button" id="submit_verify" value="确定" class="code_sure" /></span>
+    </p>
+    <span class="code_close"><img src="__PUBLIC__/images/close.png" /></span>
+  </div>
+</div>
+
+<script type="text/javascript">
+      //更换验证码
+      verifyURL = '{:U("Member/verify",'','')}';
+      function change_code(obj){
+          $("#code").attr("src",verifyURL+'/'+Math.random());
+          return false;
+      }  
+
+      $do_add_form = $("#do_add_form");//投资表单
+      $verify = $("#verify");//验证码
+      $money = $("#money");//当前投资金额
+      $min_loan_money = parseFloat($("#min_loan_money").text());//最低投资金额
+      $max_loan_money = parseFloat($("#max_loan_money").text());//最高投资金额
+      $loan_over = parseFloat($("#loan_over").text());//可投余额          
+      $user_money = parseFloat($("#user_money").text());//用户当前可用余额
+      $loan_rate = (parseFloat("{$loan.loan_rate}") + parseFloat("{$loan.loan_add_rate}")) / 100;//年利率
+      $loan_deadline = parseFloat("{$loan.loan_deadline}");//借款期限（月）
+      $uid = $("#uid");
+      $lid = $("#lid");
+      var number_reg = /^\d+$/;
+      //验证码提交
+      $("#submit_verify").click(function() {
+         if($.trim($verify.val()) == '' || $.trim($verify.val()) == '输入验证码'){
+            alert('验证码不能为空');return false;
+         }
+         //后台比对验证码，若通过则正式提交投资。否则弹出提示
+         $.ajax({
+           url: "{:U('Deal/DoVerify')}",
+           type: 'POST',
+           dataType: 'json',
+           data: "verify="+$verify.val(),
+           success:function(msg){
+              if(msg.status == '1'){
+               $submit_url = "{:U('Deal/DoAddInvested')}";
+               location.href= $submit_url+"?uid="+$uid.val()+"&lid="+$lid.val()+"&money="+$money.val();
+              }else{
+                alert(msg.info);return false;
+              }
+           }
+         })
+         
+      });
+      //关闭验证码层
+      $(".code_close").click(function(){
+          $(".de_code").fadeOut();
+      });
+
+      //同步显示预期收益
+     $(".tz_amount").keyup(function(){
+       if($.trim($money.val()) != 0 && number_reg.test($.trim($money.val()))){
+          <if condition="$loan['loan_deadline_type'] eq '1'">
+          //预期收益 = 投资金额 * 年利率 / 365 * 借款期限
+          var expect_money = parseFloat($money.val()) * $loan_rate / 365 * $loan_deadline;
+          <else/>
+          //预期收益 = 投资金额 * 年利率 / 12 * 借款期限
+          var expect_money = parseFloat($money.val()) * $loan_rate / 12 * $loan_deadline;
+          </if>
+          expect_money = Math.round(expect_money * 100)/100;//给用户显示收益                    
+          $("#expect_money").text(expect_money);
+          $(".suspension").fadeIn();
+       }              
+     }).blur(function(){
+       $(".suspension").fadeOut();             
+     });  
+     //投资表单判断
+    $("#submit_invested").click(function(){          
+        checkDoAdd();return false;
+    })
+</script>
+<!--end-->
+</body>
+</html>

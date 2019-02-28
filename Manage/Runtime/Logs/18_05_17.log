@@ -1,0 +1,737 @@
+[ 2018-05-17T09:19:34+08:00 ] 127.0.0.1 /manage.php
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:19:35+08:00 ] 127.0.0.1 /manage.php/Login/Index
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.006001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:19:39+08:00 ] 127.0.0.1 /manage.php/Login/login
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.041002s ]
+SQL: SELECT * FROM `tp_user` WHERE ( `username` = 'admin' ) LIMIT 1   [ RunTime:0.033002s ]
+SQL: UPDATE `tp_user` SET `logintime`=1526519979,`loginip`='127.0.0.1' WHERE ( `id` = 1 ) [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: insert F:\www\p2p222notminsheng\Manage\Lib\Action\LoginAction.class.php 第 35 行.
+SQL: SELECT * FROM `tp_user` WHERE ( id =  ) LIMIT 1   [ RunTime:0.000000s ]
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') LIMIT 1' at line 1
+ [ SQL语句 ] : SELECT * FROM `tp_user` WHERE ( id =  ) LIMIT 1  
+SQL: SHOW COLUMNS FROM `tp_msg_box` [ RunTime:0.003000s ]
+SQL: INSERT INTO `tp_msg_box` (`title`,`content`,`user_id`,`create_time`,`type`,`web_status`,`sql`) VALUES ('登录成功','【后台用户：admin】登录成功。','1',1526519979,2,2,'UPDATE `tp_user` SET `logintime`=1526519979,`loginip`=\'127.0.0.1\' WHERE ( `id` = 1 )') [ RunTime:0.021001s ]
+
+[ 2018-05-17T09:19:39+08:00 ] 127.0.0.1 /manage.php/Index/Index
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.002000s ]
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.033002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.033002s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:19:39+08:00 ] 127.0.0.1 /manage.php/Index/Head
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.001000s ]
+NOTIC: [8] Constant THEME_NAME already defined F:\www\p2p222notminsheng\TP\Lib\Core\View.class.php 第 223 行.
+NOTIC: [8] Constant THEME_PATH already defined F:\www\p2p222notminsheng\TP\Lib\Core\View.class.php 第 174 行.
+NOTIC: [8] Constant APP_TMPL_PATH already defined F:\www\p2p222notminsheng\TP\Lib\Core\View.class.php 第 175 行.
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.027002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.028002s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.000000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:19:39+08:00 ] 127.0.0.1 /manage.php/Index/Menu
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `tp_node` [ RunTime:0.031002s ]
+SQL: SHOW COLUMNS FROM `tp_role_user` [ RunTime:0.036002s ]
+SQL: SHOW COLUMNS FROM `tp_access` [ RunTime:0.051003s ]
+SQL: SELECT `role_id` FROM `tp_role_user` WHERE ( user_id = 1 )  [ RunTime:0.013001s ]
+NOTIC: [2] implode() [<a href='function.implode'>function.implode</a>]: Invalid arguments passed F:\www\p2p222notminsheng\TP\Lib\Core\Db.class.php 第 497 行.
+SQL: SELECT * FROM `tp_access` WHERE ( `role_id` IN () )  [ RunTime:0.000000s ]
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') )' at line 1
+ [ SQL语句 ] : SELECT * FROM `tp_access` WHERE ( `role_id` IN () ) 
+NOTIC: [2] Invalid argument supplied for foreach() F:\www\p2p222notminsheng\Manage\Lib\Action\IndexAction.class.php 第 53 行.
+SQL: SELECT * FROM `tp_node` WHERE ( `id` IN () ) AND ( `pid` = 5 ) ORDER BY id ASC  [ RunTime:0.000000s ]
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') ) AND ( `pid` = 5 ) ORDER BY id ASC' at line 1
+ [ SQL语句 ] : SELECT * FROM `tp_node` WHERE ( `id` IN () ) AND ( `pid` = 5 ) ORDER BY id ASC 
+NOTIC: [2] Invalid argument supplied for foreach() F:\www\p2p222notminsheng\Manage\Lib\Action\IndexAction.class.php 第 59 行.
+SQL: SELECT * FROM `tp_node` WHERE ( `pid` IN () ) ORDER BY id ASC  [ RunTime:0.000000s ]
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') ) ORDER BY id ASC' at line 1
+ [ SQL语句 ] : SELECT * FROM `tp_node` WHERE ( `pid` IN () ) ORDER BY id ASC 
+NOTIC: [2] Invalid argument supplied for foreach() F:\www\p2p222notminsheng\Manage\Lib\Action\IndexAction.class.php 第 65 行.
+NOTIC: [2] Invalid argument supplied for foreach() F:\www\p2p222notminsheng\Manage\Lib\Action\IndexAction.class.php 第 74 行.
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 37 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 37 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 45 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 45 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 53 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 53 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 61 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 61 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 69 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 69 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 88 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 88 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 96 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 96 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 116 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 116 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 124 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 124 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 138 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 138 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 164 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 164 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 172 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 172 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 180 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 180 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 188 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 188 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 196 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 196 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 206 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 206 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 240 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 240 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 248 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 248 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 256 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 256 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 265 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 265 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 274 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 274 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 282 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 282 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 302 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 302 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 310 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 310 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 318 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 318 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 338 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 338 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 346 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 346 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 360 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 360 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 368 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 368 行.
+NOTIC: [8] Undefined variable: uri_ar F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 382 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\www\p2p222notminsheng\Manage\Runtime\Cache\7bf772ac053b47c08e01e1799e554713.php 第 382 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.013001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.000000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2018-05-17T09:19:39+08:00 ] 127.0.0.1 /manage.php/Index/Main
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_user` WHERE ( id=1 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_loan` [ RunTime:0.081005s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_loan` WHERE ( `deal_status` = 1 ) AND ( `is_effect` = 1 ) AND ( `is_delete` = 0 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_loan` WHERE ( `deal_status` = 2 ) AND ( `is_effect` = 1 ) AND ( `is_delete` = 0 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_loan` WHERE ( `deal_status` = 5 ) AND ( `is_effect` = 1 ) AND ( `is_delete` = 0 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT sum(loan_money) as money FROM `tp_loan` WHERE ( `deal_status` = 5 ) AND ( `is_effect` = 1 ) AND ( `is_delete` = 0 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_recharge_log` [ RunTime:0.000000s ]
+SQL: SELECT sum(payAmount) as money FROM `tp_recharge_log` WHERE ( stateCode=2 ) LIMIT 1   [ RunTime:0.005000s ]
+SQL: SELECT * FROM `tp_loan` WHERE ( `deal_status` = 4 ) AND ( `is_effect` = 1 ) AND ( `is_delete` = 0 )  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_loan_apply` [ RunTime:0.003000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_loan_apply` LIMIT 1   [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.007001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:19:41+08:00 ] 127.0.0.1 /manage.php/System/System
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.012001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2018-05-17T09:19:49+08:00 ] 127.0.0.1 /manage.php/System/System
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.009000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009000s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.000000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:19:59+08:00 ] 127.0.0.1 /manage.php/Withdrawal/Index
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+SQL: SHOW COLUMNS FROM `tp_withdrawal` [ RunTime:0.018001s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_withdrawal` WHERE ( `is_delete` = 0 ) LIMIT 1   [ RunTime:0.018001s ]
+SQL: SELECT * FROM `tp_withdrawal` WHERE ( `is_delete` = 0 ) ORDER BY create_time DESC,id DESC LIMIT 0,25   [ RunTime:0.007001s ]
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( `id` IN ('7931','3396','663','599','8895','8895','9412','9414','9417','7726','9218','3287','481','9442','1150','1114','7520','5149','3395','498','4085','5199','5121','3497','7583') )  [ RunTime:0.020001s ]
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.015001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:20:00+08:00 ] 127.0.0.1 /manage.php/RechargeLog/index
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_recharge_log` [ RunTime:0.002001s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\RechargeLogAction.class.php 第 59 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_recharge_log` LIMIT 1   [ RunTime:0.003000s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\RechargeLogAction.class.php 第 67 行.
+SQL: SELECT * FROM `tp_recharge_log` ORDER BY completeTime DESC,id DESC LIMIT 0,25   [ RunTime:0.010000s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\RechargeLogAction.class.php 第 68 行.
+SQL: SELECT * FROM `tp_recharge_log` ORDER BY completeTime DESC,id DESC  [ RunTime:0.088005s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\RechargeLogAction.class.php 第 80 行.
+SQL: SELECT sum(orderAmount) count_amount FROM `tp_recharge_log` LIMIT 1   [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( `id` IN ('2781','3396','663','599','481','1150','1114','3395','498','3393','1846','9580','9542','9580','8333','3566','3566','3566','4310','9579','9579','710','707','705','701') )  [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.008000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009000s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001001s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003001s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:20:03+08:00 ] 127.0.0.1 /manage.php/ManySmsSend/Send
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_many_sms_send` [ RunTime:0.010001s ]
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( is_effect=1 )  [ RunTime:0.055003s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: display_txt F:\www\p2p222notminsheng\Manage\Runtime\Cache\3daa7ed1efa88c51230115bb2fd383a0.php 第 18 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.020001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.020001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.006001s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.002000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.002000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.011001s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2018-05-17T09:20:04+08:00 ] 127.0.0.1 /manage.php/ManySmsSend/Index
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_many_sms_send` [ RunTime:0.002001s ]
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.002000s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\ManySmsSendAction.class.php 第 28 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_many_sms_send` LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_many_sms_send` ORDER BY id desc LIMIT 0,25   [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_user` WHERE ( `id` IN ('1','1','1','1','1','1','1','1','1','1','1','1','1') )  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( `id` IN ('0','103','103','103','180','0','3810','103','0','3810','180','3810','0') )  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.007000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007000s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.000000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:20:16+08:00 ] 127.0.0.1 /manage.php/Lottery/Index
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.001000s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\LotteryAction.class.php 第 18 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_lt` LIMIT 1   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\LotteryAction.class.php 第 22 行.
+SQL: SELECT * FROM `tp_lt` ORDER BY create_time ASC,id ASC LIMIT 0,25   [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: pid F:\www\p2p222notminsheng\Manage\Runtime\Cache\b4cf1e3b35752b08ab124ae76252b82b.php 第 32 行.
+NOTIC: [8] Undefined variable: cate F:\www\p2p222notminsheng\Manage\Runtime\Cache\b4cf1e3b35752b08ab124ae76252b82b.php 第 38 行.
+NOTIC: [8] Undefined variable: ss F:\www\p2p222notminsheng\Manage\Runtime\Cache\b4cf1e3b35752b08ab124ae76252b82b.php 第 41 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.008001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.000000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:20:18+08:00 ] 127.0.0.1 /manage.php/Lottery/Index
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.001000s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\LotteryAction.class.php 第 18 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_lt` LIMIT 1   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\LotteryAction.class.php 第 22 行.
+SQL: SELECT * FROM `tp_lt` ORDER BY create_time ASC,id ASC LIMIT 0,25   [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: pid F:\www\p2p222notminsheng\Manage\Runtime\Cache\b4cf1e3b35752b08ab124ae76252b82b.php 第 32 行.
+NOTIC: [8] Undefined variable: cate F:\www\p2p222notminsheng\Manage\Runtime\Cache\b4cf1e3b35752b08ab124ae76252b82b.php 第 38 行.
+NOTIC: [8] Undefined variable: ss F:\www\p2p222notminsheng\Manage\Runtime\Cache\b4cf1e3b35752b08ab124ae76252b82b.php 第 41 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.008000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008000s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.000000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:20:19+08:00 ] 127.0.0.1 /manage.php/Lottery/RecordIndex
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.001000s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\LotteryAction.class.php 第 95 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` LIMIT 1   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\LotteryAction.class.php 第 99 行.
+SQL: SELECT * FROM `tp_record` ORDER BY create_time DESC,id DESC LIMIT 0,25   [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( `id` IN ('170','170','170','190','190','190','193','193','153','153','180','103','103','102','102','101','101','103','102','101','159','159','159','154','154') )  [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_lt` WHERE ( `id` IN ('6','6','6','6','6','6','6','6','6','6','6','2','6','6','6','6','6','3','4','5','6','6','6','6','6') )  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: pid F:\www\p2p222notminsheng\Manage\Runtime\Cache\2e832672380f97c4d4c4eea10e7e8a7a.php 第 44 行.
+NOTIC: [8] Undefined variable: cate F:\www\p2p222notminsheng\Manage\Runtime\Cache\2e832672380f97c4d4c4eea10e7e8a7a.php 第 50 行.
+NOTIC: [8] Undefined variable: ss F:\www\p2p222notminsheng\Manage\Runtime\Cache\2e832672380f97c4d4c4eea10e7e8a7a.php 第 53 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.009000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009000s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001001s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001001s ]
+
+[ 2018-05-17T09:20:22+08:00 ] 127.0.0.1 /manage.php/Lottery/Index
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\LotteryAction.class.php 第 18 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_lt` LIMIT 1   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\LotteryAction.class.php 第 22 行.
+SQL: SELECT * FROM `tp_lt` ORDER BY create_time ASC,id ASC LIMIT 0,25   [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: pid F:\www\p2p222notminsheng\Manage\Runtime\Cache\b4cf1e3b35752b08ab124ae76252b82b.php 第 32 行.
+NOTIC: [8] Undefined variable: cate F:\www\p2p222notminsheng\Manage\Runtime\Cache\b4cf1e3b35752b08ab124ae76252b82b.php 第 38 行.
+NOTIC: [8] Undefined variable: ss F:\www\p2p222notminsheng\Manage\Runtime\Cache\b4cf1e3b35752b08ab124ae76252b82b.php 第 41 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.008001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:20:24+08:00 ] 127.0.0.1 /manage.php/Lottery/LotterySet/upid/1
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_lt` WHERE ( id=1 ) LIMIT 1   [ RunTime:0.001001s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: display_txt F:\www\p2p222notminsheng\Manage\Runtime\Cache\0a5572f79fcd10c1dafe05955ebfe9ca.php 第 18 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.030001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.030001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:20:27+08:00 ] 127.0.0.1 /manage.php/Lottery/Index
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\LotteryAction.class.php 第 18 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_lt` LIMIT 1   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\LotteryAction.class.php 第 22 行.
+SQL: SELECT * FROM `tp_lt` ORDER BY create_time ASC,id ASC LIMIT 0,25   [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: pid F:\www\p2p222notminsheng\Manage\Runtime\Cache\b4cf1e3b35752b08ab124ae76252b82b.php 第 32 行.
+NOTIC: [8] Undefined variable: cate F:\www\p2p222notminsheng\Manage\Runtime\Cache\b4cf1e3b35752b08ab124ae76252b82b.php 第 38 行.
+NOTIC: [8] Undefined variable: ss F:\www\p2p222notminsheng\Manage\Runtime\Cache\b4cf1e3b35752b08ab124ae76252b82b.php 第 41 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.008000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008000s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:20:32+08:00 ] 127.0.0.1 /manage.php/Lottery/RecordIndex
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\LotteryAction.class.php 第 95 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` LIMIT 1   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\LotteryAction.class.php 第 99 行.
+SQL: SELECT * FROM `tp_record` ORDER BY create_time DESC,id DESC LIMIT 0,25   [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( `id` IN ('170','170','170','190','190','190','193','193','153','153','180','103','103','102','102','101','101','103','102','101','159','159','159','154','154') )  [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_lt` WHERE ( `id` IN ('6','6','6','6','6','6','6','6','6','6','6','2','6','6','6','6','6','3','4','5','6','6','6','6','6') )  [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: pid F:\www\p2p222notminsheng\Manage\Runtime\Cache\2e832672380f97c4d4c4eea10e7e8a7a.php 第 44 行.
+NOTIC: [8] Undefined variable: cate F:\www\p2p222notminsheng\Manage\Runtime\Cache\2e832672380f97c4d4c4eea10e7e8a7a.php 第 50 行.
+NOTIC: [8] Undefined variable: ss F:\www\p2p222notminsheng\Manage\Runtime\Cache\2e832672380f97c4d4c4eea10e7e8a7a.php 第 53 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.010001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2018-05-17T09:20:35+08:00 ] 127.0.0.1 /manage.php/System/System
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.008001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:20:55+08:00 ] 127.0.0.1 /manage.php/Withdrawal/Index
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_withdrawal` [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_withdrawal` WHERE ( `is_delete` = 0 ) LIMIT 1   [ RunTime:0.004000s ]
+SQL: SELECT * FROM `tp_withdrawal` WHERE ( `is_delete` = 0 ) ORDER BY create_time DESC,id DESC LIMIT 0,25   [ RunTime:0.007001s ]
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( `id` IN ('7931','3396','663','599','8895','8895','9412','9414','9417','7726','9218','3287','481','9442','1150','1114','7520','5149','3395','498','4085','5199','5121','3497','7583') )  [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.015001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2018-05-17T09:20:56+08:00 ] 127.0.0.1 /manage.php/SerialRecord/index
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+SQL: SHOW COLUMNS FROM `tp_serial_record` [ RunTime:0.011001s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\SerialRecordAction.class.php 第 26 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_serial_record` LIMIT 1   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\SerialRecordAction.class.php 第 34 行.
+SQL: SELECT * FROM `tp_serial_record` ORDER BY create_time DESC,id DESC LIMIT 0,25   [ RunTime:0.017001s ]
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.008000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008000s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:20:57+08:00 ] 127.0.0.1 /manage.php/RechargeLog/index
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_recharge_log` [ RunTime:0.001000s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\RechargeLogAction.class.php 第 59 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_recharge_log` LIMIT 1   [ RunTime:0.003000s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\RechargeLogAction.class.php 第 67 行.
+SQL: SELECT * FROM `tp_recharge_log` ORDER BY completeTime DESC,id DESC LIMIT 0,25   [ RunTime:0.010001s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\RechargeLogAction.class.php 第 68 行.
+SQL: SELECT * FROM `tp_recharge_log` ORDER BY completeTime DESC,id DESC  [ RunTime:0.086005s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\RechargeLogAction.class.php 第 80 行.
+SQL: SELECT sum(orderAmount) count_amount FROM `tp_recharge_log` LIMIT 1   [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( `id` IN ('2781','3396','663','599','481','1150','1114','3395','498','3393','1846','9580','9542','9580','8333','3566','3566','3566','4310','9579','9579','710','707','705','701') )  [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.009001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:21:00+08:00 ] 127.0.0.1 /manage.php/System/System
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.008000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008000s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001001s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002001s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:21:07+08:00 ] 127.0.0.1 /manage.php/Lottery/Index
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.001000s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\LotteryAction.class.php 第 18 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_lt` LIMIT 1   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined variable: where F:\www\p2p222notminsheng\Manage\Lib\Action\LotteryAction.class.php 第 22 行.
+SQL: SELECT * FROM `tp_lt` ORDER BY create_time ASC,id ASC LIMIT 0,25   [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: pid F:\www\p2p222notminsheng\Manage\Runtime\Cache\b4cf1e3b35752b08ab124ae76252b82b.php 第 32 行.
+NOTIC: [8] Undefined variable: cate F:\www\p2p222notminsheng\Manage\Runtime\Cache\b4cf1e3b35752b08ab124ae76252b82b.php 第 38 行.
+NOTIC: [8] Undefined variable: ss F:\www\p2p222notminsheng\Manage\Runtime\Cache\b4cf1e3b35752b08ab124ae76252b82b.php 第 41 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.008000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008000s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:21:14+08:00 ] 127.0.0.1 /manage.php/Lottery/LotterySet/upid/6
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_lt` WHERE ( id=6 ) LIMIT 1   [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: display_txt F:\www\p2p222notminsheng\Manage\Runtime\Cache\0a5572f79fcd10c1dafe05955ebfe9ca.php 第 18 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.005000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.005000s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+

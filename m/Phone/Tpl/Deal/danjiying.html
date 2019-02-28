@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>{$loan.loan_title}_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="{$Think.config.web_description}" />
+</head>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/countUp.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+     
+    var $div_li = $("div.js_menu ul li");
+	$div_li.click(function(){
+        $(this).addClass("js_sel").siblings().removeClass("js_sel");
+		var index = $div_li.index(this);//index() 方法返回指定元素相对于其他指定元素的 index 位置
+		$("div.js_box > div").eq(index).show().siblings().hide();
+	});
+	
+	$(".tz_jl li:odd").css("background","#f2f2f2");
+});
+
+</script>
+<body>
+<div class="center">
+   <include file="Common:header"/>
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>投资详情</span>
+     <span></span>     
+     <!--登录后显示 start-->
+    <include file="Common:ico"/>
+     <!--end-->
+   </div>  
+   <div class="investment">
+      <h3>
+           <!--<span class="at"><img src="__PUBLIC__/images/db.png"></span>-->
+           <span>{$loan.loan_title}</span>
+      </h3>
+      <div class="invest_xx">
+        <ul>
+           <li><span>借款金额</span><span><font color="#b00b00" size="+1">{$loan.loan_money|format_price}</font></span><div class="spacer"></div></li>
+           <li><span>借款年利率</span><span class="jk_num">{$loan.loan_rate}%</span><div class="spacer"></div></li>
+           <li><span>投资进度</span><span><font class="jumbo" id="myTargetElement">{$loan.load}</font>%</span><div class="spacer"></div></li>
+           <li><span>担保范围</span><span>{$loan.guarantee_purview}</span><div class="spacer"></div></li>
+           <li><span>剩余时间</span><span><if condition="$loan['re_start_time'] GT 0">{$loan.re_start_time|remain_time}<else/>{$loan.retime}</if></span><div class="spacer"></div></li>
+        </ul>
+      </div>
+      <div> 
+        
+      <php>
+      if($loan['is_effect'] == 1){
+      </php>  
+        <if condition="$loan['deal_status'] eq 1">
+        <if condition="$loan['now_time'] LT $loan['start_time'] && $loan['deal_status'] eq 1">
+        <a href="javascript:;" class="tz_sub tz_dkf">待开放</a> 
+        <else/>
+        <a href="{:U("Deal/ToInvestView",array('id'=>$loan['id']))}" class="tz_sub">投资</a> 
+        </if>
+        </if>
+        <if condition="$loan['deal_status'] eq 2">
+        <a href="javascript:;" class="tz_sub tz_mb">满标</a> 
+        </if>        
+        <if condition="$loan['deal_status'] eq 4">
+        <a href="javascript:;" class="tz_sub tz_hk">还款中</a>         
+        </if>
+        <if condition="$loan['deal_status'] eq 5">
+        <a href="javascript:;" class="tz_sub tz_dkf">已还清</a> 
+        </if> 
+      <php>}</php>
+      </div>
+      <!--<div class="nnh-menu">
+         <span class="nnh-first nnh-hover">产品介绍</span>
+         <span>投资记录</span>
+      </div>-->
+      <div class="nnh-jj">
+         <h3>产品介绍</h3>
+         <p>单季盈是金投资推出的一款按季度回收收益的短期理财产品，将手中的闲置资金推荐给信用良好的优质企业。封闭期三个月，预期年化收益9%，到期还本付息</p>
+         <h3>产品亮点</h3>
+         <p>
+            <span>可灵活投资</span><span>期限短</span><span>资产增值</span>
+         </p>
+         <h3>真实案例</h3>
+         <p>秦女士是一家私营业主，手中积累了一些闲置资金，因三个月后需大量采购一批货物，秦女士将50万元资金购买了“单季盈”，封闭期3个月，年化收益9%。这样三个月后，秦女士净收益11250元。秦女士的选择不仅没有耽误进货，又得到了一笔收益，秦女士高兴的说：“我这不仅没有耽误进货，做生意赚钱不说，还给给开工资呢！”</p>
+         <h3>预期收益演示</h3>
+         <div class="spacer"></div>
+         <ul>
+             <li class="sy-yst">
+                <span>投资时间</span>
+                <span>资金增值额</span>
+                <span class="nnh-sy-l">到期资金总额</span>
+             </li>
+             <li>
+                <span>第1个月</span>
+                <span>3,750元</span>
+                <span class="nnh-sy-l">503,750元</span>
+             </li>
+             <li>
+                <span>第2个月</span>
+                <span>7,500元</span>
+                <span class="nnh-sy-l">507,500元</span>
+             </li>
+             <li>
+                <span>第3个月</span>
+                <span>11,250元</span>
+                <span class="nnh-sy-l">511,250元</span>
+             </li>
+         </ul>
+      </div>
+      <if condition="$lid EGT 21 && $loan['re_start_time'] EQ 0">
+        <iframe frameborder="0" width="100%" height="700" src="{:U('Deal/tz_record',array('lid'=>$lid))}" scrolling="no"></iframe>
+      </if>
+      <div class="spacer"></div>
+   </div>
+   <include file="Common:bottom"/>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+
+
+    // create instance
+    var demoAnim = new countUp("myTargetElement", {$loan.load}, 2, 2.5);
+
+    window.onload = function() {
+        
+        // fire animation
+        demoAnim.start();
+        
+    }
+
+    // for demo:
+    function createCountUp() {
+
+        var endVal = document.getElementById("num").value;
+        endVal = Number(endVal.replace(',','').replace(' ',''));
+        var decimals = document.getElementById("decimals").value;
+        var duration = document.getElementById("duration").value;
+
+        demoAnim = new countUp("myTargetElement", endVal, decimals, duration);
+        demoAnim.start();
+    }
+
+</script>

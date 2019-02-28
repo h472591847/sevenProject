@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>收益计算器_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="{$Think.config.web_description}" />
+<include file = "Common:transparent" />
+</head>
+<link href="__PUBLIC__/style/base.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/page.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+
+<script type="text/javascript">
+
+/**
+ * check_earning_calc    计算器表单过滤，计算处理
+ */
+function check_earning_calc(){
+   $money = $("input[name='money']");
+   $loan_deadline = $("input[name='loan_deadline']");
+   $loan_deadline_type = $("select[name='loan_deadline_type']");
+   $loan_rate = $("input[name='loan_rate']");   
+   var number_reg = /^\d+$/;
+   if($.trim($money.val()) == 0 || !number_reg.test($.trim($money.val()))){
+     $money.parent().parent().find('.err_text').html('<font color=#F00>错误:请填写正确的投资金额</font>');
+     $money.val('');$money.focus();return false;
+   }else{
+     $money.parent().parent().find('.err_text').html('');
+   }    
+   var float_reg = /^(\d+\.\d{0,2}|\d+)$/;  //验证输入是否为数字,若小数可输入两位小数         
+   if(!float_reg.test(parseFloat($loan_rate.val()))){
+     $loan_rate.parent().parent().find('.err_text').html('<font color=#F00>错误:请填写正确的年化利率</font>');
+     $loan_rate.val('');$loan_rate.focus();return false;
+   }else{
+     $loan_rate.parent().parent().find('.err_text').html('');
+   }   
+   //后台处理计算            
+   $.ajax({
+     url: "{:U('Calculator/EarningsCalc')}",
+     type: 'POST',
+     dataType: 'json',
+     data: "money="+$money.val()+"&loan_deadline="+$loan_deadline.val()+"&loan_deadline_type="+$loan_deadline_type.val()+"&loan_rate="+$loan_rate.val(),
+     success:function(msg){
+       if(msg.status == 1){
+          $("#count_amount").text(msg.data.count_amount);
+          $("#count_accrual").text(msg.data.count_accrual);
+          return false;
+       }else{
+          alert(msg.info);return false;
+       }      
+     }
+   })
+   return false;
+}
+</script>
+<body>
+<include file = "Common:head" />
+
+<div class="earn_calc">
+   <h3 class="earn_tit">收益计算器</h3>
+   <div class="earn_cen calc_js">
+      <ul>
+         <li>
+            <span class="calc_words">投资金额：</span>
+            <span class="calc_txt"><input type="text" name="money" class="earn_txt" /></span>
+            <span class="calc_unit">元</span>
+            <span class="err_text"></span>
+         </li>
+         <li>
+            <span class="calc_words">投资期限：</span>
+            <span class="calc_txt"><input type="text" name="loan_deadline" class="earn_txt" /></span>
+            <span class="calc_unit"><select name="loan_deadline_type" id="loan_deadline_type" class="earn_txt earn_opt"><option value="1">天</option><option value="0">月</option></select></span>
+            <span class="err_text"></span>
+         </li>
+         <li>
+            <span class="calc_words">年化利率：</span>
+            <span class="calc_txt"><input type="text" name="loan_rate" class="earn_txt" /></span>
+            <span class="calc_unit">%</span>
+            <span class="err_text"></span>
+         </li>
+         <li>
+            <span class="calc_words">&nbsp;</span>
+            <span class="calc_txt"><input type="button" class="earn_sub" onclick="check_earning_calc();" value="计算" /></span>
+         </li>
+      </ul>
+   </div> 
+   <div class="earn_cen">
+     <h3 class="calc_result">计算结果</h3>
+     <ul class="earn_ul">
+        <li>
+            <span class="calc_words">到期收益：</span>
+            <span class="calc_txt" style="width:450px;">本息合计 <font id="count_amount">0</font> 元，利息收入共 <font id="count_accrual">0</font> 元</span>
+        </li>
+     </ul>
+   </div>
+   <div class="earn_cen">
+      <h3 class="calc_result">收益计算器简介</h3>
+      <p class="earn_ul">收益计算器用于计算您在金投资投资将会获得的收益，具体收益请参见投资后的统计。</p>
+   </div>
+</div>
+
+<include file = "Common:bottom" />
+
+
+</body>
+</html>

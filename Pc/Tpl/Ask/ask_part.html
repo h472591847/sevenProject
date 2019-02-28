@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$cate.name}_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="<if condition="$cate['description'] neq ''">{$cate.description}<else/>{$Think.config.web_description}</if>" />
+<include file = "Common:transparent" />
+</head>
+<link href="__PUBLIC__/style/base.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/page.css" type="text/css" rel="stylesheet" />
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+
+
+<body>
+<include file = "Common:head" />
+
+<div class="page_center">
+    <div class="page_mid">
+        <include file = "Common:left" />
+        <div class="page_right">
+            <div class="second_page">
+              <div>
+                   
+                <h3 class="second_h3" style=" margin-top:15px;">{$cate.name}</h3>
+                   <ul class="ask_part">
+                    <foreach name="list" item="v">
+                      <li>
+                         <h3><a href="{:U('Article/articleDetail',array('id'=>$v['id']))}" title="{$v.title}">{$v.title|msubstr=0,45}</a></h3>
+                         <span>
+                           {$v.description|msubstr=0,145}
+                         </span>
+                      </li>
+                      </foreach>
+                   </ul>
+                   <div class="spacer"></div>
+                </div>
+                
+                <div class="page">{$page}</div>
+                
+            </div>
+            
+        </div>
+    </div>
+    <div class="spacer"></div>
+</div>
+
+<include file = "Common:bottom" />
+
+</body>
+</html>

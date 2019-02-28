@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<title>批量付款</title>
+<script language="JavaScript" type="text/javascript" src="__PUBLIC__/Js/jquery-1.6.2.js"></script>
+<script language="JavaScript" type="text/javascript" src="__PUBLIC__/Js/jquery.form.js"></script>
+<script language="JavaScript" type="text/javascript" src="__PUBLIC__/Js/base64.js"></script>
+<script language="JavaScript" type="text/javascript" src="__PUBLIC__/Js/md5.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">  
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">  
+<META HTTP-EQUIV="Expires" CONTENT="0">
+<script type="text/javascript">
+var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
+String.prototype.replaceAll = function(s1,s2){
+	return this.replace(/[(^\s+)(\s+$)]/g,"");
+}
+function SubKO(){	
+	var d = document.base64Form;
+	var s = d.requestParameters.value.indexOf('<REQUEST_BODY>');
+	var e = d.requestParameters.value.indexOf('</REQUEST_BODY>')+15;
+	signData = d.requestParameters.value.substring(s,e);
+	signData = signData.replaceAll(" ","");
+	temp_array = signData.split("</PAY_ITEM>");
+	data_array = '' ;
+	for(i=0 ; i<temp_array.length ; i++){
+		temp_a = temp_array[i].indexOf('<ORDER_ID>');
+		temp_b = temp_array[i].indexOf('</ORDER_ID>');
+		temp_c = temp_array[i].indexOf('<REMARK>');
+		temp_d = temp_array[i].indexOf('</REMARK>');
+		if(temp_a > 0 && temp_c > 0){
+			data_array += temp_array[i].substring(temp_c+8,temp_d);
+			data_array += ',';
+			data_array += temp_array[i].substring(temp_a+10,temp_b);
+			data_array += '|';
+		}
+	}
+	//$("#txt").text(a);return false;
+	var hash1 = hex_md5(signData+"30819f300d06092a864886f70d010101050003818d003081890281810080c1f67eecf234550e364e318a386ea287fb0a22bf051845825ee8bcab2c5fe61d56165ff4d374a01d00af8930a174c099efbe90656a9c3ce0781822d98e41b5626ddd22abaf68a9ab267bae503a0154c41e3c1ee203737c4621aaa804c3ddb2d89aa385d57e8ddbcd6fa85a8ddac3bcb43dc352c0a6d4232dad4dab878f075f0203010001");
+	var xml = document.base64Form.requestParameters.value;
+	var new_xml = xml.replace("V_SIGNVALUE",hash1);
+	document.base64Form.requestParameters.value = new_xml;
+	//return false;
+	encode64_txt = encode64(utf16to8(new_xml));	
+	document.base64Form.requestParameters.value = encode64_txt
+	pars = 'commandCode='+ document.getElementById('commandCode').value + '&requestParameters=' + encodeURIComponent(encode64_txt);
+	
+	//发送前字符记录
+    $.ajax({
+    	async:false,
+    	url: '{:U("Withdrawal/CheckBeforeResult")}',
+    	type: 'POST',
+    	dataType: 'text',
+    	data: 'no='+$("#no").val()+'&send_data='+$("#requestParameters").text()+"&order_ids="+data_array,
+    })    
+    var end_str = "";
+    //发送后结果记录
+	$.ajax({
+		async:false,
+		type: "POST",
+		url: "{:U('Withdrawal/GetResult')}",
+		data: pars,
+		success: function(data) {		    
+			var result = decode64(data);
+			result = utf8to16(result);//解密后的XML格式字符串						
+			var x = $.parseXML(result);					
+			for(i = 0; i<$(x).find('ORDER_ID').length;i++){				
+				end_str += $(x).find('ERROR_CODE').eq(i).text();
+				end_str += ",";
+				end_str += $(x).find('ERROR_MSG').eq(i).text();
+				end_str += ",";				
+				end_str += $(x).find('ORDER_ID').eq(i).text();
+				end_str += "|";
+			}
+		}
+	},"text");
+
+	//修改提现记录写入订单号
+	$.ajax({
+		url: '{:U("Withdrawal/RequestPayment")}',
+		type: 'POST',
+		dataType: 'text',
+		data: "end_str="+end_str,
+		success:function(msg){
+			location.href="{:U('Withdrawal/Index')}"; return false;
+		}
+	})
+		
+
+	document.getElementById('oko').disabled="disabled";
+}
+</script>
+</head>
+<body>
+<form id="base64Form" name="base64Form" action="https://www.hnapay.com/website/BatchPay.htm" method="post" target="_blank" style="display:none">
+command:<input type=text style="width:300px;" name="commandCode" id="commandCode" value="AA1001|A001|10007643050|{$no}|V1.0|127.0.0.1"/><br />
+请求xml:<br/>
+<input type="text" name="no" value="{$no}" id="no">
+<textarea name="requestParameters" id="requestParameters" cols="100" rows="20">
+<?xml version="1.0" encoding="utf-8"?>
+<PayPlatRequestParameter>
+	<REQUEST_HEADER>
+	    <MERCHANT_CODE>10007643050</MERCHANT_CODE>
+	    <BIZ_NO>{$no}</BIZ_NO>
+	    <CURRENCY_CODE>1</CURRENCY_CODE>
+	    <TOTAL_AMOUNT>{$count_price}</TOTAL_AMOUNT>
+	    <TOTAL_COUNT>{$count}</TOTAL_COUNT>
+	    <AUDIT_FLAG>1</AUDIT_FLAG>
+	    <FEE_TYPE>1</FEE_TYPE>
+	    <PAY_TYPE>1</PAY_TYPE>
+	    <REQUEST_TIME><?php echo date('YmdHis');?></REQUEST_TIME>
+	    <VERSION>V1.0</VERSION>
+	    <SIGNVALUE>V_SIGNVALUE</SIGNVALUE>
+	</REQUEST_HEADER>
+	<REQUEST_BODY>
+	<?php $i=0;?>
+<foreach name="w_info" item="v">
+<?php $i++;?>
+	<PAY_ITEM>
+		<ORDER_ID>{$v.order_id}</ORDER_ID>
+		<PAYEE_NAME>{$v.real_name}</PAYEE_NAME>
+		<PAYEE_ACCOUNT>{$v.bank_number}</PAYEE_ACCOUNT>
+		<AMOUNT>{$v.withdrawal_price}</AMOUNT>
+		<PAYEE_MOBILE>{$v.phone}</PAYEE_MOBILE>
+		<NOTE>金投资提现</NOTE>
+		<REMARK>{$v.id}</REMARK>
+		<BANK_NAME>{$v.bank_name}</BANK_NAME>
+		<PROVINCE>{$v.province}</PROVINCE>
+		<CITY>{$v.city}</CITY>
+		<BRANCHE>{$v.bank_address}</BRANCHE>
+		<PAYEE_TYPE>1</PAYEE_TYPE>
+	</PAY_ITEM>
+</foreach>
+
+	</REQUEST_BODY>
+</PayPlatRequestParameter>
+</textarea>
+<br>
+<input type="button" name="encode" value="委托签约提交" onClick="SubKO();" id="oko"/>
+</form>
+处理中,请勿关闭或刷新本页面...
+</body>
+<script>
+SubKO();
+</script>
+</html>

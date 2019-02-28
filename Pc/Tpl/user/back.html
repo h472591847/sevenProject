@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>通过邮箱找回密码-{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="{$Think.config.web_description}" />
+<include file = "Common:transparent" />
+</head>
+<link href="__PUBLIC__/style/base.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/register.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<body>
+<include file = "Common:head" />
+
+<form action="{:U('user/DoGetPassword')}" method="post">
+<div class="reg_cen">
+   <div class="reg_step reg_step1">
+      <ul>
+        <li class="white">填写邮箱信息</li>
+        <li>验证信息</li>
+        <li>重置密码</li>
+      </ul>
+  </div>
+   <div class="reg_bot">
+      <table cellpadding="0" cellspacing="0" border="0" width="70%" class="reg_bd" style="margin-left:70px;">
+         <tr>
+            <td width="25%" height="60" align="right">邮箱：</td>
+            <td width="75%" class="fl"><input type="text"  name="email" id="email" class="login_message" value="请输入您的邮箱" class="login_message" onclick="if(this.defaultValue==this.value){this.value='';}" onblur="if(this.value==''){this.value=this.defaultValue;}"  /></td>
+         </tr>
+         <tr>
+            <td height="70">&nbsp;</td>
+            <td class="fl"><input type="submit" value="密码找回" class="login_sub" id="submit_email" /></td>
+         </tr>
+      </table>
+   </div>
+</div>
+ </form>
+<include file = "Common:bottom" />
+</body>
+</html>
+<script type="text/javascript">
+    $("#submit_email").click(function(){
+        $mail = $("input[name=email]");
+       var reg = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/; //邮箱正则过滤
+       if(!reg.test($.trim($mail.val())) || $.trim($mail.val())==''){alert("这不是一个正确的邮箱地址");$mail.focus();return false;}//验证邮箱              
+    })
+</script>

@@ -1,0 +1,150 @@
+<div class="bottom1">
+   <div class="bot_item">
+   
+      <div class="bot_item1">
+         <h3>关于我们</h3>
+         <ul>
+            <li><a href="{:U('About/index')}" title="">公司简介</a></li>
+            <li><a href="{:U('Single/index',array('cid'=>74))}" title="">法律政策</a></li>
+            <li><a href="{:U('Bank/index',array('class_name'=>'合作银行'))}" title="">合作银行</a></li>
+            <li><a href="{:U('Media/index',array('cid'=>24))}" title="">媒体新闻</a></li>
+            <li><a href="{:U('Recruitment/index',array('cid'=>34))}" title="">招贤纳士</a></li>
+            
+         </ul>
+      </div>
+      
+      <div class="bot_item2">
+         <h3>常见问题</h3>
+         <ul>         
+         <php>         
+            $bottom_hot_where['pid'] = array('between',array('31','33'));
+            $bottom_list = M('info')->where($bottom_hot_where)->order('click desc,id desc')->limit(5)->select();             
+            foreach ($bottom_list as $key => $v){
+         </php>
+            <li><a href="{:U('Article/articleDetail',array('id'=>$v['id']))}" title="{$v.title}">{$v.title|msubstr=0,15}</a></li>
+            <php>}</php>
+         </ul>
+      </div>
+      
+      <div class="bot_item3">
+         <h3>联系我们</h3>
+         <ul>
+            <li><img src="__PUBLIC__/images/contact_hot.png" alt="客服热线：4006-570-826" /></li>
+            <li>地址：{$Think.config.web_address}</li>
+            <!--<li>总部地址：西安大路1016号&nbsp;&nbsp;&nbsp;办公电话：0431-81638266</li>-->
+            <li>服务时间：{$Think.config.web_time}</li>
+              <php>
+              $ar = explode('?',$_SERVER['REQUEST_URI']);
+              if(count($ar)>0){
+              $get_param = $ar[1];
+              $get_param = "&".$get_param;
+              }
+              </php>            
+            <if condition="$Think.session.is_change eq 'www'"><li><a href="?is_change=1{$get_param}"><font color="#33FFCC">手机版</font></a></li></if>
+            <li>客户交流群：63693972</li>
+         </ul>
+      </div>
+      
+      <div class="bot_item4">
+         <h3>关注我们</h3>
+         <ul>
+            <li>
+               <span><img src="__PUBLIC__/images/bot_wx.jpg" width="90" alt="金投资微信二维码" /></span>
+               <span>腾讯微信</span>
+            </li>
+            <li>
+               <span><img src="__PUBLIC__/images/bot_sina.jpg" alt="金投资新浪微博二维码" /></span>
+               <span>新浪微博</span>
+            </li>
+         </ul>
+      </div>
+      
+   </div>   
+</div>
+<div class="bottom2">
+   <div class="bot_bq">
+        <p class="Friend_a"><span>
+        友情链接：
+<php>
+  $links_list = M('ad')->where("class_name='友情链接'")->order('ad_order DESC,id DESC')->select();    
+  $z = 0;
+  foreach($links_list as $k=>$v){
+     $z++;
+     if($z>1){
+       echo "|";
+     }     
+     echo "<a href=".$v['ad_link']." target=_blank>".$v['ad_name']."</a>";
+  }
+</php>
+
+        </span></p>
+       <ul class="bot_rz">
+           <li>
+              <span><a href="http://webscan.360.cn/index/checkwebsite/url/www.p2p222.com" target="_blank"><img src="__PUBLIC__/images/kx360.png"/></a></span>
+              <script src="http://kxlogo.knet.cn/seallogo.dll?sn=e15031022010057890iu2i000000&size=0"></script>
+              <span><a href="http://www.p2p222.com/index.php/Article/articleDetail/id/1014.html" target="_blank"><img src="__PUBLIC__/images/gjym.png" /></a></span>
+              <span><a href="http://www.itrust.org.cn/yz/pjwx.asp?wm=1081839472" target="_blank"><img src="__PUBLIC__/images/kx_web.png" /></a></span>
+           </li>
+       </ul>
+       <p class="copyright">
+          <a href="http://www.beianbeian.com/" target="_blank">{$Think.config.web_copyright}</a>
+       </p>
+       <p class="tj_total">
+         <script type="text/javascript">
+         var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+         document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fe29aec143162fc1ca52145771a9ee305' type='text/javascript'%3E%3C/script%3E"));
+         </script>          
+         <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5958842'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/stat.php%3Fid%3D5958842%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>              
+       </p>   
+       <div class="spacer"></div>   
+   </div>
+</div>
+
+<div class="side">
+	<ul>
+		<li><a href="javascript:;" class="cal_jsq"><div class="sidebox"><img src="__PUBLIC__/images/side_icon01.png">理财计算器</div></a></li>
+        <li><a href="{:U('user/register')}"><div class="sidebox"><img src="__PUBLIC__/images/side_icon06.png">用户注册</div></a></li>
+		<li><a href="tencent://message/?uin=2057287718&在线咨询&Menu=yes" ><div class="sidebox"><img src="__PUBLIC__/images/side_icon04.png">QQ客服</div></a></li>
+		<li><a href="http://weibo.com/jinyongbofa" target="_blank" ><div class="sidebox"><img src="__PUBLIC__/images/side_icon03.png">新浪微博</div></a></li>
+		<li style="border:none;"><a href="javascript:goTop();" class="sidetop"><img src="__PUBLIC__/images/side_icon05.png"></a></li>
+	</ul>
+</div>
+
+<div class="calcul_l">
+   <div class="cal_mid">
+      <h3>理财计算器</h3>
+     <table cellpadding="0" cellspacing="0" border="0" width="75%">
+        <tr>
+           <td width="28%" height="45">投资金额：</td>
+           <td width="72%"><input type="text" class="cul_txt" id="mid_money" /> 元</td>
+        </tr>
+        <tr>
+           <td height="45">投资期限：</td>
+           <td>
+           <input type="text" class="cul_txt" id="mid_deadline" style="width:50px;" /> 
+            <select name="loan_deadline_type" id="loan_deadline_type"  style="width:50px;height:30px;">          
+                <option value="1">天</option>
+                <option value="0">月</option>
+            </select>
+           </td>
+        </tr>
+        <tr>
+           <td height="45">年化利率：</td>
+           <td><input type="text" class="cul_txt" id="mid_rate" /> %</td>
+        </tr>
+        <tr>
+           <td height="50">&nbsp;</td>
+           <td><input type="button" value="计算" class="calculate" id="mid-dispose" /></td>
+        </tr>
+     </table>
+     <h3>计算结果</h3>
+     <table cellpadding="0" cellspacing="0" border="0" width="75%">
+        <tr>
+           <td width="28%">到期收益：</td>
+           <td width="72%"><span id="mid_result">0</span>元 </td>
+        </tr>
+     </table>
+     <span class="js_close"><img src="__PUBLIC__/images/wx_close.png" /></span>
+   </div>
+</div>
+<script type="text/javascript" src="__PUBLIC__/js/customer.js"></script>

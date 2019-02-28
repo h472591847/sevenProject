@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>{$article.title}_{$cate.name}_{$Think.config.web_title}</title>
+<meta name="keywords" content="<if condition="$article['keyword'] neq ''">{$article.keyword}<else/>{$Think.config.web_keywords}</if>" />
+<meta name="description" content="<if condition="$article['description'] neq ''">{$article.description}<else/>{$Think.config.web_description}</if>" />
+</head>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+
+<body>
+<div class="center">
+   <include file="Common:header"/>
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>{$cate.name}</span>
+     <span></span>     
+    <include file="Common:ico"/>
+   </div>    
+   <div class="news_detail">
+      <h3>{$article.title}</h3>
+     
+      <span class="news_d">{$article.time|date='Y-m-d',###}</span>
+      <div class="art">
+          <if condition="$article['img'] neq ''"><span><img src="{$Think.config.host}{$article.img}"></span></if>
+         {$article.content|editor_replace_imgurl}
+      </div>
+      <p class="directory"><a href="Javascript:history.go(-1);" style="display:block;">返回目录</a></p>
+   </div>
+   <include file="Common:bottom"/>
+</div>
+</body>
+</html>

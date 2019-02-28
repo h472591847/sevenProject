@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$about.title}_{$Think.config.web_title}</title>
+<meta name="keywords" content="<if condition="$about['keyword'] neq ''">{$about.keyword}<else/>{$Think.config.web_keywords}</if>" />
+<meta name="description" content="<if condition="$about['description'] neq ''">{$about.description}<else/>{$Think.config.web_description}</if>" />
+<include file = "Common:transparent" />
+</head>
+<link href="__PUBLIC__/style/base.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/page.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript">
+var environment = {
+    userVo : '',
+    role : '',
+    userId : '',
+    basePath : '',
+    userCash : '',
+    globalPath : '',
+    userActiveTime : '',
+    yoolibaoWhiteListStatus : '',
+    yoolibaoOpenStatus : '',
+    cerrencyOpenTime : "2014/11/30"//new Date()
+};
+</script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script src="__PUBLIC__/js/global-1.1.0.min.js" type="text/javascript"></script>
+<body>
+<include file = "Common:head" />
+
+<div class="earn_calc">
+   <h3 class="earn_tit">身价计算器</h3>
+   <div class="worth-calc">
+        <div class="topics">
+            <div class="topics-items" id="worthTopics"></div>
+            <div class="topics-items" id="worthData">
+                <ul></ul>
+                <span style="display:none" id="worthRecord"></span>
+                <div class="worth-submint none" id="worthSubmint"> <a href="{:U('Deal/Index')}" class="gbtn">立即开始投资</a> <a href="javascript:;" id="resetCount" class="gbtn gbtn-gray">重新计算</a> </div>
+            </div>
+        </div>
+        <div class="worth-chart"></div>
+    </div>
+    <div class="bid-info earn_cen">
+        <h2 class="calc_result">身价计算器简介</h2>
+        <ul class="items">
+            <li>身价计算器用于了解您当前的存款及收入状况，预测您通过【金投资】进行合理投资后将达到的身价。</li>
+        </ul>
+    </div>
+    <div class="spacer"></div>
+</div>
+	
+<include file = "Common:bottom" />
+
+<script type="text/javascript" src="__PUBLIC__/js/worth-calc.js"></script>
+</body>
+</html>

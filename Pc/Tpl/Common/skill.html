@@ -1,0 +1,61 @@
+
+   <div class="play_jtz play_money">
+      <div class="play_first" style="cursor:pointer;">
+        <p><img src="__PUBLIC__/images/play_step_1.png" /><span class="play_btn"><img src="__PUBLIC__/images/play_btn.png" /></span></p>
+        <p><img src="__PUBLIC__/images/play_step_2.png" /></p>
+        
+      </div>
+   </div>
+   <div class="play_jtz skill_step hide">
+      <div id="skill_step" class="flexslider">
+            <ul class="slides">
+                <li><div class="img"><img src="__PUBLIC__/images/first_step.png"  alt="" /></div></li>
+                <li><div class="img"><img src="__PUBLIC__/images/second_step.png" alt="" /></div></li>
+                <li><div class="img"><img src="__PUBLIC__/images/third_step.png" alt="" /></div></li>
+            </ul>
+            <span class="step_close"><img src="__PUBLIC__/images/step_close.png" /></span>
+      </div>
+   </div>
+
+<script type="text/javascript" src="__PUBLIC__/js/slider.js"></script> 
+<script type="text/javascript">
+   function windowalign(){
+    var bodyheight = $(window).height(),  //整个网页的宽度 如果这里是window ie6and ie7 得到的是负数
+     bodywidth = $(window).width(),  //整个网页的高度 如果这里是document ie7不会水平居中
+     wrapwidth = $(".play_jtz").width(),  //要垂直居中的内容的宽度
+     wrapheight = $(".play_jtz").height();  //要垂直居中的内容的高度度
+     postop = (bodyheight-wrapheight)/2;  
+   // 获取顶部的position
+     posleft = (bodywidth-wrapwidth)/2;  
+   // 获取左边部的position
+     $(".play_jtz").css({"left":posleft+"px","top":postop+"px"});  // 设置position
+   }
+   windowalign();
+   $(window).resize(function(){  // 当调整窗口的时候动态修正位置
+    windowalign();
+   });
+   
+   $(".play_first").click(function(){
+      $(".play_money").slideUp();
+    $(".skill_step").slideDown(1000);
+   });
+   $(".step_close").click(function(){
+      $(".grey").hide();
+   });
+   
+   //play_step
+   $(function(){
+
+    $('#skill_step').flexslider({
+      animation: "slide",
+      direction:"horizontal",
+      easing:"swing",
+      directionNav: true,
+      controlNav: true,
+      mousewheel: false
+    });
+    
+  });
+
+
+</script>

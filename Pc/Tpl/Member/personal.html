@@ -1,0 +1,601 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>个人资料-会员中心-{$Think.config.web_title}</title>
+<include file = "Common:transparent" />
+
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/style.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/guide.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+<!--安全等级-->
+<script type="text/javascript" src="__PUBLIC__/js/jquery.tips.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+	var percent = $('.progress_bar').attr('title');
+	$(".progress_bar").animate({width:percent},1000);
+	$(".tip").tipsy({gravity:'s',fade:true});
+});
+</script>
+<!---->
+</head>
+<body>
+<include file = "Common:head" />
+<include file = "Common:web_announce" />
+<div class="middle">
+   <include file="Common:left_menu"/>
+   <div class="mid_right InLine">
+      <h3 class="bt">个人资料</h3>
+      <div class="mr_center">
+
+         <div class="personal_r">
+              <span class="perso_img"><img src="<if condition="$user_info.face_pic neq ''">{$user_info.face_pic}<else/>__PUBLIC__/images/personal.jpg</if>" width="100" height="100" /></span>
+              <span class="perso_name">{$Think.session.user_name}</span>
+              <span class="perso_modify"><a href="{:U('Member/face')}">修改头像</a></span>
+         </div>
+
+         <div class="personal_l">
+            <ul>
+                <li <if condition="$user_info['is_phone'] eq '1'"> class="complete"<else/>class="nonecomplete"</if>>
+                <if condition="$user_info.phone neq '' && $user_info.code_number neq '' && $user_info.is_phone eq '1'">
+                 <a href="javascript:;" class="sj_phone">修改</a>
+                 <else/>
+
+                 <a href="javascript:;" class="sj_phone">修改</a>
+                 </if>
+                <span class="per_y">手机</span>
+                <if condition="$user_info.phone neq '' && $user_info.code_number neq '' && $user_info.is_phone eq '1'">
+                    <span>{$user_info.repeat_phone}</span>
+                    <else/>                    
+                </if>
+                 
+                </li>
+                
+                <li <if condition="$user_info['real_name'] neq ''"> class="complete"<else/>class="nonecomplete"</if>>
+                <if condition="$user_info.idno eq ''"><a href="javascript:;" class="smz_card">认证</a>
+                </if>
+                <span class="per_y">姓名</span>
+                <span>{$user_info.repeat_real_name}<font class="per_y_mark">身份证需与绑定的银行卡持卡人姓名一致，请谨慎填写</font></span>
+                
+                </li>
+                <li <if condition="$user_info['idno'] neq ''"> class="complete"<else/>class="nonecomplete"</if>><span class="per_y">身份证</span>
+                <if condition="$user_info.idno neq ''">
+                <span>{$user_info.idno}</span><else/><a href="javascript:;" class="smz_card">认证</a></if></li>
+                <li <if condition="$user_info['is_email'] eq '1'"> class="complete"<else/>class="nonecomplete"</if>><a href="javascript:;" class="yx_email"><if condition="$user_info['is_email'] eq '1'">修改<else/>认证</if></a><span class="per_y">邮箱</span><span>{$user_info.repeat_email}</span></li>                
+                <li class="complete">
+                  <a href="javascript:;" class="mm_password">修改</a>
+                  <span class="per_y">登录密码</span><span>{$user_info.repeat_user_pwd}</span>
+                </li>
+                <li <empty name="user_info.repeat_trade_pwd">class="nonecomplete"<else/>class="complete"</empty>><span class="per_y">交易密码</span>
+                <if condition="$user_info.trade_pwd neq ''">
+                  <a href="javascript:;" class="jy_password">修改</a>
+                  <span>{$user_info.repeat_trade_pwd}</span>
+                  <else/>
+                  <a href="javascript:;" class="jy_password">设置</a>
+                  <span>未设置</span>
+                </if>
+                </li>
+            </ul>
+         </div>
+         
+         <div class="spacer"></div>
+      </div>
+   </div>
+   <div class="spacer"></div>
+</div>
+
+<div class="black_em" id="black_em">
+    <div class="em">
+    <empty name="user_info.is_email">
+     <form action="{:U('Member/FindMail')}" name="form_mail" id="form_mail" method="post">
+    <else/>
+      <form action="{:U('Member/ModifyOldEmailVerify')}" name="form_mail" id="form_mail" method="post">
+    </empty>     
+        <empty name="user_info.is_email">
+        <h3>绑定邮箱</h3>
+        <p>
+           <span>输入邮箱</span>
+           <input type="text" name="email" id="email" class="inp" value="{$user_info.email}" />
+           <span><input type="submit" value="确定" id="submit_email" name="submit_email" class="sub" /></span>
+        </p>
+        <else/>
+        <h3>修改邮箱</h3>
+        <p>
+           <span class="modify_tit">原邮箱地址</span>
+           <span class="old_infor">{$user_info.repeat_email}</span>
+           <span><input type="submit" value="发送验证邮件" id="update_email" name="update_email" class="sub" /></span>
+        </p>
+        </empty>
+
+
+        <a href="javascript:;" class="close"><img src="__PUBLIC__/images/close.png" /></a>
+      </form>
+    </div>
+</div>
+
+<div id="black_em_a" class="black_em">
+    <div class="em">
+        <input type="hidden" name="phone" id="phone" value="{$user_info.phone}">
+        <h3>修改手机号</h3>
+        <p>
+           <span class="modify_tit">原手机号</span>
+           <span class="old_infor">{$user_info.repeat_phone}</span>
+           <span class="modify_tit" style=" margin-top:10px;">验证码</span>
+           <input type="text" name="code_number" id="code_number" class="yz_code" />
+           <input type="button" id="send_code" value="短信验证码" class="send_yzm vali_mes" style="width:110px;" onclick="sendCode(this,$('#phone').val(),1,'修改绑定电话号码');" />
+           <input type="button" id="send_code" value="语音验证码" class="send_yzm vali_voi" style="width:110px;"  onclick="sendCode(this,$('#phone').val(),2);" />
+           <span><input type="submit" value="确定" class="sub" name="submit_phone" id="submit_phone" /></span>
+        </p>
+        <a href="javascript:;" class="close"><img src="__PUBLIC__/images/close.png" /></a>
+    </div>
+</div>
+
+<div id="black_em_a2" class="black_em">
+    <div class="em">     
+        <h3>修改手机号</h3>
+        <p> 
+           <span class="modify_tit">新手机号</span>          
+           <span><input type="text" name="new_phone" id="new_phone" value="" class="inp" /></span>
+           <span class="modify_tit" style=" margin-top:10px;">验证码</span>
+           <input type="text" name="new_code_number" id="new_code_number" class="yz_code" />
+           <input type="button" id="new_send_code" value="短信验证码" class="send_yzm vali_mes" style="width:110px;" onclick="sendCode(this,$('#new_phone').val(),1,'修改绑定电话号码');" />
+           <input type="button" id="send_code" value="语音验证码" class="send_yzm vali_voi" style="width:110px;"  onclick="sendCode(this,$('#phone').val(),2);" />
+           <span><input type="submit" value="确定" class="sub" name="submit_phone_2" id="submit_phone_2" /></span>
+        </p>
+        <a href="javascript:;" class="close"><img src="__PUBLIC__/images/close.png" /></a>     
+    </div>
+</div>
+
+
+<div id="black_em_b" class="black_em" >
+    <div class="em">
+     <form action="{:U('Member/FindIdno')}" name="form_idno" method="post">
+        <h3>请输入您的身份证信息</h3>
+        <p>
+           <span class="modify_tit">姓名</span>
+           <input type="text" name="real_name" id="real_name" class="inp" /> <font></font>
+           <span class="modify_tit" style="margin-top:10px;">身份证号</span>
+           <input type="text" name="idno" id="idno" class="inp" />
+           <span><input type="submit" value="确定" name="submit_idno" id="submit_idno" class="sub" /></span>
+           
+        </p>
+        <a href="javascript:;" class="close"><img src="__PUBLIC__/images/close.png" /></a>
+      </form>
+      <span class="card_mark">身份证需与绑定的银行卡持卡人姓名一致，如果填写有误 ，请联系客服4006-570-826，修改需提供复杂的身份证明材料，请谨慎填写</span>
+    </div>
+    
+</div>
+
+<div id="black_em_c" class="black_em">
+    <div class="em">
+      <form action="{:U('Member/UpdatePwd')}" name="form_upwd" method="post">
+        <h3>修改密码</h3>
+        <p>
+           <span class="modify_tit">原密码</span>
+           <input type="password" name="user_pwd" id="user_pwd" class="inp" />
+           <span style=" margin-top:10px;">新密码</span>
+           <input type="password" name="new_pwd" id="new_pwd" class="inp" />
+           <span class="modify_tit" style=" margin-top:10px;">确认密码</span>
+           <input type="password" name="repwd" id="repwd" class="inp" />
+           <span><input type="submit" value="确定" class="sub" id="submit_pwd" name="submit_pwd"  /></span>
+        </p>
+        <a href="javascript:;" class="close"><img src="__PUBLIC__/images/close.png" /></a>
+      </form>
+    </div>
+</div>
+
+<div id="black_em_d" class="black_em">
+    <div class="em">
+     <form action="{:U('Member/setTrade')}" name="form_phone" id="form_phone" method="post">
+        <h3>设置交易密码</h3>
+        <p>
+           <span class="modify_tit">输入密码</span>
+           <input type="hidden" name="trade_phone" id="trade_phone" value="{$user_info.phone}" class="inp" />
+           <input type="password" name="trade_pwd" id="trade_pwd" value="" class="inp" />
+           <span class="modify_tit">再次输入密码</span>
+           <input type="password" name="re_trade_pwd" id="re_trade_pwd" value="" class="inp" />
+           <span style=" margin-top:10px;">获取手机验证码</span>
+           <input type="text" name="trade_code_number" id="trade_code_number" class="yz_code" />
+           <input type="button" id="trade_send_code" value="短信验证码" class="send_yzm vali_mes" style="width:110px;" onclick="tradeSendCode(this,1,'设置交易密码');" <if condition="$user_info['trade_pwd'] eq ''">onclick="tradeSendCode(this,1,'修改交易密码');"<else/> onclick="tradeSendCode(this,1,'修改交易密码');"</if>  />       
+           <input type="button" id="trade_send_code" value="语音验证码" class="send_yzm vali_voi" onclick="tradeSendCode(this,2);" style="width:110px;" />    
+           <span><input type="submit" value="确定" class="sub" name="submit_trade" id="submit_trade" /></span>
+        </p>
+        <a href="javascript:;" class="close"><img src="__PUBLIC__/images/close.png" /></a>
+      </form>
+    </div>
+    <div class="spacer"></div>
+</div>
+<script type="text/javascript">
+   //认证按钮弹出层
+    $(".personal_l .yx_email").click(function(){
+     $("#black_em").css("display","block");
+  });
+  $(".personal_l .sj_phone").click(function(){
+       $("#black_em_a").css("display","block");
+  });
+  $(".personal_l .smz_card").click(function(){
+       $("#black_em_b").css("display","block");
+  });
+  $(".personal_l .mm_password").click(function(){
+       $("#black_em_c").css("display","block");
+  });
+  $(".personal_l .jy_password").click(function(){
+       $("#black_em_d").css("display","block");
+  });
+  $(".close").click( function(){
+       $(this).parents(".black_em").css("display","none");
+  });
+  $(".sure_phone").click(function(){
+     $("#black_em_a").css("display","none");
+         $("#black_em_e").css("display","block");
+  });
+</script>
+<script type="text/javascript">
+    //绑定邮箱表单过滤
+    $("#submit_email").click(function(){
+       $mail = $("#email");
+       var reg = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/; //邮箱正则过滤
+       if(!reg.test($.trim($mail.val())) || $.trim($mail.val())==''){alert("这不是一个正确的邮箱地址");$mail.focus();return false;}//验证邮箱    
+       $(this).css('background-color','#999');
+       $(this).val('发送中...');
+       return;
+       $(this).attr('disabled','disabled');   
+    })
+
+    //绑定身份证表单过滤
+    $("#submit_idno").click(function(){   
+       $real_name = $("#real_name");
+       $idno = $("#idno");
+       var ch_reg = /^[u4E00-u9FA5{u-zU-Z}]+$/;//筛选包含汉字的字符         
+       if($.trim($real_name.val())==''){
+         alert('姓名不能为空');$real_name.focus();return false;
+       }
+       if(ch_reg.test($.trim($real_name.val()))){
+          alert('姓名必须为汉字');$real_name.focus();return false;
+       }         
+       if(checkCardId($.trim($idno.val()),$idno)==false){
+         return false;
+       }     
+    })    
+
+    //修改密码表单过滤
+    $("#submit_pwd").click(function(){
+        $pwd = $("#user_pwd");
+        $new_pwd = $("#new_pwd");
+        $repwd = $("#repwd");
+        if($.trim($pwd.val()).length<4){alert('密码不能为空，且长度不能少于4位');$pwd.focus();return false;} //验证密码长度
+        //新密码验证
+        if($.trim($new_pwd.val()).length<4 || $.trim($new_pwd.val()) == $.trim($pwd.val())){
+          alert('新密码不能少于4位，且不能与原密码相同');$new_pwd.focus();return false;
+        }
+        //确认密码验证
+        if($.trim($new_pwd.val()) != $.trim($repwd.val())){
+          alert('确认密码与新密码不一致，请重新输入');$repwd.focus();return false;
+        }
+    })
+    $phone = $("#phone");
+    $trade_phone = $("#trade_phone");
+    $code_number = $("#code_number"); 
+    $new_phone = $("#new_phone");
+    $new_code_number = $("#new_code_number"); 
+    $trade_code_number = $("#trade_code_number");
+    //绑定手机第一步表单过滤、提交验证旧手机
+    $("#submit_phone").click(function(){            
+       var phone_reg = /^(1[3|4|5|7|8]\d{9})$/;//手机号正则过滤
+       //验证手机号是否合法
+       if(!phone_reg.test($.trim($phone.val()))||$.trim($phone.val()).length!=11){alert('请输入正确的手机号码');$phone.focus();return false;}    
+       if($.trim($code_number.val()).length<4){alert('请输入正确的验证码');$code_number.focus();return false;}//验证码过滤
+       $.ajax({
+         url: '{:U("Member/FindPhone")}',
+         type: 'POST',
+         dataType: 'json',
+         data: 'phone='+$phone.val()+'&code_number='+$code_number.val(),
+         success:function(msg){
+            if(msg.status == 0){
+              alert(msg.info);return false;
+            }else{
+              $("#black_em_a").css('display','none');
+              $("#black_em_a2").css('display','block');
+              return false;
+              
+            }
+         }
+       })
+       
+    })    
+
+
+    //绑定手机第二步表单过滤、提交验证新手机
+    $("#submit_phone_2").click(function(){                  
+       var phone_reg = /^(1[3|4|5|7|8]\d{9})$/;//手机号正则过滤              
+       //验证手机号是否合法
+       if(!phone_reg.test($.trim($new_phone.val()))||$.trim($new_phone.val()).length!=11){
+        alert('请输入正确的手机号码');$new_phone.focus();return false;
+       }
+       if($.trim($code_number.val()).length<4){alert('请输入正确的验证码');$code_number.focus();return false;}//验证码过滤
+       $.ajax({
+         url: '{:U("Member/DoFindPhone")}',
+         type: 'POST',
+         dataType: 'json',
+         data: 'new_phone='+$new_phone.val()+'&new_code_number='+$new_code_number.val(),
+         success:function(msg){
+            if(msg.status == '0'){
+              alert(msg.info);return false;
+            }else{
+              alert(msg.info);location.reload();return false;
+            }
+         }
+       })
+       
+    })  
+
+    //设置交易密码表单过滤
+    $("#submit_trade").click(function(){        
+        $trade_pwd = $("#trade_pwd");        
+        $re_trade_pwd = $("#re_trade_pwd");
+        if($.trim($trade_pwd.val()).length<4){alert('密码不能为空，且长度不能少于4位');$trade_pwd.focus();return false;} //验证密码长度
+        //确认密码验证
+        if($.trim($trade_pwd.val()) != $.trim($re_trade_pwd.val())){
+          alert('确认密码与新密码不一致，请重新输入');$re_trade_pwd.focus();return false;
+        }
+        if($.trim($trade_code_number.val()).length<4){alert('请输入正确的验证码');$trade_code_number.focus();return false;}//验证码过滤        
+    })
+
+
+/**
+ * sendCode       单击发送验证码的操作  
+ * obj      object     按钮对象
+ * v        string     发送的手机号
+ */
+  function sendCode(obj,v,type,temp_str){        
+    var phone_reg = /^(1[3|4|5|7|8]\d{9})$/;//手机号正则过滤     
+    if(!phone_reg.test($.trim(v)) || $.trim(v)==''){
+        alert('请输入正确的手机号码');        
+        return false;
+    }                     
+    $.ajax({
+       dataType: "JSON",
+       url: "{:U('Member/sendCode')}",
+       data: "phone="+v+"&type="+type+"&temp_str="+temp_str,
+       success: function(msg){                 
+          //msg = eval("("+msg.responseText+")");                             
+          if(msg.status == 0){                  
+              alert(msg.info);return false;
+          }else{
+              sendMobileTime(obj,61,type,temp_str);
+          }
+       }
+    }); 
+  }    
+
+
+
+
+/**
+ * 设置交易密码  发送短信倒计时
+ * @param   obj   元素对象
+ * @param   stime 倒计时时间总数
+ * @return        定时器
+ */
+function tradeSendMobileTime(obj, stime,type,temp_str) {
+    setTimeout(function (){
+        var _stime = stime - 1;
+        if (_stime) {
+            $(obj).val(_stime-1 + '秒后可重新获取');                            
+            tradeSendMobileTime(obj, _stime,type,temp_str);
+            $(obj).attr("onClick","return false");//倒计时中停止点击事件
+        } else {
+            if(type == 1){
+              txt = '短信';
+            }else{
+              txt = '语音';
+            }          
+            $(obj).val('免费获取'+txt+'验证码');   //倒计时停止时将元素的文本初始化             
+            $(obj).attr("onClick","tradeSendCode(this,"+type+","+temp_str+")");//倒计时停止加回点击事件sendCode方法
+        }
+    }, 1000);
+}    
+
+
+/**
+ * 设置交易密码  单击发送验证码的操作     
+ */
+  function tradeSendCode(obj,type,temp_str){  
+    var trade_phone_reg = /^(1[3|4|5|7|8]\d{9})$/;//手机号正则过滤     
+    if(!trade_phone_reg.test($.trim($trade_phone.val())) || $.trim($trade_phone.val())==''){
+        alert('请输入正确的手机号码');
+        $trade_phone.focus();
+        return false;
+    }                 
+    $.ajax({
+       dataType: "JSON",
+       url: "{:U('Member/sendCode')}",
+       data: "phone="+$trade_phone.val()+"&type="+type+"&temp_str="+temp_str,
+       success: function(msg){                 
+          //msg = eval("("+msg.responseText+")");                             
+          if(msg.status == 0){                  
+              alert(msg.info);return false;
+          }else{
+              tradeSendMobileTime(obj,61,type,temp_str);
+          }
+       }
+    }); 
+  }    
+
+
+/**
+ * 发送短信倒计时
+ * @param   obj   元素对象
+ * @param   stime 倒计时时间总数
+ * @return        定时器
+ */
+function sendMobileTime(obj, stime,type,temp_str) {
+    setTimeout(function (){
+        var _stime = stime - 1;
+        if (_stime) {
+            $(obj).val(_stime-1 + '秒后可重新获取');                            
+            sendMobileTime(obj, _stime,type,temp_str);
+            $(obj).attr("onClick","return false");//倒计时中停止点击事件
+        } else {
+            if(type == 1){
+              txt = '短信';
+            }else{
+              txt = '语音';
+            }          
+            $(obj).val('免费获取'+txt+'验证码');   //倒计时停止时将元素的文本初始化   
+            $(obj).attr("onClick","sendCode(this,"+type+","+temp_str+")");//倒计时停止加回点击事件sendCode方法
+        }
+    }, 1000);
+}    
+
+
+
+
+/**
+ * @todo    checkCardId       验证身份证准确性
+ * @param   socialNo         身份证号值
+ * @param   obj              元素对象
+ * @return  bool         
+ */
+function checkCardId(socialNo,obj){
+
+    if(socialNo == "")
+    {
+      alert("输入身份证号码不能为空!");
+      obj.focus();return (false);
+    }
+
+    if (socialNo.length != 15 && socialNo.length != 18)
+    {
+      alert("输入身份证号码格式不正确!");
+      obj.focus();return (false);
+    }
+    
+   var area={11:"北京",12:"天津",13:"河北",14:"山西",15:"内蒙古",21:"辽宁",22:"吉林",23:"黑龙江",31:"上海",32:"江苏",33:"浙江",34:"安徽",35:"福建",36:"江西",37:"山东",41:"河南",42:"湖北",43:"湖南",44:"广东",45:"广西",46:"海南",50:"重庆",51:"四川",52:"贵州",53:"云南",54:"西藏",61:"陕西",62:"甘肃",63:"青海",64:"宁夏",65:"新疆",71:"台湾",81:"香港",82:"澳门",91:"国外"}; 
+     
+     if(area[parseInt(socialNo.substr(0,2))]==null) {
+      alert("身份证号码不正确(地区非法)!");
+        obj.focus();return (false);
+     } 
+        
+    if (socialNo.length == 15)
+    {
+       pattern= /^\d{15}$/;
+       if (pattern.exec(socialNo)==null){
+          alert("15位身份证号码必须为数字！");
+          obj.focus();return (false);
+       }
+    var birth = parseInt("19" + socialNo.substr(6,2));
+    var month = socialNo.substr(8,2);
+    var day = parseInt(socialNo.substr(10,2));
+    switch(month) {
+      case '01':
+      case '03':
+      case '05':
+      case '07':
+      case '08':
+      case '10':
+      case '12':
+        if(day>31) {
+          alert('输入身份证号码不格式正确!');
+          obj.focus();return false;
+        }
+        break;
+      case '04':
+      case '06':
+      case '09':
+      case '11':
+        if(day>30) {
+          alert('输入身份证号码不格式正确!');
+          obj.focus();return false;
+        }
+        break;
+      case '02':
+        if((birth % 4 == 0 && birth % 100 != 0) || birth % 400 == 0) {
+          if(day>29) {
+            alert('输入身份证号码不格式正确!');
+            obj.focus();return false;
+          }
+        } else {
+          if(day>28) {
+            alert('输入身份证号码不格式正确!');
+            obj.focus();return false;
+          }
+        }
+        break;
+      default:
+        alert('输入身份证号码不格式正确!');
+        obj.focus();return false;
+    }
+    var nowYear = new Date().getYear();
+    if(nowYear - parseInt(birth)<15 || nowYear - parseInt(birth)>100) {
+      alert('输入身份证号码不格式正确!');
+      obj.focus();return false;
+    }
+      obj.focus();return (true);
+    }
+    
+    var Wi = new Array(
+              7,9,10,5,8,4,2,1,6,
+              3,7,9,10,5,8,4,2,1
+              );
+    var   lSum        = 0;
+    var   nNum        = 0;
+    var   nCheckSum   = 0;
+    
+      for (i = 0; i < 17; ++i)
+      {
+          
+
+          if ( socialNo.charAt(i) < '0' || socialNo.charAt(i) > '9' )
+          {
+              alert("输入身份证号码格式不正确!");
+              obj.focus();return (false);
+          }
+          else
+          {
+              nNum = socialNo.charAt(i) - '0';
+          }
+           lSum += nNum * Wi[i];
+      }
+
+    
+      if( socialNo.charAt(17) == 'X' || socialNo.charAt(17) == 'x')
+      {
+          lSum += 10*Wi[17];
+      }
+      else if ( socialNo.charAt(17) < '0' || socialNo.charAt(17) > '9' )
+      {
+          alert("输入身份证号码格式不正确!");
+          obj.focus();return (false);
+      }
+      else
+      {
+          lSum += ( socialNo.charAt(17) - '0' ) * Wi[17];
+      }
+
+      
+      
+      if ( (lSum % 11) == 1 )
+      {
+          obj.focus();return true;
+      }
+      else
+      {
+          alert("输入身份证号码格式不正确!");
+          obj.focus();return (false);
+      }
+    
+}
+
+
+</script>
+<include file = "Common:bottom" />
+<if condition="$Prompt eq 1 && $Think.cookie.no_msg neq '1'">
+<div class="grey" style="display:none;"><include file = "Common:skill" /></div>
+</if>
+</body>
+</html>

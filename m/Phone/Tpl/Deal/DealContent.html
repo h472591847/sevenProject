@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>{$loan.loan_title}_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="{$Think.config.web_description}" />
+</head>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/countUp.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+     
+    var $div_li = $("div.js_menu ul li");
+	$div_li.click(function(){
+        $(this).addClass("js_sel").siblings().removeClass("js_sel");
+		var index = $div_li.index(this);//index() 方法返回指定元素相对于其他指定元素的 index 位置
+		$("div.js_box > div").eq(index).show().siblings().hide();
+	});
+	
+	$(".tz_jl li:odd").css("background","#f2f2f2");
+});
+
+</script>
+<body>
+<div class="center">
+   <include file="Common:header"/>
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>投资详情</span>
+     <span></span>     
+     <!--登录后显示 start-->
+    <include file="Common:ico"/>
+     <!--end-->
+   </div>  
+   <div class="investment">
+      <h3>
+           <!--<span class="at"><img src="__PUBLIC__/images/db.png"></span>-->
+           <span>{$loan.loan_title}</span>
+      </h3>
+      <div class="invest_xx">
+        <ul>
+           <li><span>借款金额</span><span><font color="#b00b00" size="+1">{$loan.loan_money|format_price}</font></span><div class="spacer"></div></li>
+           <li><span>借款年利率</span><span class="jk_num">{$loan.loan_rate}%</span><div class="spacer"></div></li>
+           <li><span>投资进度</span><span><font class="jumbo" id="myTargetElement">{$loan.load}</font>%</span><div class="spacer"></div></li>
+           <li><span>担保范围</span><span>{$loan.guarantee_purview}</span><div class="spacer"></div></li>
+           <li><span>剩余时间</span><span><if condition="$loan['re_start_time'] GT 0">{$loan.re_start_time|remain_time}<else/>{$loan.retime}</if></span><div class="spacer"></div></li>
+        </ul>
+      </div>
+      <div class="invest_xx"> 
+         <ul>
+            <li><span>借款用途</span><span class="xx_green">{$loan.loan_purpose}</span><div class="spacer"></div></li>
+            <li><span>抵押物</span><span class="xx_green">{$loan.pawn}</span><div class="spacer"></div></li>
+            <li><span>产值</span><span class="xx_green">{$loan.production_value}</span><div class="spacer"></div></li>
+            <li><span>还款来源</span><span class="xx_green">{$loan.payment_source}</span><div class="spacer"></div></li>
+            <li><span>还款能力</span><span class="xx_green">{$loan.repayment_ability}</span><div class="spacer"></div></li>
+         </ul>
+      <php>
+      if($loan['is_effect'] == 1){
+      </php>  
+        <if condition="$loan['deal_status'] eq 1">
+        <if condition="$loan['now_time'] LT $loan['start_time'] && $loan['deal_status'] eq 1">
+        <a href="javascript:;" class="tz_sub tz_dkf">待开放</a> 
+        <else/>
+        <a href="{:U("Deal/ToInvestView",array('id'=>$loan['id']))}" class="tz_sub">投资</a> 
+        </if>
+        </if>
+        <if condition="$loan['deal_status'] eq 2">
+        <a href="javascript:;" class="tz_sub tz_mb">满标</a> 
+        </if>        
+        <if condition="$loan['deal_status'] eq 4">
+        <a href="javascript:;" class="tz_sub tz_hk">还款中</a>         
+        </if>
+        <if condition="$loan['deal_status'] eq 5">
+        <a href="javascript:;" class="tz_sub tz_dkf">已还清</a> 
+        </if> 
+      <php>}</php>
+      </div>
+      
+      <div class="invest_js">
+         <div class="js_menu">
+            <ul>
+                <li class="js_one js_sel">项目介绍</li>
+                <li>企业信息</li>
+                <li class="js_three">担保信息</li>
+            </ul>
+        </div>
+        <div class="js_box"> 
+             <div>
+                <empty name="loan.loan_description">
+                <else/>                 
+                <p>{$loan.loan_description}</p>
+                </empty>
+                <ul>
+                    <empty name="loan.pawn_info">
+                    <else/>                 
+                    <li>
+                       <span class="js_a">抵押物价值</span>
+                       <span class="js_b">{$loan.pawn_info}</span>
+                       <div class="spacer"></div>
+                    </li>
+                    </empty> 
+                    <empty name="loan.loan_purpose">
+                    <else/>                                        
+                    <li>
+                       <span class="js_a">借款用途</span>
+                       <span class="js_b">{$loan.loan_purpose}</span>
+                       <div class="spacer"></div>
+                    </li>
+                    </empty> 
+                    <empty name="loan.payment_source">
+                    <else/>                       
+                    <li>
+                       <span class="js_a">还款来源</span>
+                       <span class="js_b">{$loan.payment_source}</span>
+                       <div class="spacer"></div>
+                    </li>
+                    </empty>                     
+                </ul>
+             </div>
+             <div class="hide">
+                <p>企业信息</p>
+                <ul>
+                    <empty name="loan.business_scope">
+                    <else/>                       
+                    <li>
+                       <span class="js_a">经营范围</span>
+                       <span class="js_b">{$loan.business_scope}</span>
+                       <div class="spacer"></div>
+                    </li>
+                    </empty> 
+                    <empty name="loan.business_state">
+                    <else/>                      
+                    <li>
+                       <span class="js_a">经营状况</span>
+                       <span class="js_b">{$loan.business_state|msubstr=0,150}</span>
+                       <div class="spacer"></div>
+                    </li>
+                    </empty>                     
+                </ul>
+             </div>
+             <div class="hide">
+                <p>担保信息</p>
+                <ul>
+                    <empty name="loan.guarantee_institution">
+                    <else/>                 
+                    <li>
+                       <span class="js_a">担保机构</span>
+                       <span class="js_b">{$loan.guarantee_institution}</span>
+                       <div class="spacer"></div>
+                    </li>
+                    </empty>  
+                    <empty name="loan.guarantee_content">
+                    <else/>                                            
+                    <li>
+                       <span class="js_a">机构简介</span>
+                       <span class="js_b">{$loan.guarantee_content|msubstr=0,150}</span>
+                       <div class="spacer"></div>
+                    </li>
+                    </empty>   
+                    <empty name="loan.pawn_info">
+                    <else/>                                        
+                    <li>
+                       <span class="js_a">抵押物信息</span>
+                       <span class="js_b">{$loan.pawn_info}</span>
+                       <div class="spacer"></div>
+                    </li>
+                    </empty>    
+                    <empty name="loan.risk_control">
+                    <else/>                                         
+                    <li>
+                       <span class="js_a">风险控制措施</span>
+                       <span class="js_b">{$loan.risk_control|msubstr=0,150}</span>
+                       <div class="spacer"></div>
+                    </li>
+                    </empty>   
+                    <empty name="loan.guarantee_idea">
+                    <else/>                                         
+                    <li>
+                       <span class="js_a">担保机构意见</span>
+                       <span class="js_b">{$loan.guarantee_idea}</span>
+                       <div class="spacer"></div>
+                    </li>
+                    </empty>                      
+                </ul>
+             </div>
+        </div>
+         
+         
+         <div class="spcaer"></div>
+      </div>
+      <if condition="$lid EGT 21 && $loan['re_start_time'] EQ 0">
+        <iframe frameborder="0" width="100%" height="700" src="{:U('Deal/tz_record',array('lid'=>$lid))}" scrolling="no"></iframe>
+      </if>
+      <div class="spacer"></div>
+   </div>
+   <include file="Common:bottom"/>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+
+
+    // create instance
+    var demoAnim = new countUp("myTargetElement", {$loan.load}, 2, 2.5);
+
+    window.onload = function() {
+        
+        // fire animation
+        demoAnim.start();
+        
+    }
+
+    // for demo:
+    function createCountUp() {
+
+        var endVal = document.getElementById("num").value;
+        endVal = Number(endVal.replace(',','').replace(' ',''));
+        var decimals = document.getElementById("decimals").value;
+        var duration = document.getElementById("duration").value;
+
+        demoAnim = new countUp("myTargetElement", endVal, decimals, duration);
+        demoAnim.start();
+    }
+
+</script>

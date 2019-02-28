@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<include file = "Common:transparent" />
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+</head>
+<body>
+<include file = "Common:head" />
+<include file = "Common:web_announce" />
+<div class="middle">
+   <include file="Common:left_menu"/>
+   <div class="mid_right">
+      <div class="mr_top"></div>
+      <div class="mr_center">
+         <h3 class="bt" style="margin-bottom:30px;">回款明细</h3>
+         <div class="receivable">
+            <ul>
+               <li style=" margin-left:0;">
+                  <span class="hk_je">50,000.00<font>元</font></span>
+                  <span>已收本金</span>
+                  <span class="hk_img"><img src="__PUBLIC__/images/ysbj.png" /></span>
+               </li>
+               <li>
+                  <span class="hk_je">50,000.00<font>元</font></span>
+                  <span>已收利息</span>
+                  <span class="hk_img"><img src="__PUBLIC__/images/yslx.png" /></span>
+               </li>
+               <li>
+                  <span class="hk_je">50,000.00<font>元</font></span>
+                  <span>待收本金</span>
+                  <span class="hk_img"><img src="__PUBLIC__/images/dsbj.png" /></span>
+               </li>
+               <li style="border-right:none;">
+                  <span class="hk_je">50,000.00<font>元</font></span>
+                  <span>待收利息</span>
+                  <span class="hk_img"><img src="__PUBLIC__/images/dslx.png" /></span>
+               </li>
+            </ul>
+         </div>
+         <div class="sx_mark hk_sx">
+             <div class="screening">
+                 <span class="sx_label">筛选日期：</span>
+                 <span class="sx_rq"><a href="#" class="to_d">全部</a><a href="#">今天</a><a href="#">最近一周</a><a href="#">一个月</a><a href="#">六个月</a></span>
+                 <div class="sx_date" style="margin-left:15px;"><input type="text" id="" /> - </div>
+                 <div class="sx_date">- <input type="text" id="" /></div> 
+                 <span><input type="submit" value="筛选" class="sx_tj" /></span>   
+             </div>
+             <div class="screening">
+                 <span class="sx_label">交易状态：</span>
+                 <span class="sx_rq"><a href="#" class="to_d">全部</a><a href="#">回收利息</a><a href="#">回收本金</a><a href="#">待回款</a></span>
+             </div>
+         </div>
+         <script type="text/javascript" src="__PUBLIC__/js/table.js"></script>
+         <table cellpadding="0" cellspacing="0" border="0" width="100%" class="tra_tab" style=" margin-top:30px;">
+               <thead>
+                   <tr>
+                      <th width="23%">时间</th>
+                      <th width="17%">已回款</th>
+                      <th width="18%">未回款</th>
+                      <th width="22%">明细</th>
+                      <th width="20%">资金</th>
+                   </tr>
+               </thead>
+               <tbody id="tbody"> 
+                   <tr>
+                      <td class="date">2014-09-26 10:10:25</td>
+                      <td>提现手续费</td>
+                      <td>2014092611</td>
+                      <td>&nbsp;</td>
+                      <td><span class="green">-1.00</span></td>
+                   </tr>
+                   <tr>
+                      <td class="date">2014-09-26 10:10:25</td>
+                      <td>提现</td>
+                      <td>2014092611</td>
+                      <td>&nbsp;</td>
+                      <td><span class="green">-500.00</span></td>
+                   </tr>
+                   <tr>
+                      <td class="date">2014-09-26 10:10:25</td>
+                      <td>投资</td>
+                      <td>2014092611</td>
+                      <td>装饰材料企业资金流动</td>
+                      <td><span class="add">+500.00</span></td>
+                   </tr>
+                    <tr>
+                      <td class="date">2014-09-26 10:10:25</td>
+                      <td>奖励</td>
+                      <td>2014092606</td>
+                      <td>注册奖励</td>
+                      <td><span class="add">+20.00</span></td>
+                   </tr>
+                    <tr>
+                      <td class="date">2014-09-26 10:10:25</td>
+                      <td>充值</td>
+                      <td>2014092602</td>
+                      <td>网银充值</td>
+                      <td><span class="add">+500.00</span></td>
+                   </tr>
+               </tbody>
+           </table>
+           <div class="page">
+              <a href="#">上一页</a><a href="#" class="sel">1</a><a href="#">2</a><a href="#">下一页</a>
+           </div>
+         <div class="spacer"></div>
+      </div>
+      <div class="mr_bottom"></div>
+   </div>
+   <div class="spacer"></div>
+</div>
+<include file = "Common:bottom" />
+</body>
+</html>

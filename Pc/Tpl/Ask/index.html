@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$cate.name}_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="金投资{www.p2p222.com}是互联网金融领域领先的互联网供应链金融网贷平台，为投资理财用户提供安全高收益的网络理财产品。借款人可通过平台申请网络贷款、小额贷款、抵押贷款获得融资 解决短期资金需求。" />
+<include file = "Common:transparent" />
+</head>
+<link href="__PUBLIC__/style/base.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/page.css" type="text/css" rel="stylesheet" />
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+
+
+<body>
+<include file = "Common:head" />
+
+<div class="page_center">
+    <div class="page_mid">
+        <include file = "Common:left" />
+        <div class="page_right">
+            <div class="second_page">
+                <h3 class="second_h3">{$cate.name}</h3>
+                <div class="search">
+                  <form method="get" action="{:U('Ask/ask_search')}">
+                   <span class="sear_txt"><input type="text" value="注册认证、充值、提现、理财、密码管理、投资..." onclick="if(this.defaultValue==this.value){this.value='';}" onblur="if(this.value==''){this.value=this.defaultValue;}" name="kwz" class="search_txt" /></span>
+                   <span class="sear_btn"><input type="submit" value="搜索" id="search_submit" class="search_btn" /></span>
+                   <div class="spacer"></div>
+                  </form>
+                </div>
+                <div>
+                   <div>
+                    <div class="ask_zone">
+                       <h3 class="pt_h3">{$child_cate_1.name}</h3>
+                       <ul>
+                       <foreach name="child_list_1" item="v">
+                          <li><font>&bull;</font><a href="{:U('Article/articleDetail',array('id'=>$v['id']))}" title="{$v.title}">{$v.title|msubstr=0,15}</a></li>
+                       </foreach>
+                       </ul>   
+                       <p><a href="{:U('Ask/ask_part',array('cid'=>$child_cate_1['id']))}">更多>></a></p>
+                    </div>
+                    
+                    <div class="ask_zone">
+                       <h3 class="cz_h3">{$child_cate_2.name}</h3>
+                       <ul>
+                       <foreach name="child_list_2" item="v">
+                          <li><font>&bull;</font><a href="{:U('Article/articleDetail',array('id'=>$v['id']))}" title="{$v.title}">{$v.title|msubstr=0,15}</a></li>
+                       </foreach>
+                       </ul>   
+                       <p><a href="{:U('Ask/ask_part',array('cid'=>$child_cate_2['id']))}">更多>></a></p>
+                    </div>
+
+                    <div class="ask_zone">
+                       <h3 class="lc_h3">{$child_cate_3.name}</h3>
+                       <ul>
+                       <foreach name="child_list_3" item="v">
+                          <li><font>&bull;</font><a href="{:U('Article/articleDetail',array('id'=>$v['id']))}" title="{$v.title}">{$v.title|msubstr=0,15}</a></li>
+                       </foreach>
+                       </ul>   
+                       <p><a href="{:U('Ask/ask_part',array('cid'=>$child_cate_3['id']))}">更多>></a></p>
+                    </div>
+                    <div class="spacer"></div>
+                   </div>
+
+                   <h3 class="second_h3" style=" margin-top:15px;">热门问答</h3>
+                   <ul class="ask">
+                   <foreach name="hot_list" item="v">
+                      <li>
+                         <h3><font>Q</font><a href="{:U('Article/articleDetail',array('id'=>$v['id']))}" title="{$v.title}">{$v.title|msubstr=0,25}</a></h3>
+                         <span>
+                            {$v.description|msubstr=0,25}
+                         </span>
+                      </li>
+                   </foreach>
+                   </ul>
+                   <div class="spacer"></div>
+                </div>
+                
+                <div class="ask_one">
+                   <h4>一对一理财服务</h4>
+                   <p class="ask_qq"><span>在线客服</span><span>工作时间08：30 - 17：00</span></p>
+                   <p class="ask_tel"><span>客服热线</span><span class="kf_a">4006-570-826</span></p>
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+    <div class="spacer"></div>
+</div>
+<script type="text/javascript">
+   $("#search_submit").click(function(event) {
+      $kwz = $("input[name=kwz]");
+      if($.trim($kwz.val()) == '注册认证、充值、提现、理财、密码管理、投资...' || $.trim($kwz.val()) == ''){
+        alert('请输入搜索关键词');$kwz.val('');$kwz.focus();return false;
+      }
+   });
+</script>
+<include file = "Common:bottom" />
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>申请加盟_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="金投资遴选优质贷款公司、担保机构进行合作，旨在打造安全完整的风控体系。" />
+<include file = "Common:transparent" />
+</head>
+<link href="__PUBLIC__/style/base.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/single.css" type="text/css" rel="stylesheet" />
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+function check_form(){
+  $real_name = $("input[name=real_name]");
+  $city = $("input[name=city]");
+  $company_name = $("input[name=company_name]");
+  $phone = $("input[name=phone]");          
+  if($.trim($real_name.val()) == '' || $.trim($real_name.val()) == '请输入您的真实姓名'){            
+      alert('请输入真实姓名');$real_name.val('');$real_name.focus();return false;
+  }
+  if($.trim($city.val()) == '' || $.trim($city.val()) == '请输入您的所在城市'){            
+      alert('请输入您的所在城市');$city.val('');$city.focus();return false;
+  }
+  if($.trim($company_name.val()) == '' || $.trim($company_name.val()) == '请输入您的公司名称'){            
+      alert('请输入您的公司名称');$company_name.val('');$company_name.focus();return false;
+  }
+  var phone_reg = /^(1[3|4|5|7|8]\d{9})$/;//手机号正则过滤  
+  if(!phone_reg.test($.trim($phone.val()))){
+      alert('手机号码不正确请重新输入');$phone.val('');$phone.focus();return false;
+  }       
+}
+</script>
+
+
+<body>
+<include file = "Common:head" />
+
+<div class="join_coop">
+   <div class="join_center">
+      <div class="join_bd">
+      <form action="{:U('Partner/DoJoin')}" method="post" onsubmit="return check_form();">
+         <ul>
+            <li>
+               <span class="coop_l">您的姓名：</span>
+               <span class="coop_txt"><input type="text" name="real_name" value="请输入您的真实姓名" onclick="if(this.defaultValue==this.value){this.value='';}" onblur="if(this.value==''){this.value=this.defaultValue;}" class="coop_t" /></span>
+            </li>
+            <li>
+               <span class="coop_l">所在城市：</span>
+               <span class="coop_txt"><input type="text" value="请输入您的所在城市" name="city" onclick="if(this.defaultValue==this.value){this.value='';}" onblur="if(this.value==''){this.value=this.defaultValue;}" class="coop_t" /></span>
+            </li>
+            <li>
+               <span class="coop_l">公司名称：</span>
+               <span class="coop_txt"><input type="text" value="请输入您的公司名称" name="company_name" onclick="if(this.defaultValue==this.value){this.value='';}" onblur="if(this.value==''){this.value=this.defaultValue;}" class="coop_t" /></span>
+            </li>
+            <li>
+               <span class="coop_l">联系电话：</span>
+               <span class="coop_txt"><input type="text" value="请输入您的联系电话" name="phone" onclick="if(this.defaultValue==this.value){this.value='';}" onblur="if(this.value==''){this.value=this.defaultValue;}" class="coop_t" /></span>
+            </li>
+            <li><input type="submit" value="提交" class="coop_btn" id="join_submit" /></li>
+         </ul>
+      </form>
+      </div>
+   </div>
+</div>
+<div class="hz_contet">
+   <div class="cooperation">
+      <h3>合作伙伴</h3>
+      <ul>
+      <php>$i=0;</php>
+         <foreach name="list" item="v">
+           <php>$i++;</php>
+            <li  <if condition="$i eq 1 || $i % 4 eq 1">class="coop_fir"</if>>
+            <a <if condition="$v['id'] eq 2021">href="#" <else/>href="{:U('Partner/PartnerDetail',array('id'=>$v['id']))}"</if> target="_blank" >
+            <img src="<if condition="$v['img'] neq ''">{$v.img}<else/>/Public/Images/image_err.gif</if>" alt="{$v.title}" width="225" height="130" /></a></li>
+         </foreach>
+      </ul>
+      <div class="spacer"></div>
+   </div>
+   <div class="advantage">
+      <h3 class="advan_h3">合作优势</h3>
+      <ul>
+         <li>
+            <span class="advan_pic"><img src="__PUBLIC__/images/advan_icon1.jpg" /></span>
+            <span class="advan_tit">资金优势——融资能力保证可持续发展</span>
+            <span class="advan_con">我们对合作机构要求相对严格，一旦成为我们的合作机构，我们将根据合作机构对风险的把控能力和业务发展需要不断调整合作额度及业务范围、确保优质合作机构的发展壮大。</span>
+         </li>
+         <li style="float:right;">
+            <span class="advan_pic"><img src="__PUBLIC__/images/advan_icon2.jpg" /></span>
+            <span class="advan_tit">行业优势——互联网金融方兴未艾</span>
+            <span class="advan_con">P2B模式作为互联网金融的一个重要分支，在支持小微金融方面扮演了越来越重要的角色，金融改革的浪潮势必会对整个行业发展起到强有力的助推作用。</span>
+         </li>
+         <li>
+            <span class="advan_pic"><img src="__PUBLIC__/images/advan_icon3.jpg" /></span>
+            <span class="advan_tit">业务优势--穿插业务横向联合</span>
+            <span class="advan_con">借助金投资平台出售债权或购买债权，放心的把业务作到东北三省。</span>
+         </li>
+         <li style=" float:right;">
+            <span class="advan_pic"><img src="__PUBLIC__/images/advan_icon4.jpg" /></span>
+            <span class="advan_tit">品牌优势——国内互联网金融领军企业</span>
+            <span class="advan_con">借助金投资平台线上的品牌知名度，无需前期市场培养，可直接进行业务开拓。</span>
+         </li>
+      </ul>
+      <div class="spacer"></div>
+   </div>
+   <div class="zmyq">
+     <div class="zmyq_1">
+        <h3 class="zm_h3">招募要求</h3>
+        <ul>
+           <li>
+              <h4>资金实力</h4>
+              <p>要求合作方具备相映的资金/资产实力、良好的信用状况及偿债能力。</p>
+           </li>
+           <li style=" float:right;">
+              <h4>合作地域</h4>
+              <p>合作机构需是辽宁、吉林、黑龙江及内蒙东北部地区公司</p>
+           </li>
+           <li>
+              <h4>从业经验</h4>
+              <p>合作方需具备2年及以上信贷行业相关经验，健全的风控体系及良好的历史经验数据。</p>
+           </li>
+           <li style="float:right;">
+              <h4>机构资质</h4>
+              <p>合作机构应当是在信贷领域具备较强实力的企业法人或拥有充裕资源的自然人，可合作企业的性质范围：优质小额贷款公司、投资管理公司、拥有优质资源自然人等；担保公司为：融资性担保公司具备反担保查封能力</p>
+           </li>
+        </ul>
+     </div>
+   </div>
+   <div class="spacer"></div>
+</div>
+<include file = "Common:bottom" />
+
+</body>
+</html>

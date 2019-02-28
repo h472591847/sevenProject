@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>绑定银行卡-{$Think.config.web_title}</title>
+<include file = "Common:transparent" />
+
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+<!--city-->
+<script type="text/javascript" src="__PUBLIC__/js/jquery.cityselect.js"></script>
+
+<script type="text/javascript">
+function slide_down_bank_list(){
+       $(".yh_num").slideDown(300);
+}
+
+$(document).ready(function() {
+    $(".open_bank").click(function(){
+      //获取银行卡信息
+      $id = $(this).attr('data-id');    
+      $.ajax({
+        url: '{:U("Member/modify_bank")}',
+        type: 'POST',
+        dataType: 'json',
+        data: "id="+$id,
+        success:function(msg){          
+          $("#md_real_name").text(msg.data.real_name_view);
+          $("#md_bank_number").text(msg.data.bank_number_view);
+          if(msg.data.bank_name != ''){
+            $("#choose_bank_add").val(msg.data.bank_name);          
+          }
+          $("#city_1 select[name='province'] option:selected").text(msg.data.province);
+          $("#city_1 select[name='province'] option:selected").val(msg.data.province);
+          $("#city_1 select[name='city']").append("<option value="+msg.data.city+">"+msg.data.city+"</option>");                   
+          $("#md_bank_address").val(msg.data.bank_address);
+          $("#upid").val(msg.data.id);          
+        }
+      })      
+	   	$("#grey_modify").show();
+	});
+  $("#add_bank").click(function(){
+    $("#grey_add").show();      
+  })	
+
+	$(".yh_num span").click(function(){
+       $("#choose_bank_add").val($(this).attr('data-instr'));
+       $("#choose_bank").val($(this).attr('data-instr'));
+       $(this).parent().slideUp(300);
+	});
+	$("#bank_close,.no_sub").click(function(){
+	    $(".grey").hide();
+	});
+	
+	
+	
+	/*省市二级联动菜单初始化*/
+  city_lib_url = '__PUBLIC__/js/city.min.js';//省市json库文件路径
+  $("#city_1").citySelect({
+    nodata:"none",
+    required:false
+  }); 
+  $("#city_2").citySelect({
+    nodata:"none",
+    required:false
+  });    
+    
+});
+
+
+/**
+ * check_modify      修改银行卡表单过滤
+ */
+function check_modify(){
+  if($("#city_1 select[name='province']").val() == ''){
+    alert('请选择开户省份');return false;
+  }
+  if($("#city_1 select[name='city']").val() == ''){
+    alert('请选择开户城市');return false;
+  }  
+  if($("#md_bank_address").val() == ''){
+    alert('请填写开户行全称');$("#md_bank_address").focus();return false; 
+  }
+}
+
+
+/**
+ * check_add      添加银行卡表单过滤
+ */
+function check_add(){  
+  if($("#add_real_name").val() == ''){
+    alert('请填写户名');$("#add_real_name").focus();return false; 
+  }
+  if($("#add_bank_number").val() == ''){
+    alert('请填写卡号');$("#add_bank_number").focus();return false; 
+  }    
+  if($(".add_bank_name").val() == '' || $(".add_bank_name").val() == '请选择银行'){
+    alert('请选择银行');return false;
+  }  
+  if($("#city_2 select[name='province']").val() == ''){
+    alert('请选择开户省份');return false;
+  }
+  if($("#city_2 select[name='city']").val() == ''){
+    alert('请选择开户城市');return false;
+  }  
+  if($("#add_bank_address").val() == ''){
+    alert('请填写开户行全称');$("#add_bank_address").focus();return false; 
+  }
+}
+
+//银行卡设置默认
+function is_default(objid){
+  $.ajax({
+    url: '{:U("Member/do_default_bank")}',
+    type: 'POST',
+    dataType: 'json',
+    data: "id="+objid,
+    success:function(msg){
+      if(msg.status == '1'){        
+       location.reload();return false;
+      }
+    }
+  })
+}
+</script>
+</head>
+<body onload="vMiddle();">
+<include file = "Common:head" />
+<include file = "Common:web_announce" />
+<div class="middle">
+   <include file="Common:left_menu"/>
+   <div class="mid_right InLine">
+      <h3 class="bt" style="margin-bottom:30px;">绑定银行卡</h3>
+      <div class="mr_center">
+         <ul class="binding_bank">
+         <foreach name="bank_list" item="v">
+            <!--添加完银行显示-->           
+            <li>
+               <div class="first_bank" <if condition="$v['is_default'] eq 1">id="default_bank"</if>> <!--默认提现卡加Id-->
+                  
+                  <if condition="$v['is_default'] eq 1">
+                  <!--设置为默认时显示-->
+                  <span class="default_img"><img src="__PUBLIC__/images/default.png" /></span>                  
+                  </if>
+                  <dl>
+                     <dt>
+                        <switch name="v.bank_name">
+                        <case value="中国工商银行"><img src="__PUBLIC__/images/bank_1.jpg" width="120" alt="中国工商银行" /></case>
+                        <case value="中国建设银行"><img src="__PUBLIC__/images/bank_2.jpg" width="120" alt="中国建设银行" /></case>
+                        <case value="中国农业银行"><img src="__PUBLIC__/images/bank_3.jpg" width="120" alt="中国农业银行" /></case>
+                        <case value="中国银行"><img src="__PUBLIC__/images/bank_4.jpg" width="120" alt="中国银行" /></case>
+                        <case value="交通银行"><img src="__PUBLIC__/images/bank_5.jpg" width="120" alt="交通银行" /></case>
+                        <case value="招商银行"><img src="__PUBLIC__/images/bank_6.jpg" width="120" alt="招商银行" /></case>
+                        <case value="兴业银行"><img src="__PUBLIC__/images/bank_7.jpg" width="120" alt="兴业银行" /></case>
+                        <case value="中国光大银行"><img src="__PUBLIC__/images/bank_8.jpg" width="120" alt="中国光大银行" /></case>
+                        <case value="广发银行"><img src="__PUBLIC__/images/bank_9.jpg" width="120" alt="广发银行" /></case>
+                        <case value="北京银行"><img src="__PUBLIC__/images/bank_10.jpg" width="120" alt="北京银行" /></case>
+                        <case value="平安银行"><img src="__PUBLIC__/images/bank_11.jpg" width="120" alt="平安银行" /></case>
+                        <case value="中国邮政储蓄银行"><img src="__PUBLIC__/images/bank_12.jpg" width="120" alt="中国邮政储蓄银行" /></case>
+                        <case value="中国民生银行"><img src="__PUBLIC__/images/bank_13.jpg" width="120" alt="中国民生银行" /></case>
+                        <case value="上海浦东发展银行"><img src="__PUBLIC__/images/bank_14.jpg" width="120" alt="上海浦东发展银行" /></case>
+                        <case value="中信银行"><img src="__PUBLIC__/images/bank_15.jpg" width="120" alt="中信银行" /></case>
+                        <case value="渤海银行"><img src="__PUBLIC__/images/bank_16.jpg" width="120" alt="渤海银行" /></case>
+                        <case value="上海银行"><img src="__PUBLIC__/images/bank_17.jpg" width="120" alt="上海银行" /></case>
+                        </switch>
+                     </dt>
+                     <dd><span>尾号：</span><font>{$v.bank_number_view}</font> <i onclick="is_default({$v.id});">设为默认提现卡</i></dd>
+                     <dd><span>户名：</span>{$v.real_name_view}</dd>
+                     <dd><span>开户行：</span>{$v.bank_address|msubstr=0,10}<i class="open_bank" data-id="{$v.id}">修改</i></dd>
+                  </dl>
+               </div>
+            </li>
+          </foreach>
+            <!--end-->
+            <li>
+               <div id="add_bank"><span>添加一张银行卡</span></div>
+            </li>
+         </ul>
+         
+         <div class="spacer"></div>
+      </div>
+      <div class="mr_bottom"></div>
+   </div>
+   <div class="spacer"></div>
+</div>
+<include file = "Common:bottom" />
+
+<!--modify_bank-->
+<div class="grey hide" id="grey_modify">
+<form name="mdf_bank_form" action="{:U('Member/do_modify_bank')}" method="post" onsubmit="return check_modify()">
+<input type="hidden" id="upid" name="upid">
+   <div id="bank_popup">      
+      <h3>修改银行卡<span id="bank_close"><img src="__PUBLIC__/images/bank_close.png" /></span></h3>
+      <ul>
+         <li>
+            <span class="bank_ll">户名：</span>
+            <span id="md_real_name"></span>
+         </li>
+         <li>
+            <span class="bank_ll">卡号：</span>
+            <!--add start-->
+            <!--<span><input type="text" class="card_num" value="请输入银行卡号" /></span>-->
+            <!--modify start-->
+            <span id="md_bank_number"></span>
+         </li>
+         <!--<li>
+            <span class="bank_ll">选择银行：</span>
+            <span id="md_bank_name"></span>
+         </li>-->
+         <li>
+            <span class="bank_ll">选择银行：</span>
+            <!--add start-->
+            <div class="yh_all">
+               <input type="text" id="choose_bank_add" onclick="slide_down_bank_list()" class="card_num add_bank_name" name="bank_name" value="请选择银行" readonly />
+               <div class="yh_num hide">
+                  <span data-instr="中国工商银行"><img src="__PUBLIC__/images/bank_1.jpg" width="120" alt="中国工商银行" /></span>
+                  <span data-instr="中国建设银行"><img src="__PUBLIC__/images/bank_2.jpg" width="120" alt="中国建设银行" /></span>
+                  <span data-instr="中国农业银行"><img src="__PUBLIC__/images/bank_3.jpg" width="120" alt="中国农业银行" /></span>
+                  <span data-instr="中国银行"><img src="__PUBLIC__/images/bank_4.jpg" width="120" alt="中国银行" /></span>
+                  <span data-instr="交通银行"><img src="__PUBLIC__/images/bank_5.jpg" width="120" alt="交通银行" /></span>
+                  <span data-instr="招商银行"><img src="__PUBLIC__/images/bank_6.jpg" width="120" alt="招商银行" /></span>
+                  <span data-instr="兴业银行"><img src="__PUBLIC__/images/bank_7.jpg" width="120" alt="兴业银行" /></span>
+                  <span data-instr="中国光大银行"><img src="__PUBLIC__/images/bank_8.jpg" width="120" alt="中国光大银行" /></span>
+                  <span data-instr="广发银行"><img src="__PUBLIC__/images/bank_9.jpg" width="120" alt="广发银行" /></span>
+                  <span data-instr="北京银行"><img src="__PUBLIC__/images/bank_10.jpg" width="120" alt="北京银行" /></span>
+                  <span data-instr="平安银行"><img src="__PUBLIC__/images/bank_11.jpg" width="120" alt="平安银行" /></span>
+                  <span data-instr="中国邮政储蓄银行"><img src="__PUBLIC__/images/bank_12.jpg" width="120" alt="中国邮政储蓄银行" /></span>
+                  <span data-instr="中国民生银行"><img src="__PUBLIC__/images/bank_13.jpg" width="120" alt="中国民生银行" /></span>
+                  <span data-instr="上海浦东发展银行"><img src="__PUBLIC__/images/bank_14.jpg" width="120" alt="上海浦东发展银行" /></span>
+                  <span data-instr="中信银行"><img src="__PUBLIC__/images/bank_15.jpg" width="120" alt="中信银行" /></span>
+                  <span data-instr="渤海银行"><img src="__PUBLIC__/images/bank_16.jpg" width="120" alt="渤海银行" /></span>
+                  <span data-instr="上海银行"><img src="__PUBLIC__/images/bank_17.jpg" width="120" alt="上海银行" /></span>
+                  <div class="spacer"></div>
+               </div>
+            </div>
+         </li>
+         <li>
+            <span class="bank_ll">开户城市：</span>
+            <div id="city_1" style="float:left;">
+                <select class="prov card_num provinces" name="province"></select> 
+                <select class="city card_num provinces" name="city"></select>
+            </div>
+         </li>
+         <li>
+            <span class="bank_ll">开户行：</span>
+            <span><input type="text" class="card_num" id="md_bank_address" name="bank_address" value="" /></span>
+         </li>
+      </ul>
+      <p>
+        <span><input type="submit" class="sure_sub" id="sbmt_modify" value="提交" /></span>
+        <span><input type="button" class="no_sub" value="取消" /></span>
+      </p>
+   </div>
+   </form>
+</div>
+<!--modify_bank end!-->
+
+<!--add_bank-->
+<div class="grey hide" id="grey_add">
+<form name="add_bank_form" method="post" action="{:U('do_add_bank')}" onsubmit="return check_add();">
+   <div id="bank_popup">      
+      <h3>添加银行卡<span id="bank_close"><img src="__PUBLIC__/images/bank_close.png" /></span></h3>
+      <ul>
+         <li>
+            <span class="bank_ll">户名：</span>
+            <span><input type="text" name="real_name" value="{$user_info.real_name}" readonly="readonly" id="add_real_name"></span>
+            <span><font color="#aaaaaa">添加银行卡前请先进行实名认证</font></span>
+         </li>
+         <li>
+            <span class="bank_ll">卡号：</span>
+            <span><input type="text" class="card_num" name="bank_number" id="add_bank_number" value="" /></span>
+         </li>
+         <li>
+            <span class="bank_ll">选择银行：</span>
+            <!--add start-->
+            <div class="yh_all">
+               <input type="text" id="choose_bank" onclick="slide_down_bank_list()" class="card_num add_bank_name" name="bank_name" value="请选择银行" readonly />
+               <div class="yh_num hide">
+                  <span data-instr="中国工商银行"><img src="__PUBLIC__/images/bank_1.jpg" width="120" alt="中国工商银行" /></span>
+                  <span data-instr="中国建设银行"><img src="__PUBLIC__/images/bank_2.jpg" width="120" alt="中国建设银行" /></span>
+                  <span data-instr="中国农业银行"><img src="__PUBLIC__/images/bank_3.jpg" width="120" alt="中国农业银行" /></span>
+                  <span data-instr="中国银行"><img src="__PUBLIC__/images/bank_4.jpg" width="120" alt="中国银行" /></span>
+                  <span data-instr="交通银行"><img src="__PUBLIC__/images/bank_5.jpg" width="120" alt="交通银行" /></span>
+                  <span data-instr="招商银行"><img src="__PUBLIC__/images/bank_6.jpg" width="120" alt="招商银行" /></span>
+                  <span data-instr="兴业银行"><img src="__PUBLIC__/images/bank_7.jpg" width="120" alt="兴业银行" /></span>
+                  <span data-instr="中国光大银行"><img src="__PUBLIC__/images/bank_8.jpg" width="120" alt="中国光大银行" /></span>
+                  <span data-instr="广发银行"><img src="__PUBLIC__/images/bank_9.jpg" width="120" alt="广发银行" /></span>
+                  <span data-instr="北京银行"><img src="__PUBLIC__/images/bank_10.jpg" width="120" alt="北京银行" /></span>
+                  <span data-instr="平安银行"><img src="__PUBLIC__/images/bank_11.jpg" width="120" alt="平安银行" /></span>
+                  <span data-instr="中国邮政储蓄银行"><img src="__PUBLIC__/images/bank_12.jpg" width="120" alt="中国邮政储蓄银行" /></span>
+                  <span data-instr="中国民生银行"><img src="__PUBLIC__/images/bank_13.jpg" width="120" alt="中国民生银行" /></span>
+                  <span data-instr="上海浦东发展银行"><img src="__PUBLIC__/images/bank_14.jpg" width="120" alt="上海浦东发展银行" /></span>
+                  <span data-instr="中信银行"><img src="__PUBLIC__/images/bank_15.jpg" width="120" alt="中信银行" /></span>
+                  <span data-instr="渤海银行"><img src="__PUBLIC__/images/bank_16.jpg" width="120" alt="渤海银行" /></span>
+                  <span data-instr="上海银行"><img src="__PUBLIC__/images/bank_17.jpg" width="120" alt="上海银行" /></span>
+                  <div class="spacer"></div>
+               </div>
+            </div>
+            <!--modify start-->
+            <span id="md_bank_name"></span>
+         </li>
+         <li>
+            <span class="bank_ll">开户城市：</span>
+            <div id="city_2" style="float:left;">
+                <select class="prov card_num provinces" name="province" id="add_province"></select> 
+                <select class="city card_num provinces" name="city" id="add_city"></select>
+            </div>
+         </li>
+         <li>
+            <span class="bank_ll">开户行：</span>
+            <span><input type="text" class="card_num" name="bank_address" id="add_bank_address" value="" /></span>
+         </li>
+      </ul>
+      <p>
+        <span><input type="submit" class="sure_sub" id="sbmt_add" value="提交" /></span>
+        <span><input type="button" class="no_sub" value="取消" /></span>
+      </p>
+   </div>
+</form>
+</div>
+<!--add_bank end!-->
+
+</body>
+</html>

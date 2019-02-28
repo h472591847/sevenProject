@@ -1,0 +1,121 @@
+{$a|ac}
+<div class="out_top">
+   <div class="in_top">
+      <p class="in_top_left"><span>客服热线：{$Think.config.web_tel}</span><a href="#" class="inT_wx"></a><a href="http://weibo.com/jinyongbofa" class="inT_sina" target="_blank"></a><a href="tencent://message/?uin=2736627037&在线咨询&Menu=yes" target="blank" class="inT_qq"></a></p>
+      <p class="in_top_right"><a href="{:U('SkillInvest/index',array('cid'=>23))}" title="投资技巧">投资技巧</a><a href="{:U('Guide/index')}" title="新手指引" target="_blank"><font color="#f05802">新手指引</font></a><a href="{:U('Single/index',array('cid'=>72))}" title="联系我们">联系我们</a><a href="{:U('SiteMap/index')}">网站地图</a></p>
+   </div>
+</div>
+<div class="wx_pop">
+  <div class="wx_cen">
+     <span><img src="__PUBLIC__/images/wx_b.jpg" alt="金投资_微信二维码" /></span>
+     <span class="wx_close"><img src="__PUBLIC__/images/wx_close.png" /></span>
+  </div>
+</div>
+
+<div class="out_head">
+   <div class="in_head">
+      <div class="in_head_left">
+         <h1 class="logo"><a href="{:U('Index/index')}" title="{$Think.config.web_title}"><img src="__PUBLIC__/images/logo.png" alt="{$Think.config.web_title}" /></a></h1>         
+         <span class="logo_img">
+         <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="192" height="62">
+              <param name="movie" value="__PUBLIC__/media/logo.swf" />
+              <param name="quality" value="high" />
+              <param name="wmode" value="opaque" />
+              <param name="swfversion" value="8.0.35.0" />
+              <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
+              <param name="expressinstall" value="__PUBLIC__/Scripts/expressInstall.swf" />
+              <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
+              <!--[if !IE]>-->
+              <object type="application/x-shockwave-flash" data="__PUBLIC__/media/logo.swf" width="192" height="62">
+                <!--<![endif]-->
+                <param name="quality" value="high" />
+                <param name="wmode" value="opaque" />
+                <param name="swfversion" value="8.0.35.0" />
+                <param name="expressinstall" value="__PUBLIC__/Scripts/expressInstall.swf" />
+                <!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
+<!--                 <div>
+                  <h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
+                  <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player" width="112" height="33" /></a></p>
+                </div> -->
+                <!--[if !IE]>-->
+              </object>
+              <!--<![endif]-->
+         </object>
+        </span>
+      </div>
+      <div class="in_head_right">
+
+         
+         <!--登录后显示-->
+         <if condition="$Think.session.user_id neq ''">
+         <a href="{:U('user/ExitUser')}" class="in_register" title="安全退出">退出</a>
+         <a href="{:U('Member/index')}" class="in_login" style=" width:150px; font-size:12px;" title="会员中心">您好！{$Think.session.user_name}</a>
+         <else/>
+         <!--没登录显示-->
+         <a href="{:U('user/register')}" class="in_register" title="会员注册">注册</a>
+         <a href="{:U('user/login')}" class="in_login" title="会员登录">登录</a>
+         </if>         
+      </div>
+   </div>  
+</div>
+<div class="out_menu">
+   <div class="top_menu">
+      <ul>
+      <php>
+        $uri =  $_SERVER['REQUEST_URI'];
+      </php>
+         <li class="on"><a href="{:U('Index/index')}" title="金投资_首页">首页</a></li>
+         <li><a href="{:U('Deal/index')}" title="金投资_我要投资">我要投资</a></li>
+         <li><a href="{:U('LoanApply/index')}" title="金投资_我要贷款">我要贷款</a></li>
+         <li><a href="{:U('Security/index')}" title="金投资_安全保障">安全保障</a></li>
+         <li><a href="{:U('Partner/Join')}" title="金投资_合作伙伴">合作伙伴</a></li>
+         <li><a href="{:U('About/index')}" title="金投资_关于我们">关于我们</a></li>
+         <li><a href="{:U('Ask/index')}" title="金投资_问答专区">常见问题</a></li>
+      </ul>
+         <script type="text/javascript">
+         //----导航高亮效果begin----
+         $uri = '{$uri}';         
+         $(".top_menu ul li a").each(function(i) {                         
+              if($(this).attr('href') == $uri){
+                $(this).parent().addClass('on').siblings().removeClass('on');
+              }
+            
+         });
+        //----导航高亮效果end----
+       $(document).ready(function() {          
+          $('.menu_account').hover(function() {
+               $('.sec_acc', this).slideDown(200);
+
+            }, function() {
+               $('.sec_acc', this).slideUp(100);   
+          });  
+            
+       });
+       </script>
+         <if condition="$Think.session.user_id neq ''">
+         <php>
+            $com_user_id = session('user_id');
+            if(!empty($com_user_id)){
+                $com_msg_where['user_id'] = $com_user_id;
+                $com_msg_where['is_read'] = 0;//阅读状态：0未读 1已读    
+                $com_msg_where['web_status'] = 1;//类型：1前台操作 2后台操作                
+                $com_msg_count = M('msg_box')->where($com_msg_where)->count();
+                //资金记录读取
+                $dlg_where['uid'] = $com_user_id;
+                $dlg_where['is_read'] = 0;//阅读状态：0未读 1已读
+                $dlg_count = M('deal_log')->where($dlg_where)->count();                
+                $com_count = $dlg_count + $com_msg_count;            
+            }           
+         </php>
+         <div class="menu_account">
+             <a class="my_account" href="{:U('Member/index')}" title="金投资_我的账户">我的账户<span class="me_unread"> ({$com_count})</span></a>
+             <div class="sec_acc" style="display:none;">
+               <a href="{:U('Member/TopUp')}">充值</a>
+               <a href="{:U('Member/Withdrawal')}">提现</a>
+               <a href="{:U('Member/Message')}">消息 <span class="unread_num">( {$com_count} )</span></a>
+             </div>
+             <!--以上三个链接是会员里的页-->
+         </div><!--如果登录则进入会员首页，没登录进入登录页面-->      
+         </if>
+   </div>
+</div>

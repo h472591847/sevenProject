@@ -1,0 +1,148 @@
+
+/*----------------play_skill---------------*/
+.play_jtz{ width:987px; height:568px; position:absolute;}
+.play_jtz p{ display:block; text-align:center; position:relative;}
+.play_jtz .play_btn{ position:absolute; top:180px; left:400px; cursor:pointer;} 
+
+.flexslider{ margin:0 auto;position:relative;width:800px;height:529px;zoom:1;}
+.flex-viewport{max-height:2000px;-webkit-transition:all 1s ease;-moz-transition:all 1s ease;transition:all 1s ease;}
+.flexslider .slides{zoom:1;}
+.flex-direction-nav a{width:37px;height:75px; line-height:99em;overflow:hidden;margin:-60px 0 0;display:block;position:absolute;top:50%;z-index:10;cursor:pointer;}
+.flex-direction-nav .flex-next{right:-35px; background:url(../images/skill_next.png);}
+.flex-direction-nav .flex-prev{left:-35px; background:url(../images/skill_prev.png);}
+.flexslider:hover .flex-next{opacity:0.8;filter:alpha(opacity=25);}
+.flexslider:hover .flex-prev{opacity:0.8;filter:alpha(opacity=25);}
+.flexslider:hover .flex-next:hover, .flexslider:hover .flex-prev:hover{opacity:1;filter:alpha(opacity=50);}
+.flex-control-nav{width:100%;position:absolute;bottom:10px;text-align:center;}
+.flex-control-nav li{margin:0 5px;display:inline-block;zoom:1;*display:inline;}
+.flex-control-paging li a{background:url(../images/dot_1.png) no-repeat 0 -16px;display:block;height:16px;overflow:hidden;text-indent:-99em;width:16px;cursor:pointer;}
+.flex-control-paging li a.flex-active{background-position:0 0;}
+.flexslider .step_close{ position:absolute; top:-20px; right:-20px; z-index:10; cursor:pointer;}
+
+/*------------------loan_apply----------------*/
+.loan_img,.l-intro,.coo-advan{ width:100%;}
+.loan_img{ height:498px; background:url(../images/loan_img.jpg) center top no-repeat;}
+.mid_loan{ position:relative;}
+.loan_request{ position:absolute;width:320px; height:400px; background:#ffffff; border-radius:3px; border:1px solid #e2e2e2; top:60px; right:-80px;}
+.loan_request ul{ display:block; width:85%; margin:0 auto;}
+.loan_request .loan_txt{ width:190px; height:30px; border:1px solid #e2e2e2; line-height:30px; color:#999999; padding-left:10px; border-radius:3px;}
+.loan_request ul li{ display:block; min-height:45px; line-height:30px;}
+.loan_request ul li span{ float:left;} 
+.loan_request h3{ font-size:18px; padding:15px 0;}
+.loan_sub{ width:270px; height:40px; border-radius:3px; background:#e44343; color:#ffffff; border:none;}
+.loan_request .loan_field{ display:block; width:68px;}
+
+.loan_bg{ background:url(../images/loan_bg.jpg) top center no-repeat;}
+.what_d{ background:rgba(255,255,255,0.9) none repeat scroll 0 0 !important; filter:alpha(opacity=90);  }
+.loan_h3{ font-size:45px; display:block; text-align:center; font-weight:normal; color:#333333; line-height:100px;}
+.loan_t_line{ background:#e44343; line-height:0; height:2px; display:block; width:80%; margin:0 auto;}
+.loan_hua{ box-shadow:0px 0px 5px #e2e2e2; border-radius:5px; padding-bottom:20px;}
+.loan_box{ margin-top:30px; height:330px;}
+.loan_box .box_img{ display:block; height:170px;}
+.loan_box .box_img_left{ float:left;}
+.loan_box .box_img_right{ float:right;}
+.loan_box .box_txt{ font-size:18px; line-height:45px; text-indent:2em; padding:0 25px;}
+.loan_box .box_txt span{ background:#e44343; color:#ffffff; padding:0 10px; border-radius:3px; font-size:22px;}
+
+.loan_slide{ margin:30px 0;}
+.loan_slide ul{ display:block; width:260px; margin:0 auto;}
+.loan_slide ul li{ display:block; float:left; line-height:0; width:120px; height:13px; background:#f2f0ee; cursor:pointer;}
+.loan_slide ul li.li-fir{margin-right:20px; }
+.loan_slide ul li.loan_selected{ background:#03b8cc;}
+
+.finan_pic{ display:block; text-align:center; font-size:30px; margin:40px 0;}
+
+.cooper_ad{ margin:30px 0 0 22px;}
+.cooper_ad li{ display:block; float:left; width:290px; height:190px; margin:20px 0 0 25px;}
+.cooper_ad li p{ display:block; color:#545454; font-size:16px; line-height:35px;}
+.cooper_ad li p.cooper_con{ height:125px; padding:15px 15px;}
+.cooper_ad li p.cooper_t{ text-align:center;}
+.cooper_no .cooper_con{ background:#f2f0ee;} 
+.cooper_h .cooper_con{ border:1px solid #f2f0ee;}
+.cooper_h .cooper_t{ background:url(../images/cooper_t.png) #f2f0ee center center no-repeat;}
+
+.hz_way ,.hz_apply{ margin:20px 0 30px 0;}
+.hz_way{ width:525px; float:left;}
+.hz_apply{ width:445px; float:right;}
+.hz_line{ width:100%;}
+.hz_fs{ display:block; width:451px; height:132px; background:url(../images/hz_way.jpg) top center no-repeat; color:#ffffff; font-size:17px; padding:180px 25px 20px 25px; line-height:30px;}
+.hz_apply li{ display:block; margin-top:20px;}
+.hz_apply li span{ float:left; display:block; width:110px; text-align:right; font-size:18px;}
+.hz_apply .co_apply{ background:#f2f0ee; width:315px; height:33px; border:none; margin-left:10px;}
+/*-----------------债权优势-----------------*/
+.creditor-img{ width:100%; height:451px; background:url(../images/bond_img.jpg) top center no-repeat;}
+.creditor-part1{ background:#e9eaee; height:580px;}
+.cre-cen{ position:relative;}
+.cre-cen .credi-p{ position:absolute; width:1000px; height:636px; background:url(../images/credi-p.jpg) top center no-repeat; top:-125px;}
+.cre-cen .cre-boll{ width:195px; height:284px; position:absolute; top:-360px; right:-60px;}
+.credi-p ul li{ display:block; width:300px; float:left; margin:0 15px; height:200px; color:#0a528a; line-height:26px; border-bottom:1px dashed #0a528a; padding-bottom:20px;}
+.credi-p ul li.cre-li{ border-bottom:none; height:180px;}
+.credi-p ul li span{ display:block; text-align:center;}
+.credi-p ul li .cre-tit{ font-size:18px; margin:15px 0 5px 0;}
+.credi-p ul li .cre-con{ text-align:left; margin-top:7px;}
+.credi-p .cre-describe{ color: #ffffff;}
+.credi-p .cre-describe h3{ font-size:30px; line-height:95px; text-align:center; font-weight:normal;}
+.credi-p .cre-describe p{ line-height:26px; padding:0 30px;} 
+
+.creditor-part2 ul li{ display:block; width:330px; float:left; padding:40px 0; line-height:26px; color:#999999;}
+.creditor-part2 ul li span{ display:block; text-align:center;}
+.creditor-part2 .cpart-t{ font-size:18px; font-weight:bold; color:#646464; margin-bottom:10px;}
+.creditor-part2 .cpart-h{ font-size:16px; margin:10px 0;}
+.cre-ywms{ width:100%; height:610px; background:url(../images/ywms-img.jpg) top center no-repeat; color:#ffffff;}
+.cre-ywms .ywms{ position:relative;}
+.ywms .ywms_1,.ywms .ywms_2,.ywms .ywms_3{ position:absolute; width:265px; line-height:28px;}
+.ywms .ywms_1{ top:180px; left:40px;}
+.ywms .ywms_2{ top:290px; left:395px;}
+.ywms .ywms_3{ top:200px; right:10px;}
+
+.cre-part3{ background:#0b537c; color:#ffffff; font-size:18px; line-height:30px; padding:15px 0; text-align:center;}
+.cre-part4{ padding:30px 0 70px 0; line-height:40px;}
+.cre-part4 p{ display:block; text-align:center; color:#999999; font-size:16px;}
+.cre-part4 ul{ margin-top:30px;}
+.cre-part4 ul li{ display:block; width:330px; float:left; text-align:center;}
+.cre-part4 ul li span{ display:block; text-align:center; font-size:18px;}
+
+/*------------累积投资------------*/
+.cumulative-1,.cumulative-2,.cumulative-3,.cumulative-4,.cumulative-5{ width:100%; height:400px;}
+.cumulative-1{ background:url(../images/cumulative-1.jpg) top center no-repeat; margin-top:60px;}
+.cumulative-2{ background:url(../images/cumulative-2.jpg) top center no-repeat;}
+.cumulative-3{ background:url(../images/cumulative-3.jpg) top center no-repeat;}
+.cumulative-4{ background:url(../images/cumulative-4.jpg) top center no-repeat;}
+.cumulative-5{ background:url(../images/cumulative-5.jpg) top center no-repeat;}
+
+/*---------------活动列表----------*/
+.ac_list_img{ width:100%; height:350px; background:url(../images/ac_list_img.jpg) top center no-repeat; margin-top:65px;}
+/* qx_list */
+.qx_list{width:1000px;overflow:hidden;margin:0 auto; padding-top:20px;}
+.qx_list ul li{background:#FFF;border:1px solid #E5E5E5;float:left;width:300px;margin:0px 21px 21px 0px; border-radius:5px; overflow:hidden;}
+.qx_list ul li a.qx-a{ display:block; height:40px; line-height:40px; color:#ffffff; text-align:center; font-size:16px; background:#03b8cc;}
+.qx_list ul li a.qx-b{ background:#dddddd; color:#646464;}
+.qx_picBox{border:1px solid #E9E9E9;height:200px;width:300px;margin-bottom:8px;}
+.qx_txt{font-size:14px;line-height:24px;}
+.qx_txt h3{ padding-left:13px; color:#333333; line-height:30px; font-weight:normal;}
+.qx_txt .qx_date{ font-size:12px; color:#ff4500;}
+.qx_txt .qx_con{ font-size:12px; color:#b1b1b1;}
+.qx_txt p{margin-bottom:8px;padding:0 13px;}
+
+/*--------------upgrade------------*/
+.upgrade_img{ width:100%; height:350px; background:url(../images/upgrade_img.jpg) top center no-repeat; margin-top:65px;}
+.up_advan{ margin:20px 0;}
+.up_txt h3{ display:block; font-size:32px; color:#198867; line-height:110px; text-align:center; font-weight:normal;}
+.up_txt p{ font-size:20px; line-height:45px;}
+.up_txt p span{ font-size:24px; color:#e44343;}
+.up_process{ text-align:center; margin:40px 0;}
+.up_rules{ height:330px; background:url(../images/up_rules.png) top center no-repeat; padding:170px 80px 0 80px; font-size:20px; line-height:40px; margin-bottom:40px;}
+.up_rules .uprule_1{ color:#333333;}
+.up_rules .uprule_2{ color:#ff6825; margin-top:10px;}
+.up_rules .uprule_2 span{ display:block; width:50px; padding-left:20px; height:130px; float:left;}
+
+
+
+
+
+
+
+
+
+
+

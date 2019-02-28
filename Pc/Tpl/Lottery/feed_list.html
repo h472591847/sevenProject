@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title></title>
+<link href="__PUBLIC__/style/base.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/single.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+/**
+ * unfold  精选目录内容展开
+ * @param  {object} obj  当前元素
+ */
+function unfold(obj){
+  var $all_content = $(obj).siblings("input[name='all_content']");
+  var $body_container = $(obj).siblings('.body_container');    
+  var $fold = $all_content.attr('fold');//展开开关    
+  if($fold == '0'){
+    $all_content.attr('fold',1);      
+    $body_container.text($all_content.val());   
+    $(obj).text('收起>>');      
+  }else{
+    $all_content.attr('fold',0);      
+    $body_container.text($all_content.attr('description'));
+    $(obj).text('展开>>');
+  }
+  return false;
+}  
+</script>
+</head>
+<body>
+        <div class="fd_right">
+          <h3 class="fd_h3">采纳意见<span>精选目录</span></h3>
+          <div id="content_4" class="directory">
+            <ul>
+
+              <foreach name="feed_list" item="v">
+              <li>
+                 <div class="custmor">
+                    <p class="cust_tx"><span><img src="<if condition="$v['face_pic'] neq ''">{$v.face_pic}<else/>__PUBLIC__/images/personal.jpg</if>" width="50" height="50" /></span></p>
+                    <p class="cust_msg">
+                      <span class="cust_angle"><img src="__PUBLIC__/images/cust_angle.png" /></span>
+                      <span class="cust_txt">  <font class="body_container">{$v.content|msubstr=0,65}</font>
+                      <php>if (strlen($v['content']) > strlen(msubstr($v['content'],0,65))){</php>
+                        <input type="hidden" name="all_content" value="{$v.content}" description="{$v.content|msubstr=0,65}" fold='0'>
+                        <a href="javascript:;" onclick="unfold(this)">展开>></a></p>                  
+                      <php>}</php>
+                      </span>
+                    </p>
+                    <div class="spacer"></div>
+                 </div>
+                 <if condition="$v['remark'] neq ''">
+                 <div class="jtz_reply">
+                    <p class="jtz_tx"><span><img src="__PUBLIC__/images/jtz_tx.jpg" width="50" height="50" /></span></p>
+                    <p class="jtz_msg">
+                       <span class="jtz_angle"><img src="__PUBLIC__/images/jtz_angle.png" /></span>
+                       <span class="jtz_txt">{$v.remark}</span>
+                    </p>
+                    <div class="spacer"></div>
+                 </div>
+                 </if>
+                 <div class="spacer"></div>
+              </li>
+              </foreach>
+              
+            </ul>
+          </div>
+          <div class="page">{$page}</div>
+        </div> 
+       <div class="spacer"></div> 
+</body>
+</html>

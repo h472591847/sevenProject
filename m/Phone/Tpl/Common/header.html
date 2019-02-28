@@ -1,0 +1,45 @@
+<!--wap统计代码开始-->
+<php>
+  require("/hm.php");
+  $_hmt = new _HMT("e29aec143162fc1ca52145771a9ee305");
+  $_hmtPixel = $_hmt->trackPageView();  
+</php>
+<img src="<?php echo $_hmtPixel; ?>" style="display:none" width="0" height="0" />
+<php>
+  require_once '/cs.php';echo '<img src="'._cnzzTrackPageView(5958842).'" width="0" style="display:none" height="0"/>';  
+</php>
+<!--wap统计代码结束-->
+   <script type="text/javascript">
+			$(function() {
+				$('nav#menu').mmenu();
+			});
+   </script>
+   <nav id="menu">
+      <ul>
+        <li>
+            <span class="tx_left"><img src="__PUBLIC__/images/tx_left.png"></span>
+            <span class="tx"><img src="__PUBLIC__/images/tx.png" width="70"></span>
+            <span class="tx_right"><img src="__PUBLIC__/images/tx_right.png"></span>
+            <div class="spacer"></div>
+        </li>
+        <li class="login_name" style=" margin-bottom:2px;">
+           <!--如果登录显示-->
+           <if condition="$Think.session.user_id neq ''">
+              <a class="login_user" href="{:U('Member/index')}">您好！{$Think.session.user_name}</a>
+           <else/>
+           <!--没登录显示-->
+           <a href="{:U('user/Login')}" class="menu_dl" style=" line-height:33px; margin-left:60px;">登录</a>
+           <a href="{:U('user/Register')}" class="menu_dl" style=" line-height:33px; margin-left:20px;">注册</a>
+           </if>
+        </li>
+        <li><a href="{:U('Index/Index')}"><span class="nar"><img src="__PUBLIC__/images/menua.png"></span>首页</a></li>
+        <li><a href="{:U('Deal/Index')}"><span class="nar"><img src="__PUBLIC__/images/menua.png"></span>投资列表</a></li>
+        <li><a href="{:U('About/Index')}"><span class="nar"><img src="__PUBLIC__/images/menua.png"></span>公司简介</a></li>
+        <li><a href="{:U('Article/Index',array('cid'=>20))}"><span class="nar"><img src="__PUBLIC__/images/menua.png"></span>网站公告</a></li>
+        <li><a href="{:U('Article/Index',array('cid'=>23))}"><span class="nar"><img src="__PUBLIC__/images/menua.png"></span>投资技巧</a></li>
+        <li><a href="{:U('Media/Index',array('cid'=>24))}"><span class="nar"><img src="__PUBLIC__/images/menua.png"></span>媒体报道</a></li>
+        <li><a href="{:U('Article/Index',array('cid'=>42))}"><span class="nar"><img src="__PUBLIC__/images/menua.png"></span>合作伙伴</a></li>
+        <!-- <li><a href="{:U('Activity/Index',array('cid'=>26))}"><span class="nar"><img src="__PUBLIC__/images/menua.png"></span>活动集锦</a></li> -->
+        <li><a href="{:U('Activity/Index',array('cid'=>48))}"><span class="nar"><img src="__PUBLIC__/images/menua.png"></span>最新活动</a></li>
+      </ul>
+   </nav>

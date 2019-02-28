@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>找回密码-{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="{$Think.config.web_description}" />
+<include file = "Common:transparent" />
+</head>
+<link href="__PUBLIC__/style/base.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/register.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<body>
+<include file = "Common:head" />
+<div class="reg_cen">
+   <div class="reg_step reg_step1">
+      <ul>
+        <li class="white">填写信息</li>
+        <li>验证信息</li>
+        <li>重置密码</li>
+      </ul>
+  </div>
+   <div class="reg_bot">
+      <table cellpadding="0" cellspacing="0" border="0" width="70%" class="reg_bd" style="margin-left:50px;">
+         <tr>
+            <td width="25%" height="60" align="right"></td>
+            <td width="75%" class="fl"><input name="back_mode" type="radio" value="{:U('user/getPasswordInPhone')}" checked="checked" /> 通过手机找回 <input name="back_mode" type="radio" value="{:U('user/GetPassword')}" /> 通过邮箱找回</td>
+         </tr>
+
+         <tr>
+            <td height="70">&nbsp;</td>
+            <td class="fl"><input type="button" value="密码找回" class="login_sub" id="submit_route" /></td>
+         </tr>
+         <tr>
+            <td colspan="2" height="40" class="zd_phone">验证过程中如有其它问题，请致电客服：{$Think.config.web_tel}</td>
+         </tr>
+      </table>
+
+   </div>
+</div>
+<script type="text/javascript">
+    $("#submit_route").click(function(){
+        $route_url = $('input[name=back_mode]:checked');
+          location.href= $route_url.val();
+    })
+</script> 
+<include file = "Common:bottom" />
+</body>
+</html>

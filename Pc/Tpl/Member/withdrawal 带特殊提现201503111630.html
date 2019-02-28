@@ -1,0 +1,500 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>会员提现-{$Think.config.web_title}</title>
+<include file = "Common:transparent" />
+</head>
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/register.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.cityselect.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".inp_t").click(function(){
+	     $("#black_em_d").css("display","block");
+	});
+	$(".close").click( function(){
+	     $(this).parents(".black_em").css("display","none");
+	});
+	
+	$(".bank").click(function(){
+	   $(".tx_bank").show();     
+	});
+	// $(".bank_1").click(function(){
+	//    $(".tx_bank").show();
+	// });
+	$(".sub_s").click(function(){
+	   $(".tx_bank").hide();
+	}); 	
+
+  /*省市二级联动菜单初始化*/
+  city_lib_url = '__PUBLIC__/js/city.min.js';//省市json库文件路径
+  $("#city_1").citySelect({
+    nodata:"none",
+    required:false
+  });  
+    
+  $(".with_money").keyup(function(){    
+    $(".money_mark").fadeIn();            
+  }).blur(function(){
+		$(".money_mark").fadeOut();             
+  }); 
+	
+});
+
+
+/**
+ * radio_write_val      选择银行确定
+ */
+function radio_write_val(){
+   var radio_val = $(":radio[name='slt_bank_name']:checked").val();
+   $("#show_bank_name").text(radio_val);
+   $("#show_bank_name").attr('title',radio_val);
+   $("#bank_name").val(radio_val);
+   $("#black_em_d").hide();
+   return false;
+}  
+</script>
+
+<!--资金协议-->
+<script type="text/javascript" src="__PUBLIC__/js/jquery.jmpopups-0.5.1.js"></script>
+<script type="text/javascript">
+	$.setupJMPopups({
+	  screenLockerBackground: "#000000",
+	  screenLockerOpacity: "0.7"
+	});
+
+	function openStaticPopup() {
+	  $.openPopupLayer({
+	  name: "myStaticPopup",
+	  width: 820,
+	  target: "myHiddenDiv_1"
+	});
+}
+				
+
+</script>
+<!---->
+<body>
+<include file = "Common:head" />
+<div class="middle">
+   <include file="Common:left_menu"/>
+   <div class="mid_right InLine">
+      <h3 class="bt">提现</h3>
+      <div class="mr_center">
+            <table cellpadding="0" cellspacing="0" border="0" width="90%" class="tx_table gray_border_table">
+                <tr>
+                   <td width="32%" height="80" align="right" class="bank_card" valign="top"><span>绑定提现银行卡：</span></td>
+                   <td width="68%" class="bank_k">
+                      <ul>
+                            <if condition="$bank.bank_number neq ''">
+                            <li class="bank_1">                            
+                              <span class="bank_name bank_one">{$bank.real_name}</span>
+                              <span class="bank_num">{$bank.bank_number}</span>
+                            </li>                            
+                            <else/>
+                            <li class="bank" style="cursor:pointer"><img src="__PUBLIC__/images/tx_default.jpg" width="50" height="30" /></li>
+                            </if>
+                      </ul>
+                      <div class="tx_bank">
+                        <form action="{:U('Member/DoBank')}" method="post">
+                        <input type="hidden" name="bank_name" id="bank_name" value="">
+                        <p>        
+                           <span>户名</span>
+                           <input type="text" name="real_name" id="real_name" readonly="readonly" value="{$user_info.real_name}" class="inp" />
+                           <span class="bank_name">为保证提现成功，该银行卡开户姓名必须为<font>{$user_info.real_name}</font></span>
+                           <span>银行卡号</span>
+                           <input type="text" name="bank_number" id="bank_number" class="inp" /> 
+                           <span>银行</span>
+                           <a href="javascript:;" class="inp inp_t" id="show_bank_name" title="">请选择</a>
+                           <span>开户城市</span>
+                           <!-- <input type="text" name="bank_number" id="bank_number" class="inp" />          -->
+                          <div id="city_1">
+                            <select class="prov" name="province"></select> 
+                            <select class="city" name="city" disabled="disabled"></select>
+                          </div>
+                           <span>开户行全称</span>
+                           <textarea name="bank_address" id="bank_address" cols="" rows="" class="bank_txt"></textarea>
+                           <span><input type="submit" value="确定" name="submit_bank" id="submit_bank" class="sub" /> <input type="button" value="取消" name="submit_bank" id="submit_bank" class="sub sub_s" /></span>        
+                        </p>
+                        </form>
+                        
+                     </div>
+                      
+                   </td>
+                </tr> 
+                <tr>
+                   <td width="23%" height="60" align="right" style="padding-right:20px;">当前可用余额：</td>
+                   <td class="bank_d"><font color="#e44343">{$user_info.money}</font> 元
+                   <span id="money" style="display:none">{$user_info.money}</span>
+                   <span id="management" style="display:none">{$management}</span>
+                   </td>
+                </tr> 
+              <form action="{:U('Member/DoWithdrawal')}" method="post">
+              <input type="hidden" name="phone" id="phone" value="{$user_info.phone}">                
+                <tr>
+                   <td height="60" align="right" style="padding-right:20px;">提现方式：</td>
+                   <td class="bank_d"><input name="type" type="radio" value="0" checked="checked" />正常提现 <input name="type" type="radio" value="1" />
+                     特殊提现(未投资提现)</td>
+                </tr>                
+                <tr>
+                   <td height="60" align="right" style=" padding-right:20px;">提现金额：</td>
+                   <td class="bank_d tx_money">
+                      <input type="hidden" name="bank_id" value="{$bank.id}" />
+                      <input type="hidden" name="bank_number" value="{$bank.true_bank_number}" />
+                      <input type="text" class="top_up with_money" name="withdrawal_price" value="0" id="withdrawal_price" onfocus="if(this.value=='' || this.value==0){ this.value='' ;}" />
+                      <span class="money_mark">
+                         <div id="txt"></div>
+
+                         
+                      </span>
+                   </td>
+                </tr>
+<!--                 <tr>
+                   <td height="60" align="right" style="padding-right:20px;">手续费：</td>
+                   <td class="bank_d"><span id="txt"></span></td>
+                </tr> -->
+                <tr>
+                   <td height="60" align="right" style="padding-right:20px;">预计到账日期：</td>
+                   <td class="bank_d">1-3个工作日内(双休日，国家节假日除外)之内将钱转入您在网站认证的银行卡账号</td>
+                </tr>
+                <tr>
+                   <td height="60" align="right" style=" padding-right:20px;">交易密码：</td>
+                   <td width="30%" class="bank_d"><input type="password" name="trade_pwd" class="top_up" id="trade_pwd" /><if condition="$user_info.trade_pwd eq ''"><font color="red" >您还没有设置交易密码，<a href="{:U('Member/personal')}">前往设置</a></font></if></td>
+                </tr>
+               <tr>
+                  <td height="60" align="right" style=" padding-right:20px;">手机验证码：</td>
+                  <td class="bank_d"><input type="text" value="请输验证码" onclick="if(this.defaultValue==this.value){this.value='';}" onblur="if(this.value==''){this.value=this.defaultValue;}"  class="top_up" style="width:120px" name="phone_code" style=" float:left;" />                    <input type="button" value="获取验证码" id="send_code" onclick="sendCode(this)" class="hq_yz" /></td>
+               </tr>  
+               <tr>
+                   <td height="60" align="right">&nbsp;</td>
+                   <td width="30%" class="bank_d">
+                      <input name="ido" type="checkbox" />
+                       <label for="ido">我已经阅读并同意<a href="javascript:;" onclick="openStaticPopup()" title="金投资资金管理规定" class="reg_xy">《金投资充值及提现协议》</a></label>
+                       <div id="myHiddenDiv_1" style="display:none;">
+                          <div class="popup_1">
+                             <div class="popup-header_1">
+                                 <h2>金投资充值及提现协议</h2>
+                             </div>
+                             <div class="popup-body_1">
+                                 <strong>请仔细阅读本协议</strong>
+                                 <div class="con_1">
+                                    <p>本协议双方为吉林省金湧博发投资管理有限公司（金投资）与金投资投资人，本协议具有合同效力。本协议的内容包括以下全部条款以及本网站已经发布的及将来可能发布的与出借人用户有关的各项规则，该等规则均为本协议不可分割的一部分，与以下所列条款具有同等法律效力。本网站有权根据需要修改本协议的内容。如以下条款或本网站各项规则有任何变更，本网站将在网站上刊载公告。经修订的相关条款和规则一经公告，即于公告规定的特定生效日期自动生效。</p>
+                                    <p>投资人只要勾选位于注册页面下方的“我同意金投资注册协议”选项并按照本网站的流程成功注册后，本协议即产生法律效力。投资人不得以未签署书面协议为由否认本协议的效力。本协议是由投资人与本网站共同签订的，适用于投资人在本网站的全部活动。在投资人注册成为用户时，投资人已经阅读、理解并接受本协议的全部条款及各类规则，如有违反而导致任何法律后果的发生，投资人将以自己的名义独立承担所有相应的法律责任。</p>
+                                    <b>本协议不涉及投资人与本网站的其他用户之间因网上交易而产生的法律关系及法律纠纷。</b>
+                                    <b>一、充值管理规定</b>
+                                    <p>1、充值金额：100元人民币起 （金额可精确到元）</p>
+                                    <p>2、充值费用：免费</p>
+                                    <b>二、投资管理办法</b>
+                                    <p>1、投资金额：请参照实际投资标的规定起投金额及办法</p>
+                                    <p>2、账户管理费：平台将收取投资人成功投资后利息的10%作为账户管理费</p>
+                                    
+                                    <b>提现管理规定</b>
+                                    <p>1、提现金额：100元人民币起  （金额可以精确到分）</p>
+                                    <p>2、提现费用：</p>
+                                    <p>温馨提示：建议客户在投资成功后申请办理提现业务，如投资人在未投资的情况下申请提现，未投资金额将按标准收取特殊提现手续费。</p>
+                                    <p>成功投资后提现费用：</p>
+                                    <p>金额100万~50万元，手续费5元/笔；</p>
+                                    <p>金额50万~100万元，手续费20元/笔；</p>
+                                    <p>金额100万元以上，手续费50元/笔</p>
+                                    <br />
+                                    <b>未投资特殊提现费用：</b>
+                                    <p>投资人充值后未投标的，如需特殊提现，提现手续费=10元/笔+本金的0.5%（不足5元按5元计算）。</p>
+                                    <p>举例说明：王小姐充值了2000元后因有急事想在未投资的情况下申请提现，提现手续费为10+2000*0.5%=20（元）</p>
+                                    <br />
+                                    <p>提现申请将在3个工作日内处理，如遇法定节假日顺延。</p>
+                                    <b>四、账户信息注意事项</b>
+                                    <p>提现时绑定的持卡人姓名需与注册时个人资料绑定的姓名一致，如姓名或信息错误请及时联系客服处理。</p>
+                                    <p>账户信息须正确填写，开户行名称为 银行名称+支行全称（拨打银行客服电话即可查询）。</p>
+                                    <p>如银行卡相关信息填写错误请联系客服人员办理修改，为保证投资人的资金安全，不被不法分子冒领，修改银行卡相关信息时需向客服人员提供本人手持身份证及银行卡正反面四张照片。</p>
+                                    <b>五、其他附加条款</b>
+                                    <p>1、未经本网站事先书面许可，投资人无权将本协议项下的权利转让给任何第三方，否则该转让行为无效。</p>
+                                    <p> 2、本协议之效力、解释、变更、执行与争议解决均适用中华人民共和国法律，因本协议产生之争议，双方同意将争议提交至长春市具有管辖权的人民法院，通过司法程序予以解决。</p>
+                                    <b>六、违约责任</b>
+                                    <p>如果您违反了您在协议中所作的陈述、保证、承诺或任何其他义务，致使本网站或本网站的股东、实际控制人、员工承受任何损失，您应向受损失的一方做出全额赔偿。</p>
+                                    <b>七、适用法律和管辖</b>
+                                    <p>本协议适用中华人民共和国法律，与本协议的解释和履行有关的争议应由厦门仲裁委员会按照其仲裁规则进行仲裁。</p>
+                                    <b>八、终止</b>
+                                    <p>除非本网站终止本协议或者您申请终止本协议及注销相应用户账户且经本网站同意，否则本协议始终有效。在您违反了本协议、相关规则，或在相关法律法规、政府部门的要求下，本网站有权通过电子邮件告知方式终止本协议、关闭您的账户或者限制您使用本网站。</p>
+                                    <b>九、条款的独立性</b>
+                                    <p>若本协议的部分条款被认定为无效或者无法实施时，本协议中的其他条款仍然有效。</p>
+                                    
+                                    <p>本协议内容最终解释权规金投资网站所有。</p>
+                                  </div>
+                                </div>
+                                <a href="javascript:;" class="close_1" onclick="$.closePopupLayer('myStaticPopup')" title="关闭窗口" >阅读完毕，关闭窗口</a>
+                           </div>
+                        </div>
+                        <div id="fade" class="black_overlay"></div>
+                   
+                   </td>
+                </tr>              
+                <tr>
+                   <td height="80">&nbsp;</td>
+                   <td class="bank_d"><input type="submit" value="确定" name="submit_withdrawal" id="submit_withdrawal" class="topup_sub" /></td>
+                </tr>
+               </form>                
+            </table>          
+            <div class="prompt">
+                         <font color="#e44343">温馨提示</font> <br />
+                          提现手续费计算：
+                          {$Think.config.section1_min}~{$Think.config.section1_max} = {$Think.config.section1_money}元
+                         ；{$Think.config.section2_min}~{$Think.config.section2_max} = {$Think.config.section2_money}元
+                         ；{$Think.config.section3_min}~{$Think.config.section3_max} = {$Think.config.section3_money}元 
+                          <br>特殊提现手续费计算:
+                          <span class="tx_l">未经过投资可提现，但收取提现额的千分之{$fast_management}<empty name="replenish_management"><else/>+{$replenish_management}元</empty> ,特殊提现每笔提现金额至少为{$Think.config.min_special_withdrawal}元以上</span>                        
+                         <br>
+                          1、<font color="#FF0000">请投资人根据发标计划合理充值，因金投资无法触及用户资金账户，无法收取用户任何费用，为防止套现，所充资金必须经投标回款后才能提现</font><br />
+                          2、确保您的银行帐号的姓名和您的网站上的真实姓名一致。<br />
+                          3、请详细填写开户支行信息，如果您填写的开户行支行不正确，导致无法转账，或者转账未能及时到账，请您尽快联系在线客服4006-570-826。未填写任何支行信息的，则不给予提现。如果您不确定开户行支行名称，可以打电话到当地所在银行的营业网点询问或者上网查询。<br />
+                          4、普通提现每笔提现金额至少为{$Think.config.section1_min}元以上。<br />
+                          5、我们将在3个工作日(双休日，国家节假日除外)之内将钱转入您在网站认证的银行卡账号。<br />
+                          6、每人每天仅限提现1次。
+            </div>
+         <div class="spacer"></div>
+      </div>
+      
+   </div>
+   <div class="spacer"></div>
+</div>
+
+
+
+<div id="black_em_d" class="black_em">
+    <div class="bank_sel">
+        <h3>选择银行</h3>
+        <ul>
+           <li><span class="bank_radio"><input name="slt_bank_name" type="radio" checked="checked" value="中国工商银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_1.jpg" /></span></li>
+           <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="中国建设银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_2.jpg" /></span></li>
+           <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="中国农业银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_3.jpg" /></span></li>
+           <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="中国银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_4.jpg" /></span></li>
+           <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="交通银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_5.jpg" /></span></li>
+           <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="招商银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_6.jpg" /></span></li>
+           <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="兴业银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_7.jpg" /></span></li>
+           <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="中国光大银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_8.jpg" /></span></li>
+           <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="广发银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_9.jpg" /></span></li>
+           <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="北京银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_10.jpg" /></span></li>
+           <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="平安银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_11.jpg" /></span></li>
+           <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="中国邮政储蓄银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_12.jpg" /></span></li>
+           <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="中国民生银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_13.jpg" /></span></li>
+           <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="上海浦东发展银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_14.jpg" /></span></li>
+           <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="中信银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_15.jpg" /></span></li>
+           <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="渤海银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_16.jpg" /></span></li>
+           <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="上海银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_17.jpg" /></span></li>
+           <div class="spacer"></div>
+        </ul>
+        <p><input type="button" value="确定" class="bank_sure" id="bank_sure" onclick="radio_write_val()" /></p>
+        <a href="#" class="close"><img src="__PUBLIC__/images/close.png" /></a>
+    </div>
+    <div class="spacer"></div>
+</div>
+
+<script type="text/javascript">
+//单击银行图片控制单选按钮被选择
+$(".bank_img").click(function(){
+   $(this).siblings().find("input[name='slt_bank_name']").attr('checked',true);
+})
+  $mobile = $("#phone");
+  handle_withdrawal();//页面载入提现规则计算 显示手续费率和实际扣款
+  $("#submit_bank").click(function(){
+      $real_name = $("#real_name");
+      $bank_number = $("#bank_number");
+      $bank_address = $("#bank_address");
+      $bank_name = $("#bank_name");
+      if($.trim($real_name.val()) == ''){
+        alert('请输入户名');
+        $real_name.focus();
+        return false;
+      }
+
+      if($.trim($bank_number.val()) == ''){
+        alert('请输入银行卡号');
+        $bank_number.focus();
+        return false;
+      }
+
+      if($.trim($bank_name.val()) == ''){
+        alert('请选择银行');        
+        return false;
+      }     
+
+      if($("select[name='province']").val() == ''){
+        alert('请选择开户省份');        
+        return false;
+      }    
+
+      if($("select[name='city']").val() == ''){
+        alert('请选择开户城市');        
+        return false;
+      }          
+
+      if($.trim($bank_address.val()) == ''){
+        alert('请输入开户行全称');
+        $bank_address.focus();
+        return false;
+      }       
+  })
+
+  //提现表单过滤
+  $("#submit_withdrawal").click(function(){
+      $withdrawal_price = $("#withdrawal_price");
+      $trade_pwd = $("#trade_pwd");    
+      $money = parseFloat($("#money").text());  
+      $management = parseFloat($("#management").text());
+      $ido = $("input[name='ido']");
+      if($ido.is(":checked")){        
+          $("input[name='ido']").val('1');
+      }else{        
+          $("input[name='ido']").val('0');
+      }      
+      if($ido.val() == '0'){
+        alert('您需同意《金投充值及提现协议》');
+        return false;
+      }       
+      if($.trim($withdrawal_price.val()) == ''){
+        alert('请输入提现金额');
+        $withdrawal_price.focus();
+        return false;
+      } 
+      var number_reg = /^(\d+\.\d{0,2}|\d+)$/;  //验证输入是否为数字,若小数可输入两位小数         
+      if(!number_reg.test(parseFloat($withdrawal_price.val()))){
+        alert('金额输入错误，请重新输入');return false;        
+      }  
+      //特殊提现最低限额   
+      if($type.val() == 1){
+        if(parseFloat($withdrawal_price.val()) < parseFloat({$Think.config.min_special_withdrawal})){
+           alert('特殊提现金额不能低于{$Think.config.min_special_withdrawal}元');return false;
+        }
+      }
+      //普通提现最低限额
+      if(parseFloat($withdrawal_price.val()) < parseFloat({$Think.config.section1_min})){        
+         alert('提现金额不能低于{$Think.config.section1_min}元');return false;
+      }      
+      // $true_price = parseFloat($withdrawal_price.val()) + $management;    
+      $true_price = parseFloat($withdrawal_price.val());
+      //当前余额比对  
+      if(parseFloat($money) < parseFloat($true_price)){        
+        // alert('余额不足 !实际应扣款金额:'+$true_price+',超出了当前余额:'+$money+'，请重新输入');
+        alert('余额不足 !提现金额:'+$true_price+',超出了当前余额:'+$money+'，请重新输入');
+        $withdrawal_price.focus();
+        return false;
+      }
+      if($.trim($trade_pwd.val()) == ''){
+        alert('请输入支付密码');
+        $trade_pwd.focus();
+        return false;
+      }
+       
+  })
+
+  
+  //输入提现金额/金额文本框失去焦点时  显示手续费率和实际扣款
+  $("#withdrawal_price").keyup(function(){  
+    handle_withdrawal();   
+  }).blur(function(){
+    handle_withdrawal();   
+  })
+  
+  //切换提现类型时 同步计算手续费规则 显示手续费率和实际扣款
+  $("input[name=type]").click(function() {
+     handle_withdrawal();
+  });
+
+
+
+
+  /**
+   * handle_withdrawal     提现手续费规则计算 显示手续费率和实际扣款
+   * withdrawal_price      提现金额
+   * trade_pwd             支付密码
+   * money                 余额
+   * management            手续费页面存储
+   * type                  提现类型
+   */
+  function handle_withdrawal(){
+      $withdrawal_price = $("#withdrawal_price");
+      $trade_pwd = $("#trade_pwd");    
+      $money = parseFloat($("#money").text());  
+      $management = $("#management");  
+      $management_price = "";   
+      $type = $(":radio:checked[name=type]");
+
+      if($type.val() == 0){  
+        //提现手续费区间
+        if(parseFloat($withdrawal_price.val()) >= parseFloat({$Think.config.section1_min}) && parseFloat($withdrawal_price.val()) < parseFloat({$Think.config.section1_max})){
+          $management_price = parseFloat({$Think.config.section1_money});
+        }
+        if(parseFloat($withdrawal_price.val()) >= parseFloat({$Think.config.section2_min}) && parseFloat($withdrawal_price.val()) < parseFloat({$Think.config.section2_max})){      
+          $management_price = parseFloat({$Think.config.section2_money});
+        }     
+        if(parseFloat($withdrawal_price.val()) >= parseFloat({$Think.config.section3_min}) && parseFloat($withdrawal_price.val()) <= parseFloat({$Think.config.section3_max})){      
+          $management_price = parseFloat({$Think.config.section3_money});
+        }     
+      }else if($type.val() == 1){
+        //加急手续费计算 = 提现手续费率*提现金额(低于1000元按1000元算) + 补充手续费) 
+        if(parseFloat($withdrawal_price.val()) >= parseFloat(1000)){
+          $management_price = parseFloat($withdrawal_price.val()) * parseFloat({$Think.config.fast_management}) + parseFloat({$Think.config.replenish_management});        
+        }else{
+          $management_price = parseFloat(1000) * parseFloat({$Think.config.fast_management}) + parseFloat({$Think.config.replenish_management});            
+        }
+      }               
+      $management_price =  Math.round($management_price * 1000) / 1000;//小数点后保留三位
+      $management.text($management_price);                         
+      // $true_price = parseFloat($withdrawal_price.val()) + $management_price;                        
+      $true_price = parseFloat($withdrawal_price.val()) - $management_price;                      
+      $("#txt").html('手续费：<font>'+$management_price+'</font>元<br>到账金额:<font>'+$true_price+'</font>元');       
+  }
+
+
+
+/**
+ * 发送短信倒计时
+ * @param   obj   元素对象
+ * @param   stime 倒计时时间总数
+ * @return        定时器
+ */
+function sendMobileTime(obj, stime) {      
+    setTimeout(function (){
+        var _stime = stime - 1;
+        if (_stime) {
+            $(obj).val(_stime-1 + '秒后可重新获取');                            
+            sendMobileTime(obj, _stime);
+            $("#send_code").attr("onClick","return false");//倒计时中停止点击事件
+        } else {
+            $(obj).val('免费获取验证码');   //倒计时停止时将元素的文本初始化             
+            $("#send_code").attr("onClick","sendCode(this)");//倒计时停止加回点击事件sendCode方法
+        }
+    }, 1000);
+}   
+
+
+/**
+ * 单击发送验证码时候的操作     
+ */
+  function sendCode(obj){              
+    if($.trim($mobile.val()) == ''){
+        alert('请输入正确的手机号码');
+        $mobile.focus();
+        return false;
+    }                 
+    $.ajax({
+       dataType: "JSON",
+       url: "{:U('Member/sendCode')}",
+       data: "phone="+$mobile.val(),
+       success: function(msg){          
+          //msg = eval("("+msg.responseText+")");                             
+          if(msg.status == 0){                  
+              alert(msg.info);return false;
+          }else{
+              sendMobileTime(obj,61);
+          }
+       }
+    }); 
+  }   
+</script>
+<include file = "Common:bottom" />
+</body>
+</html>

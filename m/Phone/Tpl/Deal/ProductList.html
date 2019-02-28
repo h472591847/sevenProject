@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>投资列表_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="{$Think.config.web_description}" />
+
+</head>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+<!--circle-->
+<script type="text/javascript" src="__PUBLIC__/js/raphael-min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/circle.js"></script>
+<script type="text/javascript">
+function day_cx(obj){    
+    $(obj).siblings().removeClass("cx_on");
+    $(obj).addClass("cx_on");    
+    $("#day_cx").show();
+    $("#month_cx").hide();
+}
+
+function month_cx(obj){
+    $(obj).siblings().removeClass("cx_on");
+    $(obj).addClass("cx_on");    
+    $("#month_cx").show();
+    $("#day_cx").hide();
+}  
+</script>
+<body>
+<div class="center">
+   <include file="Common:header"/>
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>投资列表</span>
+     <span></span>     
+     <!--登录后显示 start-->
+     <include file="Common:ico"/>
+     <!--end-->
+   </div>  
+    
+   <div class="product-list">
+      <ul class="cp-list part-list">
+              <li>
+                 <h3><a href="#">月月薪一期</a></h3>
+                 <div>
+                    <p>
+                       <span class="cp-rate"><font>9.00</font>%</span>
+                       <span>年化收益</span>
+                    </p>
+                    <p class="cp-second">
+                       <span class="cp-month"><font>6</font>个月</span>
+                       <span>投资期限</span>
+                    </p>
+                    <p class="cp-last">
+                       <a href="#">马上投资</a>
+                    </p>
+                    <div class="spacer"></div>
+                 </div>
+                 <div class="pro-bar">
+                   <div class="pro-bar-rate"></div>
+                 </div>
+                 <div class="spacer"></div>
+              </li>
+              <li>
+                 <h3><a href="">月月薪一期</a></h3>
+                 <div>
+                    <p>
+                       <span class="cp-rate"><font>9.00</font>%</span>
+                       <span>年化收益</span>
+                    </p>
+                    <p class="cp-second">
+                       <span class="cp-month"><font>6</font>个月</span>
+                       <span>投资期限</span>
+                    </p>
+                    <p class="cp-last">
+                       <a href="#">马上投资</a>
+                    </p>
+                    <div class="spacer"></div>
+                 </div>
+                 <div class="pro-bar">
+                   <div class="pro-bar-rate"></div>
+                 </div>
+                 <div class="spacer"></div>
+              </li>
+              <li>
+                 <h3><a href="">月月薪一期</a></h3>
+                 <div>
+                    <p>
+                       <span class="cp-rate"><font>9.00</font>%</span>
+                       <span>年化收益</span>
+                    </p>
+                    <p class="cp-second">
+                       <span class="cp-month"><font>6</font>个月</span>
+                       <span>投资期限</span>
+                    </p>
+                    <p class="cp-last">
+                       <a href="#">马上投资</a>
+                    </p>
+                    <div class="spacer"></div>
+                 </div>
+                 <div class="pro-bar">
+                   <div class="pro-bar-rate"></div>
+                 </div>
+                 <div class="spacer"></div>
+              </li>
+          </ul>
+   </div> 
+
+   <div class="page deal_page"><span style="text-align:center;display:block;width:100%;">{$page}</span></div>
+   <include file="Common:bottom"/>
+</div>
+
+</body>
+</html>
+

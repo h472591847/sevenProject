@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>新手指引_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="金投资{p2p222.com}是国内互联网金融领域领先的互联网借贷平台，理财帮助频道教你如何制定投资理财计划,让你轻松实现互联网投资理财" />
+<link href="__PUBLIC__/style/base.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/single.css" type="text/css" rel="stylesheet" />
+<script src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<include file = "Common:transparent" />
+</head>
+<body>
+<include file = "Common:head" />
+
+<div class="guide_img1"></div>
+<div class="guide_img2"></div>
+<div class="guide_about">
+  <div class="guide_us">
+     <h3>金投资是什么</h3>
+     <p>金投资是吉林省金湧博发投资管理有限公司独立运营的、以本土资本为根基的东北三省首家P2B模式金融电商平台。吉林省金湧博发投资管理有限公司注册资本一亿元，坐落于美丽的北国春城长春。是一家以金投资为金融投融资服务平台、集国家投资项目公司、融资、一体多元化国际性机构。其以财富管理、资产管理与互联网金融为核心，致力于个人财富增值、中小微企业融资服务，是吉林省首家注册金融投资管理机构、金融投资行业的龙头企业。</p>
+  </div>
+</div>
+<div class="guide_us">
+   <img src="__PUBLIC__/images/guide_chart.jpg" alt="金投资运营模式" />
+</div>
+<div class="security_guid">
+   <div class="security_c">
+      <h3 class="sec_h3">安全保障</h3>
+      <p class="sec_r"><img src="__PUBLIC__/images/advantage.jpg" /></p>
+      <p class="sec_le">金投资相关合作贷款机构必须对所有借款方做多重定性、定量的尽职调查，保证资金流向的安全性、合法性，并确保借款方还款来源充足，对借款方可能发生的借款风险承担第一重担保。金投资只选取最优质资源，在源头把控投资者的资金安全</p>
+      <p class="sec_le sec_sec">金投资要求借款方必须拥有有效合法的抵押物或质押物，符合金投资借款条件的借款方必须具有相应的偿债能力，并且抵押物完全足值。一旦发生不良贷款，则立即经过诉讼拍卖抵押物变现偿还，避免单纯信用借款高违约率风险出现，保障投资者资金安全</p>
+      
+      <div class="spacer"></div>
+   </div>
+   <div class="spacer"></div>
+</div>
+<script type="text/javascript">
+$(function(){
+        var $banner=$('.banner');
+        var $banner_ul=$('.banner-img');
+        var $btn=$('.banner-btn');
+        var $btn_a=$btn.find('a')
+        var v_width=$banner.width();
+        
+        var page=1;
+        
+        var timer=null;
+        var btnClass=null;
+
+        
+       var page_count=$banner_ul.find('li').length;//把这个值赋给小圆点的个数
+        
+       
+		
+        $banner_ul.width(page_count*v_width);
+        
+        function move(obj,classname){
+                //手动及自动播放
+        if(!$banner_ul.is(':animated')){
+                if(classname=='prevBtn'){
+                        if(page==1){
+                                        $banner_ul.animate({left:-v_width*(page_count-1)});
+                                        page=page_count; 
+                                        cirMove();
+                        }
+                        else{
+                                        $banner_ul.animate({left:'+='+v_width},"slow");
+                                        page--;
+                                        cirMove();
+                        }        
+                }
+                else{
+                        if(page==page_count){
+                                        $banner_ul.animate({left:0});
+                                        page=1;
+                                        cirMove();
+                                }
+                        else{
+                                        $banner_ul.animate({left:'-='+v_width},"slow");
+                                        page++;
+                                        cirMove();
+                                }
+                        }
+                }
+        }
+        
+		$('.banner-circle li').eq(page-1).addClass('selected').siblings().removeClass('selected');
+		$('.banner-circle li').eq(page-1).children("span").show().parent("li").siblings().children("span").hide();
+		
+		
+		
+        function cirMove(){
+                //检测page的值，使当前的page与selected的小圆点一致
+                $('.banner-circle li').eq(page-1).addClass('selected').siblings().removeClass('selected');
+				$('.banner-circle li').eq(page-1).children("span").show().parent("li").siblings().children("span").hide();
+        }
+        
+        $banner.mouseover(function(){
+                //$btn.css({'display':'block'});
+                clearInterval(timer);
+                                }).mouseout(function(){
+                //$btn.css({'display':'none'});                
+                clearInterval(timer);
+                timer=setInterval(move,3000);
+                                }).trigger("mouseout");//激活自动播放*/
+
+        $btn_a.click(function(){
+                        //手动点击清除计时器
+                        btnClass=this.className;
+                        clearInterval(timer);
+                        timer=setInterval(move,3000);
+                        move($(this),this.className);
+                });
+                
+
+});
+</script>
+<div class="process">
+    <h3 class="sec_h3">投资流程</h3>
+    <div class="banner">
+           <div class="process_menu">
+               <h4></h4>
+               <a href="javascript:;" class="prevBtn prev1"></a>
+               <ul class="banner-circle">
+                  <li><span>注册</span></li>
+                  <li><span>认证</span></li>
+                  <li><span>充值</span></li>
+                  <li><span>投资</span></li>
+               </ul>
+               <a href="javascript:;" class="nextBtn next1"></a>
+               
+            </div>
+            <div class="banner-btn">
+                <a href="javascript:;" class="prevBtn"></a>
+                <a href="javascript:;" class="nextBtn"></a>
+            </div>
+            <div class="ban_img">
+                <ul class="banner-img">
+                    <li><a href="#"><img src="__PUBLIC__/images/guide_1.png"></a></li>
+                    <li><a href="#"><img src="__PUBLIC__/images/guide_2.png"></a></li>
+                    <li><a href="#"><img src="__PUBLIC__/images/guide_3.png"></a></li>
+                    <li><a href="#"><img src="__PUBLIC__/images/guide_4.png"></a></li>
+                </ul>
+            </div>      
+    </div>
+    <div class="spacer"></div>
+</div>
+
+<include file = "Common:bottom" />
+
+
+</body>
+</html>

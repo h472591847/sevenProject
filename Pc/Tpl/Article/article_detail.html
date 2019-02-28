@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$article.title}_{$cate.name}_{$Think.config.web_title}</title>
+<meta name="keywords" content="<if condition="$article['keyword'] neq ''">{$article.keyword}<else/>{$Think.config.web_keywords}</if>" />
+<meta name="description" content="<if condition="$article['description'] neq ''">{$article.description}<else/>{$Think.config.web_description}</if>" />
+<include file = "Common:transparent" />
+</head>
+<link href="__PUBLIC__/style/base.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/page.css" type="text/css" rel="stylesheet" />
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+
+<body>
+<include file = "Common:head" />
+
+<div class="page_center">
+    <div class="page_mid">
+        <include file = "Common:left" />
+        <div class="page_right">
+            <div class="second_page">
+                <h3 class="second_h3">{$cate.name}</h3>
+                <div>
+                   <h3 class="new_h3">{$article.title}</h3>
+                   <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a><a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a><a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq"></a><a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren"></a><a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a></div>
+                   <span class="new_date">{$article.time|date='Y-m-d',###}</span>
+                   <div class="new">
+                     {$article.content}
+                   </div>
+                   <div class="previous_page">
+                   <span>上一篇：<empty name="before.id">没有了<else/><a href="{:U('Article/articleDetail',array('id'=>$before['id']))}">{$before.title}</a></empty></span>
+                   <span><a href="{:U('Index/index')}">返回首页</a></span>
+                   <span>下一篇：<empty name="after.id">没有了<else/><a href="{:U('Article/articleDetail',array('id'=>$after['id']))}">{$after.title}</a></empty></span>
+                   </div>
+                   <div class="spacer"></div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="spacer"></div>
+</div>
+
+<include file = "Common:bottom" />
+
+<script>
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+</body>
+</html>

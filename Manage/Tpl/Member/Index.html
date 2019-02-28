@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="__PUBLIC__/css/bdmin.css" type="text/css" rel="stylesheet">
+<script src="__PUBLIC__/js/jQuery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/calendar/calendar.php?lang=zh-cn" ></script>
+<LINK href="__PUBLIC__/Js/calendar/calendar.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/Js/calendar/calendar.js"></script>
+<script type="text/javascript">
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+function CheckAll(form)  {
+  for (var i=0;i<form.elements.length;i++)    {
+    var e = form.elements[i];
+    if (e.name != 'chkall')       e.checked = form.chkall.checked; 
+   }
+  }
+
+</script>
+</HEAD>
+<BODY>
+<TABLE class="hs12pt" cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD height="22" >当前位置: 信息中心/信息管理</TD>
+  </TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR></TABLE>
+<TABLE class="hs12pt" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="22" background="__PUBLIC__/images/title_bg2.jpg">&nbsp;&nbsp;&nbsp;<span class="baise12ct">信息管理</span></td>
+  </tr>
+</table>
+  <TABLE class="hs12pt" width="100%" border=1 align=center cellPadding=2 cellSpacing=0 bordercolor="#175CB7" bordercolordark="#E3EFFB">
+<form action="{:U('Member/index')}" method="post">
+    <TR>
+      <TD height="25" colspan=18 align=left style="padding-left:10px;">
+      用户名：<input type="text" name="user_name" value="{$page_param.user_name}"  size="10">&nbsp; &nbsp; 
+      用户ID：<input type="text" name="user_id" value="{$page_param.user_id}"  size="2">&nbsp; &nbsp; 
+      真实姓名:<input type="text" name="real_name" value="{$page_param.real_name}"  size="10">&nbsp; &nbsp; 
+      手机号：<input type="text" name="phone" value="{$page_param.phone}"  size="10">&nbsp; &nbsp; 
+      推荐人:
+
+      <select name="parent_status">
+        <option value="" >--- 请选择 ---</option>                     
+        <option value="1" <if condition="$page_param['parent_status'] eq 1"> selected="selected"</if>>有</option>   
+        <option value="0" <if condition="$page_param['parent_status'] eq '0'"> selected="selected"</if>>无</option>        
+      </select>&nbsp; &nbsp;
+        推荐人帐号:<input type="text" name="p_user_name" value="{$page_param.p_user_name}" size="10">&nbsp; &nbsp; 
+        用户余额：<input type="text" name="money_start" value="{$page_param.money_start}" size="5"> - <input type="text" name="money_end" value="{$page_param.money_end}"  size="5">&nbsp; &nbsp;         
+        冻结金额：<input type="text" name="lock_money_start" value="{$page_param.lock_money_start}" size="5"> - <input type="text" name="lock_money_end" size="5" value="{$page_param.lock_money_end}">&nbsp; &nbsp;         
+        奖励金额：<input type="text" name="bonus_money_start" value="{$page_param.bonus_money_start}" size="5"> - <input type="text" name="bonus_money_end" size="5" value="{$page_param.bonus_money_end}">&nbsp; &nbsp; 
+        积分：<input type="text" name="score_start" value="{$page_param.score_start}" size="5"> - <input type="text" name="score_end" size="5" value="{$page_param.score_end}">&nbsp; &nbsp;           
+      </TD> 
+    </TR>       
+      <tr>
+        <td colspan="18">
+          按登录时间：&nbsp; 
+          <input type="text" name="e_start_time" value="{$page_param.e_start_time}" class="text" id="e_start_time"  onfocus="this.blur(); return showCalendar('e_start_time', '%Y-%m-%d', false, false, 'btn_e_start_time');" size="10">      
+          <input type="button" class="button" id="btn_e_start_time" value="选择时间"  onclick="return showCalendar('e_start_time', '%Y-%m-%d', false, false, 'btn_e_start_time');" />
+          <input type="button" class="button" value="清空时间" onClick="$('#e_start_time').val('');" />     
+           - 
+          <input type="text" name="e_end_time" size="10" value="{$page_param.e_end_time}" id="e_end_time" class="text" onFocus="this.blur(); return showCalendar('e_end_time', '%Y-%m-%d', false, false, 'btn_e_end_time');">
+          <input type="button" class="button" id="btn_e_end_time" value="选择时间" onClick="return showCalendar('e_end_time', '%Y-%m-%d', false, false, 'btn_e_end_time');" />   
+          <input type="button" class="button" value="清空时间" onClick="$('#e_end_time').val('');" />     
+          &nbsp; &nbsp;      
+          按创建时间：&nbsp; 
+          <input type="text" name="k_start_time" size="10" value="{$page_param.k_start_time}" class="text" id="k_start_time"  onfocus="this.blur(); return showCalendar('k_start_time', '%Y-%m-%d', false, false, 'btn_start_time');">      
+          <input type="button" class="button" id="btn_start_time" value="选择时间" onClick="return showCalendar('k_start_time', '%Y-%m-%d', false, false, 'btn_start_time');" />
+          <input type="button" class="button" value="清空时间" onClick="$('#k_start_time').val('');" />      
+           -  
+          <input type="text" name="k_end_time" size="10" id="k_end_time" value="{$page_param.k_end_time}" class="text" onFocus="this.blur(); return showCalendar('k_end_time', '%Y-%m-%d', false, false, 'btn_end_time');">
+          <input type="button" class="button" id="btn_end_time" value="选择时间" onClick="return showCalendar('k_end_time', '%Y-%m-%d', false, false, 'btn_end_time');" />
+          <input type="button" class="button" value="清空时间" onClick="$('#e_end_time').val('');" />&nbsp; &nbsp;登录IP：<input type="text" name="login_ip" value="{$page_param.login_ip}" size="15">&nbsp;&nbsp;&nbsp;<input type="submit" value="开始查询">      
+        </td>
+      </tr>  
+    <tr>
+      <td colspan="18" align="center">
+        
+        统计数据-> 当前会员总数：{$user_count}人&nbsp;会员余额:{$sum_money.sum_money|format_price}&nbsp;奖励金额:{$sum_money.sum_bonus_money|format_price}&nbsp;冻结金额:{$sum_lock_money.sum_lock_money|format_price}&nbsp;
+        在投金额:{$sum_invested.sum_amount|format_price}&nbsp;回款金额:{$count_sum_income|format_price}&nbsp;赚得金额:<empty name="log_accrual.sum_income_accrual">￥0.00<else/>{$log_accrual.sum_income_accrual}</empty>&nbsp;
+      </td>
+    </tr>        
+
+<!--     <tr>
+      <td colspan="18" height="30">
+        按到期时间：&nbsp; 
+        <input type="text" name="e_start_time" class="text" id="e_start_time"  onfocus="this.blur(); return showCalendar('e_start_time', '%Y-%m-%d', false, false, 'btn_e_start_time');">      
+        <input type="button" class="button" id="btn_e_start_time" value="选择时间" onclick="return showCalendar('e_start_time', '%Y-%m-%d', false, false, 'btn_e_start_time');" />
+        <input type="button" class="button" value="清空时间" onclick="$('#e_start_time').val('');" />&nbsp; &nbsp;       
+         - &nbsp; &nbsp; 
+        <input type="text" name="e_end_time" id="e_end_time" class="text" onfocus="this.blur(); return showCalendar('e_end_time', '%Y-%m-%d', false, false, 'btn_e_end_time');">
+        <input type="button" class="button" id="btn_e_end_time" value="选择时间" onclick="return showCalendar('e_end_time', '%Y-%m-%d', false, false, 'btn_e_end_time');" />
+       
+      </td>
+    </tr> -->
+</form>   
+  <TR>
+    <TD height="25" align=center >选择</TD>
+    <TD align="center" >ID</TD>
+    <TD align="center" >用户名</TD>
+  	<TD  align="center" >真实姓名</TD>
+  	<TD  align="center" >用户余额</TD>
+    <TD  align="center" >奖励金额</TD>
+    <TD  align="center" >冻结金额</TD>
+    <TD  align="center" >积分</TD>
+    <TD  align="center" >手机号</TD>    
+    <TD  align="center" >推荐人</TD>  
+  	<TD  align="center" >最后登录时间</TD>
+    <TD  align="center" >最后登录地点</TD>
+  	<TD  align="center" >有效状态</TD>
+    <TD  align="center" >创建时间</TD>    
+    <TD  align="center" >操作</TD>
+  </TR>
+<form action="" method="post">
+<foreach name='info' item='v'>
+  <php>$i++;</php>
+  <TR onMouseOver="this.style.background='#d0e2f5';" onMouseOut="this.style.background='#E3EFFB';">
+    <TD height="22" align=center ><input type="checkbox" name="del[]" value="{$v.id}"></TD>
+    <TD align="center">{$v.id}</TD>
+    <TD align="center"><a href="{:U('Member/Member',array('upid'=>$v['id']))}">{$v.user_name}</a></TD>
+	<TD align="center">{$v.real_name}&nbsp;</TD>
+	<TD align="center">{$v.money|format_price}</TD>
+  <TD align="center">{$v.bonus_money|format_price}</TD>
+  <TD align="center">{$v.lock_money|format_price}</TD>
+  <TD align="center">{$v.score}</TD>
+  <TD align="center">
+      {$v.phone}
+  </TD>   
+  <TD align="center">
+      <a href="<if condition="$v['pid'] neq 0">{:U('Member/index',array('pid'=>$v['pid']))}<else/>javascript:void(0)</if>">
+        <empty name="v.parent_user_name">
+          无推荐人
+          <else/>
+        <font style="color:#F08">{$v.parent_user_name}</font>
+        </empty>
+      </a>
+  </TD>       
+	<TD align="center">
+    <if condition="$v['login_time'] neq '' && $v['login_time'] neq 0">{$v.login_time|date='Y-m-d H:i:s',###}<else/>暂未登录</if>
+  </TD>  
+  <TD align="center">
+    
+    <empty name="v.login_ip">
+      暂未登录 
+    <else/>
+
+      <span style="cursor:pointer;" onclick="get_ip_address('{$v.login_ip}',{$i})">{$v.login_ip}</span>
+    </empty>   
+    <span id="res_txt{$i}"></span>   
+  </TD>     
+	<TD align="center">
+    	<if condition="$v['is_effect'] eq 1"><a style="cursor:pointer" onClick="if (confirm('确定要操作吗?')){ location.href='{:U('Member/IsEffect',array('v'=>0,'id'=>$v['id']))}'; }else{ return false; }">有效</a><else/><a onClick="if (confirm('确定要操作吗?')){ location.href='{:U('Member/IsEffect',array('v'=>1,'id'=>$v['id']))}'; }else{ return false; }" style="color:#F00;cursor:pointer;">无效</a></if>
+    </TD>        
+	<TD align="center">{$v.create_time|date='Y-m-d H:i:s',###}</TD>    
+    <TD align="center"><a href="{:U('Member/Account',array('upid'=>$v['id']))}">账户</a>&nbsp;<a href="{:U('Member/LockMoney',array('upid'=>$v['id']))}">冻结资金</a>&nbsp; <a href="{:U('DealLog/index',array('uid'=>$v['id']))}" target="_blank">查看资金动向</a>&nbsp;<a href="{:U('ScoreLog/index',array('uid'=>$v['id']))}" target="blank">查看积分动向</a>&nbsp;<a href="{:U('MsgBox/index',array('user_id'=>$v['id'],'web_status'=>1))}"  target="_blank">查看操作动向</a>    
+    &nbsp;<a href="{:U('Member/MemberInfo',array('upid'=>$v['id']))}" target="_blank">修改会员信息</a>
+    </TD>
+  </TR>
+</foreach>
+  <TR>
+    <TD height="22" align=center ><input type=checkbox name=chkall value=on onClick="CheckAll(this.form)"></TD>
+    <TD align="center" >全选</TD>
+    <TD colspan="12" align="center" class="hs12pt">{$page}</TD>    
+    <TD align="center" class="hs12"><input type="submit" value="确认删除" onClick="if (confirm('确定要删除吗？\r一旦删除无法恢复数据')){ this.form.action='{:U('Member/InfoDelete')}'; }else{ return false; }"></TD>
+    </TR></form>
+  </TABLE>
+<script type="text/javascript">
+  function get_ip_address(login_ip,num){
+          /*新浪IP查询接口*/
+          $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip='+login_ip, function(_result){  
+            $res_txt = $("#res_txt"+num);
+            if (remote_ip_info.ret == '1'){   
+              $res_txt.html('IP：'+login_ip+'<br>'+remote_ip_info.country+' - '+remote_ip_info.province+' - '+remote_ip_info.city);   
+            }else{   
+              $res_txt.html('错误:没有找到匹配的 IP 地址信息！');   
+            }  
+          })
+  }    
+</script>
+</BODY>
+</HTML>

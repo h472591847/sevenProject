@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>主页_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="{$Think.config.web_description}" />
+<link href="__PUBLIC__/css/guide.css" type="text/css" rel="stylesheet"/>
+<script src="__PUBLIC__/js/jquery.min.js"></script>
+<script src="__PUBLIC__/js/jquery.event.drag-1.5.min.js"></script>
+<script src="__PUBLIC__/js/jquery.touchSlider.js"></script>
+<script>
+$(document).ready(function () {
+	$(".main_visual").hover(function(){
+		$("#btn_prev,#btn_next").fadeIn()
+		},function(){
+		$("#btn_prev,#btn_next").fadeOut()
+		})
+	$dragBln = false;
+	$(".main_image").touchSlider({
+		flexible : true,
+		speed : 200,
+		btn_prev : $("#btn_prev"),
+		btn_next : $("#btn_next"),
+		paging : $(".flicking_con a"),
+		counter : function (e) {
+			$(".flicking_con a").removeClass("on").eq(e.current-1).addClass("on");
+		}
+	});
+	$(".main_image").bind("mousedown", function() {
+		$dragBln = false;
+	})
+	$(".main_image").bind("dragstart", function() {
+		$dragBln = true;
+	})
+	$(".main_image a").click(function() {
+		if($dragBln) {
+			return false;
+		}
+	})
+	timer = setInterval(function() { $("#btn_next").click();}, 5000);
+	$(".main_visual").hover(function() {
+		clearInterval(timer);
+	}, function() {
+		timer = setInterval(function() { $("#btn_next").click();}, 5000);
+	})
+	$(".main_image").bind("touchstart", function() {
+		clearInterval(timer);
+	}).bind("touchend", function() {
+		timer = setInterval(function() { $("#btn_next").click();}, 5000);
+	})
+});
+</script>
+</head>
+<body>
+            <div class="main_visual">
+            <div class="flicking_con">
+                	<div class="flicking_inner">
+                    <a href="javascript:">1</a>
+                    <a href="javascript:">2</a>
+                    <a href="javascript:">3</a>
+                    <a href="javascript:">4</a>
+               	    </div>
+            </div>   
+			<div class="main_image">
+				<ul>					
+					<li><span class="img_1"><img src="__PUBLIC__/images/img_1.jpg" width="100%"></span></li>
+					<li><span class="img_2"><img src="__PUBLIC__/images/img_2.jpg" width="100%"></span></li>
+					<li><span class="img_3"><img src="__PUBLIC__/images/img_3.jpg" width="100%"></span></li>
+                    <li class="img_4"><span><img src="__PUBLIC__/images/img_4.jpg" width="100%"></span><a href="{:U('Index/Index')}"><img src="__PUBLIC__/images/img3_a.png" width="180"></a></li>
+				</ul>
+			</div>
+			</div>
+
+</body>
+</html>

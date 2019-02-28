@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="__PUBLIC__/css/bdmin.css" type="text/css" rel="stylesheet">
+<script src="__PUBLIC__/js/jQuery.js"></script>
+</HEAD>
+<BODY>
+<form action="{:U('Member/DoAccount')}" method="post" onSubmit="$('#submit_money').attr('disabled',true);return true;">
+<input type="hidden" name="upid" value="{$upid}">
+<TABLE class="hs12pt" cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD height="22" >当前位置: 会员列表/账户操作</TD>
+  </TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR></TABLE>
+<TABLE class="hs12pt" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="22" background="__PUBLIC__/images/title_bg2.jpg">&nbsp;&nbsp;&nbsp;<span class="baise12ct">{$display_txt}信息</span></td>
+  </tr>
+</table>
+  <TABLE class="hs12pt" width="100%" border="1" align="center" cellpadding="2" cellspacing="0" bordercolor="#175CB7" bordercolordark="#E3EFFB" >
+  <tr>       
+     <td width="10%" align="right">
+       账户状态：
+     </td>
+      <td align="left" colspan="5">
+        当前余额:{$user_info.money|format_price}&nbsp;&nbsp;&nbsp;
+        当前冻结金额:{$user_info.lock_money|format_price}&nbsp;&nbsp;&nbsp;
+        当前奖励金额:{$user_info.bonus_money|format_price}&nbsp;&nbsp;&nbsp;
+        当前剩余积分:{$user_info.score}&nbsp;&nbsp;&nbsp;
+      </td>               
+    </tr>
+   <tr>    
+      <td width="20%" height="25" align="right" ><span style=" color:#F00;">*</span>金额:</td>
+      <td colspan="5" align="left">
+        <input name="money" id="money" value="0" type="text" size="30" maxlength="12" class="text" > 元   <span style="color:#F00">正数代表充值，负数代表扣款</span>
+      </td>
+    </tr>
+   <tr>    
+      <td width="20%" height="25" align="right" ><span style=" color:#F00;">*</span>奖励金额:</td>
+      <td colspan="5" align="left">
+        <input name="bonus_money" id="bonus_money" type="text" value="0" size="30" maxlength="12" class="text" > 元   <span style="color:#F00">正数代表添加奖励金额，负数代表扣除奖励金额</span>
+      </td>
+    </tr>   
+   <tr>    
+      <td width="20%" height="25" align="right" ><span style=" color:#F00;">*</span>积分:</td>
+      <td colspan="5" align="left">
+        <input name="score" id="score" type="text" value="0" size="30" maxlength="12" class="text" > 分   <span style="color:#F00">正数代表添加积分，负数代表扣除积分</span>
+      </td>
+    </tr>        
+	<tr>    
+      <td width="20%" height="25" align="right" ><span style=" color:#F00;">*</span>说明:</td>
+      <td colspan="5" align="left">
+        <textarea name="content" id="content" cols="50" rows="10"></textarea>
+      </td>
+    </tr>
+                                                    
+<tbody id="tbody_imgs" style="display:none;">
+    
+</tbody>
+<tbody>
+    <tr>
+      <td height="25" colspan="6" align="center"><input type="submit" id="submit_money" value="确认{$display_txt}" onclick="$(this).attr('disabled','disabled');"></td>
+    </tr>
+  </table>
+</form>
+</BODY></HTML>
+<script type="text/javascript">
+  $("#submit_money").click(function(){     
+     $money = $("#money");
+     $bonus_money = $("#bonus_money");
+     $score = $("#score");
+     if($.trim($money.val())==''){
+        alert('金额不能为空');$money.focus();return false;
+     }
+     if($.trim($bonus_money.val())==''){
+        alert('奖励金额不能为空');$bonus_money.focus();return false;
+     } 
+     if($.trim($score.val())==''){
+        alert('积分不能为空');$score.focus();return false;
+     }          
+  })
+</script>

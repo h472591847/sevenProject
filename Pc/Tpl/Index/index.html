@@ -1,0 +1,478 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="{$Think.config.web_description}" />
+<script type='text/javascript'>
+window._CWiQ = window._CWiQ || []; 
+window.BX_CLIENT_ID = 35795; // 帐号ID 
+(function() {
+ var c = document.createElement('script') ,
+       p = 'https:'==document.location.protocol; 
+       c.type = 'text/javascript'; 
+       c.async = true; 
+       c.src = (p?'https://':'http://')+'whisky.ana.biddingx.com/boot/0'; 
+ var h = document.getElementsByTagName('script')[0]; 
+       h.parentNode.insertBefore(c, h); 
+})(); 
+_CWiQ.push(['_trackPdmp', '访问过首页', 1]); // 访客分类名称是给访客贴的标签，可以自定义，例如： 访问过官网、注册用户等。
+
+</script>
+
+<include file = "Common:transparent" />
+
+<link href="__PUBLIC__/style/base.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/index.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/animate.css" type="text/css" rel="stylesheet" />
+<!--大图轮播-->
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.flexslider-min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.flexslider').flexslider({
+		directionNav: true,
+		pauseOnAction: false
+	});
+
+	 function a(x,y){
+		l = $('.in_center').offset().left;
+		w = $('.in_center').width();
+		$('.zbs').css('left',(l + w + x) + 'px');
+		$('.zbs').css('bottom',y + 'px');
+	 }
+	 a(70,200);
+	
+});   
+</script>
+<!---->
+<script type="text/javascript" src="__PUBLIC__/js/news_scroll.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+<if condition="$rec_top['deal_status'] eq 1">
+//倒计时开始
+$.ajax({
+    url: '{:U("Index/index")}',
+    type: 'GET',
+    dataType: 'json',
+    async : false,
+    data: "get_ajax_time=1",               
+    success:function(msg){
+        if(msg.status == '1'){
+            now_gtime = msg.data * 1000;
+        }
+        return false;
+    }
+})
+var interval = 1000;
+window.setInterval(function(){
+  var re_start_time = '{$rec_top.re_start_time}';
+  var retime = {$rec_top.retime}; 
+  now_gtime = now_gtime + interval ;   
+  if(retime >= 0 && re_start_time == ''){
+  
+    var retY = {$rec_top.end_date|date='Y',###};
+    var retM = {$rec_top.end_date|date='m',###};
+    var retD = {$rec_top.end_date|date='d',###};     
+    var retH = {$rec_top.end_date|date='H',###};
+    var retI = {$rec_top.end_date|date='i',###};
+    var retS = {$rec_top.end_date|date='s',###};   
+    ShowCountDown(now_gtime,retY,retM,retD,retH,retI,retS,'divdown1','本期募集结束'); 
+  }else{
+    
+    var retY = {$rec_top.start_time|date='Y',###};
+    var retM = {$rec_top.start_time|date='m',###};
+    var retD = {$rec_top.start_time|date='d',###};     
+    var retH = {$rec_top.start_time|date='H',###};
+    var retI = {$rec_top.start_time|date='i',###};
+    var retS = {$rec_top.start_time|date='s',###};   
+    ShowCountDown(now_gtime,retY,retM,retD,retH,retI,retS,'divdown1','起投时间'); 
+  }
+}, interval); 
+function ShowCountDown(now_time,year,month,day,hour,minute,second,divname,typename){var now_time=new Date(now_time);var endDate=new Date(year,month-1,day,hour,minute,second);var leftTime=endDate.getTime()-now_time.getTime();var leftsecond=parseInt(leftTime/1000);var day1=Math.floor(leftsecond/(60*60*24));var hour=Math.floor((leftsecond-day1*24*60*60)/3600);var minute=Math.floor((leftsecond-day1*24*60*60-hour*3600)/60);var second=Math.floor(leftsecond-day1*24*60*60-hour*3600-minute*60);var cc=document.getElementById(divname);if(day1==0&&hour==0&&minute==0&&second==0){location.reload()}cc.innerHTML="距离"+typename+":"+"<span class='recom_date'>"+day1+"</span>"+"天"+"<span class='recom_date'>"+hour+"</span>"+"小时"+"<span class='recom_date'>"+minute+"</span>"+"分"+"<span class='recom_date'>"+second+"</span>"+"秒"}
+//倒计时结束
+</if>
+//进度条
+	// var percent = $('.pro_bar').attr('title');
+	// $(".pro_bar").animate({width:percent},1000);
+	// $(".tip").tipsy({gravity:'s',fade:true});
+	//投资项目进度条
+	<foreach name="loan_list" item="v">
+		<php>$i++;</php>
+			var p_bar = $(".pro_percent #bard{$i}").attr("data-load{$i}");
+			$(".pro_percent #bard{$i}").css("width",p_bar);
+	</foreach>
+	
+});
+//进度条结束
+</script>
+</head>
+<body>
+<include file = "Common:head" />
+
+<div class="flexslider" >
+	<ul class="slides">
+  <foreach name="top_list" item="v">
+     <li style="background:url(<if condition="$v['ad_image'] neq ''">{$v.ad_image}<else/>/Public/Images/image_err.gif</if>) 50% 0 no-repeat;"><a href="{$v.ad_link}" target="_blank" title="{$v.ad_name}"></a></li>
+  </foreach>
+	</ul>
+</div>
+<div class="in_center InLine">
+      <ul class="In_Icon">
+         <li style=" margin-left:0;">
+             <a href="{:U('Lottery/bond_advantage')}">
+             <span class="InIc InIcon1"><i></i></span>
+             <span class="IcTit">债权优势</span>
+             <span class="IcCon">东北三省1200余家有抵押企业债权 安全透明看得见</span>
+             </a>
+         </li>
+         <li style=" width:155px;">
+             <a href="{:U('Lottery/mode')}">
+               <span class="InIc InIcon2"><i></i></span>
+               <span class="IcTit">创新模式</span>
+               <span class="IcCon">联盟担保 诉讼保全<br />数十家合作伙伴共同为投资人保驾护航</span>
+             </a> 
+         </li>
+         <li>
+             <a href="{:U('Security/index')}">
+               <span class="InIc InIcon3"><i></i></span>
+               <span class="IcTit">安全保障</span>
+               <span class="IcCon">有抵押有担保 有风险保证金 严谨风控<br />打造安全理财金标准</span>
+             </a>
+         </li>
+         <li>
+             <a href="{:U('Guide/index')}">
+               <span class="InIc InIcon4"><i></i></span>
+               <span class="IcTit">新手指引</span>
+               <span class="IcCon">安全 透明 专业 便捷 享受金投资快乐 从这里开始</span>
+             </a>
+         </li>
+      </ul>
+   <p class="In_Video"><a href="{:U('Video/index')}" title="理财视频"><img src="__PUBLIC__/images/inVideo.png" /></a></p> 
+   <div class="spacer"></div>
+</div>
+
+<div class="Cen_m">
+   <div class="InLeft InLine New_tj">
+      <div class="index_tit">
+         <span class="New_x">新标推荐</span>
+          <if condition="$rec_top.deal_status neq 1">
+          <!--<div class="recom"><img src="__PUBLIC__/images/recommend.png" alt="金投资_新标推荐" /></div>-->
+          <else/>         
+         <div class="remaining" id="divdown1"></div>
+         </if>
+         
+      </div>
+      <p class="NewPro_img"><a href="{:U('Deal/DealContent',array('lid'=>$rec_top['id']))}" title="{$rec_top.loan_title}"><img src="<if condition="$rec_top['img'] neq ''">{$rec_top.img}<else/>/Public/Images/image_err.gif</if>" width="248" height="240" /></a></p>
+      <ul class="NewPro_Det">
+        <li class="NewPro_tit"><span><a href="{:U('Deal/DealContent',array('lid'=>$rec_top['id']))}" title="{$rec_top.loan_title}" target="_blank">{$rec_top.loan_title|msubstr=0,20}</a></span><span class="NewPro_db"><img src="__PUBLIC__/images/db.png" /></span></li>
+        <li class="New_T">
+           <div class="recom_bar"><span class="recom_bar_j" data-width="{$rec_top.load_rate|intval}%"><font><i><img src="__PUBLIC__/images/recom_angle.png" /></i>{$rec_top.load_rate|intval}%</font></span></div>
+        </li>
+        <script type="text/javascript">
+        $(".recom_bar_j").each(function () {
+        
+			var recom_width = $(this).attr("data-width");
+			$(this).css("width",recom_width);
+	
+		});
+        </script>
+        <li class="NewP_am">
+           <p class="P_am1">
+             <span class="Am_txt">年化利率</span>
+             <span class="Am_rate">{$rec_top.loan_rate|intval}<i><if condition="$rec_top['loan_add_rate'] neq 0">+{$rec_top.loan_add_rate}</if>%</i></span>
+           </p>
+           <p class="P_am2">
+             <span class="Am_txt">借款金额</span>
+             <span class="Am_limit">{$rec_top.loan_money}<i>元</i></span>
+           </p>
+           <p class="am_p_last">
+             <span class="Am_txt">借款期限</span>
+             <span class="Am_limit">
+                {$rec_top.loan_deadline}
+                <i>
+                <switch name="rec_top.loan_deadline_type">
+                <case value="0">个月</case>
+                <case value="1">天</case>
+                </switch>    
+                </i>
+             </span>
+           </p>
+        </li>        
+        <li class="start_time">
+           <p>还款方式：{$rec_top.repayment_mode}</p> 
+           <p class="hk_Way">项目开始时间：<span>{$rec_top.start_time|date='Y-m-d H:i:s',###}</span></p>      
+        </li>
+        <li class="xm_Btn">
+        <span class="buy_Btn">        
+        <switch name="rec_top.deal_status">
+            <case value="1">
+              <if condition="$rec_top['now_time'] LT $rec_top['start_time'] && $rec_top['deal_status'] eq 1">
+                <a href="javascript:;" title="{$rec_top.loan_title}" class="huanQ">待开放</a>
+              <else/>
+              <a href="{:U('Deal/DealContent',array('lid'=>$rec_top['id']))}" title="{$rec_top.loan_title}" class="ljgm" target="_blank">立即投标</a></li>
+              </if>
+            </case>        
+            <case value="2"><a href="javascript:;" title="{$rec_top.loan_title}" class="manB">满标</a></li></case>
+            <case value="3"><a href="javascript:;" class="invest_hk">流标</a></case>
+            <case value="4"><a href="javascript:;" class="huanK">还款中</a></case>
+            <case value="5"><a href="javascript:;" class="huanQ">已还清</a></case>                        
+        </switch> 
+        </span>
+      </ul>
+      
+   </div>
+   <div class="InRight InLine Media_bd">
+      <h3 class="index_tit"><a href="{:U('Media/index',array('cid'=>24))}" class="index_more">更多></a>媒体新闻</h3>
+      <ul class="Media_list">
+        <foreach name="mt_list" item="v">
+        <li>
+           <span class="MediaImg"><a href="{:U('Article/articleDetail',array('id'=>$v['id']))}" title="{$v.title}"><img src="<if condition="$v['img'] neq ''">{$v.img}<else/>/Public/Images/image_err.gif</if>" width="70" height="50" alt="" /></a></span>
+           <span class="MediaTit"><a href="{:U('Article/articleDetail',array('id'=>$v['id']))}" title="{$v.title}">{$v.title|msubstr=0,10}</a></span>
+           <span class="MediaCon">{$v.description|msubstr=0,17}</span>
+        </li>
+        </foreach>
+      </ul>
+   </div>
+   <div class="spacer"></div>
+</div>
+
+<div class="Cen_m">
+   <div class="InLeft">
+      <div class="financial_Cp InLine">
+         <h3 class="index_tit"><a href="{:U('Deal/ProductIntroduce')}" class="index_more">更多></a>理财产品</h3>
+         <ul class="Finan_list">
+           <php>$x = 0;</php>
+           <foreach name="pro_class_list" item="v">
+           <php>$x++;</php>
+            <li <if condition="$x eq 1">style="border-left:none;"</if>>
+                <h3>{$v.class_name}</h3>
+                <dl>
+                   <dd><span class="Finan_s">年化收益</span><span class="Finan_rate">筹备中</span></dd>
+                   <dd><span class="Finan_s">封闭期限</span><span class="Finan_mon">{$v.class_deadline}<i>个月</i></span></dd>
+                   <dd><span class="Finan_s">发售总额</span><span class="Finan_money">{$v.load_money}元</span></dd>
+                   <dt>{$v.class_description|msubstr=0,16}</dt>
+                </dl>
+                <span class="Finan_Btn"><a href="javascript:;" title="" class="Finan_gm">敬请期待</a></span>
+            </li>
+          </foreach>
+         </ul>
+         <div class="spacer"></div>
+      </div>
+      <div class="InvestList InLine">
+         <h3 class="index_tit"><a href="{:U('Deal/index')}" title="投资项目" class="index_more">更多></a>投资项目</h3>
+         <ul class="Invest_ul">
+          <php>unset($i);</php>
+            <foreach name="loan_list" item="v">           
+             <php>$i++;</php>
+            <li>
+               <h3>
+                  <span><a href="{:U('Deal/DealContent',array('lid'=>$v['id']))}" title="{$v.loan_title}" target="_blank">{$v.loan_title|msubstr=0,15}</a></span>
+                  <span class="Invest_icon"><img src="__PUBLIC__/images/Invest_icon.png" /></span>
+                  <if condition="$v['deal_status'] eq '1'"><span class="xm_start"><i>项目开始时间：{$v.start_time|date='Y-m-d H:i:s',###}</i></span></if>              
+               </h3>
+               <p class="Invest_to">
+                  <span class="Invest_txt">总额：</span><span>{$v.loan_money}元</span>
+               </p>
+               <p class="Invest_li">
+                  <span class="Invest_txt">期限：</span><span>
+                  {$v.loan_deadline}
+                  <switch name="v.loan_deadline_type">
+                  <case value="0">个月</case>
+                  <case value="1">天</case>
+                  </switch>  
+                  </span>
+               </p>
+               <p class="Invest_ra">
+                  <span class="Invest_txt">收益率：</span><span class="Sy_rate">
+                   {$v.loan_rate|intval}
+                   <if condition="$v['loan_add_rate'] neq 0"><i>+{$v.loan_add_rate}</i></if><i>%</i>
+                   </span>
+               </p>
+               <div class="Invest_pe">
+                  <div class="pro_percent"><div class="pro_progress" id="bard{$i}" data-load{$i}="{$v.load_rate}%"></div></div>
+                  <span>{$v.load_rate}%</span>
+               </div>
+               <p class="Invest_Xx">
+               
+                  <if condition="$v['now_time'] LT $v['start_time'] && $v['deal_status'] eq 1">
+                     <a href="javascript:;" class="Invest_hq">待开放</a>
+                  </if>
+                  <if condition="$v['now_time'] EGT $v['start_time'] && $v['deal_status'] eq 1">
+                    <a href="{:U('Deal/DealContent',array('lid'=>$v['id']))}" class="Invest_buy" target="_blank">投标</a>
+                  </if>                  
+                  <switch name="v.deal_status">
+                      <case value="2"><a href="javascript:;" class="Invest_mb">满标</a></case>
+                      <case value="3"><a href="javascript:;" class="Invest_hk">流标</a></case>
+                      <case value="4"><a href="javascript:;" class="Invest_hk">还款中</a></case>
+                      <case value="5"><a href="javascript:;" class="Invest_hq">已还清</a></case>                        
+                  </switch>  
+               </p>
+            </li>
+            </foreach>
+
+         </ul>
+      </div>
+      <div class="Indus_News InLine">
+          <div class="Industry">
+             <h3><a href="{:U('Industry/index',array('cid'=>29))}" class="index_more" title="行业新闻">更多></a>行业新闻</h3>
+             <ul>
+             <foreach name="hy_list" item="v">
+                <li>
+                   <span class="Indus_pic"> <a href="{:U('Article/articleDetail',array('id'=>$v['id']))}" title="{$v.title}" target="_blank"><img src="<if condition="$v['img'] neq ''">{$v.img}<else/>/Public/Images/image_err.gif</if>" width="52" height="52" alt="" /></a></span>
+                   <span class="Indus_tit"> <a href="{:U('Article/articleDetail',array('id'=>$v['id']))}" title="{$v.title}" target="_blank">{$v.title|msubstr=0,17}</a></span>
+                   <span class="Indus_con">{$v.description|msubstr=0,32}</span>
+                </li>
+              </foreach>
+             </ul>
+          </div>
+          <div class="ClassRoom">
+             <h3><a href="{:U('SkillInvest/index',array('cid'=>23))}" class="index_more" title="投资技巧">更多></a>投资技巧</h3>
+             <ul>
+             <php>$x=0;</php>
+             <foreach name="jq_list" item="v">
+                <php>$x++;</php>
+                <if condition="$x eq 1">
+                <li class="Class_fir">
+                   <span class="Class_pic"><a href="{:U('Article/articleDetail',array('id'=>$v['id']))}" title="{$v.title}" target="_blank"><img src="<if condition="$v['img'] neq ''">{$v.img}<else/>/Public/Images/image_err.gif</if>" width="92" height="92" alt="" /></a></span>
+                   <span class="Class_tit"><a href="{:U('Article/articleDetail',array('id'=>$v['id']))}" title="{$v.title}" target="_blank">{$v.title|msubstr=0,15}</a></span>
+                   <span class="Class_con">{$v.description|msubstr=0,20}</span>
+                </li>
+                <else/>
+                <li><a href="{:U('Article/articleDetail',array('id'=>$v['id']))}" title="{$v.title}" target="_blank">{$v.title|msubstr=0,15}</a></li>
+                </if>
+             </foreach>
+             </ul>
+          </div>
+          <div class="spacer"></div>
+      </div>
+      
+   </div>
+   <div class="InRight scroll_news">
+      <div class="NewNews InLine">
+          <div class="New_tabmenu">
+            <ul>
+               <li class="New_sel"><a href="{:U('Announcement/index',array('cid'=>20))}" target="_blank">网站公告</a></li>
+               <li><a href="{:U('Announcement/index',array('cid'=>44))}" target="_blank">政策法规</a></li>
+            </ul>
+          </div>
+          <div id="playBox">
+            <div class="pre"></div>
+            <div class="next"></div>
+            <div class="smalltitle">
+              <ul>
+               <foreach name="ad_list" item="v">
+                <li <if condition="$v['i'] eq 1">class="thistitle"</if>>{$v.i}</li>
+               </foreach>
+              </ul>
+            </div>
+            <ul class="oUlplay">
+               <foreach name="ad_list" item="v">
+                  <li><a href="{$v.ad_link}" target="_blank" title="{$v.ad_title}"><img src="{$v.ad_image}" alt="" /></a></li>
+               </foreach>
+            </ul>
+          </div>
+          
+          <div class="New_tabbox">
+             <div class="New_box">
+                 <ul>
+                   <empty name="gg_list">
+                    <li>暂无数据哦!</li>
+                   <else/>
+                   <php>$x = 0;</php>
+                   <foreach name="gg_list" item="v">
+                   <php>$x++;</php>                 
+                    <li <if condition="$x eq 1">class="news_first"</if>><a href="{:U('Article/articleDetail',array('id'=>$v['id']))}" title="{$v.title}"><span>&bull;</span>{$v.title|msubstr=0,16}</a></li>
+                   </foreach> 
+                   </empty>
+                 </ul>
+             </div>
+             <div class="New_box hide">
+                 <ul>
+                   <empty name="zc_list">
+                    <li>暂无数据哦!</li>
+                   <else/>                 
+                   <php>$x = 0;</php>
+                   <foreach name="zc_list" item="v">
+                   <php>$x++;</php>                 
+                    <li <if condition="$x eq 1">class="news_first"</if>><a href="{:U('Article/articleDetail',array('id'=>$v['id']))}" target="_blank" title="{$v.title}"><span>&bull;</span>{$v.title|msubstr=0,16}</a></li>
+                   </foreach> 
+                   </empty>
+                 </ul>
+             </div>
+          </div>
+      </div>
+      <div class="Calculator InLine">
+          <ul>
+             <li class="Cal_fir"><a href="{:U('Calculator/EarningsCalc')}" title="">收益计算器</a></li>
+             <li class="Cal_two" style="border-right:none;"><a href="{:U('Calculator/CPICalc')}" title="">CPI跟踪器</a></li>
+             <li class="Cal_thi" style=" border-bottom:none;"><a href="{:U('Calculator/IdentityCalc')}" title="">身价计算器</a></li>
+             <li class="Cal_fou" style=" border-bottom:none; border-right:none;"><a href="javascript:alert('敬请期待');" title="">收益对比器</a></li>
+          </ul>
+          <div class="spacer"></div>
+      </div>
+      <div class="LcStory InLine">
+         <h3 class="Story_h"><a href="{:U('Announcement/index',array('cid'=>46))}" title="">理财故事</a></h3>
+         <ul>
+             <empty name="gs_list">
+              <li>暂无数据哦!</li>
+             <else/>            
+             <foreach name="gs_list" item="v">                 
+             <li>
+                <span class="Story_img"><a href="{:U('Article/articleDetail',array('id'=>$v['id']))}" title="{$v.title}" target="_blank"><img src="<if condition="$v['img'] neq ''">{$v.img}<else/>/Public/Images/image_err.gif</if>" width="64" height="64" alt="" /></a></span>
+                <span class="Story_tit"><a href="{:U('Article/articleDetail',array('id'=>$v['id']))}" title="{$v.title}" target="_blank">{$v.title|msubstr=0,13}</a></span>
+                <span class="Story_con">{$v.description|msubstr=0,30}</span>
+             </li>
+             </foreach>
+            </empty>
+         </ul>
+         <div class="spacer"></div>
+      </div>
+   </div>
+   <div class="spacer"></div>
+</div>
+
+<div class="media_logo">
+      <h3 class="main_tit">合作伙伴</h3>
+       <ul class="Patner">
+         <php>$i = 0;</php>
+         <foreach name="hb_list" item="v">
+           <php>$i++;</php>
+            <li  <if condition="$i eq 1 || $i % 6 eq 1">class="media_none"</if>>
+            <a <if condition="$v['id'] eq 2021">href="#" <else/>href="{:U('Partner/PartnerDetail',array('id'=>$v['id']))}"</if> target="_blank" >
+            <img src="<if condition="$v['img'] neq ''">{$v.img}<else/>/Public/Images/image_err.gif</if>" alt="{$v.title}" width="150" height="87" />
+            </a>
+            </li>
+         </foreach>         
+       </ul>
+       <div class="spacer"></div>
+</div>
+
+<div class="media">
+   <div class="media_logo">
+       <h3 class="main_tit">媒体报道</h3>
+       <ul>
+          <li class="media_none"><a href="http://news.163.com/14/1203/01/ACGLLURF00014AED.html" target="_blank"><img src="__PUBLIC__/images/media_l_2.jpg" width="100" alt="网易新闻" /></a></li>
+          <li><a href="http://nb.ifeng.com/qyzx/detail_2015_01/14/3427220_0.shtml" target="_blank"><img src="__PUBLIC__/images/media_l_3.jpg" width="100" alt="凤凰商业" /></a></li>
+          <li><a href="http://finance.21cn.com/newsdoc/zx/a/2015/0114/15/28888794.shtml" target="_blank"><img src="__PUBLIC__/images/media_l_5.jpg" width="100" alt="21CN财经" /></a></li>
+          <li><a href="http://finance.ce.cn/sub/2011/qy/lv/201501/14/t20150114_4340484.shtml" target="_blank"><img src="__PUBLIC__/images/media_l_6.jpg" width="100" alt="中国经济网" /></a></li>
+          <li><a href="http://mcq.people.com.cn/jrcq/news/2015115/2015115927538172941.htm" target="_blank"><img src="__PUBLIC__/images/media_l_7.jpg" width="100" alt="人民网" /></a></li>
+          <li><a href="http://economy.gmw.cn/2015-01/15/content_14527230.htm" target="_blank"><img src="__PUBLIC__/images/media_l_8.jpg" width="100" alt="光明网" /></a></li>
+          <li><a href="http://www.fechina.com.cn/" target="_blank"><img src="__PUBLIC__/images/media_l_9.jpg" width="100" alt="财经中国网" /></a></li>
+          <li><a href="http://www.hb.xinhuanet.com/2015-01/15/c_1114006941.htm" target="_blank"><img src="__PUBLIC__/images/media_l_29.jpg" width="100" alt="新华网" /></a></li>
+          <li class="media_none"><a href="http://www.ci5168.com/caijing/gongsi/3763.html" target="_blank"><img src="__PUBLIC__/images/media_l_12.jpg" width="100" alt="环球金融网" /></a></li>
+          <li><a href="http://union.china.com.cn/zfgl/2015-01/14/content_7600516.htm" target="_blank"><img src="__PUBLIC__/images/media_l_14.jpg" width="100" alt="联盟中国" /></a></li>
+          <li><a href="http://finance.china.com/fin/lc/201501/15/2164213.html" target="_blank"><img src="__PUBLIC__/images/media_l_25.jpg" width="100" alt="中华网" /></a></li>
+          <li><a href="http://www.heb.chinanews.com/shijiazhuang/html/tzlc/201501/142408.html" target="_blank"><img src="__PUBLIC__/images/media_l_28.jpg" width="100" alt="中新网" /></a></li>
+          <li><a href="http://www.chinajilin.com.cn/news/content/2014-08/22/content_3380321.htm" target="_blank"><img src="__PUBLIC__/images/media_l_30.jpg" width="100" alt="中国吉林网" /></a></li>
+       </ul>
+       <div class="spacer"></div>
+    </div>
+</div>
+<div class="zbs"><a href="{:U('Lottery/qualification')}" target="_blank"><img src="__PUBLIC__/images/zbs1.png" /></a></div>
+<include file = "Common:bottom" />
+</body>
+</html>

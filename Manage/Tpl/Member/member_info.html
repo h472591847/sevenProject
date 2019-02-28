@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="__PUBLIC__/css/bdmin.css" type="text/css" rel="stylesheet">
+<script src="__PUBLIC__/js/jQuery.js"></script>
+</HEAD>
+<BODY>
+<form action="{:U('Member/DoMemberInfo')}" method="post" onSubmit="return check()">
+<input type="hidden" name="upid" value="{$upid}">
+<TABLE class="hs12pt" cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD height="22" >当前位置: 会员列表/修改会员信息</TD>
+  </TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR></TABLE>
+<TABLE class="hs12pt" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="22" background="__PUBLIC__/images/title_bg2.jpg">&nbsp;&nbsp;&nbsp;<span class="baise12ct">信息</span></td>
+  </tr>
+</table>
+  <TABLE class="hs12pt" width="100%" border="1" align="center" cellpadding="2" cellspacing="0" bordercolor="#175CB7" bordercolordark="#E3EFFB" >
+   <tr>    
+      <td width="20%" height="25" align="right" >真实姓名:</td>
+      <td colspan="5" align="left">
+        <input name="real_name" id="real_name" type="text" size="30" value="{$user_info.real_name}" maxlength="12" class="text" >   
+      </td>
+    </tr>  
+   <tr>    
+      <td width="20%" height="25" align="right" >手机号:</td>
+      <td colspan="5" align="left">
+        <input name="phone" id="phone" value="{$user_info.phone}" value="0" type="text" size="30" maxlength="12" class="text" > 
+      </td>
+    </tr>  
+   <tr>    
+      <td width="20%" height="25" align="right" >身份证号:</td>
+      <td colspan="5" align="left">
+        <input name="idno" id="idno" value="{$user_info.idno}" value="0" type="text" size="70" maxlength="100" class="text" > 
+      </td>
+    </tr>                                                         
+<tbody>
+    <tr>
+      <td height="25" colspan="6" align="center"><input type="submit" id="submit_money" value="确认{$display_txt}"></td>
+    </tr>
+  </table>
+</form>
+</BODY></HTML>

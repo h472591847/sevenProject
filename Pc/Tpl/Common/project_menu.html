@@ -1,0 +1,22 @@
+<div class="ny_top">
+   <div class="ny_top_1">
+      <h1><img src="__PUBLIC__/images/ny_logo.png" alt="{$Think.config.web_title}"></h1>
+      <ul>
+         <li class="on"><a href="{:U('Index/index')}" title="金投资_首页">首页</a></li>
+         <li><a href="{:U('Deal/index')}" title="金投资_我要投资">我要投资</a></li>
+         <!--<li><a href="{:U('LoanApply/index')}" title="金投资_我要贷款">我要贷款</a></li>-->
+         <li><a href="{:U('Security/index')}" title="金投资_安全保障">安全保障</a></li>
+         <li><a href="{:U('Partner/Join')}" title="金投资_合作伙伴">合作伙伴</a></li>
+         <li><a href="{:U('About/index')}" title="金投资_关于我们">关于我们</a></li>
+         <li><a href="{:U('Ask/index')}" title="金投资_问答专区">常见问题</a></li>
+         <li><a href="{:U('Guide/index')}" title="金投资_新手指引">新手指引</a></li>
+         <if condition="$Think.session.user_id eq ''"> 
+             <li class="ny_register"><a href="{:U('user/Login')}" title="会员登录">登录</a></li>
+             <li class="ny_register"><a href="{:U('user/register')}" title="注册">注册</a></li>
+         <else/>
+             <li class="ny_register"><a href="{:U('Member/Index')}" title="个人中心">个人中心</a></li>
+         </if>
+         
+      </ul>
+   </div>
+</div>

@@ -1,0 +1,607 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="__PUBLIC__/css/bdmin.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" charset="utf-8" src="__ROOT__/Ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__ROOT__/Ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="__ROOT__/Ueditor/lang/zh-cn/zh-cn.js"></script>
+<script src="__PUBLIC__/js/jQuery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/calendar/calendar.php?lang=zh-cn" ></script>
+<LINK href="__PUBLIC__/Js/calendar/calendar.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/Js/calendar/calendar.js"></script>
+<script type="text/javascript">
+function check(){
+   if($("input[name='loan_title']").val() == ''){
+      alert('请输入项目标题');$("input[name='loan_title']").focus();$("#sbmt").removeAttr('disabled');return false;
+   }
+   if($("input[name='loan_money']").val() == ''){
+      alert('请输入借款金额');$("input[name='loan_money']").focus();$("#sbmt").removeAttr('disabled');return false;
+   }
+   if($("input[name='min_loan_money']").val() == ''){
+      alert('请输入最小投资金额');$("input[name='min_loan_money']").focus();$("#sbmt").removeAttr('disabled');return false;
+   }
+   if($("input[name='max_loan_money']").val() == ''){
+      alert('请输入最高投资金额');$("input[name='max_loan_money']").focus();$("#sbmt").removeAttr('disabled');return false;
+   }
+   if($("input[name='loan_rate']").val() == ''){
+      alert('请输入年利率');$("input[name='loan_rate']").focus();$("#sbmt").removeAttr('disabled');return false;
+   }
+   if($("input[name='loan_deadline']").val() == ''){
+      alert('请输入借款期限');$("input[name='loan_deadline']").focus();$("#sbmt").removeAttr('disabled');return false;
+   }         
+   if($("input[name='end_time']").val() == ''){
+      alert('请输入筹标期限');$("input[name='end_time']").focus();$("#sbmt").removeAttr('disabled');return false;
+   }         
+   if($("input[name='start_time']").val() == ''){
+      alert('请输入开始时间');$("#sbmt").removeAttr('disabled');return false;
+   }                     
+}
+</script>
+</HEAD>
+<BODY>
+<form action="{:U('Loan/LoanHandle')}" method="post" onSubmit="$('#sbmt').attr('disabled',true);return check();">
+<input type="hidden" name="upid" value="{$upid}">
+<input type="hidden" name="refer" value="{$refer}">
+<TABLE class="hs12pt" cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD height="22" >当前位置: 信息中心/添加信息</TD>
+  </TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR></TABLE>
+<TABLE class="hs12pt" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="22" background="__PUBLIC__/images/title_bg2.jpg">&nbsp;&nbsp;&nbsp;<span class="baise12ct">{$display_txt}信息</span></td>
+  </tr>
+</table>
+  <TABLE class="hs12pt" width="100%" border="1" align="center" cellpadding="2" cellspacing="0" bordercolor="#175CB7" bordercolordark="#E3EFFB" >
+  <tr>    
+      <td width="20%" height="25" align="center" >产品类别:</td>
+      <td colspan="5" align="left">
+        <select name="class_id" id="class_id" onchange="product_class_fun(this)">
+            <option value="0">请选择</option>
+            <foreach name="product_class_arr" item="v">
+              <option value="{$v.id}" <if condition="$v['id'] eq $edit_info['class_id']">selected="selected"</if>>{$v.class_name}</option>
+            </foreach>
+        </select> 可不选
+      </td>
+    </tr>
+	<tr>    
+      <td width="20%" height="25" align="center" ><span style=" color:#F00;">*</span>项目标题:</td>
+      <td colspan="5" align="left">
+        <input name="loan_title" type="text" size="60" maxlength="100" class="text" value="{$edit_info.loan_title}" > 
+&nbsp;&nbsp; <input name="recommend" type="checkbox" id="recommend" value="1" <if condition="$edit_info['recommend'] neq 0">checked="checked"</if>
+>推荐</td>
+    </tr>    
+    <tr>
+      <td width="20%" height="25" align="center" >封面图:</td>
+      <td colspan="5">
+        <input name="img" type="text" class="text" id="img" size="40" value="{$edit_info.img}" maxlength="400"> 
+        <input type="button" name="btn_img" value="选择图片" onclick="upImageOne()"> * 若上传多张图片，则只显示第一张图片 
+        <if condition="$edit_info['img'] neq ''"><a href="{$edit_info.img}" target="_blank" title="点击查看大图"><img src="{$edit_info.img}" width="30" height="30"></a></if>
+      </td>
+    </tr>
+    <tr>
+      <td width="20%" height="25" align="center" >借款金额:</td>
+      <td colspan="5"><input name="loan_money" type="text" class="text" id="loan_money" value="{$edit_info.loan_money}" size="15" maxlength="11">
+        元</td>
+    </tr>
+<tr>
+      <td width="20%" height="25" align="center" >最小投资金额:</td>
+      <td colspan="5"><input name="min_loan_money" type="text" class="text" id="min_loan_money" value="<if condition="$edit_info['min_loan_money'] neq ''">{$edit_info.min_loan_money}<else/>50</if>" size="15" maxlength="11">
+        元 (不可高于借款金额)</td>
+    </tr>    
+
+<tr>
+      <td width="20%" height="25" align="center" >最高投资金额:</td>
+      <td colspan="5"><input name="max_loan_money" type="text" class="text" id="max_loan_money" value="{$edit_info.max_loan_money}" size="15" maxlength="11">
+        元 (不可高于借款金额)</td>
+    </tr>  
+
+<tr>    
+      <td width="20%" height="25" align="center" >年 利 率:</td>
+      <td colspan="5" align="left">
+        <input name="loan_rate" type="text" class="text" id="loan_rate" value="{$edit_info.loan_rate}" size="10" maxlength="11">
+        %
+        &nbsp;
+        附加年利率:<input name="loan_add_rate" type="text" class="text" id="loan_add_rate" value="{$edit_info.loan_add_rate}" size="10" maxlength="11">
+        %
+      </td>
+    </tr>
+
+<tr>    
+      <td width="20%" height="25" align="center" >借款期限:</td>
+      <td colspan="5" align="left">
+        <input name="loan_deadline" type="text" class="text" id="loan_deadline" value="{$edit_info.loan_deadline}" size="15" maxlength="11">
+      <select name="loan_deadline_type">          
+          <option value="1" <if condition="$edit_info['loan_deadline_type'] eq '1'"> selected="selected"</if>>天</option>
+          <option value="0" <if condition="$edit_info['loan_deadline_type'] eq '0'"> selected="selected"</if>>月</option>
+      </select>
+      </td>
+    </tr>
+    
+<tr>    
+      <td width="20%" height="25" align="center" >筹标期限:</td>
+      <td colspan="5" align="left">
+        <input name="end_time" type="text" class="text" id="end_time" value="{$edit_info.end_time}" size="15" maxlength="11">
+        天</td>
+    </tr> 
+
+<tbody id="no_product_class_field">
+<tr>    
+      <td width="20%" height="25" align="center" >还款方式:</td>
+      <td colspan="5" align="left">
+        <input name="repayment_mode" type="text" class="text" id="repayment_mode" value="{$edit_info.repayment_mode}" size="60" maxlength="100">
+      </td>
+    </tr>
+<tr>    
+      <td width="20%" height="25" align="center" >担保方式:</td>
+      <td colspan="5" align="left">
+        <input name="guarantee_mode" type="text" class="text" id="guarantee_mode" value="{$edit_info.guarantee_mode}" size="60" maxlength="100">
+      </td>
+    </tr>
+<tr>    
+      <td width="20%" height="25" align="center" >担保范围:</td>
+      <td colspan="5" align="left">
+        <input name="guarantee_purview" type="text" class="text" id="guarantee_purview" value="{$edit_info.guarantee_purview}" size="60" maxlength="100">
+      </td>
+    </tr>
+<tr>    
+      <td width="20%" height="25" align="center" >借款用途:</td>
+      <td colspan="5" align="left">
+        <input name="loan_purpose" type="text" class="text" id="loan_purpose" value="{$edit_info.loan_purpose}" size="60" maxlength="100">
+      </td>
+    </tr>
+<tr>    
+      <td width="20%" height="25" align="center" >抵押物:</td>
+      <td colspan="5" align="left">
+        <input name="pawn" type="text" class="text" id="pawn" value="{$edit_info.pawn}" size="60" maxlength="100">
+      </td>
+    </tr>
+<tr>    
+      <td width="20%" height="25" align="center" >产 值:</td>
+      <td colspan="5" align="left">
+        <input name="production_value" type="text" class="text" id="production_value" value="{$edit_info.production_value}" size="60" maxlength="100">
+      </td>
+    </tr>
+<tr>    
+      <td width="20%" height="25" align="center" >还款来源:</td>
+      <td colspan="5" align="left"><textarea name="payment_source" cols="60" rows="5" style="width:100%" class="text" id="payment_source">{$edit_info.payment_source}</textarea>
+      </td>
+    </tr>
+<tr>    
+      <td width="20%" height="25" align="center" >还款能力:</td>
+      <td colspan="5" align="left">
+        <input name="repayment_ability" type="text" class="text" id="repayment_ability" value="{$edit_info.repayment_ability}" size="10" maxlength="100">
+      </td>
+    </tr>    
+<tr>
+      <td height="10" align="center" >贷款描述:</td>
+      <td colspan="5"><textarea id="loan_description" name="loan_description" style="width:100%; height:100px;">{$edit_info.loan_description|stripslashes=###}</textarea></td>
+    </tr>
+<tr>    
+      <td width="20%" height="25" align="center" >企业名称:</td>
+      <td colspan="5" align="left">
+        <input name="company_name" type="text" class="text" id="company_name" value="{$edit_info.company_name}" size="100" maxlength="100">  前台不显示
+      </td>
+    </tr>        
+    <tr>
+      <td height="25" align="center" >企业信息:</td>
+      <td colspan="5"><textarea id="company_info" name="company_info" style="width:100%; height:300px;">{$edit_info.company_info|stripslashes=###}</textarea></td>
+    </tr>
+<tr>    
+      <td width="20%" height="25" align="center" >经营范围:</td>
+      <td colspan="5" align="left"><textarea name="business_scope" cols="60" rows="5" style="width:100%" class="text" id="business_scope">{$edit_info.business_scope}</textarea>
+      </td>
+    </tr>
+<tr>    
+      <td width="20%" height="25" align="center" >经营状况:</td>
+      <td colspan="5" align="left"><textarea name="business_state" cols="60" rows="5" style="width:100%" class="text" id="business_state">{$edit_info.business_state}</textarea>
+      </td>
+    </tr>
+<tr>    
+      <td width="20%" height="25" align="center" >担保机构:</td>
+      <td colspan="5" align="left"><textarea name="guarantee_institution" cols="60" rows="5" style="width:100%" class="text" id="guarantee_institution">{$edit_info.guarantee_institution}</textarea>
+      </td>
+    </tr>
+<tr>    
+      <td width="20%" height="25" align="center" >机构简介:</td>
+      <td colspan="5" align="left"><textarea name="guarantee_content" cols="60" rows="5" style="width:100%" class="text" id="guarantee_content">{$edit_info.guarantee_content}</textarea>
+      </td>
+    </tr>
+<tr>    
+      <td width="20%" height="25" align="center" >抵押物信息:</td>
+      <td colspan="5" align="left"><textarea name="pawn_info" cols="60" rows="5" style="width:100%" class="text" id="pawn_info">{$edit_info.pawn_info}</textarea>
+      </td>
+    </tr>
+<tr>    
+      <td width="20%" height="25" align="center" >风险控制措施:</td>
+      <td colspan="5" align="left"><textarea name="risk_control" cols="60" rows="5" style="width:100%" class="text" id="risk_control">{$edit_info.risk_control}</textarea>
+      </td>
+    </tr>
+<tr>    
+      <td width="20%" height="25" align="center" >担保机构意见:</td>
+      <td colspan="5" align="left"><textarea name="guarantee_idea" cols="60" rows="5" style="width:100%" class="text" id="guarantee_idea">{$edit_info.guarantee_idea}</textarea>
+      </td>
+    </tr>                        
+<tr>
+      <td width="20%" height="25" align="center" >企业材料:</td>
+      <td colspan="5"><textarea name="company_material" cols="50" rows="5" class="text" id="company_material">{$edit_info.company_material}</textarea><input type="button" name="btn_upload" onClick="upImageCaiLiao()" value="选择图片">
+      <br>
+      <empty name="edit_info.company_material_view"> 
+      <else/>  
+      <foreach name='edit_info.company_material_view' item='img'>
+          <a href="{$img}" target="_blank"><img src="{$img}" width="25" height="25" /></a>&nbsp;
+      </foreach>
+      </empty>
+      </td>
+    </tr>
+<tr>
+      <td width="20%" height="25" align="center" >抵押物实景:</td>
+      <td colspan="5"><textarea name="pawn_action" cols="50" rows="5" class="text" id="pawn_action">{$edit_info.pawn_action}</textarea><input type="button" name="btn_upload" onClick="upImageShiJing()" value="选择图片">
+      <br>
+      <empty name="edit_info.pawn_action_view"> 
+      <else/>        
+      <foreach name='edit_info.pawn_action_view' item='img'>
+        <a href="{$img}" target="_blank"><img src="{$img}" width="25" height="25" /></a>&nbsp;
+      </foreach>
+      </empty>
+      </td>
+    </tr>    
+<tr>
+      <td width="20%" height="25" align="center" >合同协议:</td>
+      <td colspan="5"><textarea name="contract_agreement" cols="50" rows="5" class="text" id="contract_agreement">{$edit_info.contract_agreement}</textarea><input type="button" name="btn_upload" onClick="upImageHetong()" value="选择图片">
+      <br>
+      <empty name="edit_info.contract_agreement_view"> 
+      <else/>         
+		  <foreach name='edit_info.contract_agreement_view' item='img'>
+        <a href="{$img}" target="_blank"><img src="{$img}" width="25" height="25" /></a>&nbsp;
+      </foreach>
+      </empty>
+      </td>
+    </tr>  
+
+<tr>
+      <td width="20%" height="25" align="center" >实地考察:</td>
+      <td colspan="5"><textarea name="field_visit" cols="50" rows="5" class="text" id="field_visit">{$edit_info.field_visit}</textarea><input type="button" name="btn_upload" onClick="upImageShidi()" value="选择图片">
+      <br>
+      <empty name="edit_info.field_visit_view"> 
+      <else/>         
+		  <foreach name='edit_info.field_visit_view' item='img'>
+        <a href="{$img}" target="_blank"><img src="{$img}" width="25" height="25" /></a>&nbsp;
+      </foreach>
+      </empty>
+      </td>
+    </tr>        
+<tr>    
+      <td width="20%" height="25" align="center" >担保方:</td>
+      <td colspan="5" align="left">
+        <input name="guarantee_title" type="text" size="60" maxlength="100" class="text" value="{$edit_info.guarantee_title}" >
+      </td>
+    </tr>
+<tr>    
+      <td width="20%" height="25" align="center" >保障措施:</td>
+      <td colspan="5" align="left">
+        <input name="guarantee_measure" type="text" size="60" maxlength="100" class="text" value="{$edit_info.guarantee_measure}">
+      </td>
+    </tr>
+</tbody>       
+
+<tr>    
+      <td width="20%" height="25" align="center" >排序:</td>
+      <td colspan="5" align="left">
+        <input name="loan_order" type="text" class="text" id="loan_order" value="<if condition="$edit_info['loan_order'] neq ''">{$edit_info.loan_order}<else/>10</if>" size="15" maxlength="100" > 
+        数字越大越靠前
+      </td>
+    </tr>
+<tr>    
+      <td width="20%" height="25" align="center" >借款状态:</td>
+      <td colspan="5" align="left">     
+      
+      	<input name="deal_status" type="radio" value="1" <if condition="$edit_info['deal_status'] eq 1 || $upid eq ''">checked</if> />
+			  进行中
+        <input name="deal_status" type="radio" value="2" <if condition="$edit_info['deal_status'] eq 2">checked</if> />   
+        满标        
+			  <input name="deal_status" type="radio" value="3" <if condition="$edit_info['deal_status'] eq 3">checked</if> />   
+         流标                    
+        <input type="radio" name="deal_status" value="4" <if condition="$edit_info['deal_status'] eq 4">checked</if> />
+      还款中            
+            <if condition="$edit_info['deal_status'] eq 5">
+                <input type="radio" disabled="disabled" name="deal_status" value="4" <if condition="$edit_info['deal_status'] eq 5">checked</if> />
+                已还清
+            </if>  
+
+      <if condition="$edit_info['deal_status'] eq 4 && $edit_info['is_send'] eq 0">
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <script type="text/javascript">
+         redirect_url = "{:U('Loan/repay_confirm_sms',array('upid'=>$edit_info['id']))}";
+      </script>
+      <button onclick="$(this).attr('disabled',true);location.href = redirect_url" type="button">点击发送开始计息短信</button>
+      </if>
+</td>
+    </tr>
+	
+    <tr id="start_time_box" <if condition="$edit_info['deal_status'] neq 1">style="display:none"</if>>
+		<td align="center" class="item_title">开始时间:</td>
+		<td class="item_input">
+			<input type="text" name="start_time" id="start_time" onfocus="return showCalendar('start_time', '%Y-%m-%d %H:%M:%S', false, false, 'start_time');"  value="<empty name='edit_info.start_time'><else/>{$edit_info.start_time|date='Y-m-d H:i:s',###}</empty>" />
+	  </td>
+	</tr> 
+
+
+	<tr id="bad_time_box" <if condition="$edit_info['deal_status'] neq 3">style="display:none"</if>>
+		<td align="center" class="item_title">流标时间:</td>
+		<td class="item_input">
+			<input type="text" name="bad_time" onfocus="this.blur(); return showCalendar('bad_time', '%Y-%m-%d %H:%M:%S', false, false, 'bad_time');"
+value="<empty name='edit_info.bad_time'><else/>{$edit_info.bad_time|date='Y-m-d H:i:s',###}</empty>" id="bad_time" />
+	  </td>
+	</tr>    
+
+	<tr id="bad_info_box" style="display:none;">
+		<td align="center" class="item_title">流标原因:</td>
+		<td class="item_input">
+			<textarea type="text" class="textbox" name="bad_msg" id="bad_msg" value="" rows="3" cols="50">{$edit_info.bad_msg}</textarea>
+	  </td>
+	</tr>
+<tr id="success_time_box" <if condition="$edit_info['deal_status'] neq 2">style="display:none"</if>>
+  <td align="center" class="item_title">筹标成功时间:</td>
+    <td class="item_input">
+      <input type="text" class="textbox" name="success_time" id="success_time" value="<empty name='edit_info.success_time'><else/>{$edit_info.success_time|date='Y-m-d H:i:s',###}</empty>" onfocus="this.blur(); return showCalendar('success_time', '%Y-%m-%d %H:%M:%S', false, false, 'success_time');"/>
+      <span class="tip_span"></span>
+    </td>
+  </tr>
+<tr id="confirm_time_box" <if condition="$edit_info['deal_status'] neq 4">style="display:none"</if>>
+	<td align="center" class="item_title">确认时间:</td>
+		<td class="item_input">
+			<input type="text" class="textbox" name="repay_confirm_time" id="repay_confirm_time" value="<empty name='edit_info.repay_confirm_time'><else/>{$edit_info.repay_confirm_time|date='Y-m-d H:i:s',###}</empty>" onfocus="this.blur(); return showCalendar('repay_confirm_time', '%Y-%m-%d %H:%M:%S', false, false, 'repay_confirm_time');"/>
+			<span class="tip_span">还款日从确认时间开始的下个月算起，确认时间不要设置为29,30,31号</span>
+	  </td>
+	</tr>
+        
+<tr>    
+      <td width="20%" height="25" align="center" >有效状态:</td>
+      <td colspan="5" align="left"><input name="is_effect" type="radio" id="radio" value="1" <if condition="$edit_info['is_effect'] eq 1">checked='checked'</if>>
+        有效
+      <input type="radio" name="is_effect" id="radio2" value="0" <if condition="$edit_info['is_effect'] eq '0' || $edit_info['is_effect'] eq ''">checked='checked'</if>>
+      无效</td>
+    </tr>                                                    
+<tbody id="tbody_imgs" style="display:none;">    
+</tbody>
+<tbody>
+    <tr>
+      <td height="25" colspan="6" align="center"><input type="submit" id="sbmt" value="确认{$display_txt}"></td>
+    </tr>
+  </table>
+</form>
+<textarea id="_editor" style=" display:none;"></textarea>
+<textarea id="_editor_shidi" style=" display:none;"></textarea>
+<textarea id="_editor_shijing" style=" display:none;"></textarea>
+<textarea id="_editor_cailiao" style=" display:none;"></textarea>
+<textarea id="_editor_one" style=" display:none;"></textarea>
+</BODY></HTML>
+<script type="text/javascript">
+function get_id(id){ return document.getElementById(id); }
+
+
+/**
+ * product_class_fun     选择产品，隐藏字段方法
+ * @param  {object} obj  下拉框对象
+ */
+function product_class_fun(obj){
+  $no_product_class_field = $("#no_product_class_field");//隐藏字段容器
+  if($(obj).val() != '0'){
+    $no_product_class_field.hide();return false;
+  }else{
+    $no_product_class_field.show();return false;
+  }
+}
+window.onload = function(){
+	//去掉文本框缓存
+	var list=document.getElementsByTagName("input");
+	for(var i=0;i<list.length && list[i];i++){
+		if(list[i].type=="text"){ 
+			list[i].autocomplete='off';
+		}
+	}
+}
+
+//修改编辑器图片上传提交路径
+window.UEDITOR_CONFIG.serverUrl = "{:U('Upload/Uploads')}";
+// //内容
+// var company_info=UE.getEditor('company_info');
+// //投资描述
+// var loan_description=UE.getEditor('loan_description');
+
+//实例化编辑器(企业材料)
+var _editor_cailiao = UE.getEditor('_editor_cailiao');
+_editor_cailiao.ready(function () {        
+  //设置编辑器不可用
+  _editor_cailiao.setDisabled();
+  //隐藏编辑器，因为不会用到这个编辑器实例，所以要隐藏
+  _editor_cailiao.hide();
+  //侦听图片上传          
+  _editor_cailiao.addListener('beforeInsertImage', function (t, arg) {                        
+  var img_url = "";
+  //遍历arg对象取出路径，用","拼接返回到文本框
+  for(var i = 0;i < arg.length;i++){                            
+    if(i == 0){
+    img_url = arg[i].src;
+    }else{
+    img_url += "\n" + arg[i].src;
+    }                          
+  }
+  $("#company_material").val(img_url);
+  })
+});
+
+//实例化编辑器(抵押物实景)
+var _editor_shijing = UE.getEditor('_editor_shijing');
+_editor_shijing.ready(function () {        
+  //设置编辑器不可用
+  _editor_shijing.setDisabled();
+  //隐藏编辑器，因为不会用到这个编辑器实例，所以要隐藏
+  _editor_shijing.hide();
+  //侦听图片上传          
+  _editor_shijing.addListener('beforeInsertImage', function (t, arg) {                        
+  var img_url = "";
+  //遍历arg对象取出路径，用","拼接返回到文本框
+  for(var i = 0;i < arg.length;i++){                            
+    if(i == 0){
+    img_url = arg[i].src;
+    }else{
+    img_url += "\n" + arg[i].src;
+    }                          
+  }
+  $("#pawn_action").val(img_url);
+  })
+});
+
+
+//实例化编辑器(合同协议)
+var _editor = UE.getEditor('_editor');
+_editor.ready(function () {        
+  //设置编辑器不可用
+  _editor.setDisabled();
+  //隐藏编辑器，因为不会用到这个编辑器实例，所以要隐藏
+  _editor.hide();
+  //侦听图片上传          
+  _editor.addListener('beforeInsertImage', function (t, arg) {                        
+  var img_url = "";
+  //遍历arg对象取出路径，用","拼接返回到文本框
+	for(var i = 0;i < arg.length;i++){                            
+	  if(i == 0){
+		img_url = arg[i].src;
+	  }else{
+		img_url += "\n" + arg[i].src;
+	  }                          
+	}
+  if($("#contract_agreement").val() != ''){
+    $contract_val = $("#contract_agreement").val()+"\r\n"+img_url;
+  }else{
+    $contract_val = img_url;
+  }
+  $("#contract_agreement").val($contract_val);
+  })
+});
+
+//实例化编辑器(实地考察)
+var _editor_shidi = UE.getEditor('_editor_shidi');
+_editor_shidi.ready(function () {        
+  //设置编辑器不可用
+  _editor_shidi.setDisabled();
+  //隐藏编辑器，因为不会用到这个编辑器实例，所以要隐藏
+  _editor_shidi.hide();
+  //侦听图片上传          
+  _editor_shidi.addListener('beforeInsertImage', function (t, arg) {                          
+  var img_url = "";
+  //遍历arg对象取出路径，用","拼接返回到文本框
+	for(var i = 0;i < arg.length;i++){                            
+	  if(i == 0){
+		img_url = arg[i].src;
+	  }else{
+		img_url += "\n" + arg[i].src;
+	  }                          
+	}
+  if($("#field_visit").val() != ''){
+    $visit_val = $("#field_visit").val()+"\r\n"+img_url;
+  }else{
+    $visit_val = img_url;
+  }
+  $("#field_visit").val($visit_val);  
+  })
+});
+
+
+//实例化编辑器(单图)
+var _editor_one = UE.getEditor('_editor_one');
+_editor_one.ready(function () {        
+  //设置编辑器不可用
+  _editor_one.setDisabled();
+  //隐藏编辑器，因为不会用到这个编辑器实例，所以要隐藏
+  _editor_one.hide();
+  //侦听图片上传          
+  _editor_one.addListener('beforeInsertImage', function (t, arg) {                          
+  //遍历arg对象取出路径，用","拼接返回到文本框
+  $("#img").val(arg[0].src);
+  })
+});
+
+
+
+//弹出企业材料上传的对话框
+function upImageCaiLiao() {
+   var myImage = _editor_cailiao.getDialog("insertimage");
+   myImage.open();
+}   
+
+//弹出抵押物实景上传的对话框
+function upImageShiJing() {
+   var myImage = _editor_shijing.getDialog("insertimage");
+   myImage.open();
+}   
+
+//弹出合同图片上传的对话框
+function upImageHetong() {
+	 var myImage = _editor.getDialog("insertimage");
+	 myImage.open();
+}   
+
+
+//弹出实地考察图片上传的对话框
+function upImageShidi() {
+	 var myImage = _editor_shidi.getDialog("insertimage");
+	 myImage.open();
+}   
+
+//弹出图片上传(单图)的对话框
+function upImageOne() {
+   var myImageOne = _editor_one.getDialog("insertimage");
+   myImageOne.open();
+}  
+
+//进行中显示模块
+$("input[type=radio]").eq(0).click(function(){
+	$("#bad_time_box").hide();
+	$("#bad_info_box").hide();
+  $("#success_time_box").hide();
+	$("#confirm_time_box").hide();	
+	$("#start_time_box").show();						
+})
+
+//流标显示模块
+$("input[type=radio]").eq(2).click(function(){
+	$("#bad_time_box").show();
+	$("#bad_info_box").show();
+  $("#success_time_box").hide();
+	$("#confirm_time_box").hide();	
+	$("#start_time_box").hide();						
+})
+
+//筹标成功显示模块
+$("input[type=radio]").eq(1).click(function(){
+	$("#bad_time_box").hide();
+  $("#success_time_box").show();
+	$("#bad_info_box").hide();	
+	$("#start_time_box").hide();							
+	$("#confirm_time_box").hide();						
+})
+
+//还款确认显示模块
+$("input[type=radio]").eq(3).click(function(){
+  $("#bad_time_box").hide();
+  $("#success_time_box").hide();
+  $("#bad_info_box").hide();  
+  $("#start_time_box").hide();              
+  $("#confirm_time_box").show();            
+})
+
+$(function(){
+  //判断选择产品类别时，其他字段不显示。
+  if($("#class_id").val() != '0'){
+    $("#no_product_class_field").hide();
+  }
+	//判断对应状态来显示模块
+	<if condition="$edit_info['deal_status'] eq 1 || $upid eq ''">$("#start_time_box").show();</if>	
+	<if condition="$edit_info['deal_status'] eq 3">$("#bad_info_box").show();$("#bad_time_box").show();</if>	
+	<if condition="$edit_info['deal_status'] eq 4">$("#confirm_time_box").show();</if>			
+})
+</script>

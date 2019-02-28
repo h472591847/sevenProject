@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>交易记录-{$Think.config.web_title}</title>
+<include file = "Common:transparent" />
+
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+<style type="text/css">
+  .sx_rq a{cursor: pointer;}
+</style>
+</head>
+<body>
+<include file = "Common:head" />
+<include file = "Common:web_announce" />
+<div class="middle">
+   <include file="Common:left_menu"/>
+   <div class="mid_right InLine">
+      <h3 class="bt" style="margin-bottom:30px;">交易记录</h3>
+      <div class="mr_center">
+        <form action="{:U('Member/trading')}" method="get" name="form_filter" id="form_filter">
+         <div class="sx_mark">
+             <div class="screening">
+                 <span class="sx_label">筛选日期：</span>
+                 <span class="sx_rq">
+                 <a href="{:U('Member/trading',array('filter_date'=>0,'type'=>$type))}" <if condition="$filter_date eq '' || $filter_date eq '0'">class="to_d"</if>>全部</a>
+                 <a href="{:U('Member/trading',array('filter_date'=>$tpl_today,'type'=>$type))}"  <if condition="$filter_date eq $tpl_today">class="to_d"</if>>今天</a>
+                 <a href="{:U('Member/trading',array('filter_date'=>$tpl_one_week,'type'=>$type))}" <if condition="$filter_date eq $tpl_one_week">class="to_d"</if>>最近一周</a>
+                 <a href="{:U('Member/trading',array('filter_date'=>$tpl_one_month,'type'=>$type))}" <if condition="$filter_date eq $tpl_one_month">class="to_d"</if>>一个月</a>
+                 <a href="{:U('Member/trading',array('filter_date'=>$tpl_six_month,'type'=>$type))}" <if condition="$filter_date eq $tpl_six_month">class="to_d"</if>>六个月</a>
+                 </span>
+             </div>
+             <div class="screening">
+                 <span class="sx_label">交易状态：</span>
+                 <span class="sx_rq">
+                 <a href="{:U('Member/trading',array('filter_date'=>$filter_date))}"  <if condition="$type eq '' || $type eq '0'">class="to_d"</if>>全部</a>
+                 <a href="{:U('Member/trading',array('filter_date'=>$filter_date,'type'=>$tpl_type['0']))}"  <if condition="$type eq $tpl_type[0]">class="to_d"</if>>充值</a>
+                 <a href="{:U('Member/trading',array('filter_date'=>$filter_date,'type'=>$tpl_type['1']))}"  <if condition="$type eq $tpl_type[1]">class="to_d"</if>>投资</a>
+                 <a href="{:U('Member/trading',array('filter_date'=>$filter_date,'type'=>$tpl_type['2']))}"  <if condition="$type eq $tpl_type[2]">class="to_d"</if>>提现</a>
+                 <a href="{:U('Member/trading',array('filter_date'=>$filter_date,'type'=>$tpl_type['3']))}"  <if condition="$type eq $tpl_type[3]">class="to_d"</if>>还款本金</a>
+                 <a href="{:U('Member/trading',array('filter_date'=>$filter_date,'type'=>$tpl_type['4']))}" <if condition="$type eq $tpl_type[4]">class="to_d"</if>>还款利息</a>
+                 </span>                 
+             </div>
+         </div>
+         </form>
+         <script type="text/javascript" src="__PUBLIC__/js/table.js"></script>
+         <div class="d_tra">
+           <table cellpadding="0" cellspacing="0" border="0" width="100%" class="tra_tab">
+               <thead>
+                   <tr>
+                      <th width="23%">时间</th>
+                      <th width="15%">交易类型</th>
+                      <th width="17%">单号</th>
+                      <th width="27%">明细</th>
+                      <th width="18%">资金</th>
+                   </tr>
+                   <tr>
+                      <td height="20">&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                   </tr>
+               </thead>
+               <tbody id="tbody"> 
+                   
+               <foreach name="list" item="v">
+                   <tr>
+                      <td class="date" height="70">{$v.create_time|date='Y-m-d H:i:s',###}</td>
+                      <td>                        
+                        {$v.type|get_deal_log_type}                      
+                      </td>
+                      <td>{$v.create_time|date='YmdHis',###}</td>
+                      <td class="jy_xx">{$v.detail}</td>
+                      <td><if condition="$v.pay_status eq 1"><span class="add">+<else/><span class="green">-</if>{$v.money|format_price}</span></td>
+                   </tr>
+                </foreach>
+               </tbody>
+           </table>
+           </div>
+           <div class="page">
+              {$page}
+           </div>
+         <div class="spacer"></div>
+      </div>
+   </div>
+   <div class="spacer"></div>
+</div>
+<include file = "Common:bottom" />
+</body>
+</html>

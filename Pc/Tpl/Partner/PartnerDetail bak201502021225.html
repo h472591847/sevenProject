@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$about.title}_{$Think.config.web_title}</title>
+<meta name="keywords" content="<if condition="$about['keyword'] neq ''">{$about.keyword}<else/>{$Think.config.web_keywords}</if>" />
+<meta name="description" content="<if condition="$about['description'] neq ''">{$about.description}<else/>{$Think.config.web_description}</if>" />
+<include file = "Common:transparent" />
+</head>
+<link href="__PUBLIC__/style/base.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/page.css" type="text/css" rel="stylesheet" />
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<!--<script type="text/javascript" src="__PUBLIC__/js/jquery.SuperSlide.js"></script>-->
+
+<!--大图-->
+<link href="__PUBLIC__/style/litebox.css" type="text/css" rel="stylesheet" />
+
+<!---->
+
+<body>
+<include file = "Common:head" />
+
+<div class="page_center">
+    <div class="page_mid">
+        <include file = "Common:left" />
+        <div class="page_right">
+        
+            <div class="second_page">
+                <h3 class="second_h3">{$cate.name}</h3>
+                {$info.content}
+                <div class="spacer"></div>
+                <h3 class="second_h3" style=" margin-top:20px;">资质证明</h3>
+                <ul class="zz_prove">
+                  <foreach name="info.imgs" item="img">
+                   <li style="margin-left:0;"><a href="{$img}" target="_self" class="litebox" data-litebox-group="group-2"><img src="{$img}" width="245" /></a></li>
+                   </foreach>
+                </ul>
+                
+            </div>
+            
+        </div>
+    </div>
+    <div class="spacer"></div>
+</div>
+
+<include file = "Common:bottom" />
+
+<!--大图-->
+<script src="__PUBLIC__/js/smoothscroll.js" type="text/javascript"></script>
+<script src="__PUBLIC__/js/images-loaded.min.js" type="text/javascript"></script>
+<script src="__PUBLIC__/js/litebox.js" type="text/javascript"></script>
+<script src="__PUBLIC__/js/backbone.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	$('.litebox').liteBox();
+</script>
+<!---->
+</body>
+</html>

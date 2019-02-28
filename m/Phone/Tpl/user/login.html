@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>会员登录-{$Think.config.web_title}</title>
+</head>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+
+<body>
+<div class="center">
+   <include file = "Common:header" />
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>会员登录</span>
+     <span></span>     
+     <!--登录后显示 start-->
+     <if condition="$Think.session.user_id neq ''">
+     <span class="user_icon"><a href="{:U('Member/index')}" title=""><img src="__PUBLIC__/images/user_info.png" /></a></span>
+     </if>
+     <!--end-->
+   </div>      
+   <form action="{:U('user/DoLogin')}" method="post">
+   <input type="hidden" name="referer_url" value="{$referer_url}">
+   <div class="login">
+      <ul>
+         <li>
+            <span class="form_icon"><img src="__PUBLIC__/images/login_icon1.png" /></span>
+            <span class="form_bd"><input type="text" value="请输入账号/手机/邮箱" onclick="if(this.value=='请输入账号/手机/邮箱'){this.value='';}" onblur="if(this.value==''){this.value='请输入账号/手机/邮箱';}" name="user_name" class="form_txt" ></span>
+         </li>
+         <li>
+            <span class="form_icon"><img src="__PUBLIC__/images/login_icon2.png" /></span>
+            <span class="form_bd"><input type="password" name="user_pwd" value="" class="form_txt"></span>
+         </li>
+         <li class="dl_l">
+            <input type="submit" class="dl" id="submit_login" value="登录">
+            <p><a href="{:U('user/back_phone')}">忘记密码</a>&nbsp;&nbsp;|&nbsp;&nbsp; <a href="{:U('user/Register')}">注册</a></p>
+         </li>
+         <li class="spacer"></li>
+      </ul>
+      
+   </div>
+   </form>
+   <include file="Common:bottom"/>
+</div>
+<script type="text/javascript">
+    // verifyURL = '{:U("user/verify",'','')}';
+    //verifyURL = '/code.php';
+    // function change_code(obj){
+    //     $("#code").attr("src",verifyURL+'/'+Math.random());
+    //     return false;
+    // }    
+    $('#submit_login').click(function(){
+       $user_name = $("input[name=user_name]");
+       $pwd = $("input[name=user_pwd]");
+       $verify = $("input[name=verify]");
+       if($.trim($user_name.val())=='' || $.trim($user_name.val())=='请输入账号/手机/邮箱'){alert('用户名不能为空');$user_name.focus();return false;} //验证帐号  
+       if($.trim($user_name.val()).length<3){alert('用户名长度不能少于3位');$user_name.focus();return false;} //验证帐号长度    
+       if($.trim($pwd.val()).length<4){alert('密码不能为空，且长度不能少于4位');$pwd.focus();return false;} //验证密码长度           
+       // if($verify.val()==""){
+       //    alert('请输入验证码！');
+       //    $verify.focus();
+       //    return false;              
+       //  }
+       //  if($verify.val().length!=4){
+       //    alert('请输入正确的验证码！');
+       //    $verify.focus();
+       //    return false;              
+       //  }          
+    })
+</script>
+
+</body>
+</html>

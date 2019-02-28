@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="__PUBLIC__/css/bdmin.css" type="text/css" rel="stylesheet">
+</HEAD>
+<script language="JavaScript">
+function CheckAll(form)  {
+  for (var i=0;i<form.elements.length;i++)    {
+    var e = form.elements[i];
+    if (e.name != 'chkall')       e.checked = form.chkall.checked; 
+   }
+}
+function get_id(id){ return document.getElementById(id); }
+//选择属性
+function shuxing(){
+	if(get_id('open_img').checked){
+		get_id('tbody_img').style.display='';
+	}else{
+		get_id('tbody_img').style.display='none';
+	} 
+	if(get_id('open_url').checked){
+		get_id('tbody_url').style.display='';
+	}else{
+		get_id('tbody_url').style.display='none';
+	}
+	if(get_id('open_description').checked){
+		get_id('tbody_description').style.display='';
+	}else{
+		get_id('tbody_description').style.display='none';
+	}
+}
+//页面加载后执行
+window.onload=function (){
+	//执行判断属性选择
+	shuxing();
+	//去掉文本框缓存
+	var list=document.getElementsByTagName("input");
+	for(var i=0;i<list.length && list[i];i++){
+		if(list[i].type=="text"){ 
+			list[i].autocomplete='off';
+		}
+	}
+}
+</script>
+<BODY>
+<TABLE class="hs12pt" cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD height="22" >当前位置: 信息管理/管理分类</TD>
+  </TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR></TABLE>
+<TABLE class="hs12pt" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="22" background="__PUBLIC__/images/title_bg2.jpg">&nbsp;&nbsp;&nbsp;<span class="baise12ct">{$display_txt}分类</span></td>
+  </tr>
+</table>
+<TABLE class="hs12pt" width="100%" border="1" align="center" cellpadding="2" cellspacing="0" bordercolor="#175CB7" bordercolordark="#E3EFFB">
+<form name="form1" method="post" action="{:U('Category/CateHandle')}">
+<input type="hidden" name="upid" value="{$upid}">
+    <tr>
+      <td width="20%" height="25" align="center" >所属分类:</td>
+      <td width="80%"><select name="pid" class="text" id="pid">
+          <option value="0">-顶级分类-</option>
+<foreach name='cate' item='v'>
+          <option value="{$v.id}"<if condition="($edit_cate['pid'] eq $v['id'])"> selected</if>>{$v.html}{$v.name}</option>
+</foreach>
+      </select></td>
+    </tr>
+    <tr>
+      <td width="20%" height="25" align="center" ><span style=" color:#F00;">*</span>分类名称:</td>
+      <td width="80%">
+<input name="name" type="text" class="text" id="name" value="{$edit_cate.name}" size="35" maxlength="30"><br>
+<input id="open_img" type="checkbox" onClick="shuxing()"<?php if(!empty($edit_cate['img'])){ echo ' checked';}?>> 封面图
+<input id="open_url" type="checkbox" onClick="shuxing()"<?php if(!empty($edit_cate['url'])){ echo ' checked';}?>> 外部链接
+<input id="open_description" type="checkbox" onClick="shuxing()"<?php if(!empty($edit_cate['description'])){ echo ' checked';}?>> 分类描述
+      </td>
+    </tr>
+    <tr>
+      <td height="25" align="center" ><span style=" color:#F00;">*</span>显示顺序:</td>
+      <td><input name="sort" type="text" class="text" id="sort"  value="<?php if(empty($edit_cate['sort'])){ echo '100';}else{ echo $edit_cate['sort'];} ?>" size="8" maxlength="7"></td>
+    </tr>
+<tbody id="tbody_img" style="display:none;">
+    <tr>
+      <td height="25" align="center" >封面图片:</td>
+      <td><input name="img" type="text" class="text" id="img"  value="{$edit_cate.img}" size="40" maxlength="400"></td>
+    </tr>
+</tbody>
+<tbody id="tbody_url" style="display:none;">
+    <tr>
+      <td height="25" align="center" >外部链接:</td>
+      <td><input name="url" type="text" class="text" id="url" value="{$edit_cate.url}" size="60" maxlength="400"></td>
+    </tr>
+</tbody>
+<tbody id="tbody_description" style="display:none;">
+    <tr>
+      <td height="25" align="center" >分类描述:</td>
+      <td><textarea name="description" cols="60" rows="5" class="text" id="description">{$edit_cate.description}</textarea></td>
+    </tr>
+</tbody>
+    <tr>
+      <td height="25" colspan="2" align="center"><input type="submit" value="确认{$display_txt}"></td>
+    </tr>
+    </form>
+  </table>
+<TABLE class="hs12pt" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="22" background="__PUBLIC__/images/title_bg2.jpg">&nbsp;&nbsp;&nbsp;<span class="baise12ct">信息管理</span></td>
+  </tr>
+</table>
+  <TABLE class="hs12pt" width="100%" border=1 align=center cellPadding=2 cellSpacing=0 bordercolor="#175CB7" bordercolordark="#E3EFFB">  
+  <TR>
+    <TD height="25" colspan="2" align=center >选择</TD>
+    <TD width="5%" align="center" >ID</TD>
+    <TD align="center" >分类名称</TD>
+    <TD width="5%" align="center" >级别</TD>
+    <TD width="10%" align="center" >排序</TD>
+	<TD width="8%" align="center" >操作</TD>
+  </TR>
+<form action="javascript:" method="post">
+<foreach name='cate' item='v'>
+  <TR onMouseOver="this.style.background='#d0e2f5';" onMouseOut="this.style.background='#E3EFFB';">
+    <TD height="22" colspan="2" align=center ><input type="checkbox" name="del[]" value="{$v.id}"></TD>
+    <TD align="center">{$v.id}</TD>
+    <TD align="left">{$v.html}{$v.name} <span style="color:#F00;"><?php if(!empty($v['img'])){ echo '[封面图]';}; if(!empty($v['url'])){ echo '[外部链接]';}; if(!empty($v['description'])){ echo '[分类描述]';};?></span></TD>
+    <TD align="center">{$v.level}</TD>
+    <TD align="center"><input name="{$v.id}" type="text" class="text" value="{$v.sort}" size="6" maxlength="5" style="text-align:center;"></TD>
+	<TD align="center"><input type="button" value="修改" onClick="location.href='{:U('Category/Index',array('upid'=>$v['id']))}'"></TD>
+  </TR>
+</foreach>
+  <TR>
+    <TD width="5%" height="22" align=center ><input type=checkbox name=chkall value=on onClick="CheckAll(this.form)"></TD>
+    <TD width="5%" align="center" >全选</TD>
+    <TD colspan="3" align="center" class="hs12">&nbsp;</TD>
+    <TD align="center" class="hs12"><input type="submit" value="更新排序" onClick="this.form.action='{:U('Category/CateSort')}'"></TD>
+    <TD align="center" class="hs12"><input type="submit" value="删除选中" onClick="if (confirm('确定要删除吗？\r一旦删除无法恢复数据')){ this.form.action='{:U('Category/CateDelete')}';}else{ return false;}"></TD>
+    </TR>
+</form>
+  </TABLE>
+</BODY></HTML>

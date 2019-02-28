@@ -1,0 +1,59 @@
+
+
+/*------------------------登录-------------------------*/
+.top{ width:100%; height:110px; background:url(../images/top.jpg) top center no-repeat;}
+.login{ width:990px; margin:0 auto; border:5px solid #f1f1f1; margin-top:50px; margin-bottom:50px; background:url(../images/login_img.jpg) left top no-repeat; height:337px;}
+
+.login .dlk{ width:305px; float:right;}
+.login .dlk .for{ float:right; padding-right:10px;}
+.login h2{ font-weight:normal; font-size:20px; padding:30px 0 10px 20px;}
+.dlk table{ margin:0 auto;}
+.dlk table input{ line-height:37px;}
+.fl{ padding-left:8px;}
+.login_txt{ width:205px; height:37px; border:1px solid #e0e0e0; background:url(../images/login.jpg) -1px -1px no-repeat; color:#808080; padding-left:50px;}
+.login_phone{ width:205px; height:37px; border:1px solid #e0e0e0; background:url(../images/phone.jpg) -1px -1px no-repeat; color:#808080; padding-left:50px;}
+.login_pwd{ width:205px; height:37px; border:1px solid #e0e0e0; background:url(../images/password.jpg) -1px -1px no-repeat; color:#808080; padding-left:50px;}
+.login_message{ width:205px; height:37px; border:1px solid #e0e0e0; background:url(../images/message.jpg) -1px -1px no-repeat; color:#808080; padding-left:50px;}
+.login_code{ width:105px; height:37px; border:1px solid #e0e0e0; background:url(../images/code.jpg) -1px -1px no-repeat; color:#808080; padding-left:50px; float:left;}
+.login_sub{ width:255px; height:40px; color:#ffffff; background:#e44343; border:none; cursor:pointer;}
+
+/*------------------------注册-------------------------*/
+.reg_cen{ width:1000px; margin:0 auto; margin-top:50px; margin-bottom:50px; position:relative;}
+.reg_cen .reg_st{ background:url(../images/reg.png) left top no-repeat; width:250px; height:55px; line-height:55px; color:#ffffff; text-align:center; font-size:18px; position:absolute; left:45px; top:-10px;}
+.hq_yz{ width:100px; height:40px; background:#19bd9b; color:#ffffff; text-align:center; float:left; border:none; margin-left:10px; border-radius:3px; font-size:12px;}
+.yz_voice{ background:#ff6c00;}
+.reg_cen .reg_step{width:1000px; height:55px;}
+.reg_cen .reg_step1{ background:url(../images/step1.jpg) top center no-repeat;}
+.reg_cen .reg_step2{ background:url(../images/step2.jpg) top center no-repeat;}
+.reg_cen .reg_step3{ background:url(../images/step3.jpg) top center no-repeat;}
+.reg_step li{ display:block; float:left; width:330px; line-height:55px; text-align:center; font-size:16px;}
+.reg_step li.white{ color:#ffffff;}
+.reg_cen .reg_bot{ width:890px; border:5px solid #f1f1f1; padding:80px 0 80px 100px;}
+.reg_bd{}
+.reg_bd td font{ padding-left:20px;}
+.reg_bd .prompt{ font-size:12px; color:#F00; padding-left:8px;}
+.reg_bd .reg_xy{ font-size:14px; color:#cb2a30; text-decoration:underline;}
+.yzm_code{ display:block; width:130px; height:40px; float:left; padding-left:10px;}
+.yzm_code1{ display:block; width:130px; float:left; margin-right:10px;}
+.reg_bot .success{ font-size:22px; color:#cb2a30; font-weight:bold;}
+
+.back{ width:990px; margin:0 auto; height:335px; border:5px solid #f1f1f1; margin-top:80px;}
+
+
+
+<!--弹出层-->
+#myHiddenDiv_1 {display:none;}
+.popup_1 { border:1px solid #ccc; background:url(../images/b1-bg06.gif) repeat-x left top #fff;padding-bottom:20px;}
+.popup_1 a:hover{ text-decoration:none; color:#fff;}
+.popup-header_1 {height:24px; padding-top:20px; height:38px; line-height:32px;}
+.popup-header_1 h2 {font-size:14px; width:100%; text-align:center; color:#646464;}
+.popup-body_1 { width:100%; padding-top:8px; }
+.popup-body_1 strong{ display:block; text-align:center; font-size:14px; font-weight:normal; margin-bottom:5px;}
+.con_1{ padding:10px; width:692px; height:247px; margin:0 auto 20px auto; overflow:auto; border:1px solid #a4c9e3;}
+.con_1 p{ text-indent:2em; line-height:24px; margin-bottom:10px; color:#808080;}
+.con_1 b{ text-indent:2em; color:#545454;}
+a.close_1{ display:block;color:#fff;text-decoration:none;font-size:12px;font-weight:700; background:url(../images/b1-bg07.gif) no-repeat; width:156px; height:24px; line-height:24px; text-align:center; margin:0 auto; }
+
+.zd_phone{ text-align:center; border-top:1px solid #dddddd;}
+
+

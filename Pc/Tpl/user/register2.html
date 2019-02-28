@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>会员注册2-{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="{$Think.config.web_description}" />
+<include file = "Common:transparent" />
+</head>
+<link href="__PUBLIC__/style/base.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/register.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<body>
+<include file = "Common:head" />
+
+
+<div class="reg_cen">
+   <div class="reg_step reg_step2">
+      <ul>
+        <li class="white">填写注册信息</li>
+        <li class="white">手机信息验证</li>
+        <li>注册成功</li>
+      </ul>
+  </div>
+   <div class="reg_bot">
+      <table cellpadding="0" cellspacing="0" border="0" width="80%" class="reg_bd">
+         <tr>
+            <td width="25%" height="60" align="right">手机号：</td>
+            <td class="fl">{$phone}</td>
+         </tr>
+         <tr>
+            <td height="60" align="right">验证码：</td>
+            <td class="fl"><input type="text" value="请输验证码" id="code_number" onclick="if(this.defaultValue==this.value){this.value='';}" onblur="if(this.value==''){this.value=this.defaultValue;}"   class="login_code" style=" float:left;" /></td>
+         </tr>
+         <tr>
+            <td height="70">&nbsp;</td>
+            <td class="fl"><input type="submit" value="验证" class="login_sub" id="submit_verify" style=" width:157px;" /></td>
+         </tr>
+         <tr>
+            <td height="70">&nbsp;</td>
+            <td class="fl">没收到短信？请查看是否被手机安全工具拦截，或<a href="{:U('user/ReSendCode',array('phone'=>$phone))}" class="reg_xy"> 重新获取验证码 </a></td>
+         </tr>
+      </table>
+   </div>
+</div>
+ 
+<include file = "Common:bottom" />
+</body>
+</html>
+<script type="text/javascript">
+  //验证表单并跳转
+  $("#submit_verify").click(function(){
+      if($.trim($("#code_number").val()) ==''){
+        alert('请输入验证码');return false;
+      }
+      location.href = '{:U("user/DoRegisterTwo")}'+"?user_id="+{$user_id}+"&code_number="+$("#code_number").val();
+  })
+</script>

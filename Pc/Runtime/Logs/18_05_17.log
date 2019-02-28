@@ -1,0 +1,1392 @@
+[ 2018-05-17T09:10:53+08:00 ] 127.0.0.1 /index.php/Lottery
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.046003s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.009001s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.012000s ]
+SQL: SELECT * FROM `tp_lt` ORDER BY id asc  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_record` ORDER BY create_time DESC,id DESC  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( `id` IN ('170','170','170','190','190','190','193','193','153','153','180','103','103','102','102','101','101','103','102','101','159','159','159','154','154','154','131','131','131','189','189','189','195','195','195','153','193','137','137','137','184','138','184','184','138','138','148','148','148','150','150','150','180','180','151','151','151','110','110','110','215','215','215','115','115','115','136','136','136','135','135','135','139','139','139','212','212','212') )  [ RunTime:0.007001s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 71 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 166 行.
+NOTIC: [8] Undefined variable: session F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 227 行.
+NOTIC: [8] Undefined variable: user_info F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 227 行.
+NOTIC: [8] Undefined variable: user_info F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 228 行.
+NOTIC: [8] Undefined variable: user_info F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 228 行.
+NOTIC: [8] Undefined variable: address F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 233 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.015001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2018-05-17T09:10:57+08:00 ] 127.0.0.1 /index.php/user/register.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.002000s ]
+NOTIC: [8] Undefined index: pid F:\www\p2p222notminsheng\Pc\Lib\Action\userAction.class.php 第 37 行.
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: a F:\www\p2p222notminsheng\Pc\Runtime\Cache\5a70ebf32799125adeff8507f39080e5.php 第 87 行.
+SQL: SHOW COLUMNS FROM `tp_recharge_log` [ RunTime:0.112006s ]
+SQL: SELECT count(*) as g,`user_id` FROM `tp_recharge_log` GROUP BY orderID ORDER BY g desc LIMIT 1   [ RunTime:0.112006s ]
+NOTIC: [2] fclose() expects exactly 1 parameter, 0 given F:\www\p2p222notminsheng\Pc\Common\Common.php 第 412 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\Pc\Runtime\Cache\5a70ebf32799125adeff8507f39080e5.php 第 160 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\Pc\Runtime\Cache\5a70ebf32799125adeff8507f39080e5.php 第 203 行.
+SQL: SHOW COLUMNS FROM `tp_info` [ RunTime:0.013000s ]
+SQL: SELECT * FROM `tp_info` WHERE (  (`pid` BETWEEN '31' AND '33' ) ) ORDER BY click desc,id desc LIMIT 5   [ RunTime:0.025002s ]
+NOTIC: [8] Undefined offset: 1 F:\www\p2p222notminsheng\Pc\Runtime\Cache\5a70ebf32799125adeff8507f39080e5.php 第 631 行.
+NOTIC: [8] Undefined index: is_change F:\www\p2p222notminsheng\Pc\Runtime\Cache\5a70ebf32799125adeff8507f39080e5.php 第 632 行.
+SQL: SHOW COLUMNS FROM `tp_ad` [ RunTime:0.004000s ]
+SQL: SELECT * FROM `tp_ad` WHERE ( class_name='友情链接' ) ORDER BY ad_order DESC,id DESC  [ RunTime:0.001000s ]
+INFO: ParseTemplate Behavior ::run [ RunTime:0.361021s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.361021s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:10:57+08:00 ] 127.0.0.1 /index.php/user/verify
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.002000s ]
+
+[ 2018-05-17T09:11:01+08:00 ] 127.0.0.1 /index.php/user/Login.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_db` [ RunTime:0.001000s ]
+ERR: 1146:Table 'tp.tp_web_user_db' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `tp_web_user_db`
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: a F:\www\p2p222notminsheng\Pc\Runtime\Cache\979777b4ee8b29d81a944311e11aa2bc.php 第 45 行.
+SQL: SHOW COLUMNS FROM `tp_recharge_log` [ RunTime:0.002000s ]
+SQL: SELECT count(*) as g,`user_id` FROM `tp_recharge_log` GROUP BY orderID ORDER BY g desc LIMIT 1   [ RunTime:0.085005s ]
+NOTIC: [2] fclose() expects exactly 1 parameter, 0 given F:\www\p2p222notminsheng\Pc\Common\Common.php 第 412 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\Pc\Runtime\Cache\979777b4ee8b29d81a944311e11aa2bc.php 第 118 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\Pc\Runtime\Cache\979777b4ee8b29d81a944311e11aa2bc.php 第 161 行.
+SQL: SHOW COLUMNS FROM `tp_info` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_info` WHERE (  (`pid` BETWEEN '31' AND '33' ) ) ORDER BY click desc,id desc LIMIT 5   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined offset: 1 F:\www\p2p222notminsheng\Pc\Runtime\Cache\979777b4ee8b29d81a944311e11aa2bc.php 第 237 行.
+NOTIC: [8] Undefined index: is_change F:\www\p2p222notminsheng\Pc\Runtime\Cache\979777b4ee8b29d81a944311e11aa2bc.php 第 238 行.
+SQL: SHOW COLUMNS FROM `tp_ad` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_ad` WHERE ( class_name='友情链接' ) ORDER BY ad_order DESC,id DESC  [ RunTime:0.000000s ]
+INFO: ParseTemplate Behavior ::run [ RunTime:0.128007s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.128007s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.000000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001001s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003001s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:11:02+08:00 ] 127.0.0.1 /index.php/user/verify
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:11:47+08:00 ] 127.0.0.1 /index.php/user/DoLogin.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( (`user_name` = 'h472591847') OR (`email` = 'h472591847') OR (`phone` = 'h472591847') ) AND ( `user_pwd` = 'e10adc3949ba59abbe56e057f20f883e' ) AND ( `is_delete` = 0 ) LIMIT 1   [ RunTime:0.133007s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: a F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 28 行.
+SQL: SHOW COLUMNS FROM `tp_recharge_log` [ RunTime:0.002001s ]
+SQL: SELECT count(*) as g,`user_id` FROM `tp_recharge_log` GROUP BY orderID ORDER BY g desc LIMIT 1   [ RunTime:0.085004s ]
+NOTIC: [2] fclose() expects exactly 1 parameter, 0 given F:\www\p2p222notminsheng\Pc\Common\Common.php 第 412 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 101 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 144 行.
+SQL: SHOW COLUMNS FROM `tp_info` [ RunTime:0.001001s ]
+SQL: SELECT * FROM `tp_info` WHERE (  (`pid` BETWEEN '31' AND '33' ) ) ORDER BY click desc,id desc LIMIT 5   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined offset: 1 F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 194 行.
+NOTIC: [8] Undefined index: is_change F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 195 行.
+SQL: SHOW COLUMNS FROM `tp_ad` [ RunTime:0.002000s ]
+SQL: SELECT * FROM `tp_ad` WHERE ( class_name='友情链接' ) ORDER BY ad_order DESC,id DESC  [ RunTime:0.000000s ]
+INFO: ParseTemplate Behavior ::run [ RunTime:0.111007s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.112007s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.000000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:11:58+08:00 ] 127.0.0.1 /index.php/user/DoLogin.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( (`user_name` = 'h472591847') OR (`email` = 'h472591847') OR (`phone` = 'h472591847') ) AND ( `user_pwd` = '4d6a4a94ab8acec338070dcdd673643c' ) AND ( `is_delete` = 0 ) LIMIT 1   [ RunTime:0.011001s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: a F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 28 行.
+SQL: SHOW COLUMNS FROM `tp_recharge_log` [ RunTime:0.001001s ]
+SQL: SELECT count(*) as g,`user_id` FROM `tp_recharge_log` GROUP BY orderID ORDER BY g desc LIMIT 1   [ RunTime:0.085004s ]
+NOTIC: [2] fclose() expects exactly 1 parameter, 0 given F:\www\p2p222notminsheng\Pc\Common\Common.php 第 412 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 101 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 144 行.
+SQL: SHOW COLUMNS FROM `tp_info` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_info` WHERE (  (`pid` BETWEEN '31' AND '33' ) ) ORDER BY click desc,id desc LIMIT 5   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined offset: 1 F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 194 行.
+NOTIC: [8] Undefined index: is_change F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 195 行.
+SQL: SHOW COLUMNS FROM `tp_ad` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_ad` WHERE ( class_name='友情链接' ) ORDER BY ad_order DESC,id DESC  [ RunTime:0.001000s ]
+INFO: ParseTemplate Behavior ::run [ RunTime:0.103006s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.103006s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.000000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:12:07+08:00 ] 127.0.0.1 /index.php/user/DoLogin.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( (`user_name` = 'h472591847') OR (`email` = 'h472591847') OR (`phone` = 'h472591847') ) AND ( `user_pwd` = '949183632ae51e036240fc194491f9e2' ) AND ( `is_delete` = 0 ) LIMIT 1   [ RunTime:0.011001s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: a F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 28 行.
+SQL: SHOW COLUMNS FROM `tp_recharge_log` [ RunTime:0.001000s ]
+SQL: SELECT count(*) as g,`user_id` FROM `tp_recharge_log` GROUP BY orderID ORDER BY g desc LIMIT 1   [ RunTime:0.082005s ]
+NOTIC: [2] fclose() expects exactly 1 parameter, 0 given F:\www\p2p222notminsheng\Pc\Common\Common.php 第 412 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 101 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 144 行.
+SQL: SHOW COLUMNS FROM `tp_info` [ RunTime:0.002000s ]
+SQL: SELECT * FROM `tp_info` WHERE (  (`pid` BETWEEN '31' AND '33' ) ) ORDER BY click desc,id desc LIMIT 5   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined offset: 1 F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 194 行.
+NOTIC: [8] Undefined index: is_change F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 195 行.
+SQL: SHOW COLUMNS FROM `tp_ad` [ RunTime:0.002000s ]
+SQL: SELECT * FROM `tp_ad` WHERE ( class_name='友情链接' ) ORDER BY ad_order DESC,id DESC  [ RunTime:0.000000s ]
+INFO: ParseTemplate Behavior ::run [ RunTime:0.101005s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.101005s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.000000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001001s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003001s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:12:18+08:00 ] 127.0.0.1 /index.php/user/DoLogin.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.002000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( (`user_name` = 'h472591847') OR (`email` = 'h472591847') OR (`phone` = 'h472591847') ) AND ( `user_pwd` = '37e6085cc86e2f38d6651156c1707972' ) AND ( `is_delete` = 0 ) LIMIT 1   [ RunTime:0.011001s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: a F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 28 行.
+SQL: SHOW COLUMNS FROM `tp_recharge_log` [ RunTime:0.002000s ]
+SQL: SELECT count(*) as g,`user_id` FROM `tp_recharge_log` GROUP BY orderID ORDER BY g desc LIMIT 1   [ RunTime:0.085005s ]
+NOTIC: [2] fclose() expects exactly 1 parameter, 0 given F:\www\p2p222notminsheng\Pc\Common\Common.php 第 412 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 101 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 144 行.
+SQL: SHOW COLUMNS FROM `tp_info` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_info` WHERE (  (`pid` BETWEEN '31' AND '33' ) ) ORDER BY click desc,id desc LIMIT 5   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined offset: 1 F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 194 行.
+NOTIC: [8] Undefined index: is_change F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 195 行.
+SQL: SHOW COLUMNS FROM `tp_ad` [ RunTime:0.002000s ]
+SQL: SELECT * FROM `tp_ad` WHERE ( class_name='友情链接' ) ORDER BY ad_order DESC,id DESC  [ RunTime:0.000000s ]
+INFO: ParseTemplate Behavior ::run [ RunTime:0.102006s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.102006s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.000000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:12:41+08:00 ] 127.0.0.1 /index.php/user/DoLogin.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( (`user_name` = '123456') OR (`email` = '123456') OR (`phone` = '123456') ) AND ( `user_pwd` = 'e10adc3949ba59abbe56e057f20f883e' ) AND ( `is_delete` = 0 ) LIMIT 1   [ RunTime:0.011001s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: a F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 28 行.
+SQL: SHOW COLUMNS FROM `tp_recharge_log` [ RunTime:0.002000s ]
+SQL: SELECT count(*) as g,`user_id` FROM `tp_recharge_log` GROUP BY orderID ORDER BY g desc LIMIT 1   [ RunTime:0.084005s ]
+NOTIC: [2] fclose() expects exactly 1 parameter, 0 given F:\www\p2p222notminsheng\Pc\Common\Common.php 第 412 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 101 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 144 行.
+SQL: SHOW COLUMNS FROM `tp_info` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_info` WHERE (  (`pid` BETWEEN '31' AND '33' ) ) ORDER BY click desc,id desc LIMIT 5   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined offset: 1 F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 194 行.
+NOTIC: [8] Undefined index: is_change F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 195 行.
+SQL: SHOW COLUMNS FROM `tp_ad` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_ad` WHERE ( class_name='友情链接' ) ORDER BY ad_order DESC,id DESC  [ RunTime:0.001001s ]
+INFO: ParseTemplate Behavior ::run [ RunTime:0.103006s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.103006s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:13:05+08:00 ] 127.0.0.1 /index.php/user/DoLogin.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( (`user_name` = '18633451728') OR (`email` = '18633451728') OR (`phone` = '18633451728') ) AND ( `user_pwd` = 'e10adc3949ba59abbe56e057f20f883e' ) AND ( `is_delete` = 0 ) LIMIT 1   [ RunTime:0.011000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: a F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 28 行.
+SQL: SHOW COLUMNS FROM `tp_recharge_log` [ RunTime:0.002000s ]
+SQL: SELECT count(*) as g,`user_id` FROM `tp_recharge_log` GROUP BY orderID ORDER BY g desc LIMIT 1   [ RunTime:0.082005s ]
+NOTIC: [2] fclose() expects exactly 1 parameter, 0 given F:\www\p2p222notminsheng\Pc\Common\Common.php 第 412 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 101 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 144 行.
+SQL: SHOW COLUMNS FROM `tp_info` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_info` WHERE (  (`pid` BETWEEN '31' AND '33' ) ) ORDER BY click desc,id desc LIMIT 5   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined offset: 1 F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 194 行.
+NOTIC: [8] Undefined index: is_change F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 195 行.
+SQL: SHOW COLUMNS FROM `tp_ad` [ RunTime:0.002000s ]
+SQL: SELECT * FROM `tp_ad` WHERE ( class_name='友情链接' ) ORDER BY ad_order DESC,id DESC  [ RunTime:0.000000s ]
+INFO: ParseTemplate Behavior ::run [ RunTime:0.101006s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.101006s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2018-05-17T09:13:13+08:00 ] 127.0.0.1 /index.php/user/DoLogin.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( (`user_name` = '18633451728') OR (`email` = '18633451728') OR (`phone` = '18633451728') ) AND ( `user_pwd` = '4d6a4a94ab8acec338070dcdd673643c' ) AND ( `is_delete` = 0 ) LIMIT 1   [ RunTime:0.012000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: a F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 28 行.
+SQL: SHOW COLUMNS FROM `tp_recharge_log` [ RunTime:0.002000s ]
+SQL: SELECT count(*) as g,`user_id` FROM `tp_recharge_log` GROUP BY orderID ORDER BY g desc LIMIT 1   [ RunTime:0.084005s ]
+NOTIC: [2] fclose() expects exactly 1 parameter, 0 given F:\www\p2p222notminsheng\Pc\Common\Common.php 第 412 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 101 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 144 行.
+SQL: SHOW COLUMNS FROM `tp_info` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_info` WHERE (  (`pid` BETWEEN '31' AND '33' ) ) ORDER BY click desc,id desc LIMIT 5   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined offset: 1 F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 194 行.
+NOTIC: [8] Undefined index: is_change F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 195 行.
+SQL: SHOW COLUMNS FROM `tp_ad` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_ad` WHERE ( class_name='友情链接' ) ORDER BY ad_order DESC,id DESC  [ RunTime:0.000000s ]
+INFO: ParseTemplate Behavior ::run [ RunTime:0.103006s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.103006s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:13:18+08:00 ] 127.0.0.1 /index.php/user/DoLogin.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( (`user_name` = '18633451728') OR (`email` = '18633451728') OR (`phone` = '18633451728') ) AND ( `user_pwd` = 'e10adc3949ba59abbe56e057f20f883e' ) AND ( `is_delete` = 0 ) LIMIT 1   [ RunTime:0.011000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: a F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 28 行.
+SQL: SHOW COLUMNS FROM `tp_recharge_log` [ RunTime:0.001000s ]
+SQL: SELECT count(*) as g,`user_id` FROM `tp_recharge_log` GROUP BY orderID ORDER BY g desc LIMIT 1   [ RunTime:0.082005s ]
+NOTIC: [2] fclose() expects exactly 1 parameter, 0 given F:\www\p2p222notminsheng\Pc\Common\Common.php 第 412 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 101 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 144 行.
+SQL: SHOW COLUMNS FROM `tp_info` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_info` WHERE (  (`pid` BETWEEN '31' AND '33' ) ) ORDER BY click desc,id desc LIMIT 5   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined offset: 1 F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 194 行.
+NOTIC: [8] Undefined index: is_change F:\www\p2p222notminsheng\Pc\Runtime\Cache\21192ab38678b761fe1252e5d7d71b1b.php 第 195 行.
+SQL: SHOW COLUMNS FROM `tp_ad` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_ad` WHERE ( class_name='友情链接' ) ORDER BY ad_order DESC,id DESC  [ RunTime:0.000000s ]
+INFO: ParseTemplate Behavior ::run [ RunTime:0.098006s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.098006s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.000000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:14:35+08:00 ] 127.0.0.1 /index.php/user/DoLogin.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:14:57+08:00 ] 127.0.0.1 /index.php/user/DoLogin.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( (`user_name` = '18633451728') OR (`email` = '18633451728') OR (`phone` = '18633451728') ) AND ( `user_pwd` = 'e10adc3949ba59abbe56e057f20f883e' ) AND ( `is_delete` = 0 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: UPDATE `tp_web_user` SET `login_time`=1526519696,`login_ip`='127.0.0.1' WHERE ( id=101 ) [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: Prompt F:\www\p2p222notminsheng\Pc\Lib\Action\userAction.class.php 第 357 行.
+
+[ 2018-05-17T09:14:57+08:00 ] 127.0.0.1 /index.php/Lottery
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.002001s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_lt` ORDER BY id asc  [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_record` ORDER BY create_time DESC,id DESC  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( `id` IN ('170','170','170','190','190','190','193','193','153','153','180','103','103','102','102','101','101','103','102','101','159','159','159','154','154','154','131','131','131','189','189','189','195','195','195','153','193','137','137','137','184','138','184','184','138','138','148','148','148','150','150','150','180','180','151','151','151','110','110','110','215','215','215','115','115','115','136','136','136','135','135','135','139','139','139','212','212','212') )  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: session F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 227 行.
+NOTIC: [8] Undefined variable: address F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 233 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.009000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009000s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001001s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003001s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:15:16+08:00 ] 127.0.0.1 /index.php/Lottery/DoLottery.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.091005s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.019001s ]
+
+[ 2018-05-17T09:15:18+08:00 ] 127.0.0.1 /index.php/Lottery/DoLottery.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001001s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001001s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:17:46+08:00 ] 127.0.0.1 /index.php/Lottery/DoLottery.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.001001s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:17:49+08:00 ] 127.0.0.1 /index.php/Lottery/DoLottery.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:19:05+08:00 ] 127.0.0.1 /index.php/Lottery/DoLottery.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:19:19+08:00 ] 127.0.0.1 /index.php/Lottery/DoLottery.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:22:27+08:00 ] 127.0.0.1 /index.php/Lottery
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.002000s ]
+SQL: SELECT * FROM `tp_lt` ORDER BY id asc  [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_record` ORDER BY create_time DESC,id DESC  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( `id` IN ('170','170','170','190','190','190','193','193','153','153','180','103','103','102','102','101','101','103','102','101','159','159','159','154','154','154','131','131','131','189','189','189','195','195','195','153','193','137','137','137','184','138','184','184','138','138','148','148','148','150','150','150','180','180','151','151','151','110','110','110','215','215','215','115','115','115','136','136','136','135','135','135','139','139','139','212','212','212') )  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: session F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 227 行.
+NOTIC: [8] Undefined variable: address F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 233 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.010001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.000000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2018-05-17T09:22:28+08:00 ] 127.0.0.1 /index.php/Lottery/DoLottery.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2018-05-17T09:22:31+08:00 ] 127.0.0.1 /index.php/Lottery
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_lt` ORDER BY id asc  [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_record` ORDER BY create_time DESC,id DESC  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( `id` IN ('170','170','170','190','190','190','193','193','153','153','180','103','103','102','102','101','101','103','102','101','159','159','159','154','154','154','131','131','131','189','189','189','195','195','195','153','193','137','137','137','184','138','184','184','138','138','148','148','148','150','150','150','180','180','151','151','151','110','110','110','215','215','215','115','115','115','136','136','136','135','135','135','139','139','139','212','212','212') )  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: session F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 227 行.
+NOTIC: [8] Undefined variable: address F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 233 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.010001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.000000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:22:33+08:00 ] 127.0.0.1 /index.php/Lottery/DoLottery.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.002001s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2018-05-17T09:23:07+08:00 ] 127.0.0.1 /index.php/Lottery/DoLottery.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.001001s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2018-05-17T09:23:18+08:00 ] 127.0.0.1 /index.php/Lottery/DoLottery.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:23:38+08:00 ] 127.0.0.1 /index.php/Lottery/index
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_lt` ORDER BY id asc  [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_record` ORDER BY create_time DESC,id DESC  [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( `id` IN ('170','170','170','190','190','190','193','193','153','153','180','103','103','102','102','101','101','103','102','101','159','159','159','154','154','154','131','131','131','189','189','189','195','195','195','153','193','137','137','137','184','138','184','184','138','138','148','148','148','150','150','150','180','180','151','151','151','110','110','110','215','215','215','115','115','115','136','136','136','135','135','135','139','139','139','212','212','212') )  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: session F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 227 行.
+NOTIC: [8] Undefined variable: address F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 233 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.009001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:23:41+08:00 ] 127.0.0.1 /index.php/Lottery/DoLottery.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001001s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2018-05-17T09:24:02+08:00 ] 127.0.0.1 /index.php/Lottery/index
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_lt` ORDER BY id asc  [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_record` ORDER BY create_time DESC,id DESC  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( `id` IN ('170','170','170','190','190','190','193','193','153','153','180','103','103','102','102','101','101','103','102','101','159','159','159','154','154','154','131','131','131','189','189','189','195','195','195','153','193','137','137','137','184','138','184','184','138','138','148','148','148','150','150','150','180','180','151','151','151','110','110','110','215','215','215','115','115','115','136','136','136','135','135','135','139','139','139','212','212','212') )  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: session F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 227 行.
+NOTIC: [8] Undefined variable: address F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 233 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.009001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2018-05-17T09:24:04+08:00 ] 127.0.0.1 /index.php/Lottery/DoLottery.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2018-05-17T09:24:13+08:00 ] 127.0.0.1 /index.php/Lottery/index.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_lt` ORDER BY id asc  [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_record` ORDER BY create_time DESC,id DESC  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( `id` IN ('170','170','170','190','190','190','193','193','153','153','180','103','103','102','102','101','101','103','102','101','159','159','159','154','154','154','131','131','131','189','189','189','195','195','195','153','193','137','137','137','184','138','184','184','138','138','148','148','148','150','150','150','180','180','151','151','151','110','110','110','215','215','215','115','115','115','136','136','136','135','135','135','139','139','139','212','212','212') )  [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: session F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 227 行.
+NOTIC: [8] Undefined variable: address F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 233 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.009000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009000s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2018-05-17T09:24:24+08:00 ] 127.0.0.1 /index.php/Lottery/DoLottery.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.002001s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_invested` WHERE ( `lid` = 19 ) AND ( `uid` = '101' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.032001s ]
+
+[ 2018-05-17T09:24:30+08:00 ] 127.0.0.1 /index.php/Deal/DealContent/lid/19.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001001s ]
+SQL: SHOW COLUMNS FROM `tp_loan` [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_loan` WHERE ( id=19 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT SUM(amount) FROM `tp_invested` WHERE ( lid=19 ) LIMIT 1   [ RunTime:0.011000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.001001s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_web_user_rate` WHERE ( `uid` = '101' ) AND ( `use_status` = 0 ) LIMIT 1   [ RunTime:0.002000s ]
+SQL: SELECT * FROM `tp_web_user_rate` WHERE ( `uid` = '101' ) AND ( `use_status` = 0 ) ORDER BY deadline_time ASC,id ASC LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_info` [ RunTime:0.002000s ]
+SQL: SELECT * FROM `tp_info` WHERE ( pid=23 ) ORDER BY sort Desc,id DESC LIMIT 5   [ RunTime:0.271015s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\Pc\Runtime\Cache\7acaa772c20a94bb04c6f66ab5c640f8.php 第 83 行.
+NOTIC: [8] Undefined variable: a F:\www\p2p222notminsheng\Pc\Runtime\Cache\7acaa772c20a94bb04c6f66ab5c640f8.php 第 146 行.
+SQL: SHOW COLUMNS FROM `tp_recharge_log` [ RunTime:0.002000s ]
+SQL: SELECT count(*) as g,`user_id` FROM `tp_recharge_log` GROUP BY orderID ORDER BY g desc LIMIT 1   [ RunTime:0.083005s ]
+NOTIC: [2] fclose() expects exactly 1 parameter, 0 given F:\www\p2p222notminsheng\Pc\Common\Common.php 第 412 行.
+SQL: SHOW COLUMNS FROM `tp_user_action_record` [ RunTime:0.001000s ]
+ERR: 1146:Table 'tp.tp_user_action_record' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `tp_user_action_record`
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_user_action_record` WHERE ( `uid` = '101' ) AND ( `is_read` = 0 ) LIMIT 1   [ RunTime:0.001000s ]
+ERR: 1146:Table 'tp.tp_user_action_record' doesn't exist
+ [ SQL语句 ] : SELECT COUNT(*) AS tp_count FROM `tp_user_action_record` WHERE ( `uid` = '101' ) AND ( `is_read` = 0 ) LIMIT 1  
+SQL: SHOW COLUMNS FROM `tp_user_money_record` [ RunTime:0.000000s ]
+ERR: 1146:Table 'tp.tp_user_money_record' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `tp_user_money_record`
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_user_money_record` WHERE ( `uid` = '101' ) AND ( `is_read` = 0 ) LIMIT 1   [ RunTime:0.000000s ]
+ERR: 1146:Table 'tp.tp_user_money_record' doesn't exist
+ [ SQL语句 ] : SELECT COUNT(*) AS tp_count FROM `tp_user_money_record` WHERE ( `uid` = '101' ) AND ( `is_read` = 0 ) LIMIT 1  
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\Pc\Runtime\Cache\7acaa772c20a94bb04c6f66ab5c640f8.php 第 317 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\Pc\Runtime\Cache\7acaa772c20a94bb04c6f66ab5c640f8.php 第 370 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\Pc\Runtime\Cache\7acaa772c20a94bb04c6f66ab5c640f8.php 第 371 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\Pc\Runtime\Cache\7acaa772c20a94bb04c6f66ab5c640f8.php 第 372 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\Pc\Runtime\Cache\7acaa772c20a94bb04c6f66ab5c640f8.php 第 373 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\Pc\Runtime\Cache\7acaa772c20a94bb04c6f66ab5c640f8.php 第 578 行.
+NOTIC: [8] Undefined variable: max_loan_money F:\www\p2p222notminsheng\Pc\Runtime\Cache\7acaa772c20a94bb04c6f66ab5c640f8.php 第 637 行.
+SQL: SELECT * FROM `tp_info` WHERE (  (`pid` BETWEEN '31' AND '33' ) ) ORDER BY click desc,id desc LIMIT 5   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined offset: 1 F:\www\p2p222notminsheng\Pc\Runtime\Cache\7acaa772c20a94bb04c6f66ab5c640f8.php 第 813 行.
+NOTIC: [8] Undefined index: is_change F:\www\p2p222notminsheng\Pc\Runtime\Cache\7acaa772c20a94bb04c6f66ab5c640f8.php 第 814 行.
+SQL: SHOW COLUMNS FROM `tp_ad` [ RunTime:0.002000s ]
+SQL: SELECT * FROM `tp_ad` WHERE ( class_name='友情链接' ) ORDER BY ad_order DESC,id DESC  [ RunTime:0.001000s ]
+INFO: ParseTemplate Behavior ::run [ RunTime:0.119007s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.119007s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:24:31+08:00 ] 127.0.0.1 /index.php/Member/verify
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:24:31+08:00 ] 127.0.0.1 /index.php/Index/index.html?get_ajax_time=1
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+
+[ 2018-05-17T09:25:31+08:00 ] 127.0.0.1 /index.php/Deal/DealContent/lid/19.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_loan` [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_loan` WHERE ( id=19 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT SUM(amount) FROM `tp_invested` WHERE ( lid=19 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_web_user_rate` WHERE ( `uid` = '101' ) AND ( `use_status` = 0 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user_rate` WHERE ( `uid` = '101' ) AND ( `use_status` = 0 ) ORDER BY deadline_time ASC,id ASC LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_info` [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_info` WHERE ( pid=23 ) ORDER BY sort Desc,id DESC LIMIT 5   [ RunTime:0.006001s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\Pc\Runtime\Cache\7acaa772c20a94bb04c6f66ab5c640f8.php 第 83 行.
+NOTIC: [8] Undefined variable: a F:\www\p2p222notminsheng\Pc\Runtime\Cache\7acaa772c20a94bb04c6f66ab5c640f8.php 第 146 行.
+SQL: SHOW COLUMNS FROM `tp_recharge_log` [ RunTime:0.001000s ]
+SQL: SELECT count(*) as g,`user_id` FROM `tp_recharge_log` GROUP BY orderID ORDER BY g desc LIMIT 1   [ RunTime:0.085005s ]
+NOTIC: [2] fclose() expects exactly 1 parameter, 0 given F:\www\p2p222notminsheng\Pc\Common\Common.php 第 412 行.
+SQL: SHOW COLUMNS FROM `tp_user_action_record` [ RunTime:0.001000s ]
+ERR: 1146:Table 'tp.tp_user_action_record' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `tp_user_action_record`
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_user_action_record` WHERE ( `uid` = '101' ) AND ( `is_read` = 0 ) LIMIT 1   [ RunTime:0.001000s ]
+ERR: 1146:Table 'tp.tp_user_action_record' doesn't exist
+ [ SQL语句 ] : SELECT COUNT(*) AS tp_count FROM `tp_user_action_record` WHERE ( `uid` = '101' ) AND ( `is_read` = 0 ) LIMIT 1  
+SQL: SHOW COLUMNS FROM `tp_user_money_record` [ RunTime:0.001000s ]
+ERR: 1146:Table 'tp.tp_user_money_record' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `tp_user_money_record`
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_user_money_record` WHERE ( `uid` = '101' ) AND ( `is_read` = 0 ) LIMIT 1   [ RunTime:0.001000s ]
+ERR: 1146:Table 'tp.tp_user_money_record' doesn't exist
+ [ SQL语句 ] : SELECT COUNT(*) AS tp_count FROM `tp_user_money_record` WHERE ( `uid` = '101' ) AND ( `is_read` = 0 ) LIMIT 1  
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\Pc\Runtime\Cache\7acaa772c20a94bb04c6f66ab5c640f8.php 第 317 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\Pc\Runtime\Cache\7acaa772c20a94bb04c6f66ab5c640f8.php 第 370 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\Pc\Runtime\Cache\7acaa772c20a94bb04c6f66ab5c640f8.php 第 371 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\Pc\Runtime\Cache\7acaa772c20a94bb04c6f66ab5c640f8.php 第 372 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\Pc\Runtime\Cache\7acaa772c20a94bb04c6f66ab5c640f8.php 第 373 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\Pc\Runtime\Cache\7acaa772c20a94bb04c6f66ab5c640f8.php 第 578 行.
+NOTIC: [8] Undefined variable: max_loan_money F:\www\p2p222notminsheng\Pc\Runtime\Cache\7acaa772c20a94bb04c6f66ab5c640f8.php 第 637 行.
+SQL: SELECT * FROM `tp_info` WHERE (  (`pid` BETWEEN '31' AND '33' ) ) ORDER BY click desc,id desc LIMIT 5   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined offset: 1 F:\www\p2p222notminsheng\Pc\Runtime\Cache\7acaa772c20a94bb04c6f66ab5c640f8.php 第 813 行.
+NOTIC: [8] Undefined index: is_change F:\www\p2p222notminsheng\Pc\Runtime\Cache\7acaa772c20a94bb04c6f66ab5c640f8.php 第 814 行.
+SQL: SHOW COLUMNS FROM `tp_ad` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_ad` WHERE ( class_name='友情链接' ) ORDER BY ad_order DESC,id DESC  [ RunTime:0.001001s ]
+INFO: ParseTemplate Behavior ::run [ RunTime:0.122007s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.122007s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:25:31+08:00 ] 127.0.0.1 /index.php/Member/verify
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:25:31+08:00 ] 127.0.0.1 /index.php/Index/index.html?get_ajax_time=1
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+
+[ 2018-05-17T09:25:36+08:00 ] 127.0.0.1 /index.php/Lottery/DoLottery.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_invested` WHERE ( `lid` = 19 ) AND ( `uid` = '101' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( uid=101 ) LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2018-05-17T09:25:38+08:00 ] 127.0.0.1 /index.php/Lottery/DoLottery.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_invested` WHERE ( `lid` = 19 ) AND ( `uid` = '101' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( uid=101 ) LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:25:48+08:00 ] 127.0.0.1 /index.php/Lottery/index.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_lt` ORDER BY id asc  [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_record` ORDER BY create_time DESC,id DESC  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( `id` IN ('170','170','170','190','190','190','193','193','153','153','180','103','103','102','102','101','101','103','102','101','159','159','159','154','154','154','131','131','131','189','189','189','195','195','195','153','193','137','137','137','184','138','184','184','138','138','148','148','148','150','150','150','180','180','151','151','151','110','110','110','215','215','215','115','115','115','136','136','136','135','135','135','139','139','139','212','212','212') )  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: session F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 227 行.
+NOTIC: [8] Undefined variable: address F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 233 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.010001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:25:50+08:00 ] 127.0.0.1 /index.php/Lottery/DoLottery.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001001s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_invested` WHERE ( `lid` = 19 ) AND ( `uid` = '101' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( `ip` = '127.0.0.1' ) AND ( (`create_time` > 1526400000) AND (`create_time` < 1526572800)  ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_lt` ORDER BY id asc  [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=1 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=2 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=3 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=4 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=5 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=6 ) LIMIT 1   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined variable: count_v F:\www\p2p222notminsheng\Pc\Lib\Action\LotteryAction.class.php 第 196 行.
+SQL: INSERT INTO `tp_record` (`real_name`,`uid`,`ip`,`lt_prize`,`create_time`) VALUES ('李营','101','127.0.0.1',6,1526520350) [ RunTime:0.000000s ]
+SQL: INSERT INTO `tp_web_user_rate` (`add_rate`,`use_status`,`uid`,`effect_deadline`,`deadline_time`,`create_time`) VALUES (1,0,'101',30,1529112350,1526520350) [ RunTime:0.000000s ]
+
+[ 2018-05-17T09:25:54+08:00 ] 127.0.0.1 /index.php/Lottery/DoLottery.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_invested` WHERE ( `lid` = 19 ) AND ( `uid` = '101' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( `ip` = '127.0.0.1' ) AND ( (`create_time` > 1526400000) AND (`create_time` < 1526572800)  ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_lt` ORDER BY id asc  [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=1 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=2 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=3 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=4 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=5 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=6 ) LIMIT 1   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: count_v F:\www\p2p222notminsheng\Pc\Lib\Action\LotteryAction.class.php 第 196 行.
+SQL: INSERT INTO `tp_record` (`real_name`,`uid`,`ip`,`lt_prize`,`create_time`) VALUES ('李营','101','127.0.0.1',6,1526520354) [ RunTime:0.000000s ]
+SQL: INSERT INTO `tp_web_user_rate` (`add_rate`,`use_status`,`uid`,`effect_deadline`,`deadline_time`,`create_time`) VALUES (1,0,'101',30,1529112354,1526520354) [ RunTime:0.000000s ]
+
+[ 2018-05-17T09:25:59+08:00 ] 127.0.0.1 /index.php/Lottery/DoLottery.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_invested` WHERE ( `lid` = 19 ) AND ( `uid` = '101' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( `ip` = '127.0.0.1' ) AND ( (`create_time` > 1526400000) AND (`create_time` < 1526572800)  ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_lt` ORDER BY id asc  [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=1 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=2 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=3 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=4 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=5 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=6 ) LIMIT 1   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: count_v F:\www\p2p222notminsheng\Pc\Lib\Action\LotteryAction.class.php 第 196 行.
+SQL: INSERT INTO `tp_record` (`real_name`,`uid`,`ip`,`lt_prize`,`create_time`) VALUES ('李营','101','127.0.0.1',6,1526520359) [ RunTime:0.001000s ]
+SQL: INSERT INTO `tp_web_user_rate` (`add_rate`,`use_status`,`uid`,`effect_deadline`,`deadline_time`,`create_time`) VALUES (1,0,'101',30,1529112359,1526520359) [ RunTime:0.000000s ]
+
+[ 2018-05-17T09:26:04+08:00 ] 127.0.0.1 /index.php/Lottery/DoLottery.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_invested` WHERE ( `lid` = 19 ) AND ( `uid` = '101' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( `ip` = '127.0.0.1' ) AND ( (`create_time` > 1526400000) AND (`create_time` < 1526572800)  ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_lt` ORDER BY id asc  [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=1 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=2 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=3 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=4 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=5 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=6 ) LIMIT 1   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: count_v F:\www\p2p222notminsheng\Pc\Lib\Action\LotteryAction.class.php 第 196 行.
+SQL: INSERT INTO `tp_record` (`real_name`,`uid`,`ip`,`lt_prize`,`create_time`) VALUES ('李营','101','127.0.0.1',6,1526520364) [ RunTime:0.000000s ]
+SQL: INSERT INTO `tp_web_user_rate` (`add_rate`,`use_status`,`uid`,`effect_deadline`,`deadline_time`,`create_time`) VALUES (1,0,'101',30,1529112364,1526520364) [ RunTime:0.000000s ]
+
+[ 2018-05-17T09:26:10+08:00 ] 127.0.0.1 /index.php/Lottery/DoLottery.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001001s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001001s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_invested` WHERE ( `lid` = 19 ) AND ( `uid` = '101' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( `ip` = '127.0.0.1' ) AND ( (`create_time` > 1526400000) AND (`create_time` < 1526572800)  ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_lt` ORDER BY id asc  [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=1 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=2 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=3 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=4 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=5 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=6 ) LIMIT 1   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: count_v F:\www\p2p222notminsheng\Pc\Lib\Action\LotteryAction.class.php 第 196 行.
+SQL: INSERT INTO `tp_record` (`real_name`,`uid`,`ip`,`lt_prize`,`create_time`) VALUES ('李营','101','127.0.0.1',6,1526520370) [ RunTime:0.001000s ]
+SQL: INSERT INTO `tp_web_user_rate` (`add_rate`,`use_status`,`uid`,`effect_deadline`,`deadline_time`,`create_time`) VALUES (1,0,'101',30,1529112370,1526520370) [ RunTime:0.000000s ]
+
+[ 2018-05-17T09:26:18+08:00 ] 127.0.0.1 /index.php/Lottery/index.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_lt` ORDER BY id asc  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_record` ORDER BY create_time DESC,id DESC  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( `id` IN ('101','101','101','101','101','170','170','170','190','190','190','193','193','153','153','180','103','103','102','102','101','101','103','102','101','159','159','159','154','154','154','131','131','131','189','189','189','195','195','195','153','193','137','137','137','184','138','184','184','138','138','148','148','148','150','150','150','180','180','151','151','151','110','110','110','215','215','215','115','115','115','136','136','136','135','135','135','139','139','139','212','212','212') )  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: session F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 227 行.
+NOTIC: [8] Undefined variable: address F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 233 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.009001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T09:31:20+08:00 ] 127.0.0.1 /index.php/Lottery/DoLottery.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_invested` WHERE ( `lid` = 19 ) AND ( `uid` = '101' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( `ip` = '127.0.0.1' ) AND ( (`create_time` > 1526400000) AND (`create_time` < 1526572800)  ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_lt` ORDER BY id asc  [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=1 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=2 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=3 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=4 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=5 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=6 ) LIMIT 1   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined variable: count_v F:\www\p2p222notminsheng\Pc\Lib\Action\LotteryAction.class.php 第 196 行.
+SQL: INSERT INTO `tp_record` (`real_name`,`uid`,`ip`,`lt_prize`,`create_time`) VALUES ('李营','101','127.0.0.1',6,1526520680) [ RunTime:0.000000s ]
+SQL: INSERT INTO `tp_web_user_rate` (`add_rate`,`use_status`,`uid`,`effect_deadline`,`deadline_time`,`create_time`) VALUES (1,0,'101',30,1529112680,1526520680) [ RunTime:0.000000s ]
+
+[ 2018-05-17T10:41:57+08:00 ] 127.0.0.1 /index.php/Lottery/index.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001001s ]
+SQL: SELECT * FROM `tp_lt` ORDER BY id asc  [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_record` ORDER BY create_time DESC,id DESC  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( `id` IN ('101','101','101','101','101','101','170','170','170','190','190','190','193','193','153','153','180','103','103','102','102','101','101','103','102','101','159','159','159','154','154','154','131','131','131','189','189','189','195','195','195','153','193','137','137','137','184','138','184','184','138','138','148','148','148','150','150','150','180','180','151','151','151','110','110','110','215','215','215','115','115','115','136','136','136','135','135','135','139','139','139','212','212','212') )  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: session F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 227 行.
+NOTIC: [8] Undefined variable: address F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 233 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.012001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T10:49:58+08:00 ] 127.0.0.1 /index.php/Lottery/index.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_lt` ORDER BY id asc  [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_record` ORDER BY create_time DESC,id DESC  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( `id` IN ('101','101','101','101','101','101','170','170','170','190','190','190','193','193','153','153','180','103','103','102','102','101','101','103','102','101','159','159','159','154','154','154','131','131','131','189','189','189','195','195','195','153','193','137','137','137','184','138','184','184','138','138','148','148','148','150','150','150','180','180','151','151','151','110','110','110','215','215','215','115','115','115','136','136','136','135','135','135','139','139','139','212','212','212') )  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: session F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 227 行.
+NOTIC: [8] Undefined variable: address F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 233 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.011000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011000s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T13:49:12+08:00 ] 127.0.0.1 /index.php/Lottery/index.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_lt` ORDER BY id asc  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_record` ORDER BY create_time DESC,id DESC  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( `id` IN ('101','101','101','101','101','101','170','170','170','190','190','190','193','193','153','153','180','103','103','102','102','101','101','103','102','101','159','159','159','154','154','154','131','131','131','189','189','189','195','195','195','153','193','137','137','137','184','138','184','184','138','138','148','148','148','150','150','150','180','180','151','151','151','110','110','110','215','215','215','115','115','115','136','136','136','135','135','135','139','139','139','212','212','212') )  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: session F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 227 行.
+NOTIC: [8] Undefined variable: address F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 233 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.011001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.000000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-17T15:24:39+08:00 ] 127.0.0.1 /index.php/Lottery/index.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_lt` ORDER BY id asc  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_record` ORDER BY create_time DESC,id DESC  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( `id` IN ('101','101','101','101','101','101','170','170','170','190','190','190','193','193','153','153','180','103','103','102','102','101','101','103','102','101','159','159','159','154','154','154','131','131','131','189','189','189','195','195','195','153','193','137','137','137','184','138','184','184','138','138','148','148','148','150','150','150','180','180','151','151','151','110','110','110','215','215','215','115','115','115','136','136','136','135','135','135','139','139','139','212','212','212') )  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: session F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 227 行.
+NOTIC: [8] Undefined variable: address F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 233 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.011000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011000s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2018-05-17T15:24:43+08:00 ] 127.0.0.1 /index.php/Lottery/DoLottery.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_invested` WHERE ( `lid` = 19 ) AND ( `uid` = '101' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( `ip` = '127.0.0.1' ) AND ( (`create_time` > 1526400000) AND (`create_time` < 1526572800)  ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_lt` ORDER BY id asc  [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=1 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=2 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=3 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=4 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=5 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_record` WHERE ( lt_prize=6 ) LIMIT 1   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: count_v F:\www\p2p222notminsheng\Pc\Lib\Action\LotteryAction.class.php 第 196 行.
+SQL: INSERT INTO `tp_record` (`real_name`,`uid`,`ip`,`lt_prize`,`create_time`) VALUES ('李营','101','127.0.0.1',6,1526541883) [ RunTime:0.000000s ]
+SQL: INSERT INTO `tp_web_user_rate` (`add_rate`,`use_status`,`uid`,`effect_deadline`,`deadline_time`,`create_time`) VALUES (1,0,'101',30,1529133883,1526541883) [ RunTime:0.000000s ]
+
+[ 2018-05-17T17:16:09+08:00 ] 127.0.0.1 /index.php/Lottery/index.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\www\p2p222notminsheng\TP\Common\functions.php 第 566 行.
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_lt` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_record` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_lt` ORDER BY id asc  [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_record` ORDER BY create_time DESC,id DESC  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( `id` IN ('101','101','101','101','101','101','101','170','170','170','190','190','190','193','193','153','153','180','103','103','102','102','101','101','103','102','101','159','159','159','154','154','154','131','131','131','189','189','189','195','195','195','153','193','137','137','137','184','138','184','184','138','138','148','148','148','150','150','150','180','180','151','151','151','110','110','110','215','215','215','115','115','115','136','136','136','135','135','135','139','139','139','212','212','212') )  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id=101 ) LIMIT 1   [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: session F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 227 行.
+NOTIC: [8] Undefined variable: address F:\www\p2p222notminsheng\Pc\Runtime\Cache\e2cf012f9c97f3ccba5ae5cc0d7dce98.php 第 233 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.010001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.000000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+

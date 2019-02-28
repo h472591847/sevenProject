@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>个人资料-会员中心-{$Think.config.web_title}</title>
+<include file = "Common:transparent" />
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+<!--安全等级-->
+<script type="text/javascript" src="__PUBLIC__/js/jquery.tips.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+	var percent = $('.progress_bar').attr('title');
+	$(".progress_bar").animate({width:percent},1000);
+	$(".tip").tipsy({gravity:'s',fade:true});
+});
+</script>
+<!---->
+</head>
+<body>
+<include file = "Common:head" />
+<include file = "Common:web_announce" />
+<div class="middle">
+   <include file="Common:left_menu"/>
+   <div class="mid_right InLine">
+      <div class="mr_top"></div>
+      <div class="mr_center">
+         <h3 class="bt">修改邮箱</h3>
+          <form action="{:U('Member/DoUpdateMailSend')}" name="form_mail" id="form_mail" method="post">
+          <input type="hidden" name="user_id" value="{$user_id}">
+            <p class="new_email">
+               <span class="modify_tit" style=" margin-bottom:20px;">新邮箱地址</span>
+               <input type="text" name="email" id="email" class="inp" value="" />
+               <span><input type="submit" value="发送验证邮件" id="submit_email" name="submit_email" class="sub" /></span>
+            </p>
+            
+          </form>
+         
+         <div class="spacer"></div>
+      </div>
+      <div class="mr_bottom"></div>
+   </div>
+   <div class="spacer"></div>
+</div>
+
+
+<script type="text/javascript">
+    $("#submit_email").click(function(){
+        $mail = $("input[name=email]");
+       var reg = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/; //邮箱正则过滤
+       if(!reg.test($.trim($mail.val())) || $.trim($mail.val())==''){alert("这不是一个正确的邮箱地址");$mail.focus();return false;}//验证邮箱              
+    })
+</script>
+<include file = "Common:bottom" />
+
+</body>
+</html>
+

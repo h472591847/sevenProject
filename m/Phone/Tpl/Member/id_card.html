@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>身份认证-{$Think.config.web_title}</title>
+</head>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('input[type=text]:first').focus();
+});
+</script>
+<body>
+<div class="center">
+   <include file = "Common:header" />
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>身份认证</span>
+     <span></span>     
+     <!--登录后显示 start-->
+     <include file="Common:ico"/>
+     <!--end-->
+   </div> 
+  <form action="{:U('Member/FindIdno')}" name="form_idno" method="post"> 
+   <div class="personal">
+      <ul>
+         <li><span>姓名：</span><input type="text" placeholder="请输入您的姓名" class="user_form user_p" name="real_name" id="real_name"></li>
+         <li><span>身份证号：</span><input type="text" placeholder="请输入您的身份证号" class="user_form user_p"  name="idno" id="idno"></li>
+      </ul>
+   </div>
+   <p class="with_p"><input type="submit" value="确定" id="submit_idno" class="user_confirm"></p>
+   </form>
+<script type="text/javascript">
+    //绑定身份证表单过滤
+    $("#submit_idno").click(function(){   
+       var ch_reg = /^[u4E00-u9FA5{u-zU-Z}]+$/;//筛选包含汉字的字符  
+       $real_name = $("#real_name");
+       $idno = $("#idno");
+       if($.trim($real_name.val())==''){
+         alert('姓名不能为空');$real_name.focus();return false;
+       }
+       if(ch_reg.test($.trim($real_name.val()))){
+          alert('姓名必须为汉字');$real_name.focus();return false;
+       }                  
+       if(checkCardId($.trim($idno.val()),$idno) == false){
+         return false;
+       }     
+    })  
+
+/**
+ * @todo    checkCardId       验证身份证准确性
+ * @param   socialNo         身份证号值
+ * @param   obj              元素对象
+ * @return  bool         
+ */
+function checkCardId(socialNo,obj){
+
+    if(socialNo == "")
+    {
+      alert("输入身份证号码不能为空!");
+      obj.focus();return (false);
+    }
+
+    if (socialNo.length != 15 && socialNo.length != 18)
+    {
+      alert("输入身份证号码格式不正确!");
+      obj.focus();return (false);
+    }
+    
+   var area={11:"北京",12:"天津",13:"河北",14:"山西",15:"内蒙古",21:"辽宁",22:"吉林",23:"黑龙江",31:"上海",32:"江苏",33:"浙江",34:"安徽",35:"福建",36:"江西",37:"山东",41:"河南",42:"湖北",43:"湖南",44:"广东",45:"广西",46:"海南",50:"重庆",51:"四川",52:"贵州",53:"云南",54:"西藏",61:"陕西",62:"甘肃",63:"青海",64:"宁夏",65:"新疆",71:"台湾",81:"香港",82:"澳门",91:"国外"}; 
+     
+     if(area[parseInt(socialNo.substr(0,2))]==null) {
+      alert("身份证号码不正确(地区非法)!");
+        obj.focus();return (false);
+     } 
+        
+    if (socialNo.length == 15)
+    {
+       pattern= /^\d{15}$/;
+       if (pattern.exec(socialNo)==null){
+          alert("15位身份证号码必须为数字！");
+          obj.focus();return (false);
+       }
+    var birth = parseInt("19" + socialNo.substr(6,2));
+    var month = socialNo.substr(8,2);
+    var day = parseInt(socialNo.substr(10,2));
+    switch(month) {
+      case '01':
+      case '03':
+      case '05':
+      case '07':
+      case '08':
+      case '10':
+      case '12':
+        if(day>31) {
+          alert('输入身份证号码不格式正确!');
+          obj.focus();return false;
+        }
+        break;
+      case '04':
+      case '06':
+      case '09':
+      case '11':
+        if(day>30) {
+          alert('输入身份证号码不格式正确!');
+          obj.focus();return false;
+        }
+        break;
+      case '02':
+        if((birth % 4 == 0 && birth % 100 != 0) || birth % 400 == 0) {
+          if(day>29) {
+            alert('输入身份证号码不格式正确!');
+            obj.focus();return false;
+          }
+        } else {
+          if(day>28) {
+            alert('输入身份证号码不格式正确!');
+            obj.focus();return false;
+          }
+        }
+        break;
+      default:
+        alert('输入身份证号码不格式正确!');
+        obj.focus();return false;
+    }
+    var nowYear = new Date().getYear();
+    if(nowYear - parseInt(birth)<15 || nowYear - parseInt(birth)>100) {
+      alert('输入身份证号码不格式正确!');
+      obj.focus();return false;
+    }
+      obj.focus();return (true);
+    }
+    
+    var Wi = new Array(
+              7,9,10,5,8,4,2,1,6,
+              3,7,9,10,5,8,4,2,1
+              );
+    var   lSum        = 0;
+    var   nNum        = 0;
+    var   nCheckSum   = 0;
+    
+      for (i = 0; i < 17; ++i)
+      {
+          
+
+          if ( socialNo.charAt(i) < '0' || socialNo.charAt(i) > '9' )
+          {
+              alert("输入身份证号码格式不正确!");
+              obj.focus();return (false);
+          }
+          else
+          {
+              nNum = socialNo.charAt(i) - '0';
+          }
+           lSum += nNum * Wi[i];
+      }
+
+    
+      if( socialNo.charAt(17) == 'X' || socialNo.charAt(17) == 'x')
+      {
+          lSum += 10*Wi[17];
+      }
+      else if ( socialNo.charAt(17) < '0' || socialNo.charAt(17) > '9' )
+      {
+          alert("输入身份证号码格式不正确!");
+          obj.focus();return (false);
+      }
+      else
+      {
+          lSum += ( socialNo.charAt(17) - '0' ) * Wi[17];
+      }
+
+      
+      
+      if ( (lSum % 11) == 1 )
+      {
+          obj.focus();return true;
+      }
+      else
+      {
+          alert("输入身份证号码格式不正确!");
+          obj.focus();return (false);
+      }
+    
+}      
+</script>   
+</div>
+
+</body>
+</html>

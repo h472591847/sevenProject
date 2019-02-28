@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>邀请好友-{$Think.config.web_title}</title>
+<link href="__PUBLIC__/css/style.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/iscroll.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $(".share_fri").click(function(){
+	   $(".bank_choose").show();
+	});
+	
+	
+});
+</script>
+</head>
+
+<body>
+<div class="center">
+   <include file = "Common:header" />
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>邀请好友</span>
+     <span></span>     
+     <!--登录后显示 start-->
+     <include file="Common:ico"/>
+     <!--end-->
+   </div> 
+   <p><img src="__PUBLIC__/images/jl_pic.jpg" width="100%"></p>
+   <div class="invitation">
+      
+      <h3>邀请方式</h3>
+      <p>复制下方链接分享给好友，您的好友<font>注册、充值并成功投资</font>后，您便可获得500积分并且还会获得您好友投资额年化的1%奖励金额(根据奖励金额使用规则投资后即可提现)
+例如:如好友成功投资3个月标200,000元，那您即得 200,000/12 x 3 x 1% = 500元 。</p>
+      <span style="color:#F00">您的推广ID为：{$uid}</span>
+      <h4>您的邀请链接</h4>
+      <p class="in_href"><a href="{$referral_links}" onclick="return false;" class="in_href">{$referral_links}</a></p>
+      <div class="spacer"></div>
+   </div>
+   
+   <div class="share_fri">分享给好友</div>
+        <div class="recom_h">
+          <ul>
+             <li class="recom_left recom_sel" style=" margin-left:0;"><a onclick="$(this).parent('li').addClass('recom_sel').siblings().removeClass('recom_sel');$('#frm_list').attr('src','{:U('Member/invitation_list',array('change'=>''))}')" style="cursor:pointer">推荐注册</a></li>
+             <li><a onclick="$(this).parent('li').addClass('recom_sel').siblings().removeClass('recom_sel');$('#frm_list').attr('src','{:U('Member/invitation_list',array('change'=>'score_log'))}')" style="cursor:pointer">积分奖励</a></li>
+             <li class="recom_right"><a onclick="$(this).parent('li').addClass('recom_sel').siblings().removeClass('recom_sel');$('#frm_list').attr('src','{:U('Member/invitation_list',array('change'=>'deal_log'))}')" style="cursor:pointer">金额奖励</a></li>             
+          </ul>
+        </div>   
+        <iframe frameborder="0" id="frm_list" width="100%" height="725" src="{:U('Member/invitation_list',array('change'=>$change))}" scrolling="no"></iframe>
+</div>
+<div class="bank_choose">
+  <div class="jf_ex">
+     <div class="bdsharebuttonbox" data-tag="share_2">
+        <a class="bds_weixin" data-cmd="weixin"></a>
+        <a class="bds_tsina" data-cmd="tsina"></a>
+        <a class="bds_sqq" data-cmd="sqq"></a>
+        <a class="bds_tqq" data-cmd="tqq"></a>
+        <a class="bds_qzone" data-cmd="qzone"></a>
+        <a class="bds_more" data-cmd="more">更多</a>
+     </div>
+    <script>
+        window._bd_share_config = {
+            common : {
+                bdText : '',	
+                bdDesc : '亲爱的，这个网站注册并完善信息就送50块钱，签到、邀请啥的还给钱，还总发奖品啥的，找几个电话号刷刷，整点小外快。',	
+                bdUrl : '{$referral_links}', 	
+                bdPic : ''
+            },
+            share : [{
+                "bdSize" : 32
+            }],
+            // slide : [{	   
+            //     bdImg : 0,
+            //     bdPos : "right",
+            //     bdTop : 0
+            // }],
+            image : [{
+                viewType : 'list',
+                viewPos : 'top',
+                viewColor : 'black',
+                viewSize : '32',
+                viewList : ['qzone','tsina','huaban','tqq','renren']
+            }],
+            selectShare : [{
+                "bdselectMiniList" : ['qzone','tqq','kaixin001','bdxc','tqf']
+            }]
+        }
+        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+    
+    
+    
+  </div>
+  
+</div>
+<include file="Common:member_bottom"/>
+</body>
+</html>

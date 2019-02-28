@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="__PUBLIC__/css/bdmin.css" type="text/css" rel="stylesheet">
+<script src="__PUBLIC__/js/jQuery.js"></script>
+</HEAD>
+<BODY>
+<form action="{:U('Member/DoLockMoney')}" method="post" onSubmit="$('#submit_lock_money').attr('disabled',true);return true;">
+<input type="hidden" name="upid" value="{$upid}">
+<TABLE class="hs12pt" cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD height="22" >当前位置: 会员列表/冻结金额</TD>
+  </TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR></TABLE>
+<TABLE class="hs12pt" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="22" background="__PUBLIC__/images/title_bg2.jpg">&nbsp;&nbsp;&nbsp;<span class="baise12ct">{$display_txt}信息</span></td>
+  </tr>
+</table>
+  <TABLE class="hs12pt" width="100%" border="1" align="center" cellpadding="2" cellspacing="0" bordercolor="#175CB7" bordercolordark="#E3EFFB" >
+  <tr>       
+      <td align="right">
+        余额:{$user_info.money|format_price}
+      </td>   
+      <td colspan="5" align="left">
+        当前冻结金额:{$user_info.lock_money|format_price}
+      </td>
+    </tr>
+  <tr>    
+      <td width="20%" height="25" align="right" ><span style=" color:#F00;">*</span>冻结金额:</td>
+      <td colspan="5" align="left">
+        <input name="lock_money" id="lock_money" type="text" size="30" maxlength="12" class="text" > 元   <span style="color:#F00">正数代表从余额中扣除金额打入冻结资金，负数则取出冻结金额到用户余额中</span>
+      </td>
+    </tr>
+	<tr>    
+      <td width="20%" height="25" align="right" ><span style=" color:#F00;">*</span>说明:</td>
+      <td colspan="5" align="left">
+        <textarea name="content" id="content" cols="50" rows="10"></textarea>
+      </td>
+    </tr>
+                                                    
+<tbody id="tbody_imgs" style="display:none;">
+    
+</tbody>
+<tbody>
+    <tr>
+      <td height="25" colspan="6" align="center"><input type="submit" id="submit_lock_money" value="确认{$display_txt}" onclick="$(this).attr('disabled','disabled');"></td>
+    </tr>
+  </table>
+</form>
+</BODY></HTML>
+<script type="text/javascript">
+  $("#submit_lock_money").click(function(){
+     $money = "{$user_info.money}";
+     $lock_money = $("#lock_money");
+     if($.trim($lock_money.val())=='' || $.trim($lock_money.val())==0){
+        alert('冻结金额不能为空');$lock_money.focus();return false;
+     }
+
+     if($.trim($lock_money.val())>$.trim($money)){
+      alert('冻结金额不能大于用户当前余额');$lock_money.focus();return false;
+     }
+  })
+</script>

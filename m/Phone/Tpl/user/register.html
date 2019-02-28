@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>会员注册-{$Think.config.web_title}</title>
+</head>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+
+<body>
+<div class="center">
+   <include file = "Common:header" />
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>会员注册</span>
+     <span></span>     
+     <!--登录后显示 start-->
+     <if condition="$Think.session.user_id neq ''">
+     <span class="user_icon"><a href="{:U('Member/index')}" title=""><img src="__PUBLIC__/images/user_info.png" /></a></span>
+     </if>
+     <!--end-->
+   </div>    
+   <form action="{:U('user/DoRegister')}" method="post" onsubmit="submit_reg()">
+     
+   <div class="login">
+      <ul>
+         <li>
+            <span class="form_icon"><img src="__PUBLIC__/images/login_icon1.png" /></span>
+            <span class="form_bd"><input type="text" placeholder="请输入帐号" maxlength="20"  name="user_name"  class="form_txt"></span>
+         </li>
+         <li>
+            <span class="form_icon"><img src="__PUBLIC__/images/login_icon2.png" /></span>
+            <span class="form_bd"><input type="password" placeholder="密 码" maxlength="20"   name="user_pwd" class="form_txt"></span>
+         </li>
+         <li>
+            <span class="form_icon"><img src="__PUBLIC__/images/login_icon2.png" /></span>
+            <span class="form_bd"><input type="password" placeholder="再次输入密码" maxlength="20"    name="re_pwd" class="form_txt"></span>
+         </li>
+         <li>
+            <span class="form_icon"><img src="__PUBLIC__/images/login_icon1.png" /></span>
+            <span class="form_bd"><input type="text" placeholder="请输入推荐人ID(选填)" name="pid" value="{$pid}"  class="form_txt"></span>
+         </li>         
+         <li>
+            <span class="form_icon"><img src="__PUBLIC__/images/phone.png" /></span>
+            <span class="form_bd"><input type="text" placeholder="请输入手机号码"  name="phone"  class="form_txt"></span>
+         </li>
+         <li>
+            <span class="form_icon"><img src="__PUBLIC__/images/yzm.png" /></span>
+            <span class="form_bd"><input type="text" name="code" placeholder="验证码"  class="form_txt"></span>
+         </li>
+         <li>
+            <span class="form_hq"><input type="button" id="send_code" onclick="sendCode(this,1)" value="短信验证码"  class="form_h"></span>
+            <span class="form_hq"><input type="button" id="send_code" onclick="sendCode(this,2)" value="语音验证码"  class="form_h form_voice"></span>
+         </li>
+         <li class="dl_l">
+            <p style="text-align:center;"><input type="checkbox" name="ido" id="ido">
+            <a href="agreement.html" class="agreement">《金投资服务条款协议》</a></p>
+            <input type="submit" class="dl" id="submit_reg" value="注册">
+         </li>
+         <li class="spacer"></li>
+      </ul>
+      
+   </div>
+   </form>
+   <include file="Common:bottom"/>
+</div>
+<script type="text/javascript">
+$user_name = $("input[name=user_name]");
+$phone = $(":input[name=phone]");
+$code = $(":input[name=code]");
+$password = $(":input[name=user_pwd]");
+$repassword = $(":input[name=re_pwd]");
+$ido = $("#ido");
+$pid = $(":input[name=pid]");
+
+$("#submit_reg").click(function(){
+    if($.trim($user_name.val())==''){alert('用户名不能为空');$user_name.focus();return false;} //验证帐号  
+    var ch_reg = /^[u4E00-u9FA5{u-zU-Z}]+$/;//筛选包含汉字的字符    
+    //alert(user_name.val());return false;
+    if($.trim($user_name.val()) == ''){
+        alert('用户名不能为空');$user_name.focus();return false;
+    }
+    if($.trim($user_name.val()).length < 6 || $.trim($user_name.val()).length > 18){
+        alert('用户名长度不能大于18位，不可小于6位字符');$user_name.focus();return false;
+    }   
+    if(!ch_reg.test($.trim($user_name.val()))){
+        alert('不可输入汉字');$user_name.focus();return false;
+    }    
+    if($password.val()==""){
+        alert('请输入密码！');
+        $password.focus();
+        return false;            
+    }
+    if($password.val().length<6){
+        alert('密码不能小于6位！');
+        $password.focus();
+        return false;            
+    }        
+    if($repassword.val()==""){
+        alert('请再次输入密码！');
+        $repassword.focus();
+        return false;            
+    }
+    if($repassword.val()!=$password.val()){
+        alert('两次输入密码不一致,请重新输入！');
+        $repassword.focus();
+        return false;            
+    }       
+    // ---手机号码有效验证开始---
+    if($phone.val()=="")
+    {
+       alert('请输入手机号码！');
+       $phone.focus();
+       return false;
+    }    
+    if($phone.val().length!=11)
+    {
+        alert('请输入有效的手机号码！');
+        $phone.focus();
+        return false;
+    }        
+    var myreg =  /^0?1[3|4|5|8][0-9]\d{8}$/;
+    if(!myreg.test($phone.val()))
+    {
+        alert('请输入有效的手机号码！');
+        $phone.focus();
+        return false;
+    }
+    // ---手机号码有效验证结束---
+
+    if($code.val()==""){
+        alert('请输入验证码！');
+        $code.focus();
+        return false;              
+    }
+    if($code.val().length!=4){
+        alert('请输入正确的验证码！');
+        $code.focus();
+        return false;              
+    }     
+    if(!$ido.is(":checked")){
+        alert('请先同意《金投资服务条款协议》');return false;
+    }       
+})
+
+
+
+/**
+ * 发送短信倒计时
+ * @param   obj   元素对象
+ * @param   stime 倒计时时间总数
+ * @return        定时器
+ */
+function sendMobileTime(obj, stime,type) {
+    setTimeout(function (){
+        var _stime = stime - 1;
+        if (_stime) {
+            $(obj).val(_stime-1 + '秒后可重发');                            
+            sendMobileTime(obj, _stime,type);
+            $("#send_code").attr("onClick","return false");//倒计时中停止点击事件
+        } else {
+            $(obj).val('免费获取验证码');   //倒计时停止时将元素的文本初始化             
+            $("#send_code").attr("onClick","sendCode(this,type)");//倒计时停止加回点击事件sendCode方法
+        }
+    }, 1000);
+}    
+/**
+ * 单击发送验证码时候的操作     
+ */
+  function sendCode(obj,type){        
+    if($phone.val()==""){
+        alert('请输入接收验证码的手机号码');
+        $phone.focus();
+        return false;
+    }             
+    $.ajax({
+       type: "POST",
+       url: "{:U('user/sendCode')}",
+       data: "phone="+$phone.val()+"&type="+type+"&temp_str=注册验证码",
+       success: function(msg){            
+            if(msg.status == 0){
+                alert(msg.info);return false;
+            }else{
+                sendMobileTime(obj,61,type);
+            }
+       }
+    }); 
+  }   
+</script>
+</body>
+</html>

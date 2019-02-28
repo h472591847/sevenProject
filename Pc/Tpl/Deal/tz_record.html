@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/page.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){   
+  
+  $("div.inner .subNavBtn").click(function() {   
+    $(this).addClass("subNav_sel").siblings().removeClass("subNav_sel");  
+  });
+  //投资记录
+  $(".tz_record li:odd").css("background","#f2f2f2");
+});
+</script>
+<style>
+body{ background:#ffffff;}
+</style>
+<body>
+<div class="tz_record">
+                   <h3>                      
+                      <span class="record_two">投标时间</span>
+                      <span class="record_three">投标人</span>
+                      <span class="record_four">投标金额</span>
+                   </h3>
+                   <ul> 
+                   <empty name="invested_list">
+                      <li><center>暂无数据!</center></li>
+                   <else/>                   
+                   <foreach name="invested_list" item="v">
+                      <li>                         
+                         <span class="record_two">{$v.create_time|date='Y-m-d H:i:s',###}</span>
+                         <span class="record_three">{$v.user_name}</span>
+                         <span class="record_four">{$v.amount|format_price}</span>
+                      </li>
+                    </foreach>
+                   </empty>
+                   </ul> 
+                   <p class="page">{$page}</p>
+                </div>
+</body>
+</html>

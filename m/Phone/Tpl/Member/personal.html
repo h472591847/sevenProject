@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>个人资料-{$Think.config.web_title}</title>
+</head>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+
+<body>
+<div class="center">
+   <include file = "Common:header" />
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>个人资料</span>
+     <span></span>     
+     <!--登录后显示 start-->
+     <include file="Common:ico"/>
+     <!--end-->
+   </div> 
+   <div class="perso_cert">
+      <ul>
+         <li><a href="{:U('Member/email')}"><if condition="$user_info['is_email'] eq '1'"><span  class="pass">{$user_info.repeat_email}<else/><span  class="no_pass">去认证</if><i>></i></span><font>*</font>邮箱</a></li>
+         <li><a href="{:U('Member/phone1')}"><if condition="$user_info['is_phone'] eq '1'"><span class="pass">{$user_info.repeat_phone}<else/><span  class="no_pass">去认证</if><i>></i></span><font>*</font>手机</a></li>
+         <li><if condition="$user_info['real_name'] neq ''"><span class="pass">{$user_info.repeat_real_name}<else/><a href="{:U('Member/id_card')}"><span  class="no_pass">去认证</a></if><i>></i></span><font>*</font>姓名</li>
+         <li><if condition="$user_info['idno'] neq ''"><span class="pass">{$user_info.repeat_idno}<else/><a href="{:U('Member/id_card')}"><span  class="no_pass">去认证</a></if><i>></i></span><font>*</font>身份证</li>
+         <li><a href="{:U('Member/ModifyPwd')}"><span class="pass">修改<i>></i></span><font>*</font>修改登录密码</a></li>
+         <li><a href="{:U('Member/MdfTrading')}"><if condition="$user_info.trade_pwd neq ''"><span class="pass">修改<else/><span  class="no_pass">去认证</if><i>></i></span><font>*</font>设置交易密码</a></li>
+      </ul>
+   </div>
+   <include file="Common:member_bottom"/>
+</div>
+</body>
+</html>

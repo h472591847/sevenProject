@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>修改手机第2步-{$Think.config.web_title}</title>
+</head>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('input[type=text]:first').focus();
+});
+</script>
+
+<body>
+<div class="center">
+   <include file = "Common:header" />
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>修改手机</span>
+     <span></span>     
+     <!--登录后显示 start-->
+     <include file="Common:ico"/>
+     <!--end-->
+   </div>     
+   <div class="personal">
+      <ul>
+         <li>新手机号：<input type="text" value="" name="phone" value="请输入新的手机号" class="user_form user_p"></li>
+         <li>验证码：<input type="text" value="" name="code" id="code" value="请输入验证码"  class="user_form"></li>
+         <li class="phone_code">
+            <input type="button" onclick="sendCode(this,1)" id="send_code" class="hq_yzm" value="短信验证码">
+            <input type="button" onclick="sendCode(this,2)" id="send_code" class="hq_yzm hq_voice" value="语音验证码">
+         </li>
+      </ul>
+   </div>
+   <p class="with_p"><input type="button" value="确定" id="confirm_submit" class="user_confirm"></p>
+</div>
+<script type="text/javascript">
+
+
+$phone = $("input[name=phone]");
+$code = $("input[name=code]");
+$old_phone = "{$user_info.phone}";
+
+/**
+ * 发送短信倒计时
+ * @param   obj   元素对象
+ * @param   stime 倒计时时间总数
+ * @return        定时器
+ */
+function sendMobileTime(obj, stime,type) {
+    setTimeout(function (){
+        var _stime = stime - 1;
+        if (_stime) {
+            $(obj).val(_stime-1 + '秒后重新发送');                            
+            sendMobileTime(obj, _stime,type);
+            $("#send_code").attr("onClick","return false");//倒计时中停止点击事件
+        } else {
+            $(obj).val('获取验证码');   //倒计时停止时将元素的文本初始化             
+            $("#send_code").attr("onClick","sendCode(this,type)");//倒计时停止加回点击事件sendCode方法
+        }
+    }, 1000);
+}    
+
+/**
+ * 单击发送验证码时候的操作     
+ */
+  function sendCode(obj,type){            
+    $.ajax({
+       type: "POST",
+       url: "{:U('Member/sendCode')}",
+       data: "phone="+$phone.val()+"&type="+type+"&temp_str=修改绑定电话号码",
+       success: function(msg){
+            if(msg.status == 0){
+                alert(msg.info);return false;
+            }else{
+                sendMobileTime(obj,61,type);
+            }
+       }
+    }); 
+  }   
+//表单过滤
+$("#confirm_submit").click(function(){
+       var phone_reg = /^(1[3|4|5|7|8]\d{9})$/;//手机号正则过滤              
+       //验证手机号是否合法
+       if(!phone_reg.test($.trim($phone.val()))||$.trim($phone.val()).length!=11){
+        alert('请输入正确的手机号码');$phone.focus();return false;
+       }
+       //新旧手机号对比
+      // if($phone.val() == $old_phone){alert('新手机号不能与原手机号相同');$phone.focus();return false;}
+       if($.trim($code.val()).length<4){alert('请输入正确的验证码');$code.focus();return false;}//验证码过滤
+       $.ajax({
+         url: '{:U("Member/DoFindPhone")}',
+         type: 'POST',
+         dataType: 'json',
+         data: 'new_phone='+$phone.val()+'&new_code_number='+$code.val(),
+         success:function(msg){
+            if(msg.status == '0'){
+              alert(msg.info);return false;
+            }else{
+              alert(msg.info);location.href="{:U('Member/Index')}";return false;
+            }
+         }
+       })
+}) 
+</script>
+</body>
+</html>

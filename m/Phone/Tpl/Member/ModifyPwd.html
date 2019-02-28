@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>修改密码-{$Think.config.web_title}</title>
+</head>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('input[type=password]:first').focus();
+});
+</script>
+
+<body>
+<div class="center">
+   <include file = "Common:header" />
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>修改密码</span>
+     <span></span>     
+     <!--登录后显示 start-->
+     <include file="Common:ico"/>
+     <!--end-->
+   </div> 
+   <form action="{:U('Member/UpdatePwd')}" method="post">
+   <div class="personal">
+      <ul>
+         <li><span>原密码：</span><input type="password" class="user_form user_p" name="user_pwd" placeholder="请输入原密码"></li>
+         <li><span>新密码：</span><input type="password" class="user_form user_p" name="new_pwd" placeholder="请输入新密码"></li>
+         <li><span>确认新密码：</span><input type="password" class="user_form user_p" name="re_password" placeholder="请再次确认密码"></li>
+      </ul>
+   </div>
+   <p class="with_p"><input type="submit" value="确定" id="submit_modify" class="user_confirm"></p>
+   </form>
+</div>
+<script type="text/javascript">
+  $('#submit_modify').click(function(){
+    $old_password = $('input[name=user_pwd]');
+    $password = $('input[name=new_pwd]');  
+    $re_password = $('input[name=re_password]');
+    if($.trim($old_password.val()) == ''){alert('原密码不能为空');$old_password.focus();return false;}
+    if($.trim($password.val()) == ''){alert('密码不能为空');$password.focus();return false;}
+    if($.trim($re_password.val()) == '' || $.trim($re_password.val()) != $.trim($password.val())){
+      alert('两次密码输入不一致，请重新输入');$re_password.focus();return false;
+    }
+  })
+</script>
+</body>
+</html>

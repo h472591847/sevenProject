@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>重置密码-{$Think.config.web_title}</title>
+</head>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('input[type=text]:first').focus();
+});
+</script>
+
+<body>
+<div class="center">
+   <include file = "Common:header" />
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>找回密码</span>
+     <span></span>     
+     <!--登录后显示 start-->
+     <if condition="$Think.session.user_id neq ''">
+     <span class="user_icon"><a href="{:U('Member/index')}" title=""><img src="__PUBLIC__/images/user_info.png" /></a></span>
+     </if>
+     <!--end-->
+   </div>      
+   <form action="{:U('user/DoResetPassword')}" method="post">   
+   <input type="hidden" name="user_id" value="{$user_id}">
+   <input type="hidden" name="referer" value="{$referer}">   
+   <div class="back_phone">
+      <p class="back_ph_p">
+         <span>确认账号</span> > <span>验证信息</span> > <span>找回密码</span>
+      </p>
+      <ul>
+         <li><span>新密码：</span><input type="password" placeholder="请输入新密码" name="password" class="back_txt"></li>
+         <li><span>确认密码：</span><input type="password" placeholder="请再次输入密码" name="repassword" class="back_txt back_p"></li>
+      </ul>
+      <p class="with_p"><input type="submit" value="确定" id="submit_reset" class="user_confirm"></p>
+   </div>
+   </form>   
+   <include file="Common:bottom"/>
+</div>
+<script type="text/javascript">
+  $('#submit_reset').click(function(){
+    $password = $('input[name=password]');
+    $repassword = $('input[name=repassword]');
+    if($.trim($password.val()) == ''){alert('密码不能为空');$password.focus();return false;}
+    if($.trim($repassword.val()) == '' || $.trim($repassword.val()) != $.trim($password.val())){alert('两次密码输入不一致，请重新输入');$repassword.focus();return false;}
+  })
+</script>
+
+</body>
+</html>

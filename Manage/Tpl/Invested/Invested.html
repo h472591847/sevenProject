@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="__PUBLIC__/css/bdmin.css" type="text/css" rel="stylesheet">
+<script src="__PUBLIC__/js/jQuery.js"></script>
+</HEAD>
+<BODY>
+<form action="{:U('Invested/DoAddInvested')}" method="post" onSubmit="return check()">
+<TABLE class="hs12pt" cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD height="22" >当前位置: 信息中心/添加信息</TD>
+  </TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR></TABLE>
+<TABLE class="hs12pt" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="22" background="__PUBLIC__/images/title_bg2.jpg">&nbsp;&nbsp;&nbsp;<span class="baise12ct">{$display_txt}信息</span></td>
+  </tr>
+</table>
+  <TABLE class="hs12pt" width="100%" border="1" align="center" cellpadding="2" cellspacing="0" bordercolor="#175CB7" bordercolordark="#E3EFFB" >
+	<tr>    
+      <td width="20%" height="25" align="center" ><span style=" color:#F00;">*</span>投资项目:</td>
+      <td colspan="5" align="left">
+          <select name="lid" id="lid"> 
+              <option selected="selected" value="">==请选择==</option>               
+           <foreach name="loan_list" item="v">                
+              <option value="{$v.id}">{$v.loan_title}</option>
+            </foreach>
+          </select>
+      </td>
+    </tr>
+<tr>    
+      <td width="20%" height="25" align="center" ><span style=" color:#F00;">*</span>投资人:</td>
+      <td colspan="5" align="left">
+          <select name="uid" name="uid">      
+           <foreach name="user_list" item="v">                 
+              <option value="{$v.id}">{$v.user_name}</option>
+            </foreach>
+          </select>
+      </td>
+    </tr>
+    
+
+    <tr>
+      <td width="20%" height="25" align="center" ><span style=" color:#F00;">*</span>投资金额:</td>
+      <td colspan="5"><input name="money" type="text" class="text" id="money" size="15" maxlength="11" value="0">
+        元</td>
+    </tr>
+  
+
+
+                                                  
+<tbody id="tbody_imgs" style="display:none;">
+    
+</tbody>
+<tbody>
+    <tr>
+      <td height="25" colspan="6" align="center"><input type="submit"  disabled="disabled" id="submit_invested" value="确定{$display_txt}"></td>
+    </tr>
+  </table>
+</form>
+</BODY></HTML>
+<script type="text/javascript">
+    $("#submit_invested").click(function(){
+          $lid = $("#lid").val()
+          $uid = $("#uid").val()
+          $money = $("#money");
+          if($lid==''){alert('请选择项目');return false;}
+          if($uid==''){alert('请选择投资人');return false;}
+          var number_reg = /^\d+$/;
+
+          if($.trim($money.val()) == 0 || !number_reg.test($.trim($money.val()))){
+            alert('请填写正确的投资金额');return false;
+          }
+    })
+</script>

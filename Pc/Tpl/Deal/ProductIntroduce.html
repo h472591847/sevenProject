@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>理财产品_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="<if condition="$cate['description'] neq ''">{$cate.description}<else/>{$Think.config.web_description}</if>" />
+<include file = "Common:transparent" />
+</head>
+<link href="__PUBLIC__/style/base.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/product.css" type="text/css" rel="stylesheet" />
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    var $div_li = $("div.cp-tz ul li");
+	$div_li.click(function(){
+        $(this).addClass("cp-tz-hover").siblings().removeClass("cp-tz-hover");
+		var index = $div_li.index(this);//index() 方法返回指定元素相对于其他指定元素的 index 位置
+		$("div.cp-syjs > .tzsy-js").eq(index).show().siblings().hide();
+	});
+});
+</script>
+<body>
+<include file = "Common:head" />
+
+<div class="pro_center">
+    <div class="pro_banner"></div>
+    
+    <div class="pro_content">
+       <ul>
+          <li>
+             <h3>年年红</h3>
+             <div class="proli_1">
+                <p class="pro_sy">
+                   <span>年化收益</span>
+                   <span class="big_txt">13<i>%</i></span>
+                </p>
+                <p class="pro_sy">
+                   <span>投资期限</span>
+                   <span class="big_txt">12<i>个月</i></span>
+                </p>                
+             </div>
+             <p class="pro_btn"><a href="{:U('Deal/ProductList',array('class_id'=>4))}">马上投资</a></p>
+          </li>
+          <li>
+             <h3>月月薪</h3>
+             <div class="proli_2">
+                <p class="pro_sy">
+                   <span>年化收益</span>
+                   <span class="big_txt">12<i>%</i></span>
+                </p>
+                <p class="pro_sy">
+                   <span>投资期限</span>
+                   <span class="big_txt">12<i>个月</i></span>
+                </p>                
+             </div>
+             <p class="pro_btn"><a href="{:U('Deal/ProductList',array('class_id'=>1))}">马上投资</a></p>
+          </li>
+          <li>
+             <h3>双季丰</h3>
+             <div class="proli_3">
+                <p class="pro_sy">
+                   <span>年化收益</span>
+                   <span class="big_txt">11<i>%</i></span>
+                </p>
+                <p class="pro_sy">
+                   <span>投资期限</span>
+                   <span class="big_txt">6<i>个月</i></span>
+                </p>                
+             </div>
+             <p class="pro_btn"><a href="{:U('Deal/ProductList',array('class_id'=>3))}">马上投资</a></p>
+          </li>
+          <li>
+             <h3>单季盈</h3>
+             <div class="proli_4">
+                <p class="pro_sy">
+                   <span>年化收益</span>
+                   <span class="big_txt">9<i>%</i></span>
+                </p>
+                <p class="pro_sy">
+                   <span>投资期限</span>
+                   <span class="big_txt">3<i>个月</i></span>
+                </p>                
+             </div>
+             <p class="pro_btn"><a href="{:U('Deal/ProductList',array('class_id'=>2))}">马上投资</a></p>
+          </li>
+       </ul>
+       <div class="spacer"></div>
+    </div>
+</div>
+
+<div class="pro_sybl InLine">
+   <h3><img src="__PUBLIC__/images/sy-eg1.png" /></h3>
+   <div class="cp-tz">
+      <ul>
+         <li class="cp-tz-hover">投年年红</li>
+         <li>投月月薪</li>
+         <li>投双季丰</li>
+         <li>投单季盈</li>
+      </ul>
+   </div>
+   <div class="cp-syjs">
+       <div class="tzsy-js">
+          <p class="tzsy-n">年年红</p>
+          <p class="tzsy-detail">
+             <span>投资期限：12个月</span>
+             <span>投资金额：10000元</span>
+             <span>预期收益：13000元</span>
+             <span><a href="#">立即加入</a></span>
+          </p>
+       </div>
+       <div class="tzsy-js hide">
+          <p class="tzsy-n">月月薪</p>
+          <p class="tzsy-detail">
+             <span>投资期限：12个月</span>
+             <span>投资金额：10000元</span>
+             <span>预期收益：100元/月（按月支付）</span>
+             <span><a href="#">立即加入</a></span>
+          </p>
+       </div>
+       <div class="tzsy-js hide">
+          <p class="tzsy-n">双季丰</p>
+          <p class="tzsy-detail">
+             <span>投资期限：6个月</span>
+             <span>投资金额：10000元</span>
+             <span>预期收益：10550元</span>
+             <span><a href="#">立即加入</a></span>
+          </p>
+       </div>
+       <div class="tzsy-js hide">
+          <p class="tzsy-n">单季盈</p>
+          <p class="tzsy-detail">
+             <span>投资期限：3个月</span>
+             <span>投资金额：10000元</span>
+             <span>预期收益：10225元</span>
+             <span><a href="#">立即加入</a></span>
+          </p>
+       </div>
+   </div>
+</div>
+<div class="pro_sybl InLine"><img src="__PUBLIC__/images/product_img2.png" /></div>
+<div class="pro_story InLine">
+   <ul>
+     <li>
+        <h3>我和妻子一起走上了“理财之路”</h3>
+        <p>我和妻子都是中学老师，儿子只有五岁。我们的收入稳定且固定，两个人每个月工资收入5000多元。我家一直没有统一“财政”，而是大方向分工，我妻子负责日常生活费用和宝宝的费用；我负责购买电器、孝敬父母等大项开支及个人烟...</p>
+     </li>
+     <li>
+        <h3>金投资让我欢喜让我忧</h3>
+        <p>    程先生，中国移动技术男，工作5年，今年28岁，新婚一年多时间，去年5月份开始在金投资线上平台投资，资金安全得到进一步保障，每月的利息收入快赶上工资了。
+  “金投资的起投才100元，由于和借款企业直接对接，省却...</p>
+     </li>
+     <li>
+        <h3>白领夫妻月入1.5万理财尽孝财富增值两不误</h3>
+        <p>    张先生和妻子都是独生子女，两人每月总收入1.5万元左右，年终奖3万元左右。家庭每月支出4000元，每月房贷4000多元。张先生和妻子都是独生子女，都是长春的白领阶层，两人每月总收入1.5万元左右，年终奖3万...</p>
+     </li>
+   </ul>
+</div>
+<div class="pro_sybl InLine" style=" margin-bottom:30px;">
+   <h3 class="pro_4_h"></h3>
+   <ul class="problem">
+      <li>
+        <h4>怎样确定是否投资成功？</h4>
+        <p>投资成功后，我们会以站内信的形式将信息发送给您；您投资的债权满标后，我们会通过短信告知您相关信息。</p>
+      </li>
+      <li>
+        <h4>请问我如何进行投资？</h4>
+        <p>您可以先浏览网站展示的项目，了解项目信息，如果比较感兴趣，请您在“首页”点击注册，进行“充值”后，在项目上线显示“投标按钮”时，您点击进入项目详情，输入投资金额，即可参与投资。</p>
+      </li>
+      <li>
+        <h4>我在金投资投资资金安全吗？</h4>
+        <p>金投资引入国内最先进、风控最完善的P2B平台金融信贷模式。 商务部旗下大型国有背景的第三方支付平台国付宝对用户账户进行资金管理。</p>
+      </li>
+      <li>
+        <h4>金投资的理财产品有哪些？收益和期限如何？</h4>
+        <p>用户您可以点击“我要投资”页面查看，页面上对产品都有详细的介绍，期限为1-12月不等，收益8-13%不等，是根据产品期限的不同，预期年化收益也有所不同。页面上有不同借款企业的介绍，企业资质和资金用途很透明，方便用户更好的选择。</p>
+      </li>
+   </ul>
+</div>
+
+<include file = "Common:bottom" />
+
+</body>
+</html>

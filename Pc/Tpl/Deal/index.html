@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>我要投资_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="金投资-最安全透明的互联网金融服务平台,汇聚了网络理财产品、小额投资理财等众多高收益理财产品，在这里您可以挑选最安全的个人理财产品以及短期理财产品，找网络理财投资平台、网络贷款平台就上金投资。"/>
+<include file = "Common:transparent" />
+</head>
+
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/index.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+
+<script type="text/javascript">
+  $(function() {        
+//投资项目进度条
+<foreach name="loan_list" item="v">
+ <php>$i++;</php>
+    var p_bar = $(".pro_percent #bard{$i}").attr("data-load{$i}");
+    $(".pro_percent #bard{$i}").css("width",p_bar);
+</foreach>
+});
+
+function day_cx(obj){    
+    $(obj).parents("dd").siblings().find("a").removeClass("on");
+    $(obj).addClass("on");    
+    $(".day_cx").show();
+    $(".month_cx").hide();
+}
+
+function month_cx(obj){
+    $(obj).parents("dd").siblings().find("a").removeClass("on");
+    $(obj).addClass("on");    
+    $(".month_cx").show();
+    $(".day_cx").hide();
+}
+</script>
+
+<body>
+<include file = "Common:head" />
+    
+    <!-- <h3 class="location" style="line-height:40px;">首页 > 我要投资</h3> -->
+
+<!-- 筛选条件 -->
+<div class="condition">
+	<div class="global_cen" style="margin-bottom:30px;">
+		<dl class="dl_condition">
+			<dt>项目状态：</dt>
+			<dd><a href="{:U('Deal/Index',array('k_deal_status'=>'','k_loan_deadline_type'=>$page_param['k_loan_deadline_type'],'k_loan_deadline'=>$page_param['k_loan_deadline'],'k_loan_rate'=>$page_param['k_loan_rate']))}" <if condition="$page_param['k_deal_status'] eq ''">class="on"</if>>全部</a></dd>
+			<dd><a href="{:U('Deal/Index',array('k_deal_status'=>1,'k_loan_deadline_type'=>$page_param['k_loan_deadline_type'],'k_loan_deadline'=>$page_param['k_loan_deadline'],'k_loan_rate'=>$page_param['k_loan_rate']))}"
+            <if condition="$page_param['k_deal_status'] eq 1">class="on"</if>
+            >投标中</a></dd>
+			<dd><a href="{:U('Deal/Index',array('k_deal_status'=>2,'k_loan_deadline_type'=>$page_param['k_loan_deadline_type'],'k_loan_deadline'=>$page_param['k_loan_deadline'],'k_loan_rate'=>$page_param['k_loan_rate']))}"  <if condition="$page_param['k_deal_status'] eq 2">class="on"</if>>投资满额</a></dd>
+			<dd><a href="{:U('Deal/Index',array('k_deal_status'=>4,'k_loan_deadline_type'=>$page_param['k_loan_deadline_type'],'k_loan_deadline'=>$page_param['k_loan_deadline'],'k_loan_rate'=>$page_param['k_loan_rate']))}"  <if condition="$page_param['k_deal_status'] eq 4">class="on"</if>>回款中</a></dd>
+			<dd><a href="{:U('Deal/Index',array('k_deal_status'=>5,'k_loan_deadline_type'=>$page_param['k_loan_deadline_type'],'k_loan_deadline'=>$page_param['k_loan_deadline'],'k_loan_rate'=>$page_param['k_loan_rate']))}"  <if condition="$page_param['k_deal_status'] eq 5">class="on"</if>>回款完毕</a></dd>
+		</dl>
+        <dl class="dl_condition">
+			<dt>项目期限：</dt>
+			<dd><a href="{:U('Deal/Index',array('k_deal_status'=>$page_param['k_deal_status'],'k_loan_deadline_type'=>'','k_loan_deadline'=>'','k_loan_rate'=>$page_param['k_loan_rate']))}" <if condition="$page_param['k_loan_deadline_type'] eq ''">class="on"</if>>全部</a></dd>
+			<dd><a href="javascript:;" class="query_day <if condition="$page_param['k_loan_deadline_type'] eq 1">on</if>" onclick="day_cx(this)">按天查询</a></dd>
+			<dd><a href="javascript:;" class="query_month  <if condition="$page_param['k_loan_deadline_type'] eq '0'">on</if>" onclick="month_cx(this)">按月查询</a></dd>
+		</dl>
+       <dl class="dl_condition day_cx <if condition="$page_param['k_loan_deadline_type'] neq 1">hide</if>">
+			<dt>项目期限：</dt>
+			<dd><a href="{:U('Deal/Index',array('k_deal_status'=>$page_param['k_deal_status'],'k_loan_deadline_type'=>1,'k_loan_deadline'=>'','k_loan_rate'=>$page_param['k_loan_rate']))}" <if condition="$page_param['k_loan_deadline_type'] eq 1 && $page_param['k_loan_deadline'] eq ''">class="on"</if>>全部</a></dd>
+			<dd><a href="{:U('Deal/Index',array('k_deal_status'=>$page_param['k_deal_status'],'k_loan_deadline_type'=>1,'k_loan_deadline'=>'0,7','k_loan_rate'=>$page_param['k_loan_rate']))}" <if condition="$page_param['k_loan_deadline'] eq '0,7'  && $page_param['k_loan_deadline_type'] eq 1">class="on"</if>>0-7天</a></dd>
+			<dd><a href="{:U('Deal/Index',array('k_deal_status'=>$page_param['k_deal_status'],'k_loan_deadline_type'=>1,'k_loan_deadline'=>'7,30','k_loan_rate'=>$page_param['k_loan_rate']))}" <if condition="$page_param['k_loan_deadline'] eq '7,30'  && $page_param['k_loan_deadline_type'] eq 1">class="on"</if>>7-30天</a></dd>
+			<dd><a href="{:U('Deal/Index',array('k_deal_status'=>$page_param['k_deal_status'],'k_loan_deadline_type'=>1,'k_loan_deadline'=>'30,90','k_loan_rate'=>$page_param['k_loan_rate']))}" <if condition="$page_param['k_loan_deadline'] eq '30,90'  && $page_param['k_loan_deadline_type'] eq 1">class="on"</if>>30-90天</a></dd>
+		</dl>
+		<dl class="dl_condition month_cx <if condition="$page_param['k_loan_deadline_type'] neq '0'">hide</if>">
+			<dt>项目期限：</dt>
+			<dd><a href="{:U('Deal/Index',array('k_deal_status'=>$page_param['k_deal_status'],'k_loan_deadline_type'=>0,'k_loan_deadline'=>'','k_loan_rate'=>$page_param['k_loan_rate']))}" <if condition="$page_param['k_loan_deadline_type'] eq '0' && $page_param['k_loan_deadline'] eq ''">class="on"</if>>全部</a></dd>
+			<dd><a href="{:U('Deal/Index',array('k_deal_status'=>$page_param['k_deal_status'],'k_loan_deadline_type'=>0,'k_loan_deadline'=>'0,1','k_loan_rate'=>$page_param['k_loan_rate']))}" <if condition="$page_param['k_loan_deadline'] eq '0,1' && $page_param['k_loan_deadline_type'] eq '0'">class="on"</if>>0-1个月</a></dd>
+			<dd><a href="{:U('Deal/Index',array('k_deal_status'=>$page_param['k_deal_status'],'k_loan_deadline_type'=>0,'k_loan_deadline'=>'1,3','k_loan_rate'=>$page_param['k_loan_rate']))}" <if condition="$page_param['k_loan_deadline'] eq '1,3'">class="on"</if>>1-3个月</a></dd>
+			<dd><a href="{:U('Deal/Index',array('k_deal_status'=>$page_param['k_deal_status'],'k_loan_deadline_type'=>0,'k_loan_deadline'=>'3,6','k_loan_rate'=>$page_param['k_loan_rate']))}" <if condition="$page_param['k_loan_deadline'] eq '3,6'">class="on"</if>>3-6个月</a></dd>
+		</dl>
+		<dl class="dl_condition">
+			<dt>项目收益：</dt>
+			<dd><a href="{:U('Deal/Index',array('k_deal_status'=>$page_param['k_deal_status'],'k_loan_deadline_type'=>$page_param['k_loan_deadline_type'],'k_loan_deadline'=>$page_param['k_loan_deadline'],'k_loan_rate'=>''))}" <if condition="$page_param['k_loan_rate'] eq ''">class="on"</if>>全部</a></dd>
+			<dd><a href="{:U('Deal/Index',array('k_deal_status'=>$page_param['k_deal_status'],'k_loan_deadline_type'=>$page_param['k_loan_deadline_type'],'k_loan_deadline'=>$page_param['k_loan_deadline'],'k_loan_rate'=>'elt10'))}" <if condition="$page_param['k_loan_rate'] eq 'elt10'">class="on"</if>>10%以下</a></dd>
+			<dd><a href="{:U('Deal/Index',array('k_deal_status'=>$page_param['k_deal_status'],'k_loan_deadline_type'=>$page_param['k_loan_deadline_type'],'k_loan_deadline'=>$page_param['k_loan_deadline'],'k_loan_rate'=>'10,12'))}" <if condition="$page_param['k_loan_rate'] eq '10,12'">class="on"</if>>10%-12%</a></dd>
+			<dd><a href="{:U('Deal/Index',array('k_deal_status'=>$page_param['k_deal_status'],'k_loan_deadline_type'=>$page_param['k_loan_deadline_type'],'k_loan_deadline'=>$page_param['k_loan_deadline'],'k_loan_rate'=>'12,14'))}" <if condition="$page_param['k_loan_rate'] eq '12,14'">class="on"</if>>12%-14%</a></dd>
+			<dd><a href="{:U('Deal/Index',array('k_deal_status'=>$page_param['k_deal_status'],'k_loan_deadline_type'=>$page_param['k_loan_deadline_type'],'k_loan_deadline'=>$page_param['k_loan_deadline'],'k_loan_rate'=>'gt14'))}" <if condition="$page_param['k_loan_rate'] eq 'gt14'">class="on"</if>>14%以上</a></dd>
+		</dl>
+	</div>
+</div>
+<div class="global_cen" style=" overflow:hidden; margin-top:0;">
+<empty name="loan_list">
+    <div style=" height:200px; line-height:50px;"><center>暂无数据！~</center></div>
+<else/>
+	<!-- 投资列表 -->
+	<php>$i=0;</php>
+	<foreach name="loan_list" item="v">           
+	<php>$i++;</php>
+	<div class="invest_item" <if condition="$i % 4 eq 1">style=" margin-left:0;"</if>>       						
+		<div  <if condition="$v['now_time'] LT $v['start_time'] && $v['deal_status'] eq 1">
+	        class="invest_list02"待开放
+	      </if>
+	      <if condition="$v['now_time'] EGT $v['start_time'] && $v['deal_status'] eq 1">
+	       class="invest_list"
+	      </if> 		
+		  <switch name="v.deal_status">
+		  <case value="2">class="invest_list03"</case>                 
+		  <case value="4">class="invest_list02"</case>	          
+		  <case value="5">class="invest_list02"</case>                        
+		  </switch>><!-- invest_list是立即投标样式 -->
+			<div class="invest_sort"><span>{$v.repayment_mode}</span><span>&nbsp;|&nbsp;</span><span>{$v.payment_source|msubstr=0,4}</span><img src="/Pc/Tpl/Public/images/Invest_icon.png" /></div>
+			<h4 class="invest_h4"><a href="{:U('Deal/DealContent',array('lid'=>$v['id']))}" title="{$v.loan_title}">{$v.loan_title|msubstr=0,12}</a></h4>
+			<p class="p_company mar-t-15"><span>{$v.guarantee_mode}</span>&nbsp;·&nbsp;<span>企业</span></p>
+			<div class="pro_percent02">
+				<div id="bard5" class="pro_progress02" style="width: {$v.load_rate}%;" original-title="{$v.load_rate}%"></div>
+			</div>
+			<p class="p_company"><span style=" color:#666;">{$v.count_amount|number_format}</span>&nbsp;/&nbsp;<span>{$v.loan_money|number_format}</span> &nbsp;<font color="#fe8854">{$v.load_rate}%</font></p>
+			<p class="p_company mar-t-15">{$v.company_info|msubstr=0,48}</p>
+			<div class="NewP_am mar-t-30">
+				<p class="P_am1" style="width:90px;">
+					<span class="Am_txt">年化利率</span>
+					<span class="Am_rate">  {$v.loan_rate|intval}
+                   <if condition="$v['loan_add_rate'] neq '0'"><i>+{$v.loan_add_rate|intval}</i></if><i>%</i></span>
+				</p>
+				<p class="am_p_last">
+					<span class="Am_txt">借款期限</span>
+					<span class="Am_limit">
+                  {$v.loan_deadline}
+                  <switch name="v.loan_deadline_type">
+                  <case value="0"><i>个月</i></case>
+                  <case value="1"><i>天</i></case>
+                  </switch> 
+				   </span>
+				</p>
+			</div>
+		</div>		
+	      <if condition="$v['now_time'] LT $v['start_time'] && $v['deal_status'] eq 1">
+	        <a class="invest_a02" href="javascript:;">待开放</a>
+	      </if>
+	      <if condition="$v['now_time'] EGT $v['start_time'] && $v['deal_status'] eq 1">
+	        <a href="{:U('Deal/DealContent',array('lid'=>$v['id']))}" target="_blank" class="invest_a01">投标</a>
+	      </if>        		
+	      <switch name="v.deal_status">
+	          <case value="2"><a href="javascript:;" class="invest_a03">满标</a></case>                      
+	          <case value="4"><a href="javascript:;" class="invest_a02">还款中</a></case>
+	          <case value="5"><a href="javascript:;" class="invest_a02">已还清</a></case>                        
+	      </switch>  		
+	</div>
+	</foreach>
+</empty>
+</div>
+
+<div class="global_cen">
+	<div class="page">{$page}</div>
+	<div class="spacer"></div> 
+</div>
+
+<include file = "Common:bottom" />
+</body>
+</html>

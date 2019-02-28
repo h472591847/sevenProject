@@ -1,0 +1,26 @@
+
+<div id="web_announce">
+   <span>网站公告：</span>
+   <div class="scroll_an">
+   <ul>
+     <php>         
+        $top_gg_list = M('info')->where('pid=20')->limit('0,2')->order('sort desc,time desc,id desc')->select();        
+        foreach ($top_gg_list as $key => $v){
+     </php>
+         <li><a href="{:U('Article/ArticleDetail',array('id'=>$v['id']))}" title="{$v.title}">{$v.title|msubstr=0,25}</a></li>
+     <php>}</php>
+   </ul>
+   </div>
+</div>
+<script type="text/javascript">
+function AutoScroll(obj){
+	$(obj).find("ul:first").animate({
+		marginTop:"-25px"
+	},500,function(){
+		$(this).css({marginTop:"0px"}).find("li:first").appendTo(this);
+	});
+}
+
+	setInterval('AutoScroll("#web_announce")',3000);
+
+</script>

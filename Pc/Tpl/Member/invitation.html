@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>邀请好友-{$Think.config.web_title}</title>
+<include file = "Common:transparent" />
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+<script type="text/javascript">
+function copyToClipboard(txt) {
+    if (window.clipboardData) {
+        window.clipboardData.clearData();
+        window.clipboardData.setData("Text", txt);
+        alert("已经成功复制到剪帖板上！");
+    } else if (navigator.userAgent.indexOf("Opera") != -1) {
+        window.location = txt;
+    } else if (window.netscape) {
+        // try {
+        //     netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+        // } catch(e) {
+        //     alert("被浏览器拒绝！\n请在浏览器地址栏输入'about:config'并回车\n然后将'signed.applets.codebase_principal_support'设置为'true'");
+        // }
+        var clip = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);
+        if (!clip) return;
+        var trans = Components.classes['@mozilla.org/widget/transferable;1'].createInstance(Components.interfaces.nsITransferable);
+        if (!trans) return;
+        trans.addDataFlavor('text/unicode');
+        var str = new Object();
+        var len = new Object();
+        var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+        var copytext = txt;
+        str.data = copytext;
+        trans.setTransferData("text/unicode", str, copytext.length * 2);
+        var clipid = Components.interfaces.nsIClipboard;
+        if (!clip) return false;
+        clip.setData(trans, null, clipid.kGlobalClipboard);
+        alert("已经成功复制到剪帖板上！");
+    }
+}
+function copyTo() {
+    $("input[name='copy_link']").focus();
+    $("input[name='copy_link']").select();
+    if(!$.browser.msie) {
+        alert('不支持此浏览器，请ctrl+c手工复制');return false;
+    }     
+    var txt = $("input[name=copy_link]").val();
+    copyToClipboard(txt);
+}
+</script>
+<script type="text/javascript" src="__PUBLIC__/js/table.js"></script>
+</head>
+<body>
+<include file = "Common:head" />
+<include file = "Common:web_announce" />
+<div class="middle">
+   <include file="Common:left_menu"/>
+   <div class="mid_right InLine">
+      <h3 class="bt" style="margin-bottom:30px;">邀请好友</h3>
+      <div class="mr_center">
+         <div><img src="__PUBLIC__/images/cz-img.jpg" /></div>
+         <div class="invitation">
+             <h3><span>邀请方式</span>复制下方链接分享给好友，您的好友<strong style="color:#F99">注册、充值并成功投资</strong>后，您便可获得500积分并且还会获得您好友投资额年化的1%奖励金额(投资后可提现)<br />
+例如:<font>如好友成功投资3个月标200,000元，那您即得 200,000/12 x 3 x 1%=500元</font> 。<br /><font class="tjr_id">您的推广ID为：{$uid}</font></h3>
+           <p class="copy_href">
+              <span>复制链接：</span>
+              <span><input type="text" name="copy_link" value="{$referral_links}" class="c_href"  onclick="copyTo();" /></span>
+              <span><input type="submit" value="复制" onclick="copyTo();" class="c_copy" /></span>              
+           </p>
+           
+           <div class="share">
+                <div class="bdsharebuttonbox" data-tag="share_1">
+                    <a class="bds_mshare" data-cmd="mshare"></a>
+                    <a class="bds_qzone" data-cmd="qzone" href="#"></a>
+                    <a class="bds_tsina" data-cmd="tsina"></a>
+                    <a class="bds_baidu" data-cmd="baidu"></a>
+                    <a class="bds_renren" data-cmd="renren"></a>
+                    <a class="bds_tqq" data-cmd="tqq"></a>
+                    <a class="bds_more" data-cmd="more">更多</a>
+                    <a class="bds_count" data-cmd="count"></a>
+                </div>
+                <script>
+                    window._bd_share_config = {
+                        common : {
+                            bdText : '',	
+                            bdDesc : '亲爱的，这个网站注册并完善信息就送50块钱，签到、邀请啥的还给钱，还总发奖品啥的，找几个电话号刷刷，整点小外快。',	
+                            bdUrl : '{$referral_links}', 	
+                            bdPic : ''
+                        },
+                        share : [{
+                            "bdSize" : 32
+                        }],
+                        
+                        image : [{
+                            viewType : 'list',
+                            viewPos : 'top',
+                            viewColor : 'black',
+                            viewSize : '32',
+                            viewList : ['qzone','tsina','huaban','tqq','renren']
+                        }],
+                        selectShare : [{
+                            "bdselectMiniList" : ['qzone','tqq','kaixin001','bdxc','tqf']
+                        }]
+                    }
+                    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+                </script>
+           </div>
+           
+           <p class="invi_xmj">
+              <span>小秘诀：</span>每成功邀请一位好友成功<strong style="color:#F99">注册、充值且成功投资</strong>即可获得500积分和1%的奖励金额(投资后可提现)，邀请越多，奖励越多，上不封顶
+           </p>
+        </div>
+        <div class="recom_h">
+          <ul>
+             <li class="recom_sel" style=" margin-left:0;"><a onclick="$(this).parent('li').addClass('recom_sel').siblings().removeClass('recom_sel');$('#frm_list').attr('src','{:U('Member/invitation_list',array('change'=>''))}')" style="cursor:pointer">推荐注册</a></li>
+             <li><a onclick="$(this).parent('li').addClass('recom_sel').siblings().removeClass('recom_sel');$('#frm_list').attr('src','{:U('Member/invitation_list',array('change'=>'score_log'))}')" style="cursor:pointer">积分奖励</a></li>
+             <li><a onclick="$(this).parent('li').addClass('recom_sel').siblings().removeClass('recom_sel');$('#frm_list').attr('src','{:U('Member/invitation_list',array('change'=>'deal_log'))}')" style="cursor:pointer">金额奖励</a></li>             
+          </ul>
+        </div>
+        <div class="recom_con"><iframe frameborder="0" id="frm_list" width="100%" height="700" src="{:U('Member/invitation_list',array('change'=>$change))}" scrolling="no"></iframe></div>  
+      </div>
+   </div>
+   <div class="spacer"></div>
+</div>
+<include file = "Common:bottom" />
+</body>
+</html>

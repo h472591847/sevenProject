@@ -1,0 +1,251 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>{$loan.loan_title}_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="{$Think.config.web_description}" />
+</head>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+<script type="text/javascript">
+/**
+ * checkDoAdd   处理投资表单
+ */
+function checkDoAdd(){
+    $lid = '{$lid}';
+    //数字判断，表单判断
+    if($.trim($money.val()) == 0 || !number_reg.test($.trim($money.val()))){
+      alert('请填写正确的投资金额');$money.val('');$money.focus();return false;
+    }  
+    $is_login = "{$Think.session.user_id}";
+    if($is_login == ''){
+      alert('请先登录');location.href='{:U("user/Login")}';return false;
+    }
+    //判断最低可投金额
+    $mod = parseFloat($.trim($money.val())) % parseFloat($min_loan_money);//输入金额是否能整除最小投资额    
+    if($mod!=0){
+      alert('投资金额需为{$loan.min_loan_money}或{$loan.min_loan_money}的倍数');return false;                      
+    }          
+    //判断最高可投金额     
+    if($money.val() > $max_loan_money){
+      alert('投资金额不能大于最高投资金额{$max_loan_money}');return false;
+    }
+    //判断剩余借款总额
+    if($money.val() > $loan_over){
+        alert('输入错误，投资总额'+$money.val()+'不可超过可投金额!'+$loan_over);return false;
+    }    
+    $submit_url = "{:U('Deal/DoAddInvested')}";  
+    //location.href= $submit_url+"?lid="+$lid+"&money="+$money.val()+"&code="+$("input[name='code']").val();         
+    $.ajax({
+      url: $submit_url,
+      type: 'POST',
+      dataType: 'json',
+      data:"lid="+$("#lid").val()+"&money="+$money.val()+"&rate_id="+$rate_id + "&code=" + $("input[name='code']").val(),
+      beforeSend:function(){
+        $("#invested_loading").show();//显示loading
+      },                         
+      success:function(msg){        
+           $("#invested_loading").hide();         
+           if(msg.status == '0'){
+             alert(msg.info);
+             if(msg.url != null){
+                location.href = msg.url;
+             }
+             return false;
+           }else{
+             alert(msg.info);location.href = msg.url;
+             return false;
+           }   
+      },
+      error:function(e){
+          alert('网络繁忙');return false;
+      }
+    })
+}  
+
+$(document).ready(function() {
+    /*手机浏览器中文输入法下不能捕捉keyup状态的兼容*/
+    var bind_name = 'input';
+    /*兼容IE内核*/
+    if (navigator.userAgent.indexOf("MSIE") != -1){
+      bind_name = 'propertychange';
+    }
+    $('#money').bind(bind_name, function(){
+      this.value.replace(/\D/g,'');
+      show_expect_money();
+    })
+    $("#money").keyup(function(){
+	  show_expect_money();
+	}).blur(function(){
+	   $(".expected").fadeOut();
+	});
+	
+	
+});
+
+/**
+ * show_expect_money   显示预期收益气泡
+ */
+function show_expect_money(){
+    $new_loan_rate = $loan_rate;
+    if($("#rate_id").attr('checked')){
+      $new_loan_rate = $new_loan_rate + parseFloat($("#rate_id").attr('data-value')/100);
+    }     
+    <if condition="$loan['loan_deadline_type'] eq '1'">
+    //预期收益 = 投资金额 * 年利率 / 365 * 借款期限
+    var expect_money = parseFloat($money.val()) * $new_loan_rate / 365 * $loan_deadline;
+    <else/>
+    //预期收益 = 投资金额 * 年利率 / 12 * 借款期限
+    var expect_money = parseFloat($money.val()) * $new_loan_rate / 12 * $loan_deadline;
+    </if>    
+    expect_money = Math.round(expect_money * 100)/100;//给用户显示收益  
+    temp_money = parseFloat($money.val() * {$Think.config.bonus_rate});//可用奖励金额
+    //若当前剩余奖励金额足以支付可用奖励金额,那么只使用可用的奖励金额
+    if(temp_money < parseFloat({$user_info.bonus_money})){
+      temp_money = temp_money;                                                         
+    }else{
+    //若剩余奖励金额不足可用奖励金额则使用全部奖励金额
+      temp_money = parseFloat({$user_info.bonus_money});
+    }
+    <empty name="user_info.id">
+    temp_money = 0;
+    <else/>
+    </empty>
+    use_money = parseFloat($money.val() - temp_money);    
+    $("#use_money").text(use_money);//输出使用余额
+    $("#expect_money").text(expect_money);
+    $("#temp_money").text(temp_money);//输出当前可用奖励金额
+    $(".expected").fadeIn();      
+}
+
+$(function(){
+   function windowalign(){
+    var bodyheight = $(window).height(),  //整个网页的宽度 如果这里是window ie6and ie7 得到的是负数
+     bodywidth = $(window).width(),  //整个网页的高度 如果这里是document ie7不会水平居中
+     wrapwidth = $(".row_to").width(),  //要垂直居中的内容的宽度
+     wrapheight = $(".row_to").height();  //要垂直居中的内容的高度度
+     postop = (bodyheight-wrapheight)/2;  
+	 // 获取顶部的position
+     posleft = (bodywidth-wrapwidth)/2;  
+	 // 获取左边部的position
+     $(".row_to").css({"left":posleft+"px","top":postop+"px"});  // 设置position
+   }
+   windowalign();
+   $(window).resize(function(){  // 当调整窗口的时候动态修正位置
+    windowalign();
+   });
+  })
+
+</script>
+<body>
+<div class="center">
+   <include file="Common:header"/>
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>投资详情</span>
+     <span></span>     
+     <!--登录后显示 start-->
+    <include file="Common:ico"/>
+     <!--end-->
+   </div>  
+   <div class="investment">
+      <h3>
+           <span class="at"><img src="__PUBLIC__/images/db.png"></span>
+           <span>{$loan.loan_title}</span>
+      </h3>
+      <div class="invest_xx">
+        <ul>
+           <li><span>可投余额</span><span><font color="#b00b00" size="+1">{$loan.loan_over|format_price}</font></span></li>
+           <li>
+               <span>账户余额</span>
+               <span>
+               <!--登录后显示-->
+               <if condition="$user_info['id'] neq ''">
+               {$user_info.money|format_price}
+               <else/>
+               <a href="{:U('user/Login')}" class="ix_cz">[登录]</a>
+               </if>
+                <a href="{:U('Member/TopUp')}" class="ix_cz">[充值]</a></span>
+           </li>
+           <if condition="$Think.session.user_id neq ''">
+           <li>
+               <span>奖励金额</span>
+               <span>{$user_info.bonus_money|format_price}</span>
+           </li>        
+           </if>
+        </ul>
+        <div class="spacer"></div>
+      </div>      
+      <div class="invest_xon">      
+         <ul>            
+            <input type="hidden" name="lid" id="lid" value="{$lid}">
+            <span id="loan_over" style="display:none">{$loan.loan_over}</span>
+            <span id="min_loan_money" style="display:none">{$loan.min_loan_money}</span>
+            <span id="max_loan_money" style="display:none">{$loan.max_loan_money}</span>
+            <span id="user_money" style="display:none">{$user_info.money}</span>            
+            <li class="invest_type">
+                <span class="sp_1">投资金额</span>
+                <span><input type="text" id="money" placeholder="投资金额应为50或50的倍数" class="confirm"></span>
+                <span class="expected">
+                <if condition="$Think.session.user_id neq ''">
+                 使用余额￥<font id="use_money"></font>元
+                <br>使用奖励金额：￥<font id="temp_money"></font>元
+                <br>
+                </if>
+                预期收益：￥<font id="expect_money"></font>元
+                </span>
+            </li>
+            <li><span class="sp_1">验证码</span><span class="sp_2"><input type="text" name="code"   placeholder="请输入验证码" class="confirm cf_yzm"></span><span class="sp_3" onclick="change_code(this)"><img src="{:U("user/verify",'','')}" id="code" width="110" height="38" /></span></li>
+            <if condition="$web_user_rate_count GT 0">
+            <li><input name="rate_id" id="rate_id" type="checkbox" onchange="change_rate(this)" value="{$one_user_rate_res.id}" data-value="{$one_user_rate_res.add_rate}">使用加息1%券（剩余3张）</li>
+            </if>
+            <li class="spacer"></li>
+         </ul>
+        <if condition="$loan['deal_status'] eq 1">
+          <!-- <a style="cursor:pointer" onclick="checkDoAdd()" class="tz_sub" style=" width:100%;">投资</a>    -->
+          <a onclick="checkDoAdd()" class="tz_sub" style="width:100%;">投资</a>   
+        </if>     
+        <if condition="$loan['deal_status'] eq 4">
+          <a href="#" class="tz_sub tz_hk">还款中</a>    
+        </if>
+      </div>      
+      <div class="spacer"></div>
+   </div>
+   <include file="Common:bottom"/>
+</div>
+<div class="grey hide" id="invested_loading">
+    <div class="row_to">
+       请勿关闭或刷新...请耐心等待...
+    </div>
+</div>
+<script type="text/javascript">
+$money = $("#money");
+$lid = $("#lid");
+$min_loan_money = parseFloat($("#min_loan_money").text());//最低投资金额
+$max_loan_money = parseFloat($("#max_loan_money").text());//最高投资金额
+$loan_over = parseFloat($("#loan_over").text());//可投余额          
+$user_money = parseFloat($("#user_money").text());//用户当前可用余额
+$loan_rate = (parseFloat("{$loan.loan_rate}") + parseFloat("{$loan.loan_add_rate}")) / 100;//年利率
+$loan_deadline = parseFloat("{$loan.loan_deadline}");//借款期限（月）
+$rate_id = '';//初始化加息券ID
+//勾选加息券ID传值
+if($("#rate_id").attr('checked')){
+ $rate_id = $("#rate_id").val();
+}      
+var number_reg = /^\d+$/;
+  //更换验证码
+  verifyURL = '{:U("user/verify",'','')}';
+  function change_code(obj){
+      $("#code").attr("src",verifyURL+'/'+Math.random());
+      return false;
+  }  
+</script>
+
+</body>
+</html>
+

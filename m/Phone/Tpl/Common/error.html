@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>错误页</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="{$Think.config.web_description}" />
+
+</head>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<body>
+<include file = "Common:head" />
+   <div class="mid_center">
+      <div class="prompt_error">
+         <p ><?php echo($error); ?></p>
+	     <div>页面将在 <span id="wait"><?php echo($waitSecond); ?></span> 秒后<a id="href" href="<?php echo($jumpUrl); ?>">跳转</a> 或 <a href="/index.php">返回首页</a>返回</div>
+      </div>
+      
+   </div>        
+<include file = "Common:bottom" />
+</body>
+</html>
+<script type="text/javascript">
+(function(){
+var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+var interval = setInterval(function(){
+    var time = --wait.innerHTML;
+    if(time <= 0) {
+        location.href = href;
+        clearInterval(interval);
+    };
+}, 1000);
+})();
+</script>

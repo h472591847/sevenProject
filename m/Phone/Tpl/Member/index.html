@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>会员中心-{$Think.config.web_title}</title>
+
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+</head>
+<body>
+<div class="center">
+   <include file = "Common:header" />
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>会员中心</span>
+     <span></span>     
+     <!--登录后显示 start-->
+     <include file="Common:ico"/>
+     <!--end-->
+   </div>    
+   <div class="userinfo">
+      <!--<h3 class="user_name"></h3>-->
+      <ul class="user_sign">
+         <li class="user_zong">
+           <span>资产总额(元)</span>
+           <span class="user_z_txt">{$deal_static.count_user_money}</span>
+         </li>
+         <li class="user_wenz">
+            <span class="user_Hi">Hi,{$Think.session.user_name}</span>
+            <span>我的积分：<font id="jf_credit">{$user_info.score}</font></span>
+         </li>
+         <li class="sign_in" id="sign_in">
+            <span <if condition="$sign_status eq 1">class="sign_wc"<else/>class="sign_qd"</if> style="cursor:pointer;">周{$week}</span>
+            <span class="my_jf">连续签到<font id="sign_day">{$user_info.continu_login}</font>天</span>
+         </li>
+      </ul>
+<script type="text/javascript">
+/*签到功能处理*/
+$("#sign_in").click(function(){
+  $.ajax({
+    url: "{:U('Member/SignIn')}",
+    type: 'POST',
+    dataType: 'json',
+    data: 'type=sign_in',
+    success:function(msg){
+      if(msg.status == '0'){
+        alert(msg.info);return false;
+      }
+      if(msg.status == '1'){
+        alert(msg.info);
+        $("#sign_in .sign_qd").attr('class','sign_wc');//改变签到成功状态                    
+        $("#sign_day").text(msg.data.continu_login);//连续签到天数
+        $("#sign_points").text(msg.data.count_score);//连续签到得到的总分
+        $("#jf_credit").text(msg.data.ref_score);//刷新用户总积分
+        return false;
+      }
+      return false;
+    }
+  })  
+});  
+</script>      
+      <ul class="statistical">
+         <li>
+           <span class="sta_txt">可用余额</span>
+           <span class="sta_amount">{$deal_static.true_money|format_price}</span>
+         </li>
+         <li>
+           <span class="sta_txt">累计收益</span>
+           <span class="sta_amount">{$deal_static.sum_money|format_price}</span>
+         </li>
+         <li style="border-right:none;">
+           <span class="sta_txt">奖励金额</span>
+           <span class="sta_amount">{$user_info.bonus_money|format_price}</span>
+         </li>
+      </ul>
+      <ul class="user_menu">
+         <li>
+            <span class="info_icon"><a href="{:U('Member/personal')}" title=""><img src="__PUBLIC__/images/user_icon1.png" alt="" /></a></span>
+            <span><a href="{:U('Member/personal')}" title="">个人资料</a></span>
+         </li>
+         <li>
+            <span class="info_icon"><a href="{:U('Member/assets')}" title=""><img src="__PUBLIC__/images/user_icon2.png" alt="" /></a></span>
+            <span><a href="{:U('Member/assets')}" title="">资产统计</a></span>
+         </li>
+         <li style=" border-right:none;">
+            <span class="info_icon"><a href="{:U('Member/trading')}" title=""><img src="__PUBLIC__/images/user_icon3.png" alt="" /></a></span>
+            <span><a href="{:U('Member/trading')}" title="">交易记录</a></span>
+         </li>
+         <li>
+            <span class="info_icon"><a href="{:U('Member/investment')}" title=""><img src="__PUBLIC__/images/user_icon4.png" alt="" /></a></span>
+            <span><a href="{:U('Member/investment')}" title="">投资记录</a></span>
+         </li>
+         <li style="">
+            <span class="info_icon"><a href="{:U('Member/bank_card')}" title=""><img src="__PUBLIC__/images/user_icon5.png" alt="" /></a></span>
+            <span><a href="{:U('Member/bank_card')}" title="">我的银行卡</a></span>
+         </li>
+         <li style=" border-right:none;">
+            <span class="info_icon"><a href="{:U('Member/withdrawal')}" title=""><img src="__PUBLIC__/images/user_icon6.png" alt="" /></a></span>
+            <span><a href="{:U('Member/withdrawal')}" title="">充值/提现</a></span>
+         </li>
+         <li class="message_L">
+            <span class="info_icon"><a href="{:U('Member/message')}" title=""><img src="__PUBLIC__/images/user_icon7.png" alt="" /></a></span>
+            <span><a href="{:U('Member/message')}" title="">消息中心</a></span>
+            <if condition="$count_read neq 0"><span class="No_Read">{$count_read}</span></if>
+         </li>
+         <li style=" border-bottom:none;">
+            <span class="info_icon"><a href="{:U('Member/integral')}" title=""><img src="__PUBLIC__/images/user_icon8.png" alt="" /></a></span>
+            <span><a href="{:U('Member/integral')}" title="">我的积分</a></span>
+         </li>
+         <li style=" border-right:none;border-bottom:none;">
+            <span class="info_icon"><a href="{:U('Member/invitation')}" title=""><img src="__PUBLIC__/images/user_icon9.png" alt="" /></a></span>
+            <span><a href="{:U('Member/invitation')}" title="">邀请好友</a></span>
+         </li>
+      </ul>
+      <p class="exit"><a href="{:U('user/ExitUser')}">退出登录</a></p>
+   </div>
+   <include file="Common:member_bottom"/>
+</div>
+</body>
+</html>

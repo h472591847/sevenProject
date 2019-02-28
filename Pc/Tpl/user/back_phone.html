@@ -1,0 +1,175 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>通过手机找回密码-{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="{$Think.config.web_description}" />
+<include file = "Common:transparent" />
+</head>
+<link href="__PUBLIC__/style/base.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/register.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<body>
+<include file = "Common:head" />
+
+<form action="{:U('user/DoGetPasswordInPhone')}" method="post">
+<div class="reg_cen">
+   <div class="reg_step reg_step2">
+      <ul>
+        <li class="white">填写信息</li>
+        <li class="white">验证信息</li>
+        <li>重置密码</li>
+      </ul>
+  </div>
+   <div class="reg_bot">
+      <table cellpadding="0" cellspacing="0" border="0" width="70%" class="reg_bd" style="margin-left:50px;">
+         <tr>
+            <td align="right" height="60">手机：</td>
+            <td class="fl"><input type="text"  name="phone" id="phone" class="login_phone" value="请输入您的手机号" class="login_message" onclick="if(this.defaultValue==this.value){this.value='';}" onblur="if(this.value==''){this.value=this.defaultValue;}"  /></td>
+         </tr>
+         <tr>
+            <td align="right" height="60">验证码：</td>
+            <td class="fl">
+                <input type="text" value="请输验证码" onclick="if(this.defaultValue==this.value){this.value='';}" class="login_code" name="verify" onblur="check_verify(this)" style=" float:left;" />
+                <span class="yzm_code">
+                <a href="javascript:void(change_code(this));">
+                     <img src="{:U("user/verify",'','')}" id="code"/>
+                     <!-- <img src="/code.php" id="code"/> -->
+                </a>
+                </span>
+            </td>
+         </tr>         
+         <tr>
+            <td width="25%" height="60" align="right">手机验证码：</td>
+            <td width="75%" class="fl">
+                <input type="text" value="请输入验证码" onclick="if(this.defaultValue==this.value){this.value='';}" onblur="if(this.value==''){this.value=this.defaultValue;}"  class="login_code" name="phone_code" style=" float:left;" />
+                <input type="button" value="获取短信验证码" id="send_code" onclick="sendCode(this,1)"   class="hq_yz" />
+                <input type="button" value="获取语音验证码" id="send_code_voice" onclick="sendCode(this,2)"  class="hq_yz yz_voice" /></td>
+         </tr>
+
+         <tr>
+            <td height="70">&nbsp;</td>
+            <td class="fl"><input type="submit" value="密码找回" class="login_sub" id="submit_phone" /></td>
+         </tr>
+      </table>
+
+   </div>
+</div>
+ </form>
+ <script type="text/javascript">
+
+verifyURL = '{:U("user/verify","","")}';
+// verifyURL = '/code.php';
+function change_code(obj){
+    $("#code").attr("src",verifyURL+'/'+Math.random());
+    return false;
+}  
+
+//ajax验证图形验证码
+function check_verify(obj){
+  if(this.value==''){this.value=this.defaultValue;}    
+  if($(obj).val() != ''){    
+    /*验证用户名是否存在*/
+    $.ajax({
+      url: '{:U("user/CheckVerify")}',
+      type: 'POST',
+      data: "verify="+$(obj).val(),
+      success:function(data){
+        if(data.status == '1'){
+          $("#send_code").attr('data-status','complate');
+          $("#send_code_voice").attr('data-status','complate');
+          return false;
+        }else{
+          $("#send_code").attr('data-status','none');
+          $("#send_code_voice").attr('data-status','none');
+          return false;                  
+        }
+      }          
+    })          
+  }
+}  
+
+//手机找回表单验证
+$verify = $("input[name=verify]");
+$phone_code = $("input[name=phone_code]");
+$phone = $("#phone");
+$phone.blur(function(event) {
+  if($phone.val() != '' && $phone.val() != '请输入您的手机号'){
+    /*验证手机号是否存在*/
+    $.ajax({
+      url: '{:U("user/VerifyUserExist")}',
+      type: 'POST',
+      data: "type=phone&v="+this.value,
+      success:function(data){
+        if(data.status == '1' || data == ''){            
+          alert('该手机号码未注册'); $phone.focus();return false;
+        }
+      }          
+    })   
+  }
+});
+
+//验证码长度判断
+$("#submit_phone").click(function(){  
+
+   if($phone_code.val().length < 4 || $phone_code.val() == '请输验证码'){
+      alert('验证码输入不正确');$phone_code.val('');$phone_code.focus();return false;
+   }
+})
+
+
+/**
+ * 发送短信倒计时
+ * @param   obj   元素对象
+ * @param   stime 倒计时时间总数
+ * @return        定时器
+ */
+function sendMobileTime(obj, stime,type) {      
+    setTimeout(function (){
+        var _stime = stime - 1;
+        if (_stime) {
+            $(obj).val(_stime-1 + '秒后可重新获取');                            
+            sendMobileTime(obj, _stime,type);
+            $("#send_code").attr("onClick","return false");//倒计时中停止点击事件
+        } else {                    
+            $(obj).val('免费获取验证码');   //倒计时停止时将元素的文本初始化             
+            $("#send_code").attr("onClick","sendCode(this,"+type+")");//倒计时停止加回点击事件sendCode方法
+        }
+    }, 1000);
+}   
+
+
+/**
+ * 单击发送验证码时候的操作     
+ */
+  function sendCode(obj,type){
+    var phone_reg = /^(1[3|4|5|7|8]\d{9})$/;//手机号正则过滤                 
+    if(!phone_reg.test($phone.val())){
+        alert('请输入正确的手机号码');
+        $phone.focus();
+        return false;
+    }    
+    if($(obj).attr('data-status') != 'complate'){
+        alert('验证码不正确');$("#verify").focus();return false;
+    }                     
+    $.ajax({
+       dataType: "JSON",
+       url: "{:U('user/sendCode')}",
+       data: "phone="+$phone.val()+"&type="+type+"&temp_str=手机找回密码",
+       success: function(msg){          
+          //msg = eval("("+msg.responseText+")");                             
+          if(msg.status == 0){                  
+              alert(msg.info);return false;
+          }else{            
+              sendMobileTime(obj,61,type);
+          }
+       }
+    }); 
+  } 
+
+</script>   
+<include file = "Common:bottom" />
+</body>
+</html>

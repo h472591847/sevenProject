@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="__PUBLIC__/css/bdmin.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+function CheckAll(form)  {
+  for (var i=0;i<form.elements.length;i++)    {
+    var e = form.elements[i];
+    if (e.name != 'chkall')       e.checked = form.chkall.checked; 
+   }
+  }
+</script>
+</HEAD>
+<BODY>
+<TABLE class="hs12pt" cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD height="22" >当前位置: 大转盘/信息管理</TD>
+  </TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR></TABLE>
+<TABLE class="hs12pt" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="22" background="__PUBLIC__/images/title_bg2.jpg">&nbsp;&nbsp;&nbsp;<span class="baise12ct">信息管理</span></td>
+  </tr>
+</table>
+  <TABLE class="hs12pt" width="100%" border=1 align=center cellPadding=2 cellSpacing=0 bordercolor="#175CB7" bordercolordark="#E3EFFB">
+<!-- <form action="" method="post">
+<input type="hidden" name="pid" value="{$pid}">
+    <TR>
+      <TD height="25" colspan="2" align=center >按类别查看：</TD>
+      <TD height="25" colspan="3" align=center >
+        <select class="text" onChange="MM_jumpMenu('self',this,0)">
+          <option value="{:U('Info/Index')}">-查看全部信息-</option>
+  <foreach name='cate' item='v'>
+    <option value="{:U('Info/Index',array('pid'=>$v['id']))}" <?php if(I('pid')==$v['id']){ echo 'selected="selected"';} ?> >{$v.html}{$v.name}</option>
+  </foreach>
+      </select></TD>
+      <TD height="25" align=center >模糊查询:</TD>
+      <TD width="10%" height="25" align=center ><input name="ss" type="text" class="text" style="color:#999999" onFocus="this.style.color='#000000';if(this.value=='请输入查询标题')this.value='';" onBlur="if(this.value==''){this.value='请输入查询标题';this.style.color='#999999';}" value="{$ss}" size="20" maxlength="50"></TD>
+      <TD height="25" align=center ><input type="submit" value="查询"></TD>
+    </TR>
+</form>   -->
+
+<tr>
+  <td align="center">名称</td>
+  <td align="center">缩略图</td>
+  <td align="center">操作</td>
+</tr>
+<foreach name="dir_list" item="v">
+  <TR>
+    <td align="center">
+      <if condition="$parent_dir neq ''">
+      <a href="{:U('UploadManage/Index')}?dir_name={$parent_dir}/{$v}">{$v}<font style="color:#014EB8">(文件夹)</font></a>
+      <else/>
+      <a href="{:U('UploadManage/Index',array('dir_name'=>$v))}">{$v}<font style="color:#014EB8">(文件夹)</font></a>
+      </if>      
+    </td>
+    <td align="center">无</td>
+    <td align="center">无</td>
+  </TR>
+</foreach>
+<empty name="file_list">
+<else/>
+<tr>
+  <td colspan="3" align="center" height="50">当前路径：{$host_dir_url}{$parent_dir} 当前文件夹共有<font style="color:#F00"><php>echo count($file_list);</php></font>个文件</td>
+</tr>
+</empty>
+<foreach name="file_list" item="v">
+  <TR>    
+    <td align="center">    
+      <if condition="$parent_dir neq ''">  
+      <a href="{$host_dir_url}{$parent_dir}/{$v}" target="_blank">{$v}</a>
+      <else/>
+      <a href="{$host_dir_url}{$v}" target="_blank">{$v}</a>
+      </if>
+    </td>  
+    <td align="center">
+      <if condition="$parent_dir neq ''">  
+      <a href="{$host_dir_url}{$parent_dir}/{$v}" title="点击查看大图" target="_blank">
+      <img src="{$host_dir_url}{$parent_dir}/{$v}" width="50" height="50"> 
+      </a>
+      <else/>
+      <a href="{$host_dir_url}{$v}" title="点击查看大图" target="_blank">
+      <img src="{$host_dir_url}{$v}" width="50" height="50">
+      </a>
+      </if>
+    </td>  
+    <td align="center">
+      <if condition="$parent_dir neq ''">  
+      <a href="{:U('UploadManage/DeleteFile')}?file_name={$parent_dir}/{$v}">删除</a>
+      <else/>
+      <a href="{:U('UploadManage/DeleteFile')}?file_name={$v}">删除</a>
+      </if>
+    </td>                    
+  </TR>
+</foreach>
+<if condition="$parent_dir neq ''">
+<tr>
+  <td align="center" colspan="3">
+    <a href="javascript:history.go(-1);" style="color:#014EB8">返回上一页</a>
+  </td>
+</tr>
+</if>
+  </TABLE>
+</BODY></HTML>

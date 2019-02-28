@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>充值-{$Think.config.web_title}</title>
+</head>
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/style.css" rel="stylesheet" type="text/css" />
+<include file = "Common:transparent" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<body>
+<include file = "Common:head" />
+<div class="middle">   
+  <include file="Common:left_menu"/>
+   <div class="mid_right">
+      <div class="mr_top"></div>
+      <div class="mr_center">
+         <h3 class="bt">充值</h3>
+         <form action="{:U('Member/incharge_redirect')}" target="_blank">
+            <table cellpadding="0" cellspacing="0" border="0" width="90%">
+                <tr>
+                   <td width="20%" height="90" align="right" style="padding-right:20px;">当前可用余额：</td>
+                   <td width="13%">{$user_info.money}元</td>
+                   <td width="67%"><span class="cz_skill">充值技巧</span></td>
+                </tr> 
+                <tr>
+                   <td height="70" align="right" style=" padding-right:20px;">充值金额：</td>
+                   <td colspan="2"><input type="text" class="top_up" name="money" id="money" /></td>
+                </tr>
+                <tr>
+                   <td height="70">&nbsp;</td>
+                   <td colspan="2"><input type="submit" value="确定" class="topup_sub" name="submit_topup" id="submit_topup" /></td>
+                </tr>
+            </table>
+          </form>
+          <div class="prompt">
+             <font color="#e44343">温馨提示</font> <br />
+              1、<font color="#FF0000">请投资人根据发标计划合理充值，因金投资无法触及用户资金账户，无法收取用户任何费用，为防止套现，所充资金必须经投标回款后才能提现</font><br />
+              2、请注意您的银行卡充值限制，以免造成不便。<br />
+              3、充值过程中可能会因网络问题出现延迟，如果15分钟内充值金额没有及时到账，请与客服联系。<br />
+              4、金投资禁止信用卡套现、虚假交易等行为，一经发现将予以处罚，包括但不限于:限制收款、冻结账户，永久停止服务等。<br /> 
+              5、网上银行充值过程中请耐心等待,充值成功后，请不要关闭浏览器,充值成功后返回金投资,充值金额才能打入您的帐号。
+              如有问题，请与我们联系4006-570-826。
+          </div>
+         <div class="spacer"></div>
+      </div>
+      <div class="mr_bottom"></div>
+   </div>
+   <div class="spacer"></div>
+</div>
+<script type="text/javascript">
+  $("#submit_topup").click(function(){
+    <empty name="no">
+     $money = $("#money");
+      var number_reg = /^[0-9]+$/;  //验证输入是否为数字      
+      if(!number_reg.test(parseFloat($.trim($money.val()))) || $.trim($money.val()) == '' || $.trim($money.val()) == 0){
+        alert('金额输入错误，请重新输入');
+        return false;
+      } 
+      if(parseFloat($.trim($money.val())) < parseFloat(100)){
+        alert('充值金额最低为100元');
+        return false;        
+      }
+    <else/>
+    </empty>
+  })
+</script>
+<include file = "Common:bottom" />
+
+</body>
+</html>

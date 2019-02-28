@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>我的银行卡-{$Think.config.web_title}</title>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+</head>
+<body>
+<div class="center">
+   <include file = "Common:header" />
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>我的银行卡</span>
+     <span></span>     
+     <!--登录后显示 start-->
+     <include file="Common:ico"/>
+     <!--end-->
+   </div> 
+   <div class="bound">
+      <ul>
+      <foreach name="bank_list" item="v">
+         <li class="default">
+            <a href="{:U('Member/modify_bank',array('upid'=>$v['id']))}">
+            <p>
+               <span>
+               <switch name="v.bank_name">
+               <case value="中国工商银行"><img src="__PUBLIC__/images/bank_a.png" alt="中国工商银行" /></case>
+               <case value="中国建设银行"><img src="__PUBLIC__/images/bank_b.png"  alt="中国建设银行" /></case>
+               <case value="中国农业银行"><img src="__PUBLIC__/images/bank_c.png"  alt="中国农业银行" /></case>
+               <case value="中国银行"><img src="__PUBLIC__/images/bank_d.png"  alt="中国银行" /></case>
+               <case value="交通银行"><img src="__PUBLIC__/images/bank_e.png"  alt="交通银行" /></case>
+               <case value="招商银行"><img src="__PUBLIC__/images/bank_f.png"  alt="招商银行" /></case>
+               <case value="兴业银行"><img src="__PUBLIC__/images/bank_g.png"  alt="兴业银行" /></case>
+               <case value="中国光大银行"><img src="__PUBLIC__/images/bank_h.png"  alt="中国光大银行" /></case>
+               <case value="广发银行"><img src="__PUBLIC__/images/bank_i.png"  alt="广发银行" /></case>
+               <case value="北京银行"><img src="__PUBLIC__/images/bank_j.png" alt="北京银行" /></case>
+               <case value="平安银行"><img src="__PUBLIC__/images/bank_k.png"  alt="平安银行" /></case>
+               <case value="中国邮政储蓄银行"><img src="__PUBLIC__/images/bank_l.png" alt="中国邮政储蓄银行" /></case>
+               <case value="中国民生银行"><img src="__PUBLIC__/images/bank_m.png"  alt="中国民生银行" /></case>
+               <case value="上海浦东发展银行"><img src="__PUBLIC__/images/bank_n.png"  alt="上海浦东发展银行" /></case>
+               <case value="中信银行"><img src="__PUBLIC__/images/bank_o.png"  alt="中信银行" /></case>
+               <case value="渤海银行"><img src="__PUBLIC__/images/bank_p.png"  alt="渤海银行" /></case>
+               <case value="上海银行"><img src="__PUBLIC__/images/bank_q.png"  alt="上海银行" /></case>
+               </switch>  
+               </span>             
+            </p>
+            <span><font>{$v.bank_name}</font><font>尾号：{$v.bank_number_view}</font></span>
+            <span class="default_mark"><if condition="$v['is_default'] eq 1">默认提现卡</if><i>></i></span>
+            </a>
+         </li>
+      </foreach>
+      </ul>
+      <div class="add_bank"><a href="{:U('Member/add_bank')}">添加银行卡</a></div>
+      <div class="spacer"></div>
+   </div>
+   <include file="Common:member_bottom"/>
+</div>
+</body>
+</html>

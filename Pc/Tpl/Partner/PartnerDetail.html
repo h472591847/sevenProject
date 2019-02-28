@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$info.title}_{$cate.name}_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="<if condition="$cate['description'] neq ''">{$cate.description}<else/>{$Think.config.web_description}</if>" />
+<include file = "Common:transparent" />
+</head>
+<link href="__PUBLIC__/style/base.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/page.css" type="text/css" rel="stylesheet" />
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<!--大图-->
+<link href="__PUBLIC__/style/litebox.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript">
+$(document).ready(function() {
+     
+    var $div_li = $(".db_tabmenu ul li");
+	$div_li.click(function(){
+        $(this).addClass("db_sel").siblings().removeClass("db_sel");
+		var index = $div_li.index(this);//index() 方法返回指定元素相对于其他指定元素的 index 位置
+		$("div.db_tabbox > .db_box").eq(index).show().siblings().hide();
+	});	
+	
+	
+});
+</script>
+
+<body>
+<include file = "Common:head" />
+
+<div class="project_mid">
+    <h3 class="location">首页 > {$cate.name} > {$info.title}</h3>
+    <div class="guarantee">
+        <h3 class="db_h3">{$info.title}</h3>
+        <div class="db_base">
+           <h4>基本信息</h4>
+           <p>
+               <span>注册资金：{$info.reg_fund}</span>
+               <span>公司成立时间：{$info.company_create_time}</span>
+               <span>开始合作时间：{$info.join_time}</span>
+               <span>联系电话：{$info.company_tel}</span>
+               <span class="db_base_last">公司网址：{$info.company_url}</span>  
+               <span class="db_base_last"><i>公司地址：</i>{$info.company_address}</span>
+           </p>
+           
+           <div class="spacer"></div>
+        </div>
+        <div class="db_prove">
+           <h4 style="margin-bottom:5px;">相关图片</h4>
+           <!--<ul class="zz_prove prove_m">
+             <foreach name="info.imgs" item="img">
+                 <li><a href="{$img}" target="_self" class="litebox" data-litebox-group="group-2"><img src="{$img}" width="200" /></a></li>
+             </foreach>
+           </ul>-->
+           <script type="text/javascript" src="__PUBLIC__/js/common.js"></script>
+           <div class="partner_pic">
+                  <div class="part_prev" id="part_prev" title="上一个"></div>
+                  <div id="part_img">
+                    <ul>
+                      <foreach name="info.imgs" item="img">
+                         <li><a href="{$img}" target="_self" class="litebox" data-litebox-group="group-2"><img src="{$img}" width="200" /></a></li>
+                      </foreach>
+                    </ul>
+                    <div class="cl"></div>
+                  </div>
+                  <div class="part_next" id="part_next" title="下一个"></div>
+                  <SCRIPT type=text/javascript>
+                            var scrollPic_01 = new ScrollPic();
+                            scrollPic_01.scrollContId   = "part_img"; //内容容器ID
+                            scrollPic_01.arrLeftId      = "part_prev";//左箭头ID
+                            scrollPic_01.arrRightId     = "part_next"; //右箭头ID
+                            scrollPic_01.frameWidth     = 435;//显示框宽度
+                            scrollPic_01.pageWidth      = 222; //翻页宽度
+                            scrollPic_01.speed          = 20; //移动速度(单位毫秒，越小越快)
+                            scrollPic_01.space          = 20; //每次移动像素(单位px，越大越快)
+                            scrollPic_01.autoPlay       = true; //自动播放
+                            scrollPic_01.autoPlayTime   = 5; //自动播放间隔时间(秒)
+                            scrollPic_01.initialize(); //初始化            
+                   </SCRIPT>
+         </div>
+        </div>
+        <div class="spacer"></div>
+        <div class="db_con">
+           <h4>公司简介</h4>
+           <p>{$info.content}</p>
+        </div>
+        
+    </div>
+    
+  <div class="db_page">
+        <h3 class="db_h">招募要求</h3>
+		<div style="overflow:hidden; width:958px; margin-top:10px;">
+			<dl class="dl_partner_d">
+				<dt><img src="__PUBLIC__/images/ico01_dt_db.gif" /><p>东三省联合</p></dt>
+				<dd>东北三省横向联合，穿插黑吉辽业务，构建完整金融服务体系</dd>
+			</dl>
+			<dl class="dl_partner_d">
+				<dt><img src="__PUBLIC__/images/ico02_dt_db.gif" /><p>债务透明</p></dt>
+				<dd>确保债务人民间隐形债务清晰透明，避免民间借贷征信信息不足</dd>
+			</dl>
+			<dl class="dl_partner_d">
+				<dt><img src="__PUBLIC__/images/ico03_dt_db.gif" /><p>资源支持</p></dt>
+				<dd>获得强力资源支持，帮助中小微企业快速成长</dd>
+			</dl>
+			<dl class="dl_partner_d">
+				<dt><img src="__PUBLIC__/images/ico04_dt_db.gif" /><p>资源共享</p></dt>
+				<dd>优质债权资源多方共享</dd>
+			</dl>
+			<dl class="dl_partner_d">
+				<dt><img src="__PUBLIC__/images/ico05_dt_db.gif" /><p>咨询支持</p></dt>
+				<dd>获得强力诉讼保全咨询支持，加大违约成本，降低业务风险</dd>
+			</dl>
+		</div>
+        
+		<table cellpadding="0" cellspacing="0" border="0" class="table_partner_d gray_border_table">
+			<colgroup>
+				<col width="" />
+				<col width="" />
+				<col width="" />
+				<col width="" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th>小贷公司招募要求</th>
+					<th>典当公司招募要求</th>
+					<th>担保公司招募要求</th>
+					<th>关于金湧</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<p>注册资金五千万以上</p>
+						<p>获得当地金融办审批通过</p>
+						<p>拥有优质有抵押债权</p>
+						<p>合法经营两年以上</p>
+					</td>
+					<td>
+						<p>注册资金三千万以上</p>
+						<p>获得商务厅审批通过</p>
+						<p>合法经营两年以上</p>
+						<p>拥有优质有抵押债权</p>
+					</td>
+					<td>
+						<p>注册资金1亿元以上</p>
+						<p>合法经营两年以上</p>
+						<p>具备人民法院诉讼保全担保资格</p>
+						<p>进行反担保查封并提供责任担保</p>
+					</td>
+					<td>
+						<p>吉林省金湧博发投资管理有限公司，注册资本1亿元</p>
+						<p>吉林省金湧和发信息咨询有限公司，注册资本2千万元</p>
+						<p>吉林省金涌财富投资管理有限公司，注册资本1亿元</p>
+						<p>金投资互联网金融平台</p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+        <ul class="Patner_d">
+            <php>$i=0;</php>            
+            <foreach name="list" item="v">        
+            <php>$i++;</php>
+			<li  <if condition="$i eq 1 || $i % 6 eq 1">style=" margin-left:0;"</if>>
+				<a href="{:U('Partner/PartnerDetail',array('id'=>$v['id']))}" title="{$v.title}" target="_blank"><img src="<if condition="$v['img'] neq ''">{$v.img}<else/>/Public/Images/image_err.gif</if>" alt="{$v.title}" width="150" height="87" /></a>
+			</li>
+            </foreach>
+		</ul>
+        
+        <div class="spacer"></div>
+    </div>
+    
+</div>
+
+<include file = "Common:bottom" />
+
+<!--大图-->
+<script src="__PUBLIC__/js/smoothscroll.js" type="text/javascript"></script>
+<script src="__PUBLIC__/js/images-loaded.min.js" type="text/javascript"></script>
+<script src="__PUBLIC__/js/litebox.js" type="text/javascript"></script>
+<script src="__PUBLIC__/js/backbone.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	$('.litebox').liteBox();
+</script>
+<!---->
+</body>
+</html>

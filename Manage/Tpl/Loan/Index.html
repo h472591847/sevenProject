@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="__PUBLIC__/css/bdmin.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="__PUBLIC__/Js/jQuery.js" ></script>
+<script type="text/javascript" src="__PUBLIC__/Js/calendar/calendar.php?lang=zh-cn" ></script>
+<LINK href="__PUBLIC__/Js/calendar/calendar.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/Js/calendar/calendar.js"></script>
+<script type="text/javascript">
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+function CheckAll(form)  {
+  for (var i=0;i<form.elements.length;i++)    {
+    var e = form.elements[i];
+    if (e.name != 'chkall')       e.checked = form.chkall.checked; 
+   }
+  }
+</script>
+</HEAD>
+<BODY>
+<TABLE class="hs12pt" cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD height="22" >当前位置: 信息中心/信息管理</TD>
+  </TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR></TABLE>
+<TABLE class="hs12pt" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="22" background="__PUBLIC__/images/title_bg2.jpg">&nbsp;&nbsp;&nbsp;<span class="baise12ct">信息管理</span></td>
+  </tr>
+</table>
+  <TABLE class="hs12pt" width="100%" border=1 align=center cellPadding=2 cellSpacing=0 bordercolor="#175CB7" bordercolordark="#E3EFFB">
+<form action="{:U('Loan/index')}" method="post">
+    <TR>
+      <TD height="25" colspan=18 align=left style="padding-left:10px;">
+      项目ID：<input type="text" name="loan_id" value="{$page_param.loan_id}" size="5">&nbsp; &nbsp; 
+      项目名称:<input type="text" name="loan_title" value="{$page_param.loan_title}" size="10">&nbsp; &nbsp; 
+      产品类别：&nbsp;
+      <select name="class_id">
+        <option value="" >--- 请选择 ---</option>                     
+        <foreach name="product_class_arr" item="v">
+          <option value="{$v.id}" <if condition="$page_param['class_id'] eq $v['id']">selected="selected"</if>>{$v.class_name}</option>
+        </foreach>
+      </select>&nbsp; &nbsp; &nbsp;       
+      投标状态：&nbsp;
+      <select name="deal_status">
+        <option value="" >--- 请选择 ---</option>                     
+        <option value="1" <if condition="$page_param['deal_status'] eq 1">selected="selected"</if>>进行中</option>
+        <option value="2" <if condition="$page_param['deal_status'] eq 2">selected="selected"</if>>满标</option>
+        <option value="3" <if condition="$page_param['deal_status'] eq 3">selected="selected"</if>>流标</option>
+        <option value="4" <if condition="$page_param['deal_status'] eq 4">selected="selected"</if>>还款中</option>
+        <option value="5" <if condition="$page_param['deal_status'] eq 5">selected="selected"</if>>已还清</option>   
+      </select>&nbsp; &nbsp; &nbsp; 
+      
+      按发布时间：&nbsp; 
+      <input type="text" name="k_start_time" class="text" id="k_start_time" value="{$page_param.k_start_time}"  onfocus="this.blur(); return showCalendar('k_start_time', '%Y-%m-%d', false, false, 'btn_start_time');">      
+      <input type="button" class="button" id="btn_start_time" value="选择时间" onclick="return showCalendar('k_start_time', '%Y-%m-%d', false, false, 'btn_start_time');" />
+      <input type="button" class="button" value="清空时间" onclick="$('#k_start_time').val('');" />&nbsp; &nbsp;       
+       - &nbsp; &nbsp; 
+      <input type="text" name="k_end_time" id="k_end_time" value="{$page_param.k_end_time}" class="text" onfocus="this.blur(); return showCalendar('k_end_time', '%Y-%m-%d', false, false, 'btn_end_time');">
+      <input type="button" class="button" id="btn_end_time" value="选择时间" onclick="return showCalendar('k_end_time', '%Y-%m-%d', false, false, 'btn_end_time');" />
+    
+      </TD>      
+    </TR>
+    <tr>
+      <td colspan="18" height="30">
+      借款期限类型:
+      <select name="loan_deadline_type">                    
+          <option value="0" <if condition="$page_param['loan_deadline_type'] eq '0'">selected="selected"</if>>月</option>
+          <option value="1" <if condition="$page_param['loan_deadline_type'] eq '1'">selected="selected"</if>>天</option>
+      </select>&nbsp;      
+        按到期时间：&nbsp; 
+        <input type="text" name="e_start_time" class="text" id="e_start_time"  value="{$page_param.e_start_time}" onfocus="this.blur(); return showCalendar('e_start_time', '%Y-%m-%d', false, false, 'btn_e_start_time');">      
+        <input type="button" class="button" id="btn_e_start_time" value="选择时间" onclick="return showCalendar('e_start_time', '%Y-%m-%d', false, false, 'btn_e_start_time');" />
+        <input type="button" class="button" value="清空时间" onclick="$('#e_start_time').val('');" />&nbsp; &nbsp;       
+         - &nbsp; &nbsp; 
+        <input type="text" name="e_end_time" id="e_end_time" value="{$page_param.e_end_time}" class="text" onfocus="this.blur(); return showCalendar('e_end_time', '%Y-%m-%d', false, false, 'btn_e_end_time');">
+        <input type="button" class="button" id="btn_e_end_time" value="选择时间" onclick="return showCalendar('e_end_time', '%Y-%m-%d', false, false, 'btn_e_end_time');" />
+        <input type="button" class="button" value="清空时间" onclick="$('#e_end_time').val('');" />         
+        &nbsp; <input type="submit" value="开始查询">          
+      </td>
+    </tr>
+</form>  
+  <TR>
+    <TD  height="25" align=center >选择</TD>
+    <TD  align="center" >ID</TD>
+    <TD  align="center" >项目名称</TD>
+    <TD  align="center" >项目总额</TD>
+  	<TD align="center" >借款期限</TD>
+    <TD align="center" >借款用途</TD>
+  	<TD align="center" >推荐</TD>
+
+	  <TD  align="center" >投标状态</TD>
+    <TD  align="center" >还款状态</TD>  
+   	<TD  align="center" >有效状态</TD>
+    <TD  align="center" >发布时间</TD>
+    <TD  align="center" >开始时间</TD>
+    <TD  align="center" >筹标期限</TD>
+    <TD align="center" >满标时间</TD>
+    <TD align="center" >还款确认时间</TD>    
+    <TD align="center" >到期时间</TD>
+    <TD align="center" >排序</TD>
+    <TD width="10%" align="center" >操作</TD>
+  </TR>
+<form action="" method="post">
+<foreach name='info' item='v'>
+  <TR onMouseOver="this.style.background='#d0e2f5';" onMouseOut="this.style.background='#E3EFFB';">
+    <TD height="22" align=center ><input type="checkbox" name="del[]" value="{$v.id}"></TD>
+    <TD align="center">{$v.id}</TD>
+    <TD align="center">{$v.loan_title}</TD>
+    <TD align="center" >{$v.loan_money|format_price}</TD>
+    <TD align="center" >
+    {$v.loan_deadline}<switch name="v.loan_deadline_type">
+    <case value="0">个月</case>
+    <case value="1">天</case>
+    </switch>
+    </TD>
+	<TD align="center">{$v.loan_purpose}</TD>
+	<TD align="center"><if condition="$v['recommend'] eq 1"><a  onClick="if (confirm('确定要操作吗？')){ location.href='{:U('Loan/Recommend',array('v'=>0,'id'=>$v['id']))}'; }else{ return false; }" style="color:#4C9F2E;cursor:pointer;">是</a><else/><a href="{:U('Loan/Recommend',array('v'=>1,'id'=>$v['id']))}" onClick="if (confirm('确定要操作吗？')){ location.href='{:U('Loan/Recommend',array('v'=>1,'id'=>$v['id']))}'; }else{ return false; }" style="cursor:pointer;">否</a></if></TD>
+	<TD align="center">
+    <switch name="v.deal_status">
+        <case value="1"><font style="color:#4C9F2E">进行中</font></case>
+        <case value="2"><font style="color:#F00">满标</font></case>
+        <case value="3"><font style="color:#F00">流标</font></case>
+        <case value="4"><font style="color:#9D8346">还款中</font></case>
+        <case value="5"><font style="color:#F00">已还清</font></case>                        
+    </switch>    
+    </TD>
+    <TD align="center">
+      <if condition="$v['deal_status'] eq 4"><a style="cursor:pointer" onClick="if (confirm('确定要操作吗？\r此项操作不可逆')){ location.href='{:U('Loan/ReturnInvested',array('lid'=>$v['id']))}'; }else{ return false; }">还款</a><else/><font style="color:#F00">不可还款</font></if>
+    </TD>      
+	  <TD align="center">
+    	<if condition="$v['is_effect'] eq 1"><a style="cursor:pointer" onClick="if (confirm('确定要冻结此项目吗?')){ location.href='{:U('Loan/IsEffect',array('v'=>0,'id'=>$v['id']))}'; }else{ return false; }">有效</a><else/><a style="cursor:pointer;color:#F00" onClick="if (confirm('确定要解冻此项目吗?')){ location.href='{:U('Loan/IsEffect',array('v'=>1,'id'=>$v['id']))}'; }else{ return false; }">无效</a></if>
+    </TD>        
+  	<TD align="center">{$v.create_time|date='Y-m-d H:i:s',###}</TD>
+    <TD align="center">{$v.start_time|date='Y-m-d H:i:s',###}</TD>
+    <TD align="center">{$v.end_time}天</TD>
+    <TD align="center" ><empty name="v.success_time">未确认<else/>{$v.success_time|date='Y-m-d H:i:s',###}</empty></TD>    
+    <TD align="center" ><if condition="$v['repay_confirm_time'] neq 0 && $v['repay_confirm_time'] neq ''">{$v.repay_confirm_time|date='Y-m-d',###}<else/>未确认</if></TD>
+    <TD align="center" ><if condition="$v['expire_time'] neq 0 && $v['expire_time'] neq '' && $v['deal_status'] eq 4 || $v['deal_status'] eq 5">{$v.expire_time|date='Y-m-d',###}<else/>暂无计算</if></TD>    
+    
+    <TD align="center"><input name="{$v.id}" type="text" class="text" style="text-align:center;" value="{$v.loan_order}" size="6" maxlength="5"></TD>
+    <TD align="center"><input type="button" value="修改" onClick="location.href='{:U('Loan/Loan',array('upid'=>$v['id']))}'"></TD>
+  </TR>
+</foreach>
+  <TR>
+    <TD height="22" align=center ><input type=checkbox name=chkall value=on onClick="CheckAll(this.form)"></TD>
+    <TD align="center" >全选</TD>
+    <TD colspan="14" align="center" class="hs12pt">{$page}</TD>
+    <TD align="center" class="hs12"><input type="submit" value="更新排序" onClick="this.form.action='{:U('Loan/LoanSort')}'"></TD>
+    <TD align="center" class="hs12"><input type="submit" value="确认删除" onClick="if (confirm('确定要删除吗？\r一旦删除无法恢复数据')){ this.form.action='{:U('Loan/InfoDelete')}'; }else{ return false; }"></TD>
+    </TR>
+    </form>
+  </TABLE>
+</BODY></HTML>

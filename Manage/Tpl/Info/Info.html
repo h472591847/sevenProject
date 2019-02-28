@@ -1,0 +1,372 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="__PUBLIC__/css/bdmin.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/js/Calendar.js"></script>
+<script type="text/javascript" charset="utf-8" src="__ROOT__/Ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__ROOT__/Ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="__ROOT__/Ueditor/lang/zh-cn/zh-cn.js"></script>
+<script src="__PUBLIC__/js/jQuery.js"></script>
+</HEAD>
+<BODY>
+<form action="{:U('Info/InfoHandle')}" method="post" onSubmit="return check()">
+<input type="hidden" name="upid" value="{$upid}">
+<input type="hidden" name="refer" value="{$refer}">
+<TABLE class="hs12pt" cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD height="22" >当前位置: 信息中心/添加信息</TD>
+  </TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR></TABLE>
+<TABLE class="hs12pt" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="22" background="__PUBLIC__/images/title_bg2.jpg">&nbsp;&nbsp;&nbsp;<span class="baise12ct">{$display_txt}信息</span></td>
+  </tr>
+</table>
+  <TABLE class="hs12pt" width="100%" border="1" align="center" cellpadding="2" cellspacing="0" bordercolor="#175CB7" bordercolordark="#E3EFFB" >
+	<tr>    
+      <td width="20%" height="25" align="center" ><span style=" color:#F00;">*</span>类别:</td>
+      <td colspan="5" align="left">
+      <select name="pid" class="text" id="pid" onchange="display_field_fun(this)">
+      <option value="">-请选择类别-</option>
+<foreach name='cate' item='v'>
+      <option value="{$v.id}"<?php if($edit_info['pid']==$v['id']){ echo ' selected'; } ?>>{$v.html}{$v.name}</option>
+</foreach>
+      </select></td>
+    </tr>
+    <tr>    
+      <td width="20%" height="25" align="center"><span style=" color:#F00;">*</span>标题:</td>
+      <td colspan="5">
+<input name="title" type="text" class="text" id="title" value="{$edit_info.title}" size="60" maxlength="200"><br>
+<input type="checkbox" id="open_img" onClick="shuxing()"<?php if(!empty($edit_info['img'])){ echo ' checked';}?>> 封面图
+<input id="open_imgs" type="checkbox" onClick="shuxing()"<?php if(!empty($edit_info['imgs'])){ echo ' checked';}?>> 图片组
+<input id="open_url" type="checkbox" onClick="shuxing()"<?php if(!empty($edit_info['url'])){ echo ' checked';}?>> 外部链接
+<input id="open_tel" type="checkbox" onClick="shuxing()"<?php if(!empty($edit_info['tel'])){ echo ' checked';}?>> 一键拨号(手机)
+      </td>
+    </tr>
+<tbody id="tbody_img" style="display:none;">
+    <tr>
+      <td width="20%" height="25" align="center" >封面图:</td>
+      <td colspan="5">
+        <input name="img" type="text" class="text" id="img" size="40" value="{$edit_info.img}" maxlength="400"> 
+        <input type="button" name="btn_img" value="选择图片" onclick="upImageOne()"> * 若上传多张图片，则只显示第一张图片 
+        <if condition="$edit_info['img'] neq ''"><a href="{$edit_info.img}" target="_blank" title="点击查看大图"><img src="{$edit_info.img}" width="30" height="30"></a></if>
+      </td>
+    </tr>
+</tbody>
+<tbody id="tbody_imgs" style="display:none;">
+    <tr>
+      <td width="20%" height="25" align="center" >图片组:</td>
+      <td colspan="5"><textarea name="imgs" cols="50" rows="5" class="text" id="imgs">{$edit_info.imgs}</textarea><input type="button" name="btn_upload" onClick="upImage()" value="选择图片">
+      <br>
+      <empty name="edit_info.imgs_view">
+      <else/>
+      <foreach name="edit_info.imgs_view" item="img">
+        <a href="{$img}" target="_blank"><img src="{$img}" width="25" height="25" /></a> &nbsp;
+      </foreach>
+      </empty>
+      </td>
+    </tr>
+</tbody>
+<tbody id="tbody_url" style="display:none;">
+    <tr>    
+      <td width="20%" height="25" align="center" >外部链接:</td>
+      <td colspan="5"><input name="url" type="text" class="text" id="url" value="{$edit_info.url}" size="80" maxlength="400"></td>
+    </tr>
+</tbody>
+<tbody id="tbody_tel" style="display:none;">
+    <tr>    
+      <td width="20%" height="25" align="center" >一键拨号(手机):</td>
+      <td colspan="5"><input name="tel" type="text" class="text" id="tel" value="{$edit_info.tel}" size="23" maxlength="30">
+      </td>
+    </tr>
+</tbody>
+    <tr style=" display:none;">
+      <td width="20%" height="25" align="center" >属性:</td>
+      <td colspan="5">&nbsp;</td>
+    </tr>
+    <tr>    
+      <td width="20%" height="25" align="center" ><span style=" color:#F00;">*</span>排序:</td>
+      <td width="7%"><input name="sort" type="text" class="text" id="sort" value="<?php if(!empty($edit_info['sort'])){ echo $edit_info['sort'];}else{ echo 100;}?>" size="15" maxlength="10"></td>
+      <td width="10%" align="center" valign="middle"><span style=" color:#F00;">*</span>点击次数：</td>
+      <td width="10%"><input name="click" type="text" class="text" id="click" value="<?php if(!empty($edit_info['click'])){ echo $edit_info['click'];}else{ echo 100;}?>" size="15" maxlength="10"></td>
+      <td width="10%" align="center"><span style=" color:#F00;">*</span>发布时间：</td>
+      <td><input name="time" type="text" class="text" id="time" size="20" maxlength="19" onFocus="new Calendar().show(this);" value="<?php if(!empty($edit_info['time'])){ echo date('Y-m-d H:i:s',$edit_info['time']);}else{ echo date('Y-m-d H:i:s');}?>"></td>
+    </tr>
+
+    <if condition="$upid eq 26 || $upid eq 1176">
+    <tr>
+      <td width="20%" height="25" align="center" ><if condition="$upid eq 1176">分</if>公司实景:</td>
+      <td colspan="5"><textarea name="company_action" cols="50" rows="5" class="text" id="company_action">{$edit_info.company_action}</textarea><input type="button" name="btn_upload" onClick="upImageShiJing()" value="选择图片">
+      <br>  
+    <empty name="edit_info.company_action_view"> 
+    <else/>       
+        <foreach name='edit_info.company_action_view' item='img'>
+        <a href="{$img}" target="_blank"><img src="{$img}" width="25" height="25" /></a>&nbsp;
+        </foreach>
+    </empty>
+      </td>
+    </tr>   
+    </if>
+    <if condition="$upid eq 26">
+    <tr>
+      <td width="20%" height="25" align="center" >团队集锦:</td>
+      <td colspan="5"><textarea name="team_gather" cols="50" rows="5" class="text" id="team_gather">{$edit_info.team_gather}</textarea><input type="button" name="btn_upload" onClick="upImageJiJin()" value="选择图片">
+      <br>
+    <empty name="edit_info.team_gather_view"> 
+    <else/>        
+      <foreach name="edit_info.team_gather_view" item="img">
+        <a href="{$img}" target="_blank"><img src="{$img}" width="25" height="25" /></a> &nbsp;
+      </foreach>
+    </empty>
+      </td>
+    </tr>
+    </if>
+
+
+    <tr>    
+      <td width="20%" height="25" align="center" >关键字:</td>
+      <td colspan="5"><textarea name="keyword" cols="80" rows="2" class="text" id="keyword">{$edit_info.keyword}</textarea></td>
+    </tr>
+    <tr>
+      <td width="20%" height="25" align="center" >描述:</td>
+      <td colspan="5"><textarea name="description" cols="80" rows="3" class="text" id="description">{$edit_info.description}</textarea></td>
+    </tr>
+    <tbody id="display_field">
+    <tr>    
+      <td width="20%" height="25" align="center" >注册资金:</td>
+      <td colspan="5"><input name="reg_fund"  class="text" id="reg_fund" size="60" value="{$edit_info.reg_fund}"></td>
+    </tr> 
+    <tr>    
+      <td width="20%" height="25" align="center" >公司成立时间:</td>
+      <td colspan="5"><input name="company_create_time"  class="text" id="company_create_time" size="60" value="{$edit_info.company_create_time}"></td>
+    </tr>  
+    <tr>    
+      <td width="20%" height="25" align="center" >开始合作时间:</td>
+      <td colspan="5"><input name="join_time"  class="text" id="join_time" size="60" value="{$edit_info.join_time}"></td>
+    </tr>  
+    <tr>    
+      <td width="20%" height="25" align="center" >公司网址:</td>
+      <td colspan="5"><input name="company_url"  class="text" id="company_url" size="60" value="{$edit_info.company_url}"></td>
+    </tr>  
+    <tr>    
+      <td width="20%" height="25" align="center" >联系电话:</td>
+      <td colspan="5"><input name="company_tel"  class="text" id="company_tel" size="60" value="{$edit_info.company_tel}"></td>
+    </tr>                 
+    <tr>    
+      <td width="20%" height="25" align="center" >公司地址:</td>
+      <td colspan="5"><input name="company_address"  class="text" id="company_address" size="60" value="{$edit_info.company_address}"></td>
+    </tr>                     
+           
+    </tbody>
+    <tr>
+      <td height="25" align="center" >内容:</td>
+      <td colspan="5"><textarea id="content" name="content" style="width:100%; height:300px;">{$edit_info.content|stripslashes=###}</textarea></td>
+    </tr>
+    <tr>
+      <td height="25" colspan="6" align="center"><input type="submit" id="submit_info" value="确认{$display_txt}"></td>
+    </tr>
+  </table>
+</form>
+<textarea id="_editor" style=" display:none;"></textarea>
+<textarea id="_editor_shijing" style=" display:none;"></textarea>
+<textarea id="_editor_jijin" style=" display:none;"></textarea>
+<textarea id="_editor_one" style=" display:none;"></textarea>
+</BODY></HTML>
+<script type="text/javascript">
+function get_id(id){ return document.getElementById(id); }
+//表单验证
+function check(){
+		if(get_id('pid').value==""){
+			alert("请选择类别！");
+			return false;
+		}
+		if(get_id('title').value==""){
+			alert("请添加标题！");
+			return false;
+		}
+		if(get_id('sort').value==""){
+			alert("请填写排序！");
+			return false;
+		}
+		if(get_id('datetime').value==""){
+			alert("请填写发布时间！");
+			return false;
+		}
+    $("#submit_info").attr('disabled','disabled');
+    $("#submit_info").val('提交中...');    
+		return true;	
+	}
+//选择属性
+function shuxing(){
+	if(get_id('open_img').checked){
+		get_id('tbody_img').style.display='';
+	}else{
+		get_id('tbody_img').style.display='none';
+	} 
+	if(get_id('open_imgs').checked){
+		get_id('tbody_imgs').style.display='';
+	}else{
+		get_id('tbody_imgs').style.display='none';
+	}
+	if(get_id('open_url').checked){
+		get_id('tbody_url').style.display='';
+	}else{
+		get_id('tbody_url').style.display='none';
+	}
+	if(get_id('open_tel').checked){
+		get_id('tbody_tel').style.display='';
+	}else{
+		get_id('tbody_tel').style.display='none';
+	}
+}
+window.onload = function(){
+	//执行判断属性选择
+	shuxing();
+	//去掉文本框缓存
+	var list=document.getElementsByTagName("input");
+	for(var i=0;i<list.length && list[i];i++){
+		if(list[i].type=="text"){ 
+			list[i].autocomplete='off';
+		}
+	}
+}
+
+//修改编辑器图片上传提交路径
+window.UEDITOR_CONFIG.serverUrl = "{:U('Upload/Uploads')}";
+//内容
+var content=UE.getEditor('content');
+//实例化编辑器(图片)
+var _editor = UE.getEditor('_editor');
+_editor.ready(function () {        
+  //设置编辑器不可用
+  _editor.setDisabled();
+  //隐藏编辑器，因为不会用到这个编辑器实例，所以要隐藏
+  _editor.hide();
+  //侦听图片上传          
+  _editor.addListener('beforeInsertImage', function (t, arg) {                        
+  var img_url = "";
+  //遍历arg对象取出路径，用","拼接返回到文本框
+	for(var i = 0;i < arg.length;i++){                            
+	  if(i == 0){
+		img_url = arg[i].src;
+	  }else{
+		img_url += "\n" + arg[i].src;
+	  }                          
+	}
+    if($("#imgs").val()!=''){
+      img_url = $("#imgs").val()+"\n"+img_url;
+    }
+    $("#imgs").val(img_url);
+  })
+});
+
+//实例化编辑器(单图)
+var _editor_one = UE.getEditor('_editor_one');
+_editor_one.ready(function () {        
+  //设置编辑器不可用
+  _editor_one.setDisabled();
+  //隐藏编辑器，因为不会用到这个编辑器实例，所以要隐藏
+  _editor_one.hide();
+  //侦听图片上传          
+  _editor_one.addListener('beforeInsertImage', function (t, arg) {                          
+  //遍历arg对象取出路径，用","拼接返回到文本框
+  $("#img").val(arg[0].src);
+  })
+});
+
+
+//实例化编辑器(企业实景)
+var _editor_shijing = UE.getEditor('_editor_shijing');
+_editor_shijing.ready(function () {        
+  //设置编辑器不可用
+  _editor_shijing.setDisabled();
+  //隐藏编辑器，因为不会用到这个编辑器实例，所以要隐藏
+  _editor_shijing.hide();
+  //侦听图片上传          
+  _editor_shijing.addListener('beforeInsertImage', function (t, arg) {                        
+  var img_url = "";
+  //遍历arg对象取出路径，用","拼接返回到文本框
+  for(var i = 0;i < arg.length;i++){                            
+    if(i == 0){
+    img_url = arg[i].src;
+    }else{
+    img_url += "\n" + arg[i].src;
+    }                          
+  }
+  if($("#company_action").val()!=''){
+      img_url = $("#company_action").val()+"\n"+img_url;
+  }    
+  $("#company_action").val(img_url);
+  })
+});
+
+
+//实例化编辑器(团队集锦)
+var _editor_jijin = UE.getEditor('_editor_jijin');
+_editor_jijin.ready(function () {        
+  //设置编辑器不可用
+  _editor_jijin.setDisabled();
+  //隐藏编辑器，因为不会用到这个编辑器实例，所以要隐藏
+  _editor_jijin.hide();
+  //侦听图片上传          
+  _editor_jijin.addListener('beforeInsertImage', function (t, arg) {                        
+  var img_url = "";
+  //遍历arg对象取出路径，用","拼接返回到文本框
+  for(var i = 0;i < arg.length;i++){                            
+    if(i == 0){
+    img_url = arg[i].src;
+    }else{
+    img_url += "\n" + arg[i].src;
+    }                          
+  }
+  if($("#team_gather").val()!=''){
+      img_url = $("#team_gather").val()+"\n"+img_url;
+  }    
+  $("#team_gather").val(img_url);  
+  })
+});
+
+
+//弹出图片上传(单图)的对话框
+function upImageOne() {
+   var myImageOne = _editor_one.getDialog("insertimage");
+   myImageOne.open();
+}  
+
+//弹出图片上传的对话框
+function upImage() {
+	 var myImage = _editor.getDialog("insertimage");
+	 myImage.open();
+}  
+
+//弹出企业实景上传的对话框
+function upImageShiJing() {
+   var myImage = _editor_shijing.getDialog("insertimage");
+   myImage.open();
+} 
+
+//弹出团队集锦上传的对话框
+function upImageJiJin() {
+   var myImage = _editor_jijin.getDialog("insertimage");
+   myImage.open();
+}  
+
+
+/**
+ * display_field_fun     类别是合作伙伴，显示/隐藏字段方法
+ * @param  {object} obj  下拉框对象
+ */
+function display_field_fun(obj){
+  $display_field = $("#display_field");//隐藏字段容器
+  if($(obj).val() != '42'){
+    $display_field.hide();return false;
+  }else{
+    $display_field.show();return false;
+  }
+}
+  //判断若不是合作伙伴，其字段不显示。
+  if($("#pid").val() != '42'){
+    $("#display_field").hide();
+  }  
+</script>

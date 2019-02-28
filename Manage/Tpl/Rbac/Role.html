@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="__PUBLIC__/css/bdmin.css" type="text/css" rel="stylesheet">
+</HEAD>
+<script language="JavaScript">
+function CheckAll(form)  {
+  for (var i=0;i<form.elements.length;i++)    {
+    var e = form.elements[i];
+    if (e.name != 'chkall')       e.checked = form.chkall.checked; 
+   }
+}
+//页面加载后执行
+window.onload=function (){
+	//去掉文本框缓存
+	var list=document.getElementsByTagName("input");
+	for(var i=0;i<list.length && list[i];i++){
+		if(list[i].type=="text"){ 
+			list[i].autocomplete='off';
+		}
+	}
+}
+</script>
+<BODY>
+<TABLE class="hs12pt" cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD height="22" >当前位置: 用户管理/角色管理</TD>
+  </TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR></TABLE>
+<TABLE class="hs12pt" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="22" background="__PUBLIC__/images/title_bg2.jpg">&nbsp;&nbsp;&nbsp;<span class="baise12ct">{$display_txt}角色</span></td>
+  </tr>
+</table>
+<TABLE class="hs12pt" width="100%" border="1" align="center" cellpadding="2" cellspacing="0" bordercolor="#175CB7" bordercolordark="#E3EFFB">
+<form name="form1" method="post" action="{:U('Rbac/RoleHandle')}">
+<input type="hidden" name="upid" value="{$upid}">
+    <tr>
+      <td width="20%" height="25" align="center" >角色名称:</td>
+      <td width="80%"><input name="name" type="text" id="name" value="{$edit_role.name}" size="25" maxlength="20"></td>
+    </tr>
+    <tr>
+      <td width="20%" height="25" align="center">角色描述:</td>
+      <td width="80%"><input name="remark" type="text" id="remark" value="{$edit_role.remark}" size="35" maxlength="200"></td>
+    </tr>
+    <tr>
+      <td height="25" align="center" >开启状态</td>
+      <td><input name="status" type="radio" id="status1" value="1"<?php if(!empty($upid)){ if(!empty($edit_role['status'])){ echo '  checked';} }else{ echo '  checked';}?>>
+      开启
+        <input type="radio" name="status" id="status2" value="0"<?php if(!empty($upid)){ if(empty($edit_role['status'])){ echo '  checked';} }?>>
+      关闭</td>
+    </tr>
+    <tr>
+      <td height="25" colspan="2" align="center"><input type="submit" value="确认{$display_txt}"></td>
+    </tr>
+    </form>
+  </table>
+<if condition="empty($upid)">
+<TABLE class="hs12pt" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="22" background="__PUBLIC__/images/title_bg2.jpg">&nbsp;&nbsp;&nbsp;<span class="baise12ct">信息管理</span></td>
+  </tr>
+</table>
+  <TABLE class="hs12pt" width="100%" border=1 align=center cellPadding=2 cellSpacing=0 bordercolor="#175CB7" bordercolordark="#E3EFFB">  
+  <TR>
+    <TD height="25" colspan="2" align=center >选择</TD>
+    <TD width="5%" align="center" >ID</TD>
+    <TD width="30%" align="center" >角色名称</TD>
+    <TD width="30%" align="center" >角色描述</TD>
+    <TD width="10%" align="center" >状态</TD>
+	<TD align="center" >操作</TD>
+  </TR>
+<form action="javascript:" method="post">
+<foreach name='role' item='v'>
+  <TR onMouseOver="this.style.background='#d0e2f5';" onMouseOut="this.style.background='#E3EFFB';">
+    <TD height="22" colspan="2" align=center ><input type="checkbox" name="del[]" value="{$v.id}"></TD>
+    <TD align="center">{$v.id}</TD>
+    <TD align="center">{$v.name}</TD>
+    <TD align="center">{$v.remark}</TD>
+    <TD align="center"><?php if($v['status']){ echo '开启';}else{ echo '关闭';} ?></TD>
+	<TD align="center"><input type="button" value="修改" onClick="location.href='{:U('Rbac/Role',array('upid'=>$v['id']))}'">
+	  <input type="button" value="配置权限" onClick="location.href='{:U('Rbac/Node',array('rid'=>$v['id']))}'"></TD>
+  </TR>
+</foreach>
+  <TR>
+    <TD width="5%" height="22" align=center ><input type=checkbox name=chkall value=on onClick="CheckAll(this.form)"></TD>
+    <TD width="5%" align="center" >全选</TD>
+    <TD colspan="4" align="left" class="hs12">&nbsp;</TD>
+    <TD align="center" class="hs12"><input type="submit" value="删除选中" onClick="if (confirm('确定要删除吗？\r一旦删除无法恢复数据')){ this.form.action='{:U('Rbac/RoleDelete')}';}else{ return false;}"></TD>
+    </TR>
+</form>
+  </TABLE>
+</if>
+</BODY></HTML>

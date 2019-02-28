@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>我的积分-{$Think.config.web_title}</title>
+</head>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $(".jf_exchange").click(function(){
+	    $(".bank_choose").show();
+	});
+	$(".jf_close").click(function(){
+	    $(".bank_choose").hide();
+	});
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function() {  
+  $("#exchange").keyup(function(){
+        $(".jf_pop").fadeIn();
+    var exchange = $('#exchange').val();
+    if(exchange == ''){
+      exchange = 0;
+    }
+    $('#money').text(exchange / 10);
+  }).blur(function(){
+         $(".jf_pop").fadeOut();  
+  });
+
+});
+function ajax(){
+ $.ajax({
+   url: "{:U('Member/integral_handle')}",
+   type: 'POST',
+   dataType: 'json',
+   data: "exchange="+$("#exchange").val(),
+   success:function(msg){
+  if(msg.status == 0){
+       alert(msg.info);
+    }else{
+       alert(msg.info);location.reload();
+    }
+   }
+ })
+}
+
+</script>
+<body>
+<div class="center">
+   <include file = "Common:header" />
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>我的积分</span>
+     <span></span>     
+     <!--登录后显示 start-->
+     <include file="Common:ico"/>
+     <!--end-->
+   </div> 
+   
+   <div class="integ_jf">
+      <ul class="statistical">
+         <li>
+           <span class="sta_txt">累计获取积分</span>
+           <span class="sta_amount">{$sum_score}</span>
+         </li>
+         <li>
+           <span class="sta_txt">可用积分</span>
+           <span class="sta_amount">{$user_info.score}</span>
+         </li>
+         <li style="border-right:none;">
+           <span class="sta_txt">已用积分</span>
+           <span class="sta_amount">{$use_sum_score}</span>
+         </li>
+      </ul>
+   </div>
+   
+   <div class="jf_exchange">兑换积分</div>
+   
+   <ul class="jf_list">
+      <li class="jf_fir_li">
+         <span class="jf_date">时间</span>
+         <span class="jf_mx">明细</span>
+         <span class="jf_score">积分</span>
+      </li>
+      <foreach name="score_log_list" item="v">
+      <li>
+         <span class="jf_date">{$v.create_time|date='Y-m-d',###}<br>{$v.create_time|date='H:i:s',###}</span>
+         <span class="jf_mx">{$v.type|get_score_log_type}-明细：{$v.detail}</span>         
+          <if condition="$v['pay_status'] eq 2">
+          <span class="jf_score jf_green">-{$v.score}</span>
+          <else/>
+          <span class="jf_score jf_red">+{$v.score}</span>
+          </if>         
+      </li>
+      </foreach>
+   </ul>
+   <div class="page">{$page}</div>   
+   <include file="Common:member_bottom"/>
+</div>
+
+<div class="bank_choose" style=" height:1200px;">
+  <div class="jf_ex">
+       <h3><span class="jf_close">X</span>积分兑换</h3>
+       <p>当前可用积分：<font>{$score_exchange}</font></p>
+       <p><input type="text" name="exchange" id="exchange" placeholder="请输入兑换积分" class="input_jf" onkeyup="this.value=this.value.replace(/\D/g,'');"></p>
+       <p>可兑换为：<font id="money"></font>元奖励金额</p>
+       <p><input type="button" onclick="ajax();" value="确认兑换" class="jf_sure"></p>
+  </div>
+</div>
+
+</body>
+</html>

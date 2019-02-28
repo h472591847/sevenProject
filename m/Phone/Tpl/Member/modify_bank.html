@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>银行卡绑定-{$Think.config.web_title}</title>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.cityselect.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('input[type=text]:first').focus();
+	
+	$(".open_bank").click(function(){
+	    $(".bank_choose").show();
+	});
+	 /*省市二级联动菜单初始化*/
+	  city_lib_url = '__PUBLIC__/js/city.min.js';//省市json库文件路径
+	  $("#city_1").citySelect({
+		prov:"{$bank_info.province}",
+    city:"{$bank_info.city}",
+    nodata:"none",
+		required:false
+	  });  
+	  
+	  var height = $(window).height();
+	  var b_height = height-50;
+	  $("#bank_choose").css({"height":height+"px"});
+	  $("#bank_choose ul").css({"height":b_height+"px","overflow":"scroll"});
+}); 
+
+
+/**
+ * check_modify      修改银行卡表单过滤
+ */
+function check_modify(){
+  if($("#city_1 select[name='province']").val() == ''){
+    alert('请选择开户省份');return false;
+  }
+  if($("#city_1 select[name='city']").val() == ''){
+    alert('请选择开户城市');return false;
+  }  
+  if($("#bank_address").val() == ''){
+    alert('请填写开户行全称');$("#bank_address").focus();return false; 
+  }
+}
+
+</script>
+</head>
+<body style="height:900px;">
+<div class="center">
+   <include file = "Common:header" />
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>绑定银行卡</span>
+     <span></span>     
+     <!--登录后显示 start-->
+     <include file="Common:ico"/>
+     <!--end-->
+   </div>    
+   <form method="post" name="mdf_bank_form" id="mdf_bank_form" onsubmit="return check_modify(this);" action="{:U('Member/do_modify_bank')}">
+   <input type="hidden" name="upid" value="{$upid}">
+   <input type="hidden" name="bank_name" id="bank_name" value="{$bank_info.bank_name}">   
+   <div class="withdra">
+      <ul>
+         <li>
+            <span class="with_txt">银行卡户名</span>
+            <span class="with_con intro_bank">{$bank_info.real_name_view}</span>
+         </li>
+         <li>
+            <span class="with_txt">银行卡号</span>
+            <span class="with_con intro_bank">{$bank_info.bank_number_view}</span>
+         </li>
+         <li>
+            <span class="with_txt">银行</span>
+            <span class="with_con">               
+               <a href="#" class="open_bank" id="open_bank">{$bank_info.bank_name}</a>
+            </span>            
+            <!-- <span class="with_con intro_bank">{$bank_info.bank_name}</span> -->
+         </li>
+         <li>
+             <span class="with_txt">开户城市</span>
+             <span class="with_con intro_bank">
+                <div id="city_1" style="float:left;">
+                    <select class="prov card_num provinces" name="province">                      
+                    </select> 
+                    <select class="city card_num provinces" name="city">                      
+                    </select>
+                </div>              
+             </span>
+         </li>
+         <li>
+             <span class="with_txt">开户行全称</span>
+             <span class="with_con intro_bank">
+             <input type="text" id="bank_address" name="bank_address" value="{$bank_info.bank_address}" class="drawal_ipt drawal_bank">
+             </span>
+         </li>
+      </ul>
+   </div>
+    
+   <div class="card_intro">
+      <if condition="$bank_info['is_default'] eq 0">
+         <a class="set_up" href="{:U('Member/do_default_bank',array('id'=>$upid))}">设为默认</a>
+         <else/>
+         <a class="set_up" href="javascript:;">已默认</a>
+      </if>
+      <a class="card_modi" onclick="$('#mdf_bank_form').submit();" >修改信息</a>
+   </div>
+  </form>
+</div> 
+<div class="bank_choose" id="bank_choose">
+   <ul>
+      <li <if condition="$bank_info['bank_name'] eq '中国工商银行'">class="bank_select"</if>>中国工商银行</li>
+      <li <if condition="$bank_info['bank_name'] eq '中国建设银行'">class="bank_select"</if>>中国建设银行</li>
+      <li <if condition="$bank_info['bank_name'] eq '中国农业银行'">class="bank_select"</if>>中国农业银行</li>
+      <li <if condition="$bank_info['bank_name'] eq '中国银行'">class="bank_select"</if>>中国银行</li>
+      <li <if condition="$bank_info['bank_name'] eq '交通银行'">class="bank_select"</if>>交通银行</li>
+      <li <if condition="$bank_info['bank_name'] eq '招商银行'">class="bank_select"</if>>招商银行</li>
+      <li <if condition="$bank_info['bank_name'] eq '兴业银行'">class="bank_select"</if>>兴业银行</li>
+      <li <if condition="$bank_info['bank_name'] eq '中国光大银行'">class="bank_select"</if>>中国光大银行</li>
+      <li <if condition="$bank_info['bank_name'] eq '广发银行'">class="bank_select"</if>>广发银行</li>
+      <li <if condition="$bank_info['bank_name'] eq '北京银行'">class="bank_select"</if>>北京银行</li>
+      <li <if condition="$bank_info['bank_name'] eq '平安银行'">class="bank_select"</if>>平安银行</li>
+      <li <if condition="$bank_info['bank_name'] eq '中国邮政储蓄银行'">class="bank_select"</if>>中国邮政储蓄银行</li>
+      <li <if condition="$bank_info['bank_name'] eq '中国民生银行'">class="bank_select"</if>>中国民生银行</li>
+      <li <if condition="$bank_info['bank_name'] eq '上海浦东发展银行'">class="bank_select"</if>>上海浦东发展银行</li>
+      <li <if condition="$bank_info['bank_name'] eq '中信银行'">class="bank_select"</if>>中信银行</li>
+      <li <if condition="$bank_info['bank_name'] eq '渤海银行'">class="bank_select"</if>>渤海银行</li>
+      <li <if condition="$bank_info['bank_name'] eq '上海银行'">class="bank_select"</if>>上海银行</li>
+   </ul>
+</div>
+<script type="text/javascript">
+  /*选择银行操作*/
+  $("#bank_choose ul li").click(function(){
+    $(this).attr('class','bank_select').siblings().removeClass('bank_select');
+    $("#bank_name").val($(this).text());
+    $("#open_bank").text($(this).text());
+    $("#bank_choose").hide();
+  })  
+</script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="__PUBLIC__/css/bdmin.css" type="text/css" rel="stylesheet">
+</HEAD>
+<script language="JavaScript" src="__PUBLIC__/Js/jquery.js"></script>
+<script language="JavaScript">
+function CheckAll(form)  {
+  for (var i=0;i<form.elements.length;i++)    {
+    var e = form.elements[i];
+    if (e.name != 'chkall')       e.checked = form.chkall.checked; 
+   }
+}
+</script>
+<BODY>
+<TABLE class="hs12pt" cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD height="22" >当前位置: 信息管理/管理信息</TD>
+  </TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR></TABLE>
+<TABLE class="hs12pt" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="22" background="__PUBLIC__/images/title_bg2.jpg">&nbsp;&nbsp;&nbsp;<span class="baise12ct">{$display_txt}信息</span></td>
+  </tr>
+</table>
+<TABLE class="hs12pt" width="100%" border="1" align="center" cellpadding="2" cellspacing="0" bordercolor="#175CB7" bordercolordark="#E3EFFB">
+<form name="form1" method="post" action="{:U('Ad/HandleAd')}" enctype="multipart/form-data">
+<input type="hidden" name="upid" value="{$upid}">
+<input type="hidden" name="refer" value="{$refer}">
+    <tr>
+      <td width="20%" height="25" align="right" ><span style=" color:#F00;">*</span>所属信息:</td>
+      <td width="80%">
+      <select name="class_name" class="text" id="class_name">
+          <option value="0">-选择分类-</option>          
+<foreach name='class_list' item='ar'>
+    <foreach name='ar' item='v'>          
+          <option value="{$v}" <if condition="$edit_ad['class_name'] eq $v">selected="selected"</if>>{$v}</option>
+    </foreach>
+</foreach>
+      </select>
+      <span class="hs12pt" id="add_class" style="cursor:pointer">+</span>
+      <input type="text" name="class_fname" id="class_fname" style="display:none">
+      </td>
+    </tr>
+    <tr>
+      <td width="20%" height="25" align="right" ><span style=" color:#F00;">*</span>信息名称:</td>
+      <td width="80%">
+          <input name="ad_name" type="text" class="text" id="ad_name" value="{$edit_ad.ad_name}" size="35" maxlength="30"><br>
+      </td>
+    </tr>
+    <tr>
+      <td height="25" align="right" ><span style=" color:#F00;">*</span>信息链接:</td>
+      <td>
+         <textarea name="ad_link" id="ad_link" cols="50" class="text" >{$edit_ad.ad_link}</textarea>
+         填写规则： "http://" + 链接
+     </td>
+    </tr>
+    <tr>
+      <td width="20%" height="25" align="right" >封面图:</td>
+      <td width="80%">
+        <input type="file"  name="file">
+        <if condition="$edit_ad['ad_image'] neq ''">
+           <a href="{$edit_ad.ad_image}" title="点击查看大图" target="_blank">
+              <img src="{$edit_ad.ad_image}" width="32" height="32" border="0"> 
+           </a>           
+        </if>  
+      &nbsp; 图片尺寸：<input name="ad_size" type="text" class="text" id="ad_size" value="{$edit_ad.ad_size}" size="20" maxlength="30">                        
+      </td>
+    </tr>   
+    <tr>
+      <td height="25" align="right" >显示顺序:</td>
+      <td><input name="ad_order" type="text" class="text" id="ad_order"  value="<?php if(empty($edit_ad['ad_order'])){ echo '100';}else{ echo $edit_ad['ad_order'];} ?>" size="8" maxlength="7">
+      </td>
+    </tr>         
+    <tr>
+      <td height="25" colspan="2" align="center"><input type="submit" value="确认{$display_txt}" id="save"></td>
+    </tr>
+    </form>
+  </table>
+<TABLE class="hs12pt" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="22" background="__PUBLIC__/images/title_bg2.jpg">&nbsp;&nbsp;&nbsp;<span class="baise12ct">信息管理</span></td>
+  </tr>
+</table>
+  <TABLE class="hs12pt" width="100%" border=1 align=center cellPadding=2 cellSpacing=0 bordercolor="#175CB7" bordercolordark="#E3EFFB">  
+  <TR>
+    <TD height="25" colspan="2" align=center  width="4%">选择</TD>
+    <TD align="center" width="5%" >ID</TD>
+    <TD align="center"  width="15%">信息名称</TD>
+    <TD align="center" width="30%">信息链接</TD>
+    <TD align="center" >信息图片</TD>
+    <TD align="center" >信息类别</TD>
+    <TD align="center" >显示排序</TD>
+	<TD width="8%" align="center" >操作</TD>
+  </TR>
+<form action="javascript:" method="post" >
+<foreach name='list' item='v'>
+  <TR onMouseOver="this.style.background='#d0e2f5';" onMouseOut="this.style.background='#E3EFFB';">
+    <TD height="22" colspan="2" align=center ><input type="checkbox" name="del[]" value="{$v.id}"></TD>
+    <TD align="center">{$v.id}</TD>
+    <TD align="center">{$v.ad_name|msubstr=0,20} </TD>
+    <TD align="center"><if condition="$v['ad_link'] neq ''"><a href="{$v.ad_link}" target="_blank">{$v.ad_link}</a> <else/>&nbsp;</if></TD>
+    <TD align="center">&nbsp;
+      <if condition="$v['ad_image'] neq ''">
+         <a href="{$v.ad_image}" title="点击查看大图" target="_blank">
+            <img src="{$v.ad_image}" width="50" height="50" border="0"> 
+         </a>           
+      </if>      
+    </TD>
+    <TD align="center" ><a href="{:U('Ad/Index',array('k_class_name'=>$v['class_name']))}">{$v.class_name}</a></TD>
+    <TD align="center">{$v.ad_order}</TD>
+	<TD align="center"><input type="button" value="修改" onClick="location.href='{:U('Ad/Index',array('upid'=>$v['id']))}'"></TD>
+  </TR>
+</foreach>
+  <TR>
+    <TD  height="22" align=center colspan="2" ><input type=checkbox name=chkall value=on onClick="CheckAll(this.form)"></TD>
+    <TD  align="center" >全选</TD> 
+    <TD colspan="5" align="center">{$page}</TD>    
+    <TD align="center" class="hs12"><input type="submit" value="删除选中" onClick="if (confirm('确定要删除吗？\r一旦删除无法恢复数据')){ this.form.action='{:U('Ad/AdDelete')}';}else{ return false;}"></TD>
+    </TR>
+</form>
+  </TABLE>
+</BODY></HTML>
+<script language="JavaScript">
+
+  //添加或修改表单处理
+  $("#save").click(function(){
+      var class_name = $("#class_name");
+      var ad_name = $("#ad_name");
+      if(class_name.val()=='0' && $.trim($("#class_fname").val())==''){
+        alert("请选择类别");return false;
+      }
+      if($.trim(ad_name.val())==''){
+        alert("请填写信息名称");ad_name.focus();return false;
+      }
+  })
+  //显示新增类别选项
+  $("#add_class").click(function(){
+      $("#class_fname").show();
+      $(this).hide();
+  })
+
+</script>

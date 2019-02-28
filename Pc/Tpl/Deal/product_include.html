@@ -1,0 +1,297 @@
+
+<div class="project_mid">
+    <h3 class="location">首页 > 理财产品 > {$cate.class_name}</h3>
+    <div class="ProjectTop">
+        <h3 class="Product_n"><span class="Product_t_t">{$loan.loan_title}</span><span><i>循环出借</i><i>收益最大化</i></span></h3>
+        <div class="ProjectLeft">
+           <ul class="deal_amount">
+               <li class="d_am_fir">
+                  <span>发售总额</span>
+                  <span class="deal_big">{$loan.loan_money}<font>元</font></span>
+               </li>
+               <li>
+                  <span>年化收益</span>
+                  <span class="deal_big">{$loan.loan_rate}<font><if condition="$loan['loan_add_rate'] neq 0">+{$loan.loan_add_rate}</if>%</font></span>
+               </li>
+               <li class="d_am_last">
+                  <span>封闭期限</span>
+                  <span class="deal_big">{$loan.loan_deadline}<font>个月</font></span>
+               </li>
+               <div class="spacer"></div>
+           </ul> 
+           <ul class="deal_det" style=" height:100px;">
+              <li>
+                  <span class="det_l">剩余时间：</span>
+                  <span><if condition="$loan['re_start_time'] neq ''">{$loan.re_start_time|remain_time}<else/>{$loan.retime}</if></span>
+              </li>
+              <li>
+                  <span class="det_l">已购买：</span>
+                  <span>{$loan.sum_amount}元</span>
+              </li>
+              <li>
+                  <span class="det_l">还款方式：</span>
+                  <span>利随本清</span>
+              </li>
+              <li>
+                  <span class="det_l">尚需金额：</span>
+                  <span>{$loan.loan_over}元</span>
+              </li>
+              <li class="d_jd Pro_Jd" style=" width:400px;">
+                  <span>投资进度：</span>
+                  <div class="progress_container"><div class="progress_bar tip" title="{$load}%"></div></div>
+                  <span>{$loan.load}%</span>
+              </li>
+           </ul>
+           
+           <ul class="deal_process">
+              <li class="product_bz Pro_bz_img"><span class="product_txt">投资标的保障</span><span class="product_icon_1"><img src="__PUBLIC__/images/principal.png" /></span><span class="product_icon_1"><img src="__PUBLIC__/images/interest.png" /></span></li>
+              
+              <div class="spacer"></div>
+           </ul>
+        </div>
+        <div class="ProjectRight nnh-right">
+           <form action="{:U('Deal/DoAddInvested')}" id="do_add_form" method="post" onsubmit="return checkDoAdd(this)">
+           <input type="hidden" name="uid" id="uid" value="{$user_info.id}">
+           <input type="hidden" name="lid" id="lid" value="{$loan.id}">
+           <ul>
+              <!--<li>可投余额</li>-->
+              <li class="DealRemain">可投余额：<span class="remaining">{$loan.loan_over_view}</span>元</li>
+              <li class="MyMoney">
+                     <if condition="$user_info['id'] neq ''">
+                     <p>可用余额：<span class="remain">{$user_info.money}</span>元
+                     [<a href="{:U('Member/TopUp')}">充值</a>]</p>
+                     <p>奖励金额：<span class="remain">{$user_info.bonus_money}</span>元</p>
+                     <!--没登录显示-->
+                     <else/>
+                       <p style=" margin:15px 0;">可用余额：<span>[<a href="{:U('user/Login')}">请先登录</a>]</span></p>
+                     </if>
+              </li>
+              <li>
+                   <p class="tz_aaa">
+                        <span><input type="text" value="投资额应大于{$loan.min_loan_money}小于{$loan.max_loan_money}" class="tz_amount" onclick="if(this.defaultValue==this.value){this.value='';}" onblur="if(this.value==''){this.value=this.defaultValue;}" name="money" id="money" /></span>
+                        <span class="suspension">预期收益 ￥<font id="expect_money"></font>元<br>可使用奖励金额 ￥<font id="temp_money"></font>元</span>
+                   </p>
+              </li>
+              
+              <if condition="$web_user_rate_count GT 0">
+                <li class="tz_jxq">
+                  <input name="rate_id" id="rate_id" type="checkbox" onchange="change_rate(this)" value="{$one_user_rate_res.id}" data-value="{$one_user_rate_res.add_rate}" />使用加息1%券（剩余{$web_user_rate_count}张）
+                </li>
+              </if>
+              <li>                    
+                   <input type="button" value="立即投标" class="investment tz_tjbtn" name="submit_invested" id="submit_invested" />
+              </li>
+           </ul>
+           </form>
+        </div>
+        </if>
+        <div class="spacer"></div> 
+    </div>      
+    
+</div>
+<script type="text/javascript">
+  var retime = '{$loan.re_start_time}';//剩余时间(秒)   
+  //投资窗口，筹标剩余时间控制
+  if(retime >= 0 && retime != ''){
+      $("#re_start").show();
+      $("#ing_retime").hide();
+      $("#submit_invested").attr('disabled','disabled');
+      $("#submit_invested").val('待开放');
+  }else{    
+      $("#submit_invested").removeAttr('disabled');
+      $("#ing_retime").show();
+      $("#re_start").hide();
+  }    
+</script>
+<!---->
+<div class="de_code" id="invested_loading" style=" display:none;">
+  <div class="row_pd" >
+    <p class="row_to row_txt">请勿关闭或刷新...请耐心等待...</p>
+    <!--<p class="row_to"><img src="__PUBLIC__/images/aabb.gif" /></p>-->
+  </div>
+</div>
+
+<!--弹出验证码-->
+<div class="de_code" id="vrf">
+  <div class="row_pd code_input">
+    <h3>请输入验证码</h3>
+    <p>
+      <span><input type="text" value="输入验证码" onclick="if(this.defaultValue==this.value){this.value='';}" onblur="if(this.value==''){this.value=this.defaultValue;}" id="verify" class="inp_code" /></span>
+      <span>
+        <a href="javascript:void(change_code(this));">
+             <img src="{:U("Member/verify",'','')}" id="code"/>
+         </a>
+      </span>
+      <span><input type="button" id="submit_verify" value="确定" class="code_sure" /></span>
+    </p>
+    <span class="code_close"><img src="__PUBLIC__/images/close.png" /></span>
+  </div>
+</div>
+<script type="text/javascript">
+
+  
+/**
+ * checkDoAdd   处理投资表单
+ */
+function checkDoAdd(){  
+    //数字判断，表单判断
+    if($.trim($money.val()) == 0 || !number_reg.test($.trim($money.val()))){
+      alert('请填写正确的投资金额');$money.val('');$money.focus();return false;
+    }  
+    $is_login = "{$Think.session.user_id}";
+    if($is_login == ''){
+      alert('请先登录');location.href='{:U("user/Login")}';return false;
+    }
+    //判断最低可投金额
+    $mod = parseFloat($.trim($money.val())) % parseFloat($min_loan_money);//输入金额是否能整除最小投资额    
+    if($mod!=0){
+      alert('投资金额需为{$loan.min_loan_money}或{$loan.min_loan_money}的倍数');return false;                      
+    }          
+    //判断最高可投金额     
+    if($money.val() > $max_loan_money){
+      alert('投资金额不能大于最高投资金额{$max_loan_money}');return false;
+    }
+    //判断剩余借款总额
+    if($money.val() > $loan_over){
+        alert('输入错误，投资总额'+$money.val()+'不可超过可投金额!'+$loan_over);return false;
+    }
+    //判断比对当前可用余额
+    // if($money.val() > $user_money){
+    //   alert('投资金额不能大于您当前可用余额'+$user_money);return false;
+    // }
+    //通过上述判断，显示验证码层
+    $("#vrf").fadeIn();
+    return false;      
+}
+
+/**
+ * show_expect_money   显示预期收益气泡
+ */
+function show_expect_money(){
+    $new_loan_rate = $loan_rate;
+    if($("#rate_id").attr('checked')){
+      $new_loan_rate = $new_loan_rate + parseFloat($("#rate_id").attr('data-value')/100);
+    }     
+    <if condition="$loan['loan_deadline_type'] eq '1'">
+    //预期收益 = 投资金额 * 年利率 / 365 * 借款期限
+    var expect_money = parseFloat($money.val()) * $new_loan_rate / 365 * $loan_deadline;
+    <else/>
+    //预期收益 = 投资金额 * 年利率 / 12 * 借款期限
+    var expect_money = parseFloat($money.val()) * $new_loan_rate / 12 * $loan_deadline;
+    </if>
+    expect_money = Math.round(expect_money * 100)/100;//给用户显示收益  
+    temp_money = parseFloat($money.val() * {$Think.config.bonus_rate});//可用奖励金额
+    //若当前剩余奖励金额足以支付可用奖励金额,那么只使用可用的奖励金额
+    if(temp_money < parseFloat({$user_info.bonus_money})){
+      temp_money = temp_money;                                                         
+    }else{
+    //若剩余奖励金额不足可用奖励金额则使用全部奖励金额
+      temp_money = parseFloat({$user_info.bonus_money});
+    }
+    <empty name="user_info.id">
+    temp_money = 0;
+    <else/>
+    </empty>
+    use_money = parseFloat($money.val() - temp_money);
+    $("#expect_money").text(expect_money);
+    $("#temp_money").text(temp_money);//输出当前可用奖励金额
+    $("#use_money").text(use_money);//输出使用余额
+    $(".suspension").fadeIn();      
+}
+
+//更换验证码
+verifyURL = '{:U("Member/verify",'','')}';
+function change_code(obj){
+    $("#code").attr("src",verifyURL+'/'+Math.random());
+    return false;
+}  
+
+$do_add_form = $("#do_add_form");//投资表单
+$verify = $("#verify");//验证码
+$money = $("#money");//当前投资金额
+$min_loan_money = {$loan.min_loan_money};//最低投资金额
+$max_loan_money = {$loan.max_loan_money};//最高投资金额
+$loan_over = parseFloat($("#loan_over").text());//可投余额          
+// $user_money = parseFloat($("#user_money").text());//用户当前可用余额
+$loan_rate = (parseFloat("{$loan.loan_rate}") + parseFloat("{$loan.loan_add_rate}")) / 100;//年利率      
+$loan_deadline = parseFloat("{$loan.loan_deadline}");//借款期限（月）          
+var number_reg = /^\d+$/;
+//验证码提交
+$verify.blur(function() {        
+
+   $rate_id = '';//初始化加息券ID
+   //勾选加息券ID传值
+   if($("#rate_id").attr('checked')){
+     $rate_id = $("#rate_id").val();
+   }         
+   check_verify();   
+});
+$verify.keyup(function(){
+  check_verify();
+})
+function check_verify(){
+    if($.trim($verify.val()) != '' && $.trim($verify.val()) != '输入验证码' && $verify.val().length == 4){    
+       //后台比对验证码，若通过则正式提交投资。否则弹出提示
+       $.ajax({
+         url: "{:U('Deal/DoVerify')}",
+         type: 'POST',
+         dataType: 'json',
+         data: "verify="+$verify.val(),
+         success:function(msg){          
+            if(msg.status == '1'){            
+              $("#submit_verify").css("background","#e43343");
+              $("#submit_verify").removeAttr('disabled');              
+             // location.href= $submit_url+"?lid="+$("#lid").val()+"&money="+$money.val()+"&rate_id="+$rate_id;          
+            }else{
+              //alert(msg.info);
+              $("#submit_verify").css('background','#CCC');$("#submit_verify").attr('disabled',true);return false;
+            }
+         }
+        })
+   }
+}
+$("#submit_verify").click(function() {      
+    $.ajax({
+      url: "{:U('Deal/DoAddInvested')}",
+      type: 'POST',
+      dataType: 'json',
+      data:"lid="+$("#lid").val()+"&money="+$money.val()+"&rate_id="+$rate_id + "&verify=" + $verify.val() + "&tpid={$Think.session.user_id}",
+      beforeSend:function(){
+        $("#invested_loading").show();//显示loading
+      },                         
+      success:function(msg){              
+           $("#invested_loading").hide();         
+           if(msg.status == '0'){
+             alert(msg.info);
+             if(msg.url != null){
+                location.href = msg.url;
+             }
+             return false;
+           }else{
+             alert(msg.info);location.href = msg.url;
+             return false;
+           }   
+      },
+      error:function(e){
+          alert('网络繁忙');return false;
+      }
+    })
+});
+//关闭验证码层
+$(".code_close").click(function(){
+    $("#vrf").fadeOut();
+});
+
+//同步显示预期收益
+$(".tz_amount").keyup(function(){
+ if($.trim($money.val()) != 0 && number_reg.test($.trim($money.val()))){       
+    show_expect_money();//显示预期收益气泡
+ }              
+}).blur(function(){
+ $(".suspension").fadeOut();             
+});  
+//投资表单判断
+$("#submit_invested").click(function(){          
+  checkDoAdd();return false;
+})
+</script>

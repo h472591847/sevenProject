@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>个人管理-{$Think.config.web_title}</title>
+<include file = "Common:transparent" />
+
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<!--安全等级-->
+<script type="text/javascript" src="__PUBLIC__/js/jquery.tips.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.cookie.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+	var percent = $('.progress_bar').attr('title');
+	$(".progress_bar").animate({width:percent},1000);
+	$(".tip").tipsy({gravity:'s',fade:true});
+});
+</script>
+<!---->
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+<!--chart start-->
+<script type="text/javascript" src="__PUBLIC__/js/highcharts.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/exporting.js"></script>
+<script type="text/javascript">
+var options = {
+    chart: {
+        defaultSeriesType: 'spline',
+         renderTo:'container'
+    },
+    xAxis: {
+        categories: ['{$user_info.month_0_name}', '{$user_info.month_1_name}', '{$user_info.month_2_name}', '{$user_info.month_3_name}', '{$user_info.month_4_name}', '{$user_info.month_5_name}'],
+        showEmpty: false
+    },
+
+    yAxis: {
+        showEmpty: false
+    },
+    plotOptions:{
+      series:{
+        animation:true
+      }
+    },
+    series: [{
+        allowPointSelect: true,
+        data: [ 
+            ['{$user_info.month_0_name}',    {$user_info.month_0.sum_month}],
+            ['{$user_info.month_1_name}',    {$user_info.month_1.sum_month}],
+            ['{$user_info.month_2_name}',     {$user_info.month_2.sum_month}],
+            ['{$user_info.month_3_name}',     {$user_info.month_3.sum_month}],
+            ['{$user_info.month_4_name}',      {$user_info.month_4.sum_month}],
+            ['{$user_info.month_5_name}',      {$user_info.month_5.sum_month}]          
+            
+        ],
+        dataLabels:{
+          enabled:true
+        },
+        marker:{
+          enabled:true
+        },
+        showInLegend: false
+    }]
+};
+
+$(function () {
+    var chart = new Highcharts.Chart(options); 
+
+    // Set Name
+    var name = false;
+    $('.change[index=name]').click(function() {
+        options.series[0].name = name ? null : 'First';
+        chart = new Highcharts.Chart(options);
+        name = !name;
+    });
+
+    //Set Enable DataLabels
+    var enableDataLabels = false;
+    $('.change[index=data-labels]').click(function() {
+        options.series[0].dataLabels.enabled = enableDataLabels;
+        chart = new Highcharts.Chart(options);
+        enableDataLabels = !enableDataLabels;
+    });
+    
+    //Set Enable Markers 
+    var enableMarkers = false;
+    $('.change[index=markers]').click(function() {
+        options.series[0].marker.enabled = enableMarkers;
+        chart = new Highcharts.Chart(options);
+        enableMarkers = !enableMarkers;
+    });
+
+    //Set Color
+    var color = false;
+    $('.change[index=color]').click(function() {
+        options.series[0].color =  color ? null : Highcharts.getOptions().colors[1];
+        chart = new Highcharts.Chart(options);
+        color = !color;
+    });
+
+    // Set type
+    $.each(['line', 'column', 'spline', 'area', 'areaspline', 'scatter', 'pie'], function (i, type) {
+        $('.change[index=' + type+']').click(function () {
+            options.chart.type =  type;
+            chart = new Highcharts.Chart(options);
+        });
+    });
+});         
+
+</script>
+<script type="text/javascript">
+
+/**
+ * welcome              问候语
+ * objid                元素ID
+ * @return   string     问候语文字
+ */
+function welcome(objid){
+  myDate=new Date();
+  myHours=myDate.getHours();
+  if(myHours<9)
+   welcomestring="早上好";
+   else if(myHours<12)
+   welcomestring="上午好";
+   else if(myHours<13)
+   welcomestring="中午好";
+   else if(myHours<18)
+   welcomestring="下午好";
+   else if(myHours<24)
+   welcomestring="晚上好"; 
+   var time_obj = document.getElementById(objid);
+   time_obj.innerHTML = welcomestring;
+ }  
+</script>
+<!--play_skill-->
+<link href="__PUBLIC__/style/guide.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+<include file = "Common:head" />
+<include file = "Common:web_announce" />
+<div class="middle">
+   <include file="Common:left_menu"/>
+   <!--mid_right start-->
+   <div class="mid_right InLine">
+      <h3 class="bt">帐户总览</h3>
+      <div class="mr_center" style=" height:1200px;">                
+         <!--wealth start-->
+         <script type="text/javascript">
+         $(document).ready(function() {
+      			var q_mark = $(".q_mark");
+      			var t_am = $(".t_am");
+               $(q_mark).mouseover(function(){
+      			   $(this).parent().siblings('.t_am').fadeIn();
+      			}).mouseleave(function(){
+      			   $(t_am).hide();
+      			});
+      			var qq = $(".wealth");
+         });
+         </script>
+         <ul class="wealth">
+            <li class="w_fir">
+               <span class="amount">{$deal_static.count_user_money|format_price}</span>
+               <span>资产总额<font class="q_mark"><img src="__PUBLIC__/images/q_mark.png" /></font></span>
+               <div class="t_am">
+                  资产总额 = 可用余额 + 冻结金额 + 待收本息 + 待收利息 + 奖励金额
+               </div>
+            </li>
+            <li class="w_fir">
+               <span class="amount">{$deal_static.money|format_price}</span>
+               <span>可用余额<!-- <font class="q_mark"><img src="__PUBLIC__/images/q_mark.png" /></font> --></span>
+<!--                <div class="t_am">
+                  可用余额 = 实际余额 +　奖励金额
+               </div> -->
+            </li>
+            <li class="rew-blo">
+               <p class="reward_j">
+                   <span class="amount">{$user_info.bonus_money}</span>
+                   <span><a href="javascript:;" <if condition="$user_info['bonus_money'] GT 0">title="充值{$true_recharge_money}元,投资后即可取出全部奖励金额"</if> style="cursor:text;">奖励金额</a></span>
+               </p>
+               <p class="reward_g"><span><a href="http://www.p2p222.com/index.php/Article/articleDetail/id/1546.html" target="_blank" title="奖励金额使用规则"><img src="__PUBLIC__/images/reward_use.png" alt="奖励金额使用规则" /></a></span></p>
+            </li>
+            <li>
+               <span class="amount jumbo" id="myTargetElement">{$deal_static.sum_money|format_price}</span>
+               <span>累计收益</span>
+            </li>
+            <li>
+               <span class="amount">{$deal_static.sum_amount_all|format_price}</span>
+               <span>累计投资</span>
+            </li>
+            <li>
+               <span class="amount">{$deal_static.sum_repay|format_price}</span>
+               <span>待收总额</span>
+            </li>
+            
+         </ul>
+         
+         <!--wealth end-->
+         <!--chart start-->
+         <div class="chart member_con">
+             <h3 class="member_bt">最近投资</h3>
+             <div id="container" style="width:730px;height:380px; margin-top:20px;"></div>
+  			 <div style="margin:0 auto;text-align:center;"></div>
+         </div>
+         <!--chart end-->
+         
+         <!--trading start-->
+         <div class="trading member_con">
+           <h3 class="member_bt">交易记录</h3>
+         <table cellpadding="0" cellspacing="0" border="0" width="100%" class="tra_tab">
+               <thead>
+                   <tr>
+                      <th width="21%">时间</th>
+                      <th width="12%">交易类型</th>
+                      <th width="17%">单号</th>
+                      <th width="35%">明细</th>
+                      <th width="15%">资金</th>
+                   </tr>
+               </thead>
+               <tbody id="tbody"> 
+               <foreach name="list" item="v">
+                   <tr>
+                      <td class="date" height="70">{$v.create_time|date='Y-m-d H:i:s',###}</td>
+                      <td>                        
+                          {$v.type|get_deal_log_type}                  
+                      </td>
+                      <td>{$v.create_time|date='YmdHis',###}</td>
+                      <td>{$v.detail}</td>
+                      <td>
+                      <if condition="$v.pay_status eq 1"><span class="add">+<else/><span class="green">-</if>
+                      {$v.money|format_price}</span></td>
+                   </tr>
+                </foreach>
+               </tbody>
+           </table>
+           <script type="text/javascript">
+              $(".tra_tab").find("tr:odd").css("background","#f8f9fa");
+           </script>
+         </div>
+         <!--trading end-->
+      </div>
+      <div class="spacer"></div>
+   </div>
+   <!--mid_right end-->
+   <div class="spacer"></div>   
+</div>
+<include file = "Common:bottom" />
+<if condition="$Prompt eq 1 && $Think.cookie.no_msg neq '1'">
+<div class="grey"><include file = "Common:skill" /></div>
+</if>
+
+
+<!--chart end-->
+<script type="text/javascript" src="__PUBLIC__/js/countUp.js"></script>
+<script type="text/javascript">
+
+    // create instance
+    var demoAnim = new countUp("myTargetElement",{$deal_static.sum_money}, 2, 2.5);
+
+    window.onload = function() {
+        
+        // fire animation
+        demoAnim.start();
+        
+    }
+
+    // for demo:
+    function createCountUp() {
+
+        var endVal = document.getElementById("num").value;
+        endVal = Number(endVal.replace(',','').replace(' ',''));
+        var decimals = document.getElementById("decimals").value;
+        var duration = document.getElementById("duration").value;
+
+        demoAnim = new countUp("myTargetElement", endVal, decimals, duration);
+        demoAnim.start();
+    }
+
+</script>
+</body>
+</html>

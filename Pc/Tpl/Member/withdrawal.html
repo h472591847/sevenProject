@@ -1,0 +1,694 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>会员提现-{$Think.config.web_title}</title>
+<include file = "Common:transparent" />
+
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/register.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.cityselect.js"></script>
+<script type="text/javascript">
+function slide_down_bank_list(){
+       $(".yh_num").slideDown(300);
+}
+
+$(document).ready(function() {	
+
+  /*省市二级联动菜单初始化*/
+  city_lib_url = '__PUBLIC__/js/city.min.js';//省市json库文件路径
+  $("#city_1").citySelect({
+    nodata:"none",
+    required:false
+  });  
+  $("#city_2").citySelect({
+    nodata:"none",
+    required:false
+  });    
+    
+  $(".with_money").keyup(function(){    
+    $(".money_mark").fadeIn();            
+  }).blur(function(){
+		$(".money_mark").fadeOut();             
+  }); 
+	
+});
+</script>
+
+<!--资金协议-->
+<script type="text/javascript" src="__PUBLIC__/js/jquery.jmpopups-0.5.1.js"></script>
+<script type="text/javascript">
+	$.setupJMPopups({
+	  screenLockerBackground: "#000000",
+	  screenLockerOpacity: "0.7"
+	});
+
+	function openStaticPopup() {
+	  $.openPopupLayer({
+	  name: "myStaticPopup",
+	  width: 820,
+	  target: "myHiddenDiv_1"
+	});
+}
+
+
+/**
+ * get_modify_info      获取银行卡信息
+ */		
+function get_modify_info(obj){      
+      $id = $(obj).attr('data-id');          
+      $.ajax({
+        url: '{:U("Member/modify_bank")}',
+        type: 'POST',
+        dataType: 'json',
+        data: "id="+$id,
+        success:function(msg){                 
+          $("#md_real_name").text(msg.data.real_name_view);
+          $("#md_bank_number").text(msg.data.bank_number_view);
+          // $("#md_bank_name").text(msg.data.bank_name);          
+          if(msg.data.bank_name != ''){            
+            $("#show_bank_name_add").text(msg.data.bank_name);            
+          }
+          $("#city_1 select[name='province'] option:selected").text(msg.data.province);
+          $("#city_1 select[name='province'] option:selected").val(msg.data.province);
+          $("#city_1 select[name='city']").append("<option value="+msg.data.city+" selected=selected>"+msg.data.city+"</option>");                   
+          $("#md_bank_address").val(msg.data.bank_address);
+          $("#upid").val(msg.data.id);          
+        }
+      })   
+}
+
+/**
+ * check_modify      修改银行卡表单过滤
+ */
+function check_modify(){
+  if($("#city_1 select[name='province']").val() == ''){
+    alert('请选择开户省份');return false;
+  }
+  if($("#city_1 select[name='city']").val() == ''){
+    alert('请选择开户城市');return false;
+  }  
+  if($("#md_bank_address").val() == ''){
+    alert('请填写开户行全称');$("#md_bank_address").focus();return false; 
+  }
+}
+
+
+/**
+ * check_add      添加银行卡表单过滤
+ */
+function check_add(){  
+  if($("#add_real_name").val() == ''){
+    alert('请填写户名');$("#add_real_name").focus();return false; 
+  }
+  if($("#add_bank_number").val() == ''){
+    alert('请填写卡号');$("#add_bank_number").focus();return false; 
+  }
+  if($("#bank_name").val() == '' || $("#bank_name").val() == '请选择银行'){
+    alert('请选择银行');return false;
+  }        
+  if($("#city_2 select[name='province']").val() == ''){
+    alert('请选择开户省份');return false;
+  }
+  if($("#city_2 select[name='city']").val() == ''){
+    alert('请选择开户城市');return false;
+  }  
+  if($("#add_bank_address").val() == ''){
+    alert('请填写开户行全称');$("#add_bank_address").focus();return false; 
+  }
+}
+
+
+//银行卡设置默认
+function is_default(objid){
+  $.ajax({
+    url: '{:U("Member/do_default_bank")}',
+    type: 'POST',
+    dataType: 'json',
+    data: "id="+objid,
+    success:function(msg){
+      if(msg.status == '1'){        
+       location.reload();return false;
+      }
+    }
+  })
+}
+
+
+/**
+ * verify_trade    验证交易密码
+ */
+function verify_trade(obj){
+  $.ajax({
+    url: '{:U("Member/VerifyTrade")}',
+    type: 'POST',
+    dataType: 'json',
+    data: "trade_pwd="+$(obj).val(),
+    success:function(msg){
+      if(msg.status == '0'){
+        $("#trade_msg").css("color","red");
+        $("#trade_msg").text(msg.info);
+        $("#trade_msg").show();
+        $("#submit_withdrawal").attr('disabled','disabled');
+        $("#submit_withdrawal").css("background","#999");
+        return false;
+      }else{        
+        $("#trade_msg").text("");
+        $("#trade_msg").hide();
+        $("#submit_withdrawal").css("background","#E44343");
+        $("#submit_withdrawal").removeAttr('disabled');
+        return false;
+      }
+    }
+  })
+  
+}
+</script>
+<!---->
+</head>
+<body>
+<include file = "Common:head" />
+<include file = "Common:web_announce" />
+<div class="middle">
+   <include file="Common:left_menu"/>
+   <div class="mid_right InLine">
+      <h3 class="bt">提现</h3>
+      <div class="mr_center">
+            <table cellpadding="0" cellspacing="0" border="0" width="90%" class="tx_table gray_border_table">
+                <tr>
+                   <td width="32%" height="80" align="right" class="bank_card" valign="top"><span>绑定提现银行卡：</span></td>
+                   <td width="68%" class="bank_k">
+                      <ul class="clearfix">
+                            <foreach name="bank_list" item="v">         
+                            <li class="clearfix">     
+                              <div class="bank_1" onclick="is_default({$v.id});" <if condition="$v['is_default'] eq 1">id="default_bank"</if>>
+                                 <if condition="$v['is_default'] eq 1">
+                                     <span class="default_img"><img src="__PUBLIC__/images/default.png" /></span>
+                                  </if>                                                    
+                                  <span class="bank_name bank_one">
+                                    <switch name="v.bank_name">
+                                    <case value="中国工商银行"><img src="__PUBLIC__/images/bank_1.jpg" width="105" alt="中国工商银行" /></case>
+                                    <case value="中国建设银行"><img src="__PUBLIC__/images/bank_2.jpg" width="105" alt="中国建设银行" /></case>
+                                    <case value="中国农业银行"><img src="__PUBLIC__/images/bank_3.jpg" width="105" alt="中国农业银行" /></case>
+                                    <case value="中国银行"><img src="__PUBLIC__/images/bank_4.jpg" width="105" alt="中国银行" /></case>
+                                    <case value="交通银行"><img src="__PUBLIC__/images/bank_5.jpg" width="105" alt="交通银行" /></case>
+                                    <case value="招商银行"><img src="__PUBLIC__/images/bank_6.jpg" width="105" alt="招商银行" /></case>
+                                    <case value="兴业银行"><img src="__PUBLIC__/images/bank_7.jpg" width="105" alt="兴业银行" /></case>
+                                    <case value="中国光大银行"><img src="__PUBLIC__/images/bank_8.jpg" width="105" alt="中国光大银行" /></case>
+                                    <case value="广发银行"><img src="__PUBLIC__/images/bank_9.jpg" width="105" alt="广发银行" /></case>
+                                    <case value="北京银行"><img src="__PUBLIC__/images/bank_10.jpg" width="105" alt="北京银行" /></case>
+                                    <case value="平安银行"><img src="__PUBLIC__/images/bank_11.jpg" width="105" alt="平安银行" /></case>
+                                    <case value="中国邮政储蓄银行"><img src="__PUBLIC__/images/bank_12.jpg" width="105" alt="中国邮政储蓄银行" /></case>
+                                    <case value="中国民生银行"><img src="__PUBLIC__/images/bank_13.jpg" width="105" alt="中国民生银行" /></case>
+                                    <case value="上海浦东发展银行"><img src="__PUBLIC__/images/bank_14.jpg" width="105" alt="上海浦东发展银行" /></case>
+                                    <case value="中信银行"><img src="__PUBLIC__/images/bank_15.jpg" width="105" alt="中信银行" /></case>
+                                    <case value="渤海银行"><img src="__PUBLIC__/images/bank_16.jpg" width="105" alt="渤海银行" /></case>
+                                    <case value="上海银行"><img src="__PUBLIC__/images/bank_17.jpg" width="105" alt="上海银行" /></case>
+                                    </switch>
+                                  </span>
+                                  <span class="bank_num">{$v.bank_number_view}</span>
+                              </div>
+                              <span class="xg_txt"><i class="modify_bank" data-id="{$v.id}" onclick="get_modify_info(this)">修改</i></span>
+                            </li>
+                            </foreach>
+                            
+                            <li><div class="with_add" id="with_add">添加一张银行卡</div></li>
+                              <script type="text/javascript">
+                                   $("#with_add").click(function(){
+                                      $("#tx_bank_add").show();        
+                                      $("#tx_bank_modify").hide();
+                                   });
+                               </script>                            
+                            <div class="spacer"></div>
+                      </ul>
+                      
+                   </td>
+                </tr> 
+                <tr>
+                   <td width="23%" height="60" align="right" style="padding-right:20px;">当前可用余额：</td>
+                   <td class="bank_d"><font color="#e44343">{$user_info.money}</font> 元
+                   <span id="money" style="display:none">{$user_info.money}</span>
+                   <span id="management" style="display:none">{$management}</span>
+                   </td>
+                </tr> 
+              <form action="{:U('Member/DoWithdrawal')}" method="post">
+              <input type="hidden" name="bank_id" id="bank_id" value="{$default_bank_id}">                
+              <input type="hidden" name="phone" id="phone" value="{$user_info.phone}">                 
+                <tr>
+                   <td height="60" align="right" style="padding-right:20px;">提现方式：</td>
+                   <td class="bank_d"><input name="type" type="radio" value="0" checked="checked" />正常提现 <!--input name="type" type="radio" value="1" />
+                     特殊提现(未投资提现)--></td>
+                </tr>                
+                <tr>
+                   <td height="60" align="right" style=" padding-right:20px;">提现金额：</td>
+                   <td class="bank_d tx_money">                      
+                      <input type="hidden" name="bank_number" value="{$bank.true_bank_number}" />
+                      <input type="text" class="top_up with_money" name="withdrawal_price" value="0" id="withdrawal_price" onfocus="if(this.value=='' || this.value==0){ this.value='' ;}" />
+                      <span class="money_mark">
+                         <div id="txt"></div>
+
+                         
+                      </span>
+                   </td>
+                </tr>
+<!--                 <tr>
+                   <td height="60" align="right" style="padding-right:20px;">手续费：</td>
+                   <td class="bank_d"><span id="txt"></span></td>
+                </tr> -->
+                <tr>
+                   <td height="60" align="right" style="padding-right:20px;">预计到账日期：</td>
+                   <td class="bank_d">请您尽量于工作日16:00前提交提现申请以便审核。16:00之后提交申请的，需次日审核。审核通过当日后3个工作日内（不含双休及法定节假），将资金转入您在网站认证的银行卡账号。</td>
+                </tr>
+                <tr>
+                   <td height="60" align="right" style=" padding-right:20px;">交易密码：</td>
+                   <td width="30%" class="bank_d">
+                   <input type="password" name="trade_pwd" class="top_up" id="trade_pwd" onkeyup="verify_trade(this)" onblur="verify_trade(this)" />
+                   <if condition="$user_info.trade_pwd eq ''"><font color="red" >您还没有设置交易密码，<a href="{:U('Member/personal')}">前往设置</a></font></if>
+                   <span id="trade_msg"></span>
+                   </td>
+                </tr>
+               <tr>
+                  <td height="60" align="right" style=" padding-right:20px;">手机验证码：</td>
+                  <td class="bank_d">
+                        <input type="text" value="请输验证码" onclick="if(this.defaultValue==this.value){this.value='';}" onblur="if(this.value==''){this.value=this.defaultValue;}"  class="top_up" style="width:120px; float:left;" name="phone_code" />                    
+                        <input type="button" value="短信验证码" id="send_code" onclick="sendCode(this,1,'取现验证码')" class="hq_yz" style=" height:40px;" />
+                        <input type="button" value="语音验证码" id="send_code" onclick="sendCode(this,2)" class="hq_yz yz_voice" style=" height:40px;" />
+                  </td>
+               </tr>  
+               <tr>
+                   <td height="60" align="right">&nbsp;</td>
+                   <td width="30%" class="bank_d">
+                      <input name="ido" type="checkbox" />
+                       <label for="ido">我已经阅读并同意<a href="javascript:;" onclick="openStaticPopup()" title="金投资资金管理规定" class="reg_xy">《金投资充值及提现协议》</a></label>
+                       <div id="myHiddenDiv_1" style="display:none;">
+                          <div class="popup_1">
+                             <div class="popup-header_1">
+                                 <h2>金投资充值及提现协议</h2>
+                             </div>
+                             <div class="popup-body_1">
+                                 <strong>请仔细阅读本协议</strong>
+                                 <div class="con_1">
+                                    <p>本协议双方为吉林省金湧博发投资管理有限公司（金投资）与金投资投资人，本协议具有合同效力。本协议的内容包括以下全部条款以及本网站已经发布的及将来可能发布的与出借人用户有关的各项规则，该等规则均为本协议不可分割的一部分，与以下所列条款具有同等法律效力。本网站有权根据需要修改本协议的内容。如以下条款或本网站各项规则有任何变更，本网站将在网站上刊载公告。经修订的相关条款和规则一经公告，即于公告规定的特定生效日期自动生效。</p>
+                                    <p>投资人只要勾选位于注册页面下方的“我同意金投资注册协议”选项并按照本网站的流程成功注册后，本协议即产生法律效力。投资人不得以未签署书面协议为由否认本协议的效力。本协议是由投资人与本网站共同签订的，适用于投资人在本网站的全部活动。在投资人注册成为用户时，投资人已经阅读、理解并接受本协议的全部条款及各类规则，如有违反而导致任何法律后果的发生，投资人将以自己的名义独立承担所有相应的法律责任。</p>
+                                    <b>本协议不涉及投资人与本网站的其他用户之间因网上交易而产生的法律关系及法律纠纷。</b><br />
+                                    <b>一、充值管理规定</b>
+                                    <p>1、充值金额：100元人民币起 （金额可精确到元）</p>
+                                    <p>2、充值费用：免费</p>
+                                    <b>二、投资管理办法</b>
+                                    <p>1、投资金额：请参照实际投资标的规定起投金额及办法</p>
+                                    <p>2、账户管理费：平台将收取投资人成功投资后利息的10%作为账户管理费</p>
+                                    
+                                    <b>提现管理规定</b>
+                                    <p>1、提现金额：100元人民币起  （金额可以精确到分）</p>
+                                    <p>2、提现时绑定的持卡人姓名需与个人资料绑定的姓名一致。</p>
+                                    <p>3、提现手续费每笔5元起，工作日16:00前提交提现申请的，当天审核；16:00之后提交申请的，下个工作日审核。</p>
+                                    <p>4、审核通过后3个工作日内（不含双休及法定节假），将资金转入您在网站认证的银行卡账号。</p>
+                                    <b>四、账户信息注意事项</b>
+                                    <p>提现时绑定的持卡人姓名需与注册时个人资料绑定的姓名一致，如姓名或信息错误请及时联系客服处理。</p>
+                                    <p>账户信息须正确填写，开户行名称为 银行名称+支行全称（拨打银行客服电话即可查询）。</p>
+                                    <p>如银行卡相关信息填写错误请联系客服人员办理修改，为保证投资人的资金安全，不被不法分子冒领，修改银行卡相关信息时需向客服人员提供本人手持身份证及银行卡正反面四张照片。</p>
+                                    <b>五、其他附加条款</b>
+                                    <p>1、未经本网站事先书面许可，投资人无权将本协议项下的权利转让给任何第三方，否则该转让行为无效。</p>
+                                    <p> 2、本协议之效力、解释、变更、执行与争议解决均适用中华人民共和国法律，因本协议产生之争议，双方同意将争议提交至长春市具有管辖权的人民法院，通过司法程序予以解决。</p>
+                                    <b>六、违约责任</b>
+                                    <p>如果您违反了您在协议中所作的陈述、保证、承诺或任何其他义务，致使本网站或本网站的股东、实际控制人、员工承受任何损失，您应向受损失的一方做出全额赔偿。</p>
+                                    <b>七、适用法律和管辖</b>
+                                    <p>本协议适用中华人民共和国法律，与本协议的解释和履行有关的争议应由长春仲裁委员会按照其仲裁规则进行仲裁。</p>
+                                    <b>八、终止</b>
+                                    <p>除非本网站终止本协议或者您申请终止本协议及注销相应用户账户且经本网站同意，否则本协议始终有效。在您违反了本协议、相关规则，或在相关法律法规、政府部门的要求下，本网站有权通过电子邮件告知方式终止本协议、关闭您的账户或者限制您使用本网站。</p>
+                                    <b>九、条款的独立性</b>
+                                    <p>若本协议的部分条款被认定为无效或者无法实施时，本协议中的其他条款仍然有效。</p>
+                                    
+                                    <p>本协议内容最终解释权规金投资网站所有。</p>
+                                  </div>
+                                </div>
+                                <a href="javascript:;" class="close_1" onclick="$.closePopupLayer('myStaticPopup')" title="关闭窗口" >阅读完毕，关闭窗口</a>
+                           </div>
+                        </div>
+                        <div id="fade" class="black_overlay"></div>
+                   
+                   </td>
+                </tr>              
+                <tr>
+                   <td height="80">&nbsp;</td>
+                   <td class="bank_d"><input type="submit" value="确定" name="submit_withdrawal" id="submit_withdrawal" class="topup_sub" /></td>
+                </tr>
+               </form>                
+            </table>          
+            <div class="prompt">
+                         <font color="#e44343">温馨提示</font> <br />
+                          提现手续费计算：
+                          {$Think.config.section1_min}~{$Think.config.section1_max} = {$Think.config.section1_money}元
+                         ；{$Think.config.section2_min}~{$Think.config.section2_max} = {$Think.config.section2_money}元
+                         ；{$Think.config.section3_min}~{$Think.config.section3_max} = {$Think.config.section3_money}元 
+                          <!--br>特殊提现手续费计算:
+                          <span class="tx_l">未经过投资可提现，但收取提现额的千分之{$fast_management}<empty name="replenish_management"><else/>+{$replenish_management}元</empty> ,特殊提现每笔提现金额至少为{$Think.config.min_special_withdrawal}元以上</span-->                        
+                         <br>
+                          1、确保您的银行帐号的姓名和您的网站上的真实姓名一致。<br />
+                          2、请详细填写开户支行信息，如果您填写的开户行支行不正确，导致无法转账，或者转账未能及时到账，请您尽快联系在线客服400-6570-826。未填写任何支行信息的，则不给予提现。如果您不确定开户行支行名称，可以打电话到当地所在银行的营业网点询问或者上网查询。<br />
+                          3、普通提现每笔提现金额至少为{$Think.config.section1_min}元以上。<br />
+                          4、请您尽量于工作日16:00前提交提现申请以便审核。16:00之后提交申请的，需次日审核。审核通过当日后3个工作日内（不含双休及法定节假），将资金转入您在网站认证的银行卡账号。<br />
+            </div>
+         <div class="spacer"></div>
+      </div>
+      
+   </div>
+   <div class="spacer"></div>
+</div>
+ 
+                     <div class="grey hide" id="tx_bank_modify">
+                        <div class="tx_bank">
+                            <form name="mdf_bank_form" action="{:U('Member/do_modify_bank')}" method="post" onsubmit="return check_modify()">
+                            <input type="hidden" name="upid" id="upid" value="">
+                            <input type="hidden" name="bank_name" id="bank_name" value="">   
+                            <h3>修改银行卡<span class="bank_close"><img src="__PUBLIC__/images/bank_close.png" /></span></h3>
+                            <div class="xg_bank">  
+                               <ul>
+                                  <li>
+                                      <span class="Tm_B">户名</span>
+                                      <span class="mod_intro" id="md_real_name"></span>
+                                      <span><font class="bank_name">为保证提现成功，该银行卡开户姓名必须为<i>{$user_info.real_name}</i></font></span>
+                                  </li>
+                                  <li>
+                                      <span class="Tm_B">银行卡号</span>
+                                      <span class="mod_intro" id="md_bank_number"></span>
+                                  </li>
+                                  <!--<li>
+                                       <span class="Tm_B">银行</span>
+                                       <span class="mod_intro" id="md_bank_name"></span>
+                                  </li>-->
+                                  <li>
+                                       <span class="Tm_B">银行</span>
+                                       <!--modify start-->
+                                       <span class="mod_intro"></span>
+                                       <!--add start-->
+                                       <div class="yh_all" style=" float:left;"><a href="javascript:;" class="inp inp_t" id="show_bank_name_add" title="" onclick="slide_down_bank_list()">请选择</a>
+                                           <div class="yh_num hide">
+                                              <span data-instr="中国工商银行"><img src="__PUBLIC__/images/bank_1.jpg" width="120" alt="中国工商银行" /></span>
+                                              <span data-instr="中国建设银行"><img src="__PUBLIC__/images/bank_2.jpg" width="120" alt="中国建设银行" /></span>
+                                              <span data-instr="中国农业银行"><img src="__PUBLIC__/images/bank_3.jpg" width="120" alt="中国农业银行" /></span>
+                                              <span data-instr="中国银行"><img src="__PUBLIC__/images/bank_4.jpg" width="120" alt="中国银行" /></span>
+                                              <span data-instr="交通银行"><img src="__PUBLIC__/images/bank_5.jpg" width="120" alt="交通银行" /></span>
+                                              <span data-instr="招商银行"><img src="__PUBLIC__/images/bank_6.jpg" width="120" alt="招商银行" /></span>
+                                              <span data-instr="兴业银行"><img src="__PUBLIC__/images/bank_7.jpg" width="120" alt="兴业银行" /></span>
+                                              <span data-instr="中国光大银行"><img src="__PUBLIC__/images/bank_8.jpg" width="120" alt="中国光大银行" /></span>
+                                              <span data-instr="广发银行"><img src="__PUBLIC__/images/bank_9.jpg" width="120" alt="广发银行" /></span>
+                                              <span data-instr="北京银行"><img src="__PUBLIC__/images/bank_10.jpg" width="120" alt="北京银行" /></span>
+                                              <span data-instr="平安银行"><img src="__PUBLIC__/images/bank_11.jpg" width="120" alt="平安银行" /></span>
+                                              <span data-instr="中国邮政储蓄银行"><img src="__PUBLIC__/images/bank_12.jpg" width="120" alt="中国邮政储蓄银行" /></span>
+                                              <span data-instr="中国民生银行"><img src="__PUBLIC__/images/bank_13.jpg" width="120" alt="中国民生银行" /></span>
+                                              <span data-instr="上海浦东发展银行"><img src="__PUBLIC__/images/bank_14.jpg" width="120" alt="上海浦东发展银行" /></span>
+                                              <span data-instr="中信银行"><img src="__PUBLIC__/images/bank_15.jpg" width="120" alt="中信银行" /></span>
+                                              <span data-instr="渤海银行"><img src="__PUBLIC__/images/bank_16.jpg" width="120" alt="渤海银行" /></span>
+                                              <span data-instr="上海银行"><img src="__PUBLIC__/images/bank_17.jpg" width="120" alt="上海银行" /></span>
+                                              <div class="spacer"></div>
+                                           </div>
+                                       </div>
+                                  </li>
+                                  <li>
+                                       <span class="Tm_B">开户城市</span>
+                                       <div id="city_1" style=" float:left;">
+                                        <select class="prov" name="province"></select> 
+                                        <select class="city" name="city"></select>
+                                       </div>
+                                  </li>
+                                  <li>
+                                       <span class="Tm_B">开户行全称</span>
+                                       <span><textarea name="bank_address" id="md_bank_address" cols="" rows="" class="bank_txt"></textarea></span>
+                                  </li>
+                               </ul>            
+                            </div>
+                            <p class="button_bank"><input type="submit" value="确定" name="submit_bank" id="submit_bank" class="sub" /> <input type="button" value="取消" name="submit_bank" id="submit_bank" class="sub sub_s" /></p>
+                            </form>
+                            
+                         </div>
+                     </div>
+
+                     <div class="grey hide" id="tx_bank_add">
+                         <div class="tx_bank">
+                            <form name="add_bank_form" action="{:U('Member/do_add_bank')}" method="post" onsubmit="return check_add()">                        
+                            <input type="hidden" name="bank_name" id="bank_name_add" value="">      
+                            <h3>添加银行卡<span class="bank_close"><img src="__PUBLIC__/images/bank_close.png" /></span></h3>                  
+                            <div class="xg_bank">   
+                               <ul>
+                                  <li>
+                                       <span class="Tm_B">户名</span>
+                                       <!--add start-->
+                                       <span><input type="text" name="real_name" id="add_real_name" readonly="readonly" value="{$user_info.real_name}" class="inp" style=" width:70px;" /></span>
+                                       <span><font class="bank_name">为保证提现成功，该银行卡开户姓名必须为<i>{$user_info.real_name}</i></font></span>
+                                  </li>
+                                  <li>
+                                       <span class="Tm_B">银行卡号</span>
+                                       <!--add start-->
+                                       <span><input type="text" name="bank_number" id="add_bank_number" class="inp" /></span>
+                                  </li>
+                                  <li>
+                                       <span class="Tm_B">银行</span>
+                                       <!--modify start-->
+                                       <span class="mod_intro"></span>
+                                       <!--add start-->
+                                       <div class="yh_all" style=" float:left;"><a href="javascript:;" class="inp inp_t" id="show_bank_name" onclick="slide_down_bank_list()" title="">请选择</a>
+                                           <div class="yh_num hide">
+                                              <span data-instr="中国工商银行"><img src="__PUBLIC__/images/bank_1.jpg" width="120" alt="中国工商银行" /></span>
+                                              <span data-instr="中国建设银行"><img src="__PUBLIC__/images/bank_2.jpg" width="120" alt="中国建设银行" /></span>
+                                              <span data-instr="中国农业银行"><img src="__PUBLIC__/images/bank_3.jpg" width="120" alt="中国农业银行" /></span>
+                                              <span data-instr="中国银行"><img src="__PUBLIC__/images/bank_4.jpg" width="120" alt="中国银行" /></span>
+                                              <span data-instr="交通银行"><img src="__PUBLIC__/images/bank_5.jpg" width="120" alt="交通银行" /></span>
+                                              <span data-instr="招商银行"><img src="__PUBLIC__/images/bank_6.jpg" width="120" alt="招商银行" /></span>
+                                              <span data-instr="兴业银行"><img src="__PUBLIC__/images/bank_7.jpg" width="120" alt="兴业银行" /></span>
+                                              <span data-instr="中国光大银行"><img src="__PUBLIC__/images/bank_8.jpg" width="120" alt="中国光大银行" /></span>
+                                              <span data-instr="广发银行"><img src="__PUBLIC__/images/bank_9.jpg" width="120" alt="广发银行" /></span>
+                                              <span data-instr="北京银行"><img src="__PUBLIC__/images/bank_10.jpg" width="120" alt="北京银行" /></span>
+                                              <span data-instr="平安银行"><img src="__PUBLIC__/images/bank_11.jpg" width="120" alt="平安银行" /></span>
+                                              <span data-instr="中国邮政储蓄银行"><img src="__PUBLIC__/images/bank_12.jpg" width="120" alt="中国邮政储蓄银行" /></span>
+                                              <span data-instr="中国民生银行"><img src="__PUBLIC__/images/bank_13.jpg" width="120" alt="中国民生银行" /></span>
+                                              <span data-instr="上海浦东发展银行"><img src="__PUBLIC__/images/bank_14.jpg" width="120" alt="上海浦东发展银行" /></span>
+                                              <span data-instr="中信银行"><img src="__PUBLIC__/images/bank_15.jpg" width="120" alt="中信银行" /></span>
+                                              <span data-instr="渤海银行"><img src="__PUBLIC__/images/bank_16.jpg" width="120" alt="渤海银行" /></span>
+                                              <span data-instr="上海银行"><img src="__PUBLIC__/images/bank_17.jpg" width="120" alt="上海银行" /></span>
+                                              <div class="spacer"></div>
+                                           </div>
+                                       </div>
+                                  </li>
+                                  <li>
+                                       <span class="Tm_B">开户城市</span>
+                                       
+                                       <div id="city_2" style=" float:left;">
+                                        <select class="prov inp_city" name="province"></select> 
+                                        <select class="city inp_city" name="city"></select>
+                                        <div class="spacer"></div>
+                                        
+                                      </div>
+                                  </li>
+                                  <li>
+                                      <span class="Tm_B">开户行全称</span>
+                                      <span><textarea name="bank_address" id="add_bank_address"  cols="" rows="" class="bank_txt"></textarea></span>
+                                  </li>
+                               </ul>                                    
+                            </div>
+                            <p class="button_bank"><input type="submit" value="确定" name="submit_bank" id="submit_bank" class="sub" /> <input type="button" value="取消" name="submit_bank" id="submit_bank" class="sub sub_s" /></p>        
+                            </form>                        
+                         </div>
+                     </div>
+<script type="text/javascript">
+    $(".modify_bank").click(function(){
+			  $("#tx_bank_modify").show();	 
+         }); 
+			   $("#with_add").click(function(){
+			         $("#tx_bank_add").show();
+			   });
+			   $(".bank_close,.sub_s").click(function(){
+			         $("#tx_bank_modify,#tx_bank_add").hide();
+			   });
+			   
+				$(".yh_num span").click(function(){
+				   $("#show_bank_name").text($(this).attr('data-instr'));
+           $("#show_bank_name_add").text($(this).attr('data-instr'));
+           $("#bank_name").val($(this).attr('data-instr'));
+           $("#bank_name_add").val($(this).attr('data-instr'));
+				   $(this).parent().slideUp(300);
+				});
+									   
+			   function windowalign(){
+			   var bodyheight = $(window).height(),  //整个网页的宽度 如果这里是window ie6and ie7 得到的是负数
+			   bodywidth = $(window).width(),  //整个网页的高度 如果这里是document ie7不会水平居中
+			   wrapwidth = $(".tx_bank").width(),  //要垂直居中的内容的宽度
+			   wrapheight = $(".tx_bank").height();  //要垂直居中的内容的高度度
+			   postop = (bodyheight-wrapheight)/2;  
+						 // 获取顶部的position
+			   posleft = (bodywidth-wrapwidth)/2;  
+						 // 获取左边部的position
+				 $(".tx_bank").css({"left":posleft+"px","top":postop+"px"});  // 设置position
+			   }
+			   windowalign();
+			   $(window).resize(function(){  // 当调整窗口的时候动态修正位置
+					windowalign();
+			   });				                                                                   
+ </script>
+
+<script type="text/javascript">
+  $mobile = $("#phone");
+  handle_withdrawal();//页面载入提现规则计算 显示手续费率和实际扣款
+  //提现表单过滤
+  $("#submit_withdrawal").click(function(){
+      $withdrawal_price = $("#withdrawal_price");
+      $trade_pwd = $("#trade_pwd");    
+      $money = parseFloat($("#money").text());  
+      $management = parseFloat($("#management").text());
+      $ido = $("input[name='ido']");
+      if($ido.is(":checked")){        
+          $("input[name='ido']").val('1');
+      }else{        
+          $("input[name='ido']").val('0');
+      }      
+      if($ido.val() == '0'){
+        alert('您需同意《金投充值及提现协议》');
+        return false;
+      }       
+      if($.trim($withdrawal_price.val()) == ''){
+        alert('请输入提现金额');
+        $withdrawal_price.focus();
+        return false;
+      } 
+      var number_reg = /^(\d+\.\d{0,2}|\d+)$/;  //验证输入是否为数字,若小数可输入两位小数         
+      if(!number_reg.test(parseFloat($withdrawal_price.val()))){
+        alert('金额输入错误，请重新输入');return false;        
+      }  
+      //特殊提现最低限额   
+      if($type.val() == 1){
+        if(parseFloat($withdrawal_price.val()) < parseFloat({$Think.config.min_special_withdrawal})){
+           alert('特殊提现金额不能低于{$Think.config.min_special_withdrawal}元');return false;
+        }
+      }
+      //普通提现最低限额
+      if(parseFloat($withdrawal_price.val()) < parseFloat({$Think.config.section1_min})){        
+         alert('提现金额不能低于{$Think.config.section1_min}元');return false;
+      }      
+      // $true_price = parseFloat($withdrawal_price.val()) + $management;    
+      $true_price = parseFloat($withdrawal_price.val());
+      //当前余额比对  
+      if(parseFloat($money) < parseFloat($true_price)){        
+        // alert('余额不足 !实际应扣款金额:'+$true_price+',超出了当前余额:'+$money+'，请重新输入');
+        alert('余额不足 !提现金额:'+$true_price+',超出了当前余额:'+$money+'，请重新输入');
+        $withdrawal_price.focus();
+        return false;
+      }
+      if($.trim($trade_pwd.val()) == ''){
+        alert('请输入支付密码');
+        $trade_pwd.focus();
+        return false;
+      }
+       
+  })
+
+  
+  //输入提现金额/金额文本框失去焦点时  显示手续费率和实际扣款
+  $("#withdrawal_price").keyup(function(){  
+    handle_withdrawal();   
+  }).blur(function(){
+    handle_withdrawal();   
+  })
+  
+  //切换提现类型时 同步计算手续费规则 显示手续费率和实际扣款
+  $("input[name=type]").click(function() {
+     handle_withdrawal();
+  });
+
+
+
+
+  /**
+   * handle_withdrawal     提现手续费规则计算 显示手续费率和实际扣款
+   * withdrawal_price      提现金额
+   * trade_pwd             支付密码
+   * money                 余额
+   * management            手续费页面存储
+   * type                  提现类型
+   */
+  function handle_withdrawal(){
+      $withdrawal_price = $("#withdrawal_price");
+      $trade_pwd = $("#trade_pwd");    
+      $money = parseFloat($("#money").text());  
+      $management = $("#management");  
+      $management_price = "";   
+      $type = $(":radio:checked[name=type]");
+
+      if($type.val() == 0){  
+        //提现手续费区间
+        if(parseFloat($withdrawal_price.val()) >= parseFloat({$Think.config.section1_min}) && parseFloat($withdrawal_price.val()) < parseFloat({$Think.config.section1_max})){
+          $management_price = parseFloat({$Think.config.section1_money});
+        }
+        if(parseFloat($withdrawal_price.val()) >= parseFloat({$Think.config.section2_min}) && parseFloat($withdrawal_price.val()) < parseFloat({$Think.config.section2_max})){      
+          $management_price = parseFloat({$Think.config.section2_money});
+        }     
+        if(parseFloat($withdrawal_price.val()) >= parseFloat({$Think.config.section3_min}) && parseFloat($withdrawal_price.val()) <= parseFloat({$Think.config.section3_max})){      
+          $management_price = parseFloat({$Think.config.section3_money});
+        }     
+      }else if($type.val() == 1){
+        //加急手续费计算 = 提现手续费率*提现金额(低于1000元按1000元算) + 补充手续费) 
+        if(parseFloat($withdrawal_price.val()) >= parseFloat(1000)){
+          $management_price = parseFloat($withdrawal_price.val()) * parseFloat({$Think.config.fast_management}) + parseFloat({$Think.config.replenish_management});        
+        }else{
+          $management_price = parseFloat(1000) * parseFloat({$Think.config.fast_management}) + parseFloat({$Think.config.replenish_management});            
+        }
+      }               
+      $management_price =  Math.round($management_price * 1000) / 1000;//小数点后保留三位
+      $management.text($management_price);                         
+      // $true_price = parseFloat($withdrawal_price.val()) + $management_price;                        
+      $true_price = parseFloat($withdrawal_price.val()) - $management_price;                      
+      $("#txt").html('手续费：<font>'+$management_price+'</font>元<br>到账金额:<font>'+$true_price+'</font>元');       
+  }
+
+
+
+/**
+ * 发送短信倒计时
+ * @param   obj   元素对象
+ * @param   stime 倒计时时间总数
+ * @return        定时器
+ */
+function sendMobileTime(obj, stime,type,temp_str) {      
+    setTimeout(function (){
+        var _stime = stime - 1;
+        if (_stime) {
+            $(obj).val(_stime-1 + '秒');                            
+            sendMobileTime(obj, _stime,type,temp_str);
+            $("#send_code").attr("onClick","return false");//倒计时中停止点击事件
+        } else {
+            $(obj).val('获取验证码');   //倒计时停止时将元素的文本初始化             
+            $("#send_code").attr("onClick","sendCode(this,"+type+","+temp_str+")");//倒计时停止加回点击事件sendCode方法
+        }
+    }, 1000);
+}   
+
+
+/**
+ * 单击发送验证码时候的操作     
+ */
+  function sendCode(obj,type,temp_str){              
+    if($.trim($mobile.val()) == ''){
+        alert('请输入正确的手机号码');
+        $mobile.focus();
+        return false;
+    }                 
+    $.ajax({
+       dataType: "JSON",
+       url: "{:U('Member/sendCode')}",
+       data: "phone="+$mobile.val()+"&type="+type+"&temp_str="+temp_str,
+       success: function(msg){          
+          //msg = eval("("+msg.responseText+")");                             
+          if(msg.status == 0){                  
+              alert(msg.info);return false;
+          }else{
+              sendMobileTime(obj,61,type,temp_str);
+          }
+       }
+    }); 
+  }   
+</script>
+<include file = "Common:bottom" />
+</body>
+</html>

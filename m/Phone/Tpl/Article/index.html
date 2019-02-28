@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>{$cate.name}_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="<if condition="$cate['description'] neq ''">{$cate.description}<else/>{$Think.config.web_description}</if>" />
+</head>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+
+<body>
+<div class="center">
+   <include file="Common:header"/>
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>{$cate.name}</span>
+     <span></span>     
+    <include file="Common:ico"/>
+   </div>    
+   <ul class="skills" id="container">   
+   <foreach name="list" item="v">
+      <li>
+         <span class="skil_left"><font class="rq_r">{$v.time|date='d',###}</font><font>{$v.time|date='Y',###}-{$v.time|date='m',###}</font></span>
+         <span class="skil_right"><a href="{:U('Article/articleDetail')}?id={$v.id}">{$v.title}</a></span>
+      </li>
+      <div id="loading" style="display:none;width:100%;"><img src="/Public/Images/loading.gif" width="100%"></div>
+   </foreach>  
+   </ul>
+      <div id="end-view" style="display:none;">
+         <span>The End</span>
+      </div>    
+   <include file="Common:bottom"/>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+
+/*
+   滚动加载数据，加载成功则拼接html插入到页面中
+ */
+var cid = "{$cid}";
+var totalheight = 0; 
+var page = 0; 
+$(window).scroll( function() { 
+   totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());         
+   // console.log($(document).height()+"|"+"("+$(window).height()+"|"+$(window).scrollTop()+")");
+   if ($(document).height() <= totalheight  && $("#end-view").css("display") != 'block'){                 
+      page++;
+      $.ajax({
+         url:"{:U('Article/loadData')}",
+         type: "POST",
+         data: ({page:page,cid:cid}),      
+         beforeSend:function(){
+            $("#loading").show();//显示loading
+         },       
+         success:function(msg){            
+            $("#loading").hide();//隐藏loading
+            if(msg.status == '1'){               
+               $container = $("#container");
+               var html = "";
+               for (var i = 0; i < msg.data.length; i++) {
+                  html = "<li><span class='skil_left'><font class='rq_r'>"+msg.data[i].d+"</font>";
+                  html += "<font>"+msg.data[i].Y+"-"+msg.data[i].m+"</font></span>";
+                  html += "<span class=\"skil_right\"><a href={:U('Article/articleDetail')}?id="+msg.data[i].id+">"+msg.data[i].title+"</a></span>";
+                  html += "</li>"
+                  $("#container").append(html);
+               };                             
+               return false;
+            }else{
+               $("#end-view").show();
+               return false;
+            }
+         }
+      });
+   } 
+}); 
+</script>

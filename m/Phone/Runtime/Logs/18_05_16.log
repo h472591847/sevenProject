@@ -1,0 +1,247 @@
+[ 2018-05-16T17:09:52+08:00 ] 127.0.0.1 /index.php
+NOTIC: [8] Undefined index: referer_url F:\www\p2p222notminsheng\m\Phone\Common\Common.php 第 194 行.
+NOTIC: [8] Undefined index: HTTP_REFERER F:\www\p2p222notminsheng\m\Phone\Common\Common.php 第 197 行.
+NOTIC: [8] Undefined index: HTTP_REFERER F:\www\p2p222notminsheng\m\Phone\Common\Common.php 第 198 行.
+NOTIC: [8] Undefined index: referer_url F:\www\p2p222notminsheng\m\Phone\Common\Common.php 第 200 行.
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_loan` [ RunTime:0.002000s ]
+SQL: SELECT * FROM `tp_loan` WHERE ( `is_effect` = 1 ) AND ( `is_delete` = 0 ) AND ( `recommend` = 1 ) ORDER BY loan_order DESC,create_time DESC,id DESC LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.001001s ]
+SQL: SELECT sum(amount) as sum_amount FROM `tp_invested` WHERE ( lid=53 ) LIMIT 1   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 40 行.
+SQL: SELECT * FROM `tp_loan` WHERE ( `is_effect` = 1 ) AND ( `is_delete` = 0 ) AND ( `recommend` <> '1' ) ORDER BY loan_order DESC,create_time DESC,id DESC LIMIT 8   [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_invested` WHERE ( `lid` IN ('52','51','50','49','48','47','46','45') )  [ RunTime:0.003000s ]
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 59 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 59 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 59 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 59 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 59 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 59 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 59 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 59 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 89 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 89 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 89 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 89 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 89 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 89 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 89 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 89 行.
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined index: HTTP_REFERER F:\www\p2p222notminsheng\m\hm.php 第 74 行.
+NOTIC: [2] mt_rand() [<a href='function.mt-rand'>function.mt-rand</a>]: max(-2147483648) is smaller than min(1) F:\www\p2p222notminsheng\m\cs.php 第 55 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\m\Phone\Runtime\Cache\27eacdb6f2bbc56ea9cbe68966d2eede.php 第 48 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\m\Phone\Runtime\Cache\27eacdb6f2bbc56ea9cbe68966d2eede.php 第 70 行.
+NOTIC: [8] Undefined offset: 1 F:\www\p2p222notminsheng\m\Phone\Runtime\Cache\27eacdb6f2bbc56ea9cbe68966d2eede.php 第 223 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.017001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.017001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-16T17:11:19+08:00 ] 127.0.0.1 /index.php/Deal/Index.html
+NOTIC: [8] Undefined index: referer_url F:\www\p2p222notminsheng\m\Phone\Common\Common.php 第 194 行.
+NOTIC: [8] Undefined index: referer_url F:\www\p2p222notminsheng\m\Phone\Common\Common.php 第 200 行.
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+SQL: SHOW COLUMNS FROM `tp_loan` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_loan` [ RunTime:0.001000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_loan` WHERE ( is_effect = 1 AND class_id = 0 AND is_delete = 0  ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_loan` WHERE ( is_effect = 1 AND class_id = 0 AND is_delete = 0  ) ORDER BY loan_order DESC,create_time DESC,id DESC LIMIT 0,12   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_invested` WHERE ( `lid` IN ('53','52','51','50','49','48','47','46','45','44','43','42') )  [ RunTime:0.003000s ]
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 96 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 96 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 96 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 96 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 96 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 96 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 96 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 96 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 96 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 96 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 96 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 96 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 120 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 120 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 120 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 120 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 120 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 120 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 120 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 120 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 120 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 120 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 120 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 120 行.
+INFO: [ view_parse ] --START--
+NOTIC: [2] mt_rand() [<a href='function.mt-rand'>function.mt-rand</a>]: max(-2147483648) is smaller than min(1) F:\www\p2p222notminsheng\m\cs.php 第 55 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\m\Phone\Runtime\Cache\f428799e82d704bf65143437d36bfa83.php 第 56 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\m\Phone\Runtime\Cache\f428799e82d704bf65143437d36bfa83.php 第 80 行.
+NOTIC: [8] Undefined offset: 1 F:\www\p2p222notminsheng\m\Phone\Runtime\Cache\f428799e82d704bf65143437d36bfa83.php 第 178 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.018001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.018001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.000000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-16T17:11:22+08:00 ] 127.0.0.1 /index.php/Deal/DealContent/lid/53.html
+NOTIC: [8] Undefined index: referer_url F:\www\p2p222notminsheng\m\Phone\Common\Common.php 第 194 行.
+NOTIC: [8] Undefined index: referer_url F:\www\p2p222notminsheng\m\Phone\Common\Common.php 第 200 行.
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001001s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001001s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_loan` [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_loan` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( id= ) LIMIT 1   [ RunTime:0.000000s ]
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') LIMIT 1' at line 1
+ [ SQL语句 ] : SELECT * FROM `tp_web_user` WHERE ( id= ) LIMIT 1  
+SQL: SELECT * FROM `tp_loan` WHERE ( id=53 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT SUM(amount) FROM `tp_invested` WHERE ( lid=53 ) LIMIT 1   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 183 行.
+SQL: SHOW COLUMNS FROM `tp_web_user_rate` [ RunTime:0.041002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_web_user_rate` WHERE ( `uid` = null ) AND ( `use_status` = 0 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tp_web_user_rate` WHERE ( `uid` = null ) AND ( `use_status` = 0 ) ORDER BY deadline_time ASC,id ASC LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_info` [ RunTime:0.025002s ]
+SQL: SELECT * FROM `tp_info` WHERE ( pid=23 ) ORDER BY sort Desc,id DESC LIMIT 5   [ RunTime:0.232013s ]
+INFO: [ view_parse ] --START--
+NOTIC: [2] mt_rand() [<a href='function.mt-rand'>function.mt-rand</a>]: max(-2147483648) is smaller than min(1) F:\www\p2p222notminsheng\m\cs.php 第 55 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\m\Phone\Runtime\Cache\770a451d78dc5bf0508923862773da68.php 第 52 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\m\Phone\Runtime\Cache\770a451d78dc5bf0508923862773da68.php 第 76 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Runtime\Cache\770a451d78dc5bf0508923862773da68.php 第 93 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Runtime\Cache\770a451d78dc5bf0508923862773da68.php 第 204 行.
+NOTIC: [8] Undefined offset: 1 F:\www\p2p222notminsheng\m\Phone\Runtime\Cache\770a451d78dc5bf0508923862773da68.php 第 208 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.014001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.000000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-05-16T17:11:22+08:00 ] 127.0.0.1 /index.php/Deal/tz_record/lid/53.html
+NOTIC: [8] Undefined index: referer_url F:\www\p2p222notminsheng\m\Phone\Common\Common.php 第 194 行.
+NOTIC: [8] Undefined index: referer_url F:\www\p2p222notminsheng\m\Phone\Common\Common.php 第 200 行.
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001000s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `tp_loan` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_web_user` [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.000000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `tp_invested` WHERE ( lid=53 ) LIMIT 1   [ RunTime:0.044003s ]
+SQL: SELECT * FROM `tp_invested` WHERE ( lid=53 ) ORDER BY id DESC LIMIT 0,10   [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_web_user` WHERE ( `id` IN ('102','9580','7669','7669','2349','9542','5901','5395','8333','6102') )  [ RunTime:0.016001s ]
+NOTIC: [8] Undefined variable: repeat F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 336 行.
+NOTIC: [8] Undefined variable: repeat F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 337 行.
+NOTIC: [8] Undefined variable: repeat F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 340 行.
+NOTIC: [8] Undefined variable: repeat F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 341 行.
+NOTIC: [8] Undefined variable: repeat F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 336 行.
+NOTIC: [8] Undefined variable: repeat F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 337 行.
+NOTIC: [8] Undefined variable: repeat F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 336 行.
+NOTIC: [8] Undefined variable: repeat F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 337 行.
+NOTIC: [8] Undefined variable: repeat F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 336 行.
+NOTIC: [8] Undefined variable: repeat F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 337 行.
+NOTIC: [8] Undefined variable: repeat F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 336 行.
+NOTIC: [8] Undefined variable: repeat F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 337 行.
+NOTIC: [8] Undefined variable: repeat F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 336 行.
+NOTIC: [8] Undefined variable: repeat F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 337 行.
+NOTIC: [8] Undefined variable: repeat F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 336 行.
+NOTIC: [8] Undefined variable: repeat F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 337 行.
+NOTIC: [8] Undefined variable: repeat F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 336 行.
+NOTIC: [8] Undefined variable: repeat F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 337 行.
+NOTIC: [8] Undefined variable: repeat F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 336 行.
+NOTIC: [8] Undefined variable: repeat F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 337 行.
+NOTIC: [8] Undefined variable: repeat F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 336 行.
+NOTIC: [8] Undefined variable: repeat F:\www\p2p222notminsheng\m\Phone\Lib\Action\DealAction.class.php 第 337 行.
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.006000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006000s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2018-05-16T17:13:11+08:00 ] 127.0.0.1 /
+NOTIC: [8] Undefined index: referer_url F:\www\p2p222notminsheng\m\Phone\Common\Common.php 第 194 行.
+NOTIC: [8] Undefined index: HTTP_REFERER F:\www\p2p222notminsheng\m\Phone\Common\Common.php 第 197 行.
+NOTIC: [8] Undefined index: HTTP_REFERER F:\www\p2p222notminsheng\m\Phone\Common\Common.php 第 198 行.
+NOTIC: [8] Undefined index: referer_url F:\www\p2p222notminsheng\m\Phone\Common\Common.php 第 200 行.
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `tp_loan` [ RunTime:0.032002s ]
+SQL: SELECT * FROM `tp_loan` WHERE ( `is_effect` = 1 ) AND ( `is_delete` = 0 ) AND ( `recommend` = 1 ) ORDER BY loan_order DESC,create_time DESC,id DESC LIMIT 1   [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `tp_invested` [ RunTime:0.002000s ]
+SQL: SELECT sum(amount) as sum_amount FROM `tp_invested` WHERE ( lid=53 ) LIMIT 1   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 40 行.
+SQL: SELECT * FROM `tp_loan` WHERE ( `is_effect` = 1 ) AND ( `is_delete` = 0 ) AND ( `recommend` <> '1' ) ORDER BY loan_order DESC,create_time DESC,id DESC LIMIT 8   [ RunTime:0.001000s ]
+SQL: SELECT * FROM `tp_invested` WHERE ( `lid` IN ('52','51','50','49','48','47','46','45') )  [ RunTime:0.002000s ]
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 59 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 59 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 59 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 59 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 59 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 59 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 59 行.
+NOTIC: [8] Undefined index: count_amount F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 59 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 89 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 89 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 89 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 89 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 89 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 89 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 89 行.
+NOTIC: [8] Undefined index: re_start_time F:\www\p2p222notminsheng\m\Phone\Lib\Action\IndexAction.class.php 第 89 行.
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined index: HTTP_REFERER F:\www\p2p222notminsheng\m\hm.php 第 74 行.
+NOTIC: [2] mt_rand() [<a href='function.mt-rand'>function.mt-rand</a>]: max(-2147483648) is smaller than min(1) F:\www\p2p222notminsheng\m\cs.php 第 55 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\m\Phone\Runtime\Cache\27eacdb6f2bbc56ea9cbe68966d2eede.php 第 48 行.
+NOTIC: [8] Undefined index: user_id F:\www\p2p222notminsheng\m\Phone\Runtime\Cache\27eacdb6f2bbc56ea9cbe68966d2eede.php 第 70 行.
+NOTIC: [8] Undefined offset: 1 F:\www\p2p222notminsheng\m\Phone\Runtime\Cache\27eacdb6f2bbc56ea9cbe68966d2eede.php 第 223 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.016001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.016001s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+

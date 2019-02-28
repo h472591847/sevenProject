@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>资产统计-{$Think.config.web_title}</title>
+<include file = "Common:transparent" />
+
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+</head>
+<body>
+<include file = "Common:head" />
+<include file = "Common:web_announce" />
+<div class="middle">
+   <include file="Common:left_menu"/>
+   <div class="mid_right InLine">
+      <h3 class="bt" style="margin-bottom:30px;">资产统计</h3>
+      <div class="mr_center">
+         <div class="assets">
+            <h3><p class="zc_ze">资产总额：<span class="zcze">{$deal_static.count_user_money|format_price}</span></p><p class="jlje">奖励金额：<span>{$deal_static.bonus_money|format_price}</span></p></h3>
+              
+             <div class="proportion">
+               <ul>
+                  <li class="tzi_1">
+                    <span class="tzi_f">可用余额</span>
+                    <span>{$deal_static.money|format_price}</span>
+                  </li>
+                  <li class="tzi_2">
+                    <span class="tzi_f">在投本金</span>
+                    <span>{$deal_static.sum_amount|format_price}</span>
+                  </li>
+                  <li class="tzi_3">
+                    <span class="tzi_f">冻结金额</span>
+                    <span>{$deal_static.lock_money|format_price}</span>
+                  </li>
+               </ul>
+            </div>          
+            
+            <div>
+               <ul class="total_amount">
+                  <li>
+                     <span class="total_tit">已收总额</span>
+                     <span class="total_je">{$deal_static.sum_income|format_price}</span>
+                  </li>
+                  <li style="border-right:none;">
+                     <span class="total_tit">待收总额</span>
+                     <span class="total_je">{$deal_static.sum_repay|format_price}</span>
+                  </li>
+               </ul>
+               
+               <ul class="detail_amount">
+                  <li>
+                     <span class="total_tit">已收本金</span>
+                     <span class="total_je">{$deal_static.sum_income_amount|format_price}</span>
+                  </li>
+                  <li>
+                     <span class="total_tit">已收利息</span>
+                     <span class="total_je">{$deal_static.sum_income_accrual|format_price}</span>
+                  </li>
+                  <li>
+                     <span class="total_tit">待收本金</span>
+                     <span class="total_je">{$deal_static.sum_amount|format_price}</span>
+                  </li>
+                  <li style="border-right:none;">
+                     <span class="total_tit">待收利息</span>
+                     <span class="total_je">{$deal_static.count_accrual|format_price}</span>
+                  </li>
+               </ul>
+            </div>
+            
+         </div>
+         
+         <div class="spacer"></div>
+      </div>
+      <div class="mr_bottom"></div>
+   </div>
+   <div class="spacer"></div>
+</div>
+
+<include file = "Common:bottom" />
+</body>
+</html>

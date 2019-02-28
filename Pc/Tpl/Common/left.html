@@ -1,0 +1,53 @@
+<script type="text/javascript">
+$(document).ready(function() {
+   $(".page_left li:has(dl)").children("h3").addClass("sel");
+   //$(".page_left li dl:visible").siblings("h3").addClass("up");
+      
+     $(".page_left li h3").click(function(){
+      
+     var $left_dl=$(this).next("dl");     
+     if($left_dl.is(":visible")){      
+        $left_dl.hide().siblings("h3").addClass("sel").removeClass("up");
+     }else{
+        $left_dl.show().siblings("h3").addClass("up").removeClass("sel");
+     }
+     });
+   
+   
+});  
+</script>
+
+
+        <!--点击导航添加visited-->
+        <div class="page_left">
+           <ul>
+              <li>
+                 <h3><span class="lm_1">公司介绍</span></h3>
+                 <dl <if condition="$about['title'] eq '公司简介' || $about['title'] eq '企业文化' || $about['title'] eq '团队介绍' || $class_name eq '合作银行' || $about['title'] eq '企业背景' || $cate['id'] eq 47">style="display:block"</if>>
+                    <dt <if condition="$about['title'] eq '公司简介'"> class="visited"</if>><span class="lm_2"><a href="{:U('About/index')}">关于我们</a></span></dt>
+                    <dt <if condition="$about['title'] eq '企业背景'"> class="visited"</if>><span class="lm_21"><a href="{:U('EnterPrisebg/index')}">企业背景</a></span></dt>
+                    <dt <if condition="$cate['id'] eq 47"> class="visited"</if>><span class="lm_22"><a href="{:U('Honor/Index')}">公司荣誉</a></span></dt>
+                    <dt <if condition="$about['title'] eq '企业文化'"> class="visited"</if>><span class="lm_3"><a href="{:U('Single/index',array('cid'=>73))}">企业文化</a></span></dt>
+                    
+                    <dt <if condition="$class_name eq '合作银行'"> class="visited"</if>><span class="lm_5"><a href="{:U('Bank/index',array('class_name'=>'合作银行'))}">合作银行</a></span></dt>
+                 </dl>
+              </li>
+              <li><h3 <if condition="$cate['id'] eq 42"> class="visited"</if>><span class="lm_6"><a href="{:U('Partner/index')}">合作伙伴</a></span></h3></li>
+              <li><h3 <if condition="$cate['id'] eq 26"> class="visited"</if>><span class="lm_7"><a href="{:U('Activity/index',array('cid'=>26))}">公司掠影</a></span></h3></li>
+              <li><h3 <if condition="$cate['id'] eq 23"> class="visited"</if>><span class="lm_8"><a href="{:U('SkillInvest/index',array('cid'=>23))}">投资技巧</a></span></h3></li>
+              <li><h3 <if condition="$cate['id'] eq 46"> class="visited"</if>><span class="lm_24"><a href="{:U('SkillInvest/index',array('cid'=>46))}">理财故事</a></span></h3></li>
+              <li>
+                 <h3><span class="lm_13">新闻动态</span></h3>
+                 <dl <if condition="$cate['id'] eq 20 || $cate['id'] eq 24 || $cate['id'] eq 29 || $cate['id'] eq 44">style="display:block"</if>>
+                    <dt <if condition="$cate['id'] eq 20"> class="visited"</if>><span class="lm_14"><a href="{:U('Announcement/index',array('cid'=>20))}">网站公告</a></span></dt>
+                    <dt <if condition="$cate['id'] eq 24"> class="visited"</if>><span class="lm_15"><a href="{:U('Media/index',array('cid'=>24))}">媒体新闻</a></span></dt>
+                    <dt <if condition="$cate['id'] eq 29"> class="visited"</if>><span class="lm_16"><a href="{:U('Industry/index',array('cid'=>29))}">行业新闻</a></span></dt>
+                    <dt <if condition="$cate['id'] eq 44"> class="visited"</if>><span class="lm_23"><a href="{:U('Announcement/index',array('cid'=>44))}">政策法规</a></span></dt>
+                 </dl>
+              </li>
+              <li><h3 <if condition="$cate['id'] eq 30 || $cate['id'] eq 31 || $cate['id'] eq 32 || $cate['id'] eq 33"> class="visited"</if>><span class="lm_17"><a href="{:U('Ask/index')}">问答专区</a></span></h3></li>
+              <li><h3 <if condition="$cate['id'] eq 41"> class="visited"</if>><span class="lm_18"><a href="{:U('Single/index',array('cid'=>76))}">平台原理</a></span></h3></li>
+              <li><h3 <if condition="$cate['id'] eq 34"> class="visited"</if>><span class="lm_19"><a href="{:U('Recruitment/index',array('cid'=>34))}">招贤纳士</a></span></h3></li>
+              <li><h3 <if condition="$cate['id'] eq 40"> class="visited"</if>><span class="lm_20"><a href="{:U('Single/index',array('cid'=>72))}">联系我们</a></span></h3></li>
+           </ul>
+        </div>

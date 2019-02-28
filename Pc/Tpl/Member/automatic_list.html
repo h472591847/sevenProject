@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>自动投标规则-会员中心-{$Think.config.web_title}</title>
+<include file = "Common:transparent" />
+</head>
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $(".auto_d").click(function(){
+		if($(".auto_xq").is(":visible")){
+		   $(".au_x").slideUp(500);	
+		}else{
+		   $(".au_x").slideDown(500);
+		}
+        
+	});
+});
+</script>
+<body>
+<include file = "Common:head" />
+<include file = "Common:web_announce" />
+<div class="middle">
+   <include file="Common:left_menu"/>
+   <div class="mid_right InLine">
+      <div class="mr_center">
+         <h3 class="bt">自动投标规则</h3>
+         <div class="sx_auto">
+           <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                   <td height="60" class="auto_h3">
+                        <a href="#" class="auto_detail auto_d">详情</a>
+                        <if condition="$auto_arr neq '' && $auto_arr['switch'] eq 1">
+                        <a href="{:U('Member/AutoMatic',array('id'=>$auto_arr['id']))}" class="auto_detail">编辑</a>
+                        <a href="{:U('Member/SwitchAutoMatic',array('id'=>$auto_arr['id'],'turn'=>0))}" class="auto_detail">关闭</a>
+                        <!--end-->
+                        <else/>                        
+                        <!--没设置自动投标时显示-->
+                        <a href="<if condition="$auto_arr['id'] neq ''">{:U('Member/SwitchAutoMatic',array('id'=>$auto_arr['id'],'turn'=>1))}<else/>{:U('Member/AutoMatic')}</if>" class="auto">启用</a>
+                        <!--end-->
+                        </if>
+                        自动投标 - 自定义规则
+                   </td>
+                </tr> 
+            </table>
+            <div class="au_x">
+              <table cellpadding="0" cellspacing="0" border="0" width="90%" class="auto_xq">
+                   <tr>
+                     <td width="18%" class="auto_left">账户可用余额：</td>
+                     <td width="30%"><span class="zh_ye">{$user_info.money}元</span></td>
+                     <td width="52%">&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td class="auto_left">每次投标金额：</td>
+                     <td><span>{$auto_arr.every_money}元</span></td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td class="auto_left">借款期限：</td>
+                     <td><span>
+                     <if condition="$auto_arr['deadline_status'] neq 1">
+                          不限制
+                     <else/>
+                         {$auto_arr.min_deadline}个月~{$auto_arr.max_deadline}个月
+                     </if>
+                     </span></td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td class="auto_left">年化利率：</td>
+                     <td><span>
+
+                     <if condition="$auto_arr['rate_status'] neq 1">
+                          不限制
+                     <else/>
+                          ≥ {$auto_arr.min_rate}%                         
+                     </if>
+                     </span></td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td class="auto_left">账户保留金额：</td>
+                     <td><span>{$auto_arr.reserve_money}元</span></td>
+                     <td>&nbsp;</td>
+                   </tr>
+                </table>
+            </div>
+         </div>
+         <div class="prompt" style=" margin-top:20px;">
+          <p><font color="#e44343" size="+1">自动投标规则</font><br />
+            1、本平台项目，按一定比例划分为自动投标和手动投标部分，目前债权暂时不能使用自动投标工具进行债权购买；<br />
+            2、用户开启此工具，并完成条件设置后，自动投标功能将在五分钟内生效；<br />
+          3、自动投资工具会根据用户设置的每次投资金额，结合用户的账户可用余额向符合设置条件的投资项目进行投资，账户可用余额 < 每次投资金额，不执行自动投资；</p>
+            4、自动投标成交后，用户的自动投标功能不会自动关闭，如果需要关闭，需进行手工设置；<br />
+            5、用户依开通自动投标功能时间先后形成队列，平台项目在此队列依次进行匹配；<br />
+            6、单个投资项目，单个用户至多只有一次自动投资的机会。<br />
+          </p>
+        </div>
+         
+         <div class="spacer"></div>
+      </div>
+   </div>
+   <div class="spacer"></div>
+</div>
+
+
+<include file = "Common:bottom" />
+
+</body>
+</html>
+

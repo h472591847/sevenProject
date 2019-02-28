@@ -1,0 +1,186 @@
+<if condition="$user_info['id'] neq ''">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+<!--安全等级-->
+<script type="text/javascript" src="__PUBLIC__/js/jquery.tips.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.cookie.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+	var percent = $('.progress_bar').attr('title');
+	$(".progress_bar").animate({width:percent},1000);
+	$(".tip").tipsy({gravity:'s',fade:true});
+	
+	/*--------头像-------*/
+	$(".tx_gl").mouseover(function(){
+      $(".modify_tx").show();
+   }).mouseleave(function(){
+      $(".modify_tx").hide();
+   }); 
+});
+
+window.onload=function(){$("#loading").remove("div");} 
+document.write('<div id="loading" style="font-weight:bold;font-size:16px; opacity:0.8; -moz-opacity:0.8; filter:alpha(opacity=50); text-align:center; background:#FFF; width:100%; height:100%; position:absolute;"><img src="__PUBLIC__/images/loading-iframe.gif" width="206" /></div>'); 
+</script>
+<!---->
+</head>
+<body>
+<script type="text/javascript">
+$(document).ready(function() {
+   $(".tx_gl").mouseover(function(){
+      $(".modify_tx").show();
+   }).mouseleave(function(){
+      $(".modify_tx").hide();
+   }); 
+});
+
+/**
+ * read_score_log       操作未读积分消息
+ * @param  {object} obj 自身元素
+ */
+function read_score_log(obj){
+  redirect_url = '{:U("Member/integral")}'; //跳转链接 
+  <php>if($slg_count > 0){</php>
+    /*-----当有未读积分消息时------*/
+    $.ajax({
+      url: '{:U("Member/integral")}',
+      type: 'POST',
+      dataType: 'json',
+      data: "is_read=1",
+      success:function(msg){ 
+        if(msg.status == '1'){
+          //操作读取状态成功，则移除未读消息数量的元素
+          $(obj).find('.message_num').remove();
+          parent.location = redirect_url;
+        }      
+        return false;
+      }    
+    })
+  <php>}else{</php>  
+    /*-----当没有未读积分消息时------*/
+    parent.location = redirect_url;
+    return false;
+  <php>}</php>  
+}
+</script>
+
+<div class="mid_left">
+
+<div class="manage_tx InLine">
+          <div class="mana_tx">
+              <h3>Hi,{$user_info.user_name}!</h3>
+              <span class="tx_gl">
+                 <img src="<if condition="$user_info.face_pic neq ''">{$user_info.face_pic}<else/>__PUBLIC__/images/personal.jpg</if>" width="79" height="79" />
+                 <a href="{:U('Member/face')}" class="modify_tx" style=" display:none;" target="blank">修改头像</a>
+              </span>
+              <span class="certi_pic">
+                 <a href="{:U('Member/personal')}" 
+                 <if condition="$user_info['idno'] neq '' && $user_info['real_name'] neq ''">class="fir_pass"<else/>class="certi_fir"</if> target="_parent" title="实名认证"></a> 
+                 <a href="{:U('Member/personal')}" <if condition="$user_info['is_phone'] neq '1'">class="certi_sec"<else/>class="sec_pass"</if>target="_parent" title="手机认证"></a>
+                 <a href="{:U('Member/personal')}" <if condition="$user_info['is_email'] neq '1'">class="certi_thi"<else/>class="thi_pass"</if> target="_parent" title="邮箱认证"></a>
+              </span>
+              <div class="progress_container"><div class="progress_bar tip" title="{$user_info.auth_rate}%"></div></div>
+              <span class="mana_aq">
+                 安全等级：
+                 <if condition="$user_info['auth_rate'] GT 75">
+                 <i>高</i>
+                 </if>
+                 <if condition="$user_info['auth_rate'] EGT 50 && $user_info['auth_rate'] ELT 75">
+                 <i>中</i>
+                 </if>
+                 <if condition="$user_info['auth_rate'] LT 50">
+                 <i>低</i>
+                 </if>                                  
+                 <if condition="$user_info['auth_rate'] LT 100">
+                   <a href="{:U('Member/personal')}" class="safe_ts" target="_parent">[提升]</a>
+                 </if>
+              </span>
+          </div>
+          <div class="mana_credit">
+             <span <if condition="$sign_status eq 1">class="sign_complete"<else/>class="sign_in"</if> id="sign_in">周{$week}</span>
+             <p class="credit_p">
+               <span>积分</span>
+               <span class="jf_credit" id="jf_credit">{$user_info.score}</span>
+             </p>
+             <div class="spacer"></div>
+             <p class="sign_txt">连续签到<i class="sign_day" id="sign_day">{$user_info.continu_login}</i>天，今天获得<i class="sign_points" id="sign_points">{$count_score}</i>积分</p>
+             <div class="spcaer"></div>
+          </div>
+          <div class="mana_balance">
+             <p>可用余额：<span>{$deal_static.money|format_price}</span></p>
+             <a class="mor_cz" href="{:U('Member/TopUp')}" target="_parent">充值</a><a class="mor_cz mor_tx" href="{:U('Member/withdrawal')}" target="_parent">提现</a>
+          </div>
+          <div class="spacer"></div>
+      </div>
+<script type="text/javascript">
+/*签到功能处理*/
+$("#sign_in").click(function(){
+  $.ajax({
+    url: "{:U('Member/SignIn')}",
+    type: 'POST',
+    dataType: 'json',
+    data: 'type=sign_in',
+    success:function(msg){
+      if(msg.status == '0'){
+        alert(msg.info);return false;
+      }
+      if(msg.status == '1'){
+        alert(msg.info);
+        $("#sign_in").attr('class','sign_complete');//改变签到成功状态                    
+        $("#sign_day").text(msg.data.continu_login);//连续签到天数
+        $("#sign_points").text(msg.data.count_score);//连续签到得到的总分
+        $("#jf_credit").text(msg.data.ref_score);//刷新用户总积分
+        return false;
+      }
+      return false;
+    }
+  })  
+});  
+</script>  
+      <div class="manage_ul InLine">
+          <ul>
+            <li><a href="{:U('Member/index')}" class="left_1"  target="_parent">帐户总览</a></li>
+            <li><a href="{:U('Member/personal')}" class="left_2"  target="_parent">个人资料</a></li>
+            <li><a href="{:U('Member/bank_card')}" class="left_9"  target="_parent">我的银行卡</a></li>
+            <li><a href="{:U('Member/investment')}" class="left_3"  target="_parent">投资记录</a></li>
+            <li><a href="{:U('Member/trading')}" class="left_4"  target="_parent">交易记录</a></li>
+            <li><a href="{:U('Member/assets')}" class="left_5"  target="_parent">资产统计</a></li>
+            <li><a href="{:U('Member/integral')}" style="cursor:pointer;" class="left_6" onclick="read_score_log(this)"  target="_parent">
+            <if condition="$slg_count GT 0">
+            <span class="message_num">{$slg_count}</span>
+            </if>
+            我的积分</a></li>
+            <li><a href="{:U('Member/message')}" class="left_7"  target="_parent"><if condition="$com_count GT 0"><span class="message_num">{$com_count}</span></if>消息中心</a></li>
+            <li><a href="{:U('Member/invitation')}" class="left_8"  target="_parent">邀请好友</a></li>
+          </ul>
+          
+      </div>
+      
+      <p class="feed_b"><a href="{:U('Lottery/feed_back')}" target="_blank">意见反馈</a></p>
+      
+</div>
+<script type="text/javascript">
+
+var menu_url = $(".mid_left ul li a");//获取菜单中的链接元素        
+  //遍历菜单中的链接元素
+  menu_url.each(function(){
+      var parent_li = $(this).parent();//获取该元素父级 
+      //如果链接的href值与本页的路径相同则添加高亮，否则移除高亮 
+      //location是js获取本页路径自带方法
+      if(this.href == parent.location){                
+          parent_li.addClass("selected");
+          parent_li.siblings().removeClass("selected");
+      }
+      
+})
+</script>    
+</body>
+</html>
+</if>

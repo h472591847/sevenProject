@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>CPI跟踪器_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="{$Think.config.web_description}" />
+<include file = "Common:transparent" />
+</head>
+<link href="__PUBLIC__/style/base.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/page.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript">
+var environment = {
+    userVo : '',
+    role : '',
+    userId : '',
+    basePath : '',
+    userCash : '',
+    globalPath : '',
+    userActiveTime : '',
+    yoolibaoWhiteListStatus : '',
+    yoolibaoOpenStatus : '',
+    cerrencyOpenTime : "2014/11/30"//new Date()
+};
+</script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script src="__PUBLIC__/js/global-1.1.0.min.js" type="text/javascript"></script>
+
+<body>
+<include file = "Common:head" />
+
+<div class="earn_calc">
+   <h3 class="earn_tit">CPI跟踪器</h3>
+    <div class="bid-opt earn_cen calc_js">
+        <ul class="items">
+            <li>
+              <span class="calc_words">当前财富：</span>
+              <span class="calc_txt"><input type="text" id="myAsset" class="earn_txt" class="input"></span>
+              <span class="calc_unit">元</span>
+              <span class="tip" id="assetTip" style="display:none"></span> 
+            </li>
+            <li class="txt">
+              <span class="calc_words">计算时长：</span>
+              <span class="calc_txt">
+                <select id="CountLength" class="earn_txt">
+                    <option selected="selected">1</option>
+                    <option>2</option>
+                    <option>5</option>
+                    <option>10</option>
+                    <option>20</option>
+                    <option>50</option>
+                </select>
+              </span>
+              <span class="calc_unit">年</span>
+            </li>
+        </ul>
+        <div class="btn-submit"> <a href="javascript:;" class="gbtn earn_sub" id="submitButton">计算</a></div>
+    </div>
+    <div class="cpi-result earn_cen">
+        <div id="CPIResult"></div>
+        <h2 class="calc_result">CPI同比涨跌幅</h2>
+        <div id="CPIResultChart" style="height:260px;"></div>
+        <p style="color:#999; padding:5px 0 25px 25px; font-size:12px">数据来源：国家统计局</p>
+    </div>
+    <div class="bid-info earn_cen">
+        <h2 class="calc_result">CPI跟踪器</h2>
+        <ul class="items">
+            <li>CPI跟踪器为您展示CPI指数趋势图。如果想财富不随着时间而贬值，请选择合适的投资理财方式。</li>
+        </ul>
+    </div>
+</div>
+
+<include file = "Common:bottom" />
+
+<script type="text/javascript" src="__PUBLIC__/js/highcharts.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/cpi.js"></script>
+</body>
+</html>

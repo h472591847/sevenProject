@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="__PUBLIC__/css/bdmin.css" type="text/css" rel="stylesheet">
+</HEAD>
+<script language="JavaScript">
+function CheckAll(form)  {
+  for (var i=0;i<form.elements.length;i++)    {
+    var e = form.elements[i];
+    if (e.name != 'chkall')       e.checked = form.chkall.checked; 
+   }
+}
+//页面加载后执行
+window.onload=function (){
+	//去掉文本框缓存
+	var list=document.getElementsByTagName("input");
+	for(var i=0;i<list.length && list[i];i++){
+		if(list[i].type=="text"){ 
+			list[i].autocomplete='off';
+		}
+	}
+}
+</script>
+<BODY>
+<TABLE class="hs12pt" cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD height="22" >当前位置: 用户管理/节点管理</TD>
+  </TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR></TABLE>
+<if condition='empty($rid)'>
+<TABLE class="hs12pt" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="22" background="__PUBLIC__/images/title_bg2.jpg">&nbsp;&nbsp;&nbsp;<span class="baise12ct">{$display_txt}节点</span></td>
+  </tr>
+</table>
+<TABLE class="hs12pt" width="100%" border="1" align="center" cellpadding="2" cellspacing="0" bordercolor="#175CB7" bordercolordark="#E3EFFB">
+<form name="form1" method="post" action="{:U('Rbac/NodeHandle')}">
+<input type="hidden" name="upid" value="{$upid}">
+<input type="hidden" name="pid" value="{$pid}">
+<input type="hidden" name="level" value="{$level}">
+<input type="hidden" name="title" value="{$display_type}">
+    <tr>
+      <td width="20%" height="25" align="center" >{$display_type}名称:</td>
+      <td width="80%"><input name="name" type="text" id="name" value="{$edit_node.name}" size="25" maxlength="20"></td>
+    </tr>
+    <tr>
+      <td width="20%" height="25" align="center">{$display_type}描述:</td>
+      <td width="80%"><input name="remark" type="text" id="remark" value="{$edit_node.remark}" size="35" maxlength="50"></td>
+    </tr>
+    <tr>
+      <td height="25" align="center" >开启状态</td>
+      <td><input name="status" type="radio" id="status1" value="1"<?php if(!empty($upid)){ if(!empty($edit_node['status'])){ echo '  checked';} }else{ echo '  checked';}?>>
+      开启
+        <input type="radio" name="status" id="status2" value="0"<?php if(!empty($upid)){ if(empty($edit_node['status'])){ echo '  checked';} }?>>
+      关闭</td>
+    </tr>
+    <tr>
+      <td height="25" align="center" >排序:</td>
+      <td><input name="sort" type="text" id="sort" value="<?php if(!empty($upid)){ echo $edit_node['sort'];}else{ echo 100;}?>" size="8" maxlength="6"></td>
+    </tr>
+    <tr>
+      <td height="25" colspan="2" align="center"><input type="submit" value="确认{$display_txt}"></td>
+    </tr>
+    </form>
+  </table>
+</if>
+<if condition='($level eq 1) and empty($upid)'>
+<TABLE class="hs12pt" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="22" background="__PUBLIC__/images/title_bg2.jpg">&nbsp;&nbsp;&nbsp;<span class="baise12ct">节点管理</span></td>
+  </tr>
+</table>
+  <TABLE class="hs12pt" width="100%" border=1 align=center cellPadding=2 cellSpacing=0 bordercolor="#175CB7" bordercolordark="#E3EFFB">  
+  <TR>
+    <TD height="25" colspan="2" align=center >选择</TD>
+    <TD width="5%" align="center" >ID</TD>
+    <TD width="10%" align="center" >节点类别</TD>
+    <TD width="20%" align="center" >名称</TD>
+    <TD width="20%" align="center" >描述</TD>
+    <TD width="10%" align="center" >状态</TD>
+    <TD width="10%" align="center" >排序</TD>
+	<TD align="center" >操作</TD>
+  </TR>
+<form action="javascript:" method="post">
+<input type="hidden" name="rid" value="{$rid}">
+<foreach name='node' item='app'>
+  <TR onMouseOver="this.style.background='#d0e2f5';" onMouseOut="this.style.background='#E3EFFB';">
+    <TD height="22" colspan="2" align=center ><input name="check[]" type="checkbox" value="{$app.id}_1"<?php if(!empty($app['access'])){ echo ' checked';}?>></TD>
+    <TD align="center">{$app.id}</TD>
+    <TD align="center">{$app.title}</TD>
+    <TD align="left">├─{$app.name}</TD>
+    <TD align="center">{$app.remark}</TD>
+    <TD align="center"><?php if(!empty($app['status'])){ echo '开启';}else{ echo '关闭';} ?></TD>
+    <TD align="center">{$app.sort}</TD>
+	<TD align="center"><if condition="empty($rid)">
+    <input type="button" value="修改" onClick="location.href='{:U('Rbac/Node',array('upid'=>$app['id'],'pid'=>$app['pid'],'level'=>1))}'">
+	<input type="button" value="添加控制器" onClick="location.href='{:U('Rbac/Node',array('pid'=>$app['id'],'level'=>2))}'">
+      <else />--</if></TD>
+  </TR>
+<foreach name='app.child' item='action'>
+  <TR onMouseOver="this.style.background='#d0e2f5';" onMouseOut="this.style.background='#E3EFFB';">
+    <TD height="22" colspan="2" align=center ><input name="check[]" type="checkbox" value="{$action.id}_2" <?php if(!empty($action['access'])){ echo ' checked';}?>></TD>
+    <TD align="center">{$action.id}</TD>
+    <TD align="center">{$action.title}&nbsp;</TD>
+    <TD align="left">丨├─{$action.name}</TD>
+    <TD align="center">{$action.remark}</TD>
+    <TD align="center"><?php if(!empty($action['status'])){ echo '开启';}else{ echo '关闭';} ?></TD>
+    <TD align="center">{$action.sort}</TD>
+	<TD align="center"><if condition="empty($rid)">
+    <input type="button" value="修改" onClick="location.href='{:U('Rbac/Node',array('upid'=>$action['id'],'pid'=>$action['pid'],'level'=>2))}'">
+	<input type="button" value="添加方法" onClick="location.href='{:U('Rbac/Node',array('pid'=>$action['id'],'level'=>3))}'">
+    <else />--</if></TD>
+  </TR>
+<foreach name='action.child' item='method'>
+  <TR onMouseOver="this.style.background='#d0e2f5';" onMouseOut="this.style.background='#E3EFFB';">
+    <TD height="22" colspan="2" align=center ><input name="check[]" type="checkbox" value="{$method.id}_3" <?php if(!empty($method['access'])){ echo ' checked';}?>></TD>
+    <TD align="center">{$method.id}</TD>
+    <TD align="center">{$method.title}&nbsp;</TD>
+    <TD align="left">丨丨├─{$method.name}</TD>
+    <TD align="center">{$method.remark}</TD>
+    <TD align="center"><?php if(!empty($method['status'])){ echo '开启';}else{ echo '关闭';} ?></TD>
+    <TD align="center">{$method.sort}</TD>
+	<TD align="center"><if condition="empty($rid)">
+    <input type="button" value="修改" onClick="location.href='{:U('Rbac/Node',array('upid'=>$method['id'],'pid'=>$method['pid'],'level'=>3))}'">
+	<input type="button" value="删除" onClick="location.href='{:U('Rbac/NodeDelete',array('check'=>$method['id'].'_3'))}'">
+    <else />--</if></TD>
+  </TR>
+</foreach>
+</foreach>
+</foreach>
+  <TR>
+    <TD width="5%" height="22" align=center ><input type=checkbox name=chkall value=on onClick="CheckAll(this.form)"></TD>
+    <TD width="5%" align="center" >全选</TD>
+    <TD colspan="6" align="center" class="hs12">&nbsp;</TD>
+    <TD align="center" class="hs12"><if condition="empty($rid)"><input type="submit" value="删除选中" onClick="if (confirm('确定要删除吗？\r一旦删除无法恢复数据')){ this.form.action='{:U('Rbac/NodeDelete')}';}else{ return false;}"><else /><input type="submit" value="确认修改" onClick="this.form.action='{:U('Rbac/SetAccess')}';"><input type="button" onClick="history.go(-1)" value="返回上页"></if></TD>
+    </TR>
+</form>
+  </TABLE>
+</if>
+</BODY></HTML>

@@ -1,0 +1,536 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>充值-{$Think.config.web_title}</title>
+<include file = "Common:transparent" />
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/register.css" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/style/style.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/guide.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+<!--资金协议-->
+<script type="text/javascript" src="__PUBLIC__/js/jquery.jmpopups-0.5.1.js"></script>
+<script type="text/javascript">
+				$.setupJMPopups({
+					screenLockerBackground: "#000000",
+					screenLockerOpacity: "0.7"
+				});
+
+				function openStaticPopup() {
+					$.openPopupLayer({
+						name: "myStaticPopup",
+						width: 820,
+						target: "myHiddenDiv_1"
+					});
+				}
+$(document).ready(function() {
+   $(".cz_bank li").click(function(){
+       var index = $(this).index();
+	   $(".topup_box > div").eq(index).show().siblings().hide();
+   });
+   $(".cz_skill").click(function(){
+       $(".grey").show();
+   });
+});
+</script>
+<!---->
+</head>
+<body>
+<include file = "Common:head" />
+<include file = "Common:web_announce" />
+<div class="middle">   
+  <include file="Common:left_menu"/>
+   <div class="mid_right InLine">
+      <h3 class="bt">充值</h3>
+      <div class="mr_center">
+         
+         <form action="{:U('Member/incharge_redirect')}" target="_blank">
+            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                   <td width="16%" height="90" align="right" style="padding-right:20px;">当前可用余额：</td>
+                   <td width="34%">{$user_info.money}元</td>
+                   <td width="50%"><span class="cz_skill" style="cursor:pointer">充值技巧</span></td>
+                </tr> 
+                <tr>
+                   <td height="70" align="right" style=" padding-right:20px;">充值金额：</td>
+                   <td colspan="2"><input type="text" class="top_up" name="money" id="money" /></td>
+                </tr>
+                <!--<tr>
+                   <td align="right" valign="top" style=" padding:20px 20px 0 0;">选择充值网银：</td>
+                   <td colspan="2">
+                      <ul class="topup_bank cz_bank">
+                       <li><span class="bank_radio"><input name="slt_bank_name" type="radio" checked="checked" value="中国工商银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_1.jpg" width="120" /></span></li>
+                       <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="中国建设银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_2.jpg" width="120" /></span></li>
+                       <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="中国农业银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_3.jpg" width="120" /></span></li>
+                       <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="中国银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_4.jpg" width="120" /></span></li>
+                       <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="交通银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_5.jpg" width="120" /></span></li>
+                       <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="招商银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_6.jpg" width="120" /></span></li>
+                       <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="兴业银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_7.jpg" width="120" /></span></li>
+                       <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="中国光大银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_8.jpg" width="120" /></span></li>
+                       <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="广发银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_9.jpg" width="120" /></span></li>
+                       <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="北京银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_10.jpg" width="120" /></span></li>
+                       <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="平安银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_11.jpg" width="120" /></span></li>
+                       <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="中国邮政储蓄银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_12.jpg" width="120" /></span></li>
+                       <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="中国民生银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_13.jpg" width="120" /></span></li>
+                       <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="上海浦东发展银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_14.jpg" width="120" /></span></li>
+                       <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="中信银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_15.jpg" width="120" /></span></li>
+                       <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="渤海银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_16.jpg" width="120" /></span></li>
+                       <li><span class="bank_radio"><input name="slt_bank_name" type="radio" value="上海银行" /></span><span class="bank_img"><img src="__PUBLIC__/images/bank_17.jpg" width="120" /></span></li>
+                       <div class="spacer"></div>
+                    </ul>
+                   </td>
+                </tr>
+                <tr>
+                   <td align="right" style=" padding-right:20px;">&nbsp;</td>
+                   <td colspan="2">
+                      <div class="topup_box">
+                         <div>
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%" class="bank_limit">
+                               <tr>
+                                 <th width="15%">单笔限额(元)</th>
+                                 <th width="15%">每日限额(元)</th>
+                                 <th width="27%">需要满足条件</th>
+                                 <th width="43%">备注</th>
+                               </tr>
+                               <tr>
+                                 <td>300</td>
+                                 <td>300</td>
+                                 <td>柜面注册存量静态支付密码客户</td>
+                                 <td rowspan="4">如您是柜面注册存量静态支付密码客户，当您所做的网上支付交易达到总支付限额后，您将不能继续进行网上支付交易。如您仍需进行网上支付交易，请您到中国工商银行营业网点申领电子银行口令卡或个人客户证书（U盾），当您成为电子银行口令卡客户或证书客户后，您将不再受到支付限额的限制。</td>
+                               </tr>
+                               <tr>
+                                 <td>2,000</td>
+                                 <td>5,000</td>
+                                 <td>电子银行口令卡动态支付密码客户--通过手机短信认证</td>
+                               </tr>
+                               <tr>
+                                 <td>500</td>
+                                 <td>1,000</td>
+                                 <td>电子银行口令卡动态支付密码客户--无手机短信认证</td>
+                               </tr>
+                               <tr>
+                                 <td>无限额</td>
+                                 <td>无限额</td>
+                                 <td>证书客户（U盾客户）</td>
+                               </tr>
+                            </table>
+                         </div>
+                         <div class="hide">
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%" class="bank_limit">
+                               <tr>
+                                 <th width="15%">单笔限额(元)</th>
+                                 <th width="15%">每日限额(元)</th>
+                                 <th width="27%">需要满足条件</th>
+                                 <th width="43%">备注</th>
+                               </tr>
+                               <tr>
+                                 <td>1,000</td>
+                                 <td>1,000</td>
+                                 <td>网银盾、动态口令卡（刮刮卡）客户、短信动态口令客户、账号支付（无需开通网银）</td>
+                                 <td>除文件证书客户不开放支付限额外，其他未提及的支付限额均以此限额为准。</td>
+                               </tr>
+                               <tr>
+                                 <td>3,000</td>
+                                 <td>3,000</td>
+                                 <td>文件证书+刮刮卡客户</td>
+                                 <td rowspan="2">账号支付是建行客户小额线上支付方式，无需开通建行网上银行，使用账号支付前，需在建行预留您正在使用的手机号。</td>
+                               </tr>
+                               <tr>
+                                 <td>100万</td>
+                                 <td>100万</td>
+                                 <td>USB Key客户</td>
+                               </tr>
+                            </table>
+                         </div>
+                         <div class="hide">
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%" class="bank_limit">
+                               <tr>
+                                 <th width="15%">单笔限额(元)</th>
+                                 <th width="15%">每日限额(元)</th>
+                                 <th width="27%">需要满足条件</th>
+                                 <th width="43%">备注</th>
+                               </tr>
+                               <tr>
+                                 <td>1,000</td>
+                                 <td>3,000</td>
+                                 <td>动态口令卡</td>
+                                 <td rowspan="3">中国农业银行于2007年11月1日推出动态口令卡服务。动态口令卡是一种新型安全认证产品。动态口令卡与IE证书绑定后，使用IE证书对外支付将不受上述限额限制，请至农业银行网点申领。</td>
+                               </tr>
+                               <tr>
+                                 <td>50万</td>
+                                 <td>100万</td>
+                                 <td>一代K版（USBN证书用户）</td>
+                               </tr>
+                               <tr>
+                                 <td>100万</td>
+                                 <td>500万</td>
+                                 <td>二代K版（USBN证书用户）</td>
+                               </tr>
+                            </table>
+                         </div>
+                         <div class="hide">
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%" class="bank_limit">
+                               <tr>
+                                 <th width="15%">单笔限额(元)</th>
+                                 <th width="15%">每日限额(元)</th>
+                                 <th width="27%">需要满足条件</th>
+                                 <th width="43%">备注</th>
+                               </tr>
+                               <tr>
+                                 <td>1万</td>
+                                 <td>10万</td>
+                                 <td>动态口令卡</td>
+                                 <td>如需使用中国银行网上支付服务，请先到我行营业网点申请开通新版中国银行网上银行,并申请安全认证工具“中银e令”并妥善保管。</td>
+                               </tr>
+                            </table>
+                         </div>
+                         <div class="hide">
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%" class="bank_limit">
+                               <tr>
+                                 <th width="15%">单笔限额(元)</th>
+                                 <th width="15%">每日限额(元)</th>
+                                 <th width="27%">需要满足条件</th>
+                                 <th width="43%">备注</th>
+                               </tr>
+                               <tr>
+                                 <td>5000-5万</td>
+                                 <td>5000-5万</td>
+                                 <td>短信密码客户</td>
+                                 <td rowspan="2">1、您需要到交通银行营业网点柜面申请成为个人网上银行手机注册用户或者证书认证用户，并开通网上支付功能。<br />
+2、用户在开通网上支付功能后，需到交通银行个人网上银行激活该功能方可使用。<br />
+3、短信密码客户（默认为5000元，用户可根据自身需求登录个人网银进行限额调整，最高至5万）。</td>
+                               </tr>
+                               <tr>
+                                 <td>100万</td>
+                                 <td>100万</td>
+                                 <td>证书客户</td>
+                               </tr>
+                            </table>
+                         </div>
+                         <div class="hide">
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%" class="bank_limit">
+                               <tr>
+                                 <th width="15%">单笔限额(元)</th>
+                                 <th width="15%">每日限额(元)</th>
+                                 <th width="27%">需要满足条件</th>
+                                 <th width="43%">备注</th>
+                               </tr>
+                               <tr>
+                                 <td>500</td>
+                                 <td>500</td>
+                                 <td>开通大众版网上银行</td>
+                                 <td rowspan="2">进行借记卡大额支付，可选择招商银行专业版支付及手机支付渠道进行交易；详情参见</td>
+                               </tr>
+                               <tr>
+                                 <td>无限额</td>
+                                 <td>无限额</td>
+                                 <td>开通专业版网上银行</td>
+                               </tr>
+                            </table>
+                         </div>
+                         <div class="hide">
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%" class="bank_limit">
+                               <tr>
+                                 <th width="15%">单笔限额(元)</th>
+                                 <th width="15%">每日限额(元)</th>
+                                 <th width="27%">需要满足条件</th>
+                                 <th width="43%">备注</th>
+                               </tr>
+                               <tr>
+                                 <td>1,000或5,000</td>
+                                 <td>1,000或5,000</td>
+                                 <td>个人网银自主开通</td>
+                                 <td rowspan="2">1、证书客户或短信保护客户直接在个人网银“网上购物”板块“开通/关闭网上购物支付”里日限额只能选1000或5000元，总额度最大100万元；<br />
+2、客户在柜面或者使用证书可自行设置日限额和总额度（最大100万元）；<br />
+3、e卡默认开通网上支付功能，日限额5000元，总额度由客户申请e卡时自行设置（最大100万元），但是可以采取以上两种方式修改。</td>
+                               </tr>
+                               <tr>
+                                 <td>无限额</td>
+                                 <td>无限额</td>
+                                 <td>柜面或证书客户个人网银开通</td>
+                               </tr>
+                            </table>
+                         </div>
+                         <div class="hide">
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%" class="bank_limit">
+                               <tr>
+                                 <th width="15%">单笔限额(元)</th>
+                                 <th width="15%">每日限额(元)</th>
+                                 <th width="27%">需要满足条件</th>
+                                 <th width="43%">备注</th>
+                               </tr>
+                               <tr>
+                                 <td>5,000</td>
+                                 <td>5,000</td>
+                                 <td>手机动态密码（令牌）</td>
+                                 <td rowspan="2">1、办理数字证书支付签约需开通个人网上银行专业版，并登录网上银行专业版进行签约。<br />
+2、办理银行卡直接支付签约可通过我行网点柜台办理，也可登录个人网上银行专业版进行签约。</td>
+                               </tr>
+                               <tr>
+                                 <td>20万</td>
+                                 <td>50万</td>
+                                 <td>网银专业版阳光网盾</td>
+                               </tr>
+                            </table>
+                         </div>
+                         <div class="hide">
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%" class="bank_limit">
+                               <tr>
+                                 <th width="15%">单笔限额(元)</th>
+                                 <th width="15%">每日限额(元)</th>
+                                 <th width="27%">需要满足条件</th>
+                                 <th width="43%">备注</th>
+                               </tr>
+                               <tr>
+                                 <td>3,000</td>
+                                 <td>3,000</td>
+                                 <td>通用版（银行网站在线申请）</td>
+                                 <td rowspan="2">1、通用版及证书版网银新客户，必须登录个人网银后，开通网上购物构能方能使用；<br />
+2、网上购物构能中可自行设置每笔支付限额及当日累计金额。</td>
+                               </tr>
+                               <tr>
+                                 <td>单笔不限</td>
+                                 <td>300,000</td>
+                                 <td>证书版（各网点办理，增加数字证书和KEY盾）</td>
+                               </tr>
+                            </table>
+                         </div>
+                         <div class="hide">
+                            
+                         </div>
+                         <div class="hide">
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%" class="bank_limit">
+                               <tr>
+                                 <th width="15%">单笔限额(元)</th>
+                                 <th width="15%">每日限额(元)</th>
+                                 <th width="27%">需要满足条件</th>
+                                 <th width="43%">备注</th>
+                               </tr>
+                               <tr>
+                                 <td>50,000</td>
+                                 <td>50,000</td>
+                                 <td>&nbsp;</td>
+                                 <td>&nbsp;</td>
+                               </tr>
+                            </table>
+                         </div>
+                         <div class="hide">
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%" class="bank_limit">
+                               <tr>
+                                 <th width="15%">单笔限额(元)</th>
+                                 <th width="15%">每日限额(元)</th>
+                                 <th width="27%">需要满足条件</th>
+                                 <th width="43%">备注</th>
+                               </tr>
+                               <tr>
+                                 <td>10,000</td>
+                                 <td>10,000</td>
+                                 <td>手机短信客户</td>
+                                 <td rowspan="4">&nbsp;</td>
+                               </tr>
+                               <tr>
+                                 <td>100,000</td>
+                                 <td>100,000</td>
+                                 <td>电子令牌客户</td>
+                               </tr>
+                               <tr>
+                                 <td>1,000,000</td>
+                                 <td>1,000,000</td>
+                                 <td>Ukey+短信客户</td>
+                               </tr>
+                            </table>
+                         </div>
+                         <div class="hide">
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%" class="bank_limit">
+                               <tr>
+                                 <th width="15%">单笔限额(元)</th>
+                                 <th width="15%">每日限额(元)</th>
+                                 <th width="27%">需要满足条件</th>
+                                 <th width="43%">备注</th>
+                               </tr>
+                               <tr>
+                                 <td>300</td>
+                                 <td>300</td>
+                                 <td>无证书客户（个人网上银行大众版）</td>
+                                 <td rowspan="3">自2008年11月20日起，大众版支付限额由原日累计300元改为累计支付300元。</td>
+                               </tr>
+                               <tr>
+                                 <td>5,000</td>
+                                 <td>5,000</td>
+                                 <td>贵宾版（浏览器证书）</td>
+                               </tr>
+                               <tr>
+                                 <td>20万</td>
+                                 <td>50万</td>
+                                 <td>贵宾版（U宝）</td>
+                               </tr>
+                            </table>
+                         </div>
+                         <div class="hide">
+                            
+                         </div>
+                         <div class="hide">
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%" class="bank_limit">
+                               <tr>
+                                 <th width="15%">单笔限额(元)</th>
+                                 <th width="15%">每日限额(元)</th>
+                                 <th width="27%">需要满足条件</th>
+                                 <th width="43%">备注</th>
+                               </tr>
+                               <tr>
+                                 <td>1,000</td>
+                                 <td>5,000</td>
+                                 <td>文件证书</td>
+                                 <td rowspan="3">&nbsp;</td>
+                               </tr>
+                               <tr>
+                                 <td>1,000,000</td>
+                                 <td>1,000,000</td>
+                                 <td>Key证书系统默认</td>
+                               </tr>
+                               <tr>
+                                 <td>不限</td>
+                                 <td>不限</td>
+                                 <td>Key证书客户通过网银修改支付限额</td>
+                               </tr>
+                            </table>
+                         </div>
+                         <div class="hide">
+                            
+                         </div>
+                         <div class="hide">
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%" class="bank_limit">
+                               <tr>
+                                 <th width="15%">单笔限额(元)</th>
+                                 <th width="15%">每日限额(元)</th>
+                                 <th width="27%">需要满足条件</th>
+                                 <th width="43%">备注</th>
+                               </tr>
+                               <tr>
+                                 <td>5,000</td>
+                                 <td>5,000</td>
+                                 <td>专业版文件证书</td>
+                                 <td rowspan="2">可至上海银行营业网点申请开通个人网上银行专业版，获得文件证书或usbkey证书，成为专业版客户。</td>
+                               </tr>
+                               <tr>
+                                 <td>5万</td>
+                                 <td>5万</td>
+                                 <td>专业版USBKEY证书</td>
+                               </tr>
+                            </table>
+                         </div>
+                         
+                         
+                      </div>
+                   </td>
+                </tr>-->
+                <tr>
+                   <td height="30" align="right">&nbsp;</td>
+                   <td colspan="2">
+                       <input name="ido" type="checkbox" value="0" />
+                       <label for="ido">我已经阅读并同意<a href="javascript:;" onclick="openStaticPopup()" title="金投充值及提现协议" class="reg_xy">《金投充值及提现协议》</a></label>
+                       <div id="myHiddenDiv_1" style="display:none;">
+                          <div class="popup_1">
+                             <div class="popup-header_1">
+                                 <h2>金投充值及提现协议</h2>
+                             </div>
+                             <div class="popup-body_1">
+                                 <strong>请仔细阅读本协议</strong>
+                                 <div class="con_1">
+                                    <p>本协议双方为吉林省金湧博发投资管理有限公司（金投资）与金投资投资人，本协议具有合同效力。本协议的内容包括以下全部条款以及本网站已经发布的及将来可能发布的与出借人用户有关的各项规则，该等规则均为本协议不可分割的一部分，与以下所列条款具有同等法律效力。本网站有权根据需要修改本协议的内容。如以下条款或本网站各项规则有任何变更，本网站将在网站上刊载公告。经修订的相关条款和规则一经公告，即于公告规定的特定生效日期自动生效。</p>
+                                    <p>投资人只要勾选位于注册页面下方的“我同意金投资注册协议”选项并按照本网站的流程成功注册后，本协议即产生法律效力。投资人不得以未签署书面协议为由否认本协议的效力。本协议是由投资人与本网站共同签订的，适用于投资人在本网站的全部活动。在投资人注册成为用户时，投资人已经阅读、理解并接受本协议的全部条款及各类规则，如有违反而导致任何法律后果的发生，投资人将以自己的名义独立承担所有相应的法律责任。</p>
+                                    <b>本协议不涉及投资人与本网站的其他用户之间因网上交易而产生的法律关系及法律纠纷。</b><br />
+                                    <b>一、充值管理规定</b>
+                                    <p>1、充值金额：100元人民币起 （金额可精确到元）</p>
+                                    <p>2、充值费用：免费</p>
+                                    <b>二、投资管理办法</b>
+                                    <p>1、投资金额：请参照实际投资标的规定起投金额及办法</p>
+                                    <p>2、账户管理费：平台将收取投资人成功投资后利息的10%作为账户管理费</p>
+                                    
+                                    <b>提现管理规定</b>
+                                    <p>1、提现金额：100元人民币起  （金额可以精确到分）</p>
+                                    <p>2、提现时绑定的持卡人姓名需与个人资料绑定的姓名一致。</p>
+                                    <p>3、提现手续费每笔5元起，工作日16:00前提交提现申请的，当天审核；16:00之后提交申请的，下个工作日审核。</p>
+                                    <p>4、审核通过后3个工作日内（不含双休及法定节假），将资金转入您在网站认证的银行卡账号。</p>
+                                    <b>四、账户信息注意事项</b>
+                                    <p>提现时绑定的持卡人姓名需与注册时个人资料绑定的姓名一致，如姓名或信息错误请及时联系客服处理。</p>
+                                    <p>账户信息须正确填写，开户行名称为 银行名称+支行全称（拨打银行客服电话即可查询）。</p>
+                                    <p>如银行卡相关信息填写错误请联系客服人员办理修改，为保证投资人的资金安全，不被不法分子冒领，修改银行卡相关信息时需向客服人员提供本人手持身份证及银行卡正反面四张照片。</p>
+                                    <b>五、其他附加条款</b>
+                                    <p>1、未经本网站事先书面许可，投资人无权将本协议项下的权利转让给任何第三方，否则该转让行为无效。</p>
+                                    <p> 2、本协议之效力、解释、变更、执行与争议解决均适用中华人民共和国法律，因本协议产生之争议，双方同意将争议提交至长春市具有管辖权的人民法院，通过司法程序予以解决。</p>
+                                    <b>六、违约责任</b>
+                                    <p>如果您违反了您在协议中所作的陈述、保证、承诺或任何其他义务，致使本网站或本网站的股东、实际控制人、员工承受任何损失，您应向受损失的一方做出全额赔偿。</p>
+                                    <b>七、适用法律和管辖</b>
+                                    <p>本协议适用中华人民共和国法律，与本协议的解释和履行有关的争议应由长春仲裁委员会按照其仲裁规则进行仲裁。</p>
+                                    <b>八、终止</b>
+                                    <p>除非本网站终止本协议或者您申请终止本协议及注销相应用户账户且经本网站同意，否则本协议始终有效。在您违反了本协议、相关规则，或在相关法律法规、政府部门的要求下，本网站有权通过电子邮件告知方式终止本协议、关闭您的账户或者限制您使用本网站。</p>
+                                    <b>九、条款的独立性</b>
+                                    <p>若本协议的部分条款被认定为无效或者无法实施时，本协议中的其他条款仍然有效。</p>
+                                    
+                                    <p>本协议内容最终解释权规金投资网站所有。</p>
+                                  </div>
+                                </div>
+                                <a href="javascript:;" class="close_1" onclick="$.closePopupLayer('myStaticPopup')" title="关闭窗口" >阅读完毕，关闭窗口</a>
+                           </div>
+                        </div>
+                        <div id="fade" class="black_overlay"></div>
+                   </td>
+                </tr>
+                <tr>
+                   <td height="70">&nbsp;</td>
+                   <td colspan="2"><input type="submit" value="确定" class="topup_sub" name="submit_topup" id="submit_topup" /></td>
+                </tr>
+            </table>
+          </form>
+          <div class="prompt">
+             <font color="#e44343">温馨提示</font> <br />
+              1、<font color="#FF0000">请投资人根据发标计划合理充值</font><br />
+              2、充值金额必须大于或等于100元<br />
+              3、请注意您的银行卡充值限制，以免造成不便。<br />
+              4、充值过程中可能会因网络问题出现延迟，如果15分钟内充值金额没有及时到账，请与客服联系。<br />
+              5、金投资禁止信用卡套现、虚假交易等行为，一经发现将予以处罚，包括但不限于:限制收款、冻结账户，永久停止服务等。<br /> 
+              6、网上银行充值过程中请耐心等待,充值成功后，请不要关闭浏览器,充值成功后返回金投资,充值金额才能打入您的帐号。
+              如有问题，请与我们联系400-6570-826。
+          </div>
+         <div class="spacer"></div>
+      </div>
+   </div>
+   <div class="spacer"></div>
+</div>
+<script type="text/javascript">
+//单击银行图片控制单选按钮被选择
+$(".bank_img").click(function(){
+   $(this).siblings().find("input[name='slt_bank_name']").attr('checked',true);
+})
+  $("#submit_topup").click(function(){
+    <empty name="no">
+     $money = $("#money");
+      var number_reg = /^[0-9]+$/;  //验证输入是否为数字      
+      if(!number_reg.test(parseFloat($.trim($money.val()))) || $.trim($money.val()) == '' || $.trim($money.val()) == 0){
+        alert('金额输入错误，请重新输入');
+        return false;
+      } 
+      if(parseFloat($.trim($money.val())) < parseFloat(100)){
+        alert('充值金额最低为100元');
+        return false;        
+      }     
+    <else/>               
+    </empty>
+     if($("input[name='ido']").attr('checked')){
+          $("input[name='ido']").val('1');
+      }else{
+          $("input[name='ido']").val('0');
+      }      
+      if($("input[name='ido']").val() == '0'){
+        alert('您需同意《金投充值及提现协议》');
+        return false;
+      }      
+  })
+</script>
+<include file = "Common:bottom" />
+<div class="grey" style="display:none;"><include file = "Common:skill" /></div>
+</body>
+</html>

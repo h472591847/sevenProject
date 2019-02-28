@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="__PUBLIC__/css/bdmin.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="__PUBLIC__/Js/jQuery.js" ></script>
+<script type="text/javascript" src="__PUBLIC__/Js/calendar/calendar.php?lang=zh-cn" ></script>
+<LINK href="__PUBLIC__/Js/calendar/calendar.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/Js/calendar/calendar.js"></script>
+<script type="text/javascript">
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+function CheckAll(form)  {
+  for (var i=0;i<form.elements.length;i++)    {
+    var e = form.elements[i];
+    if (e.name != 'chkall')       
+      e.checked = form.chkall.checked; 
+   }
+}
+
+
+/**
+ * confirm_check    点击审核通过（给分）
+ * @param  {int} objid   此条信息的ID
+ */
+function confirm_check(objid){
+  var redirect_url = "{:U('FeedBack/IsCheck',array('status'=>1))}";
+  var redirect_url = redirect_url + "?upid=" + objid;
+  if (confirm('确定要采纳此意见吗？采纳后将给予该会员{$Think.config.feed_back_score}积分奖励')){location.href = redirect_url;}else{ return false;}    
+}
+</script>
+</HEAD>
+<BODY>
+<TABLE class="hs12pt" cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD height="22" >当前位置: 信息中心/信息管理</TD>
+  </TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR></TABLE>
+<TABLE class="hs12pt" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="22" background="__PUBLIC__/images/title_bg2.jpg">&nbsp;&nbsp;&nbsp;<span class="baise12ct">信息管理</span></td>
+  </tr>
+</table>
+  <TABLE class="hs12pt" width="100%" border=1 align=center cellPadding=2 cellSpacing=0 bordercolor="#175CB7" bordercolordark="#E3EFFB">
+<!-- <form action="{:U('FeedBack/index')}" method="post">    
+    <tr>
+      <td colspan="11" height="30">
+        会员帐号：<input type="text" name="user_name" size="10">&nbsp; &nbsp;             
+        提现金额：<input type="text" name="money_start" size="5"> - <input type="text" name="money_end" size="5">&nbsp; &nbsp;         
+        申请时间：&nbsp; 
+        <input type="text" name="k_start_time" class="text" id="k_start_time"  onfocus="this.blur(); return showCalendar('k_start_time', '%Y-%m-%d', false, false, 'btn_start_time');">      
+        <input type="button" class="button" id="btn_start_time" value="选择时间" onClick="return showCalendar('k_start_time', '%Y-%m-%d', false, false, 'btn_start_time');" />
+        <input type="button" class="button" value="清空时间" onClick="$('#k_start_time').val('');" />       
+         - 
+        <input type="text" name="k_end_time" id="k_end_time" class="text" onFocus="this.blur(); return showCalendar('k_end_time', '%Y-%m-%d', false, false, 'btn_end_time');">
+        <input type="button" class="button" id="btn_end_time" value="选择时间" onClick="return showCalendar('k_end_time', '%Y-%m-%d', false, false, 'btn_end_time');" />
+        <input type="button" class="button" value="清空时间" onClick="$('#e_end_time').val('');" />         
+        &nbsp; <input type="submit" value="开始查询">          
+      </td>
+    </tr>
+</form>  -->
+  <TR>
+    <TD width=5% height="25" align=center >选择</TD>
+    <TD width="5%" align="center" >ID</TD>
+    <TD align="center" >会员帐号</TD>
+    <TD align="center" >获得积分</TD>
+    <TD align="center" >反馈内容</TD>
+    <TD width="5%" align="center" >审核状态</TD>     
+    <TD width="10%" align="center" >阅读状态</TD>    
+    <TD width="10%" align="center" >反馈时间</TD>    
+    <TD width="10%" align="center" >审核时间</TD>        
+  </TR>
+<form action="" method="post">
+<foreach name='info' item='v'>
+  <TR onMouseOver="this.style.background='#d0e2f5';" onMouseOut="this.style.background='#E3EFFB';">
+    <TD height="22" align=center ><input type="checkbox" name="del[]" value="{$v.id}"></TD>
+    <TD align="center">{$v.id}</TD>
+    <TD align="center"><a href="{:U('FeedBack/index',array('uid'=>$v['uid']))}">{$v.user_info.user_name}</a></TD>
+    <TD align="center">{$v.score}</TD>    
+    <TD align="center">
+        {$v.content}
+    </TD>     
+      	    
+    <TD align="center">
+    <if condition="$v['is_check'] eq '0'">
+    <a href="{:U('FeedBack/IsCheck',array('upid'=>$v['id']))}" style="color:#F00;">未采纳</a>
+    <else/>
+    <a href="{:U('FeedBack/IsCheck',array('upid'=>$v['id']))}" style="color:#4C9F2E;">已采纳</a>
+    </if>
+    </TD>
+    <td align="center">
+    <if condition="$v['is_read'] eq '0'">
+    <a href="{:U('FeedBack/IsCheck',array('upid'=>$v['id']))}" style="color:#F00;">未读</a>
+    <else/>
+    <a href="{:U('FeedBack/IsCheck',array('upid'=>$v['id']))}" style="color:#4C9F2E">已读</a>
+    </if>      
+    </td>
+    <TD align="center">
+        <if condition="$v['create_time'] neq 0">{$v.create_time|date='Y-m-d H:i:s',###}</if>
+    </TD>     
+    <td align="center"><if condition="$v['check_time'] neq 0">{$v.check_time|date='Y-m-d H:i:s',###}<else/>暂无</if></td>    
+  </TR>
+</foreach>
+  <TR>
+    <TD height="22" align=center ><input type=checkbox name=chkall value=on onClick="CheckAll(this.form)"></TD>
+    <TD align="center" >全选</TD>
+    <TD colspan="7" align="center" class="hs12pt">{$page}</TD>        
+    </TR></form>
+  </TABLE>
+</BODY></HTML>

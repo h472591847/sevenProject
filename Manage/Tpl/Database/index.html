@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="__PUBLIC__/css/bdmin.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+var ROOT='__ROOT__';
+</script>
+<script src="__PUBLIC__/Js/jQuery.Js"></script>
+<script src="__PUBLIC__/Js/database.Js?6"></script>
+<load href='__PUBLIC__/Js/jquery.bgiframe.Js' />
+<load href='__PUBLIC__/Js/jquery.weebox.Js' />
+</HEAD>
+<body>
+<div class="main">
+<TABLE class="hs12pt" cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD height="22" >当前位置: 数据库备份</TD>
+  </TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR></TABLE>
+    <TABLE class="hs12pt" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+      <tr>
+        <td height="22" background="__PUBLIC__/images/title_bg2.jpg">&nbsp;&nbsp;&nbsp;<span class="baise12ct">信息管理</span></td>
+      </tr>
+    </table>
+
+  <TABLE class="hs12pt" width="100%" border=1 align=center cellPadding=2 cellSpacing=0 bordercolor="#175CB7" bordercolordark="#E3EFFB">
+<form action="" method="post">
+    <TR>
+        <td align="left" colspan="3"><input type="button" class="button" value="创建备份" onClick="backup();" /></td>
+    </TR>
+</form>  
+  <TR>
+    <TD  height="25" align=center >备份文件</TD>
+    <TD align="center" >创建时间</TD>
+    <TD  align="center" >操作</TD>
+  </TR>
+<form action="" method="post">
+<foreach name="sql_list" item="sql_item" key="groupname">
+  <TR onMouseOver="this.style.background='#d0e2f5';" onMouseOut="this.style.background='#E3EFFB';">
+        <td>{$groupname}({:sprintf('共%d卷',count($sql_item))})</td>
+        <td>{$groupname|date='Y-m-d H:i:s',###}</td>
+        <td><a href="javascript:void(0);" onClick="restore_db('{$groupname}');">恢复</a> <a href="javascript:void(0);" onClick="delsql('{$groupname}');">删除</a></td>
+  </TR>
+</foreach>
+</form>
+  </TABLE>
+</body>
+</html>

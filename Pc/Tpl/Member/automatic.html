@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>自动投标规则设置-会员中心-{$Think.config.web_title}</title>
+<include file = "Common:transparent" />
+
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+</head>
+<body>
+<include file = "Common:head" />
+<include file = "Common:web_announce" />
+<div class="middle">
+   <include file="Common:left_menu"/>
+   <div class="mid_right InLine">
+      <h3 class="bt">自动投标</h3>
+      <div class="mr_center">
+         <form action="{:U('Member/DoAutomatic')}" method="post">
+         <input type="hidden" name="upid" value="{$upid}">
+         <div class="sx_auto">
+           <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                   <td height="60" class="auto_h3">自动投标 - 自定义规则</td>
+                </tr> 
+            </table>
+            <table cellpadding="0" cellspacing="0" border="0" width="90%" class="auto_xq" style=" line-height:45px;">
+               <tr>
+                 <td width="18%" class="auto_left">账户可用余额：</td>
+                 <td><span class="zh_ye">{$user_info.money}元</span></td>
+               </tr>
+               <tr>
+                 <td class="auto_left">每次投标金额：</td>
+                 <td><input type="text" name="every_money" id="every_money" value="{$auto_arr.every_money}" class="auto_txt" /> 元</td>
+               </tr>
+               <tr>
+                 <td class="auto_left">借款期限：</td>
+                 <td><input type="radio" name="deadline_status" <if condition="$auto_arr['deadline_status'] eq 0 || $upid eq ''">checked="checked"</if> value="0" />
+                 <label for="radio">不限定借款期限范围</label></td>
+               </tr>
+               <tr>
+                 <td class="auto_left">&nbsp;</td>
+                 <td><input type="radio" name="deadline_status" value="1" <if condition="$auto_arr['deadline_status'] eq 1">checked="checked"</if>  />
+                     <label for="radio">月范围在 </label>
+                     <select name="min_deadline" id="min_deadline">
+                        <option value="1" <if condition="$auto_arr['min_deadline'] eq 1"> selected="selected"</if>>1个月</option>
+                        <option value="2" <if condition="$auto_arr['min_deadline'] eq 2"> selected="selected"</if>>2个月</option>
+                        <option value="3" <if condition="$auto_arr['min_deadline'] eq 3"> selected="selected"</if>>3个月</option>
+                        <option value="6" <if condition="$auto_arr['min_deadline'] eq 6"> selected="selected"</if>>6个月</option>
+                        <option value="9" <if condition="$auto_arr['min_deadline'] eq 9"> selected="selected"</if>>9个月</option>
+                        <option value="10" <if condition="$auto_arr['min_deadline'] eq 10"> selected="selected"</if>>10个月</option>
+                        <option value="12" <if condition="$auto_arr['min_deadline'] eq 12"> selected="selected"</if>>12个月</option>
+                     </select>
+                     至
+                     <select name="max_deadline" id="max_deadline">
+                        <option value="1" <if condition="$auto_arr['max_deadline'] eq 1"> selected="selected"</if>>1个月</option>
+                        <option value="2" <if condition="$auto_arr['max_deadline'] eq 2"> selected="selected"</if>>2个月</option>
+                        <option value="3" <if condition="$auto_arr['max_deadline'] eq 3"> selected="selected"</if>>3个月</option>
+                        <option value="6" <if condition="$auto_arr['max_deadline'] eq 6"> selected="selected"</if>>6个月</option>
+                        <option value="9" <if condition="$auto_arr['max_deadline'] eq 9"> selected="selected"</if>>9个月</option>
+                        <option value="10" <if condition="$auto_arr['max_deadline'] eq 10"> selected="selected"</if>>10个月</option>
+                        <option value="12" <if condition="$auto_arr['max_deadline'] eq 12"> selected="selected"</if>>12个月</option>
+                     </select>
+                 </td>
+               </tr>
+               <tr>
+                 <td class="auto_left">年化利率：</td>
+                 <td><input type="radio" name="rate_status" <if condition="$auto_arr['rate_status'] eq 0 || $upid eq ''">checked="checked"</if>  value="0"  />
+                 <label for="radio2">不限定年化利率范围</label></td>
+               </tr>
+               <tr>
+                 <td class="auto_left">&nbsp;</td>
+                 <td><input type="radio" name="rate_status"  value="1" <if condition="$auto_arr['rate_status'] eq 1">checked="checked"</if>  />
+                 <label for="radio2">≥ </label><input type="text" name="min_rate" id="min_rate" value="{$auto_arr.min_rate}" class="auto_n" /> %</td>
+               </tr>
+               <tr>
+                 <td class="auto_left">账户保留金额：</td>
+                 <td><input type="text" class="auto_txt" name="reserve_money" value="{$auto_arr.reserve_money}" id="reserve_money" /> 元</td>
+               </tr>
+               <tr>
+                 <td class="auto_left" height="70">&nbsp;</td>
+                 <td><input type="submit" value="保存设置" id="submit_auto_invested" class="auto_btn" /></td>
+               </tr>
+            </table>
+         </div>
+         <div class="prompt" style=" margin-top:20px;">
+          <p><font color="#e44343" size="+1">自动投标规则</font><br />
+            1、本平台项目，按一定比例划分为自动投标和手动投标部分，目前债权暂时不能使用自动投标工具进行债权购买；<br />
+            2、用户开启此工具，并完成条件设置后，自动投标功能将在五分钟内生效；<br />
+          3、自动投资工具会根据用户设置的每次投资金额，结合用户的账户可用余额向符合设置条件的投资项目进行投资，账户可用余额 < 每次投资金额，不执行自动投资；</p>
+            4、自动投标成交后，用户的自动投标功能不会自动关闭，如果需要关闭，需进行手工设置；<br />
+            5、用户依开通自动投标功能时间先后形成队列，平台项目在此队列依次进行匹配；<br />
+            6、单个投资项目，单个用户至多只有一次自动投资的机会。<br />
+          </p>
+        </div>
+         <div class="spacer"></div>
+      </div>
+      <div class="mr_bottom"></div>
+   </div>
+   </form>
+   <div class="spacer"></div>
+</div>
+<script type="text/javascript">
+   $("#submit_auto_invested").click(function() {
+       var every_money = $("#every_money");
+       var min_deadline = $("#min_deadline");
+       var max_deadline = $("#max_deadline");
+       var min_rate = $("#min_rate");
+       var reserve_money = $("#reserve_money");    
+       var deadline_status = $('input[name="deadline_status"]:checked');
+       var rate_status = $('input[name="rate_status"]:checked');
+       reg_number = /^[0-9]+$/;       
+       if(!reg_number.test(every_money.val())){
+          alert('请输入正确的投标金额');every_money.focus();return false;
+       }       
+       if(deadline_status.val() == 1){
+         if(parseInt(min_deadline.val()) >= parseInt(max_deadline.val())){
+            alert('最小期限只能小于最大期限');return false;
+         }          
+       }
+       if(rate_status.val() == 1){
+         if(!reg_number.test(min_rate.val())){
+            alert('请输入准确的最小年利率');min_rate.focus();return false;
+         }                
+       }             
+       if(!reg_number.test(reserve_money.val())){
+          alert('请输入每次投资金额');reserve_money.focus();return false;
+       }              
+        
+   });
+</script>
+<include file = "Common:bottom" />
+
+</body>
+</html>
+

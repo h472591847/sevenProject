@@ -1,0 +1,7 @@
+     <!--登录后显示 start-->
+     <if condition="$Think.session.user_id neq ''">
+     <span class="user_icon"><a href="{:U('Member/index')}" title=""><img src="__PUBLIC__/images/user_info.png" /></a></span>
+     <else/>
+     <span class="user_icon"><a href="{:U('user/Login')}" title=""><img src="__PUBLIC__/images/user_info.png" /></a></span>
+     </if>
+     <!--end-->

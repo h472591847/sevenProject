@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>银行卡绑定-{$Think.config.web_title}</title>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.cityselect.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('input[type=text]:first').focus();
+	
+	$(".open_bank").click(function(){
+	    $(".bank_choose").show();
+	});
+	
+	 /*省市二级联动菜单初始化*/
+	  city_lib_url = '__PUBLIC__/js/city.min.js';//省市json库文件路径
+	  $("#city_1").citySelect({
+		nodata:"none",
+		required:false
+	  }); 
+	  
+	  var height = $(window).height();
+	  var b_height = height-50;
+	  $("#bank_choose").css({"height":height+"px"});
+	  $("#bank_choose ul").css({"height":b_height+"px","overflow":"scroll"}); 
+});
+</script>
+</head>
+<body style="height:900px;">
+<form action="{:U('Member/do_add_bank')}" method="post">
+<div class="center">
+   <include file = "Common:header" />
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>绑定银行卡</span>
+     <span></span>     
+     <!--登录后显示 start-->
+     <include file="Common:ico"/>
+     <!--end-->
+   </div>    
+   <div class="withdra">
+      <input type="hidden" name="bank_name" id="bank_name" value="">
+      <ul>
+         <li>
+            <span class="with_txt">银行卡户名</span>
+            <span class="with_con"><input type="text" name="real_name" value="{$user_info.real_name}" readonly id="real_name" class="drawal_ipt"></span>
+         </li>
+         <li>
+            <span class="with_txt">银行卡号</span>
+            <span class="with_con">
+            <input type="text" name="bank_number" placeholder="请输入银行卡号" id="bank_number" class="drawal_ipt drawal_bank">
+            </span>
+         </li>
+         <li>
+            <span class="with_txt">银行</span>
+            <span class="with_con">               
+               <a href="#" class="open_bank" id="open_bank">请选择银行</a>
+            </span>
+         </li>
+         <li>
+             <span class="with_txt">开户城市</span>
+             <span id="city_1" class="with_con">
+                 <select class="prov" name="province" id="province"></select> 
+                 <select class="city" name="city" disabled="disabled" id="city"></select>                          
+             </span>
+         </li>
+         <li><span class="with_txt">开户行全称</span><span class="with_con"><input type="text" placeholder="请输入开户行全称" id="bank_address" name="bank_address" class="drawal_ipt drawal_bank"></span></li>
+      </ul>
+   </div>
+    
+    <p class="with_p"><input type="submit" id="submit_bank" value="确定" class="user_confirm"></p> 
+  
+</div>
+</form>
+<div class="bank_choose" id="bank_choose">
+   <ul>
+      <li class="bank_select">中国工商银行</li>
+      <li>中国建设银行</li>
+      <li>中国农业银行</li>
+      <li>中国银行</li>
+      <li>交通银行</li>
+      <li>招商银行</li>
+      <li>兴业银行</li>
+      <li>中国光大银行</li>
+      <li>广发银行</li>
+      <li>北京银行</li>
+      <li>平安银行</li>
+      <li>中国邮政储蓄银行</li>
+      <li>中国民生银行</li>
+      <li>上海浦东发展银行</li>
+      <li>中信银行</li>
+      <li>渤海银行</li>
+      <li>上海银行</li>
+   </ul>
+</div>
+<script type="text/javascript">
+  /*选择银行操作*/
+  $("#bank_choose ul li").click(function(){
+    $(this).attr('class','bank_select').siblings().removeClass('bank_select');
+    $("#bank_name").val($(this).text());
+    $("#open_bank").text($(this).text());
+    $("#bank_choose").hide();
+  })
+
+  /*绑定银行卡表单处理*/
+  $("#submit_bank").click(function(){
+      $real_name = $("#real_name");
+      $bank_number = $("#bank_number");
+      $bank_address = $("#bank_address");
+      $bank_name = $("#bank_name");
+      if($.trim($real_name.val()) == ''){
+        alert('请输入户名');
+        $real_name.focus();
+        return false;
+      }
+
+      if($.trim($bank_number.val()) == ''){
+        alert('请输入银行卡号');
+        $bank_number.focus();
+        return false;
+      }
+
+      if($.trim($bank_name.val()) == ''){
+        alert('请选择银行');        
+        return false;
+      }     
+
+      if($("select[name='province']").val() == ''){
+        alert('请选择开户省份');        
+        return false;
+      }    
+
+      if($("select[name='city']").val() == ''){
+        alert('请选择开户城市');        
+        return false;
+      }          
+
+      if($.trim($bank_address.val()) == ''){
+        alert('请输入开户行全称');
+        $bank_address.focus();
+        return false;
+      }       
+  })  
+</script>
+</body>
+</html>

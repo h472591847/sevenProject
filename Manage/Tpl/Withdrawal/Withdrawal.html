@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="__PUBLIC__/css/bdmin.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/Js/Calendar.js"></script>
+<script type="text/javascript" charset="utf-8" src="__ROOT__/Ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__ROOT__/Ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="__ROOT__/Ueditor/lang/zh-cn/zh-cn.js"></script>
+<script src="__PUBLIC__/js/jQuery.js"></script>
+</HEAD>
+<BODY>
+<form action="{:U('Withdrawal/DoWithdrawal')}" method="post" onSubmit="$('#sbmt').attr('disabled',true);return true;">
+<input type="hidden" name="upid" value="{$upid}">
+<input type="hidden" name="refer" value="{$refer}">
+<TABLE class="hs12pt" cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD height="22" >当前位置: 信息中心/审核信息</TD>
+  </TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR></TABLE>
+<TABLE class="hs12pt" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="22" background="__PUBLIC__/images/title_bg2.jpg">&nbsp;&nbsp;&nbsp;<span class="baise12ct">{$display_txt}信息</span></td>
+  </tr>
+</table>
+  <TABLE class="hs12pt" width="100%" border="1" align="center" cellpadding="2" cellspacing="0" bordercolor="#175CB7" bordercolordark="#E3EFFB" >
+    <tr>
+      <td width="20%" height="25" align="center" >用户名:</td>
+      <td colspan="5">
+        {$user_info.user_name}
+      </td>
+    </tr> 
+    <tr>
+      <td width="20%" height="25" align="center" >代付单笔订单号:</td>
+      <td colspan="5">
+        {$info.biz_no}
+      </td>
+    </tr>            
+    <tr>
+      <td width="20%" height="25" align="center" >提现金额:</td>
+      <td colspan="5">
+        {$info.withdrawal_price|format_price}
+      </td>
+    </tr>
+    <tr>
+      <td width="20%" height="25" align="center" >手续费:</td>
+      <td colspan="5">
+        {$info.management_price|format_price}
+      </td>
+    </tr>    
+    <tr>
+      <td width="20%" height="25" align="center" >银行名称:</td>
+      <td colspan="5">
+        {$info.bank.bank_name}
+      </td>
+    </tr> 
+    <tr>
+      <td width="20%" height="25" align="center" >开户省市:</td>
+      <td colspan="5">
+        {$info.bank.province} - {$info.bank.city}
+      </td>
+    </tr>          
+    <tr>
+      <td width="20%" height="25" align="center" >开户行:</td>
+      <td colspan="5">
+        {$info.bank.bank_address}
+      </td>
+    </tr>
+    <tr>
+      <td width="20%" height="25" align="center" >户名:</td>
+      <td colspan="5">
+        {$info.bank.real_name}
+      </td>
+    </tr> 
+    <tr>
+      <td width="20%" height="25" align="center" >卡号:</td>
+      <td colspan="5">
+        {$info.bank.bank_number}
+      </td>
+    </tr>
+    <tr>
+      <td width="20%" height="25" align="center" >联系电话:</td>
+      <td colspan="5">
+        {$user_info.phone}
+      </td>
+    </tr>
+    <tr>
+      <td width="20%" height="25" align="center" >提现类型:</td>
+      <td colspan="5">
+        <switch name="info.type">
+          <case value="0">正常</case>
+          <case value="1">加急</case>
+        </switch>          
+      </td>
+    </tr>            
+    <tr>
+      <td width="20%" height="25" align="center" >审核状态:</td>
+      <td colspan="5">
+        <select name="audit_status" id="audit_status">
+          <if condition="$info['audit_status'] eq 0">
+          <option value="0" <if condition="$info['audit_status'] eq 0"> selected="selected"</if>>申请中</option>                   
+          <option value="1" <if condition="$info['audit_status'] eq 1"> selected="selected"</if>>通过</option>         
+          <option value="2" <if condition="$info['audit_status'] eq 2"> selected="selected"</if>>不通过</option>                             
+          </if>
+          <if condition="$info['audit_status'] eq 1">
+          <option value="1" <if condition="$info['audit_status'] eq 1"> selected="selected"</if>>通过</option>         
+          <option value="2" <if condition="$info['audit_status'] eq 2"> selected="selected"</if>>不通过</option>                             
+          <option value="3" <if condition="$info['audit_status'] eq 3"> selected="selected"</if>>打款完成</option> 
+          </if>
+          <if condition="$info['audit_status'] eq 2">
+          <option value="2" <if condition="$info['audit_status'] eq 2"> selected="selected"</if>>不通过</option>              
+          </if>
+          <if condition="$info['audit_status'] eq 3">
+          <option value="3" <if condition="$info['audit_status'] eq 3"> selected="selected"</if>>打款完成</option> 
+          </if>
+          <if condition="$info['audit_status'] eq 4">
+          <option value="4" <if condition="$info['audit_status'] eq 4"> selected="selected"</if>>已代付</option>                
+          <option value="3" <if condition="$info['audit_status'] eq 3"> selected="selected"</if>>打款完成</option>              
+          <option value="2" <if condition="$info['audit_status'] eq 2"> selected="selected"</if>>不通过</option>              
+          </if>  
+          
+        </select>                          
+        </select>        
+      </td>
+    </tr>
+    <tr>
+    <td width="20%" height="25" align="center" >资金动向:</td>
+    <td colspan="5">
+      <a href="{:U('DealLog/index',array('uid'=>$info['uid']))}" target="blank">查看该用户资金动向</a>  |  
+      <a href="{:U('ScoreLog/index',array('uid'=>$info['uid']))}" target="blank">查看该用户积分动向</a>
+    </td>
+    </tr>
+    <tr>
+      <td width="20%" height="25" align="center" >备注:</td>
+      <td colspan="5">
+        <textarea name="audit_content" id="audit_content" cols="100" rows="5">{$info.audit_content}</textarea>
+      </td>
+    </tr>                                                            
+    <tr>
+      <td height="25" colspan="6" align="center">
+      <if condition="$info['audit_status'] eq 0 || $info['audit_status'] eq 1"> 
+        <input type="submit" id="sbmt" value="确认{$display_txt}" >
+      </if>         
+      <input type="button" onclick="location.href='{$refer}'" value="返回上一页"></td>  
+    </tr> 
+  </table>
+</form>
+</BODY></HTML>
+<script type="text/javascript">
+
+</script>

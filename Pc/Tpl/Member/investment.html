@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>投资记录-{$Think.config.web_title}</title>
+<include file = "Common:transparent" />
+<link href="__PUBLIC__/style/base.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/style/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/prefixfree.min.js"></script>
+<style type="text/css">
+  .sx_rq a{cursor: pointer;}
+</style>
+</head>
+<body>
+<include file = "Common:head" />
+<include file = "Common:web_announce" />
+<div class="middle">
+   <include file="Common:left_menu"/>
+   <div class="mid_right InLine">
+      <h3 class="bt" style="margin-bottom:30px;">投资记录</h3>
+      <div class="mr_center">
+         <form action="{:U('Member/investment')}" method="get" name="form_filter" id="form_filter">
+         <div class="sx_mark">
+             <div class="screening">
+                 <span class="sx_label">筛选日期：</span>
+                 <span class="sx_rq">
+                 <a href="{:U('Member/investment',array('deal_status'=>$deal_status))}"  <if condition="$filter_date eq '' || $filter_date eq '0'">class="to_d"</if>>全部</a>
+                 <a href="{:U('Member/investment',array('filter_date'=>$tpl_today,'deal_status'=>$deal_status))}" <if condition="$filter_date eq $tpl_today">class="to_d"</if>>今天</a>
+                 <a href="{:U('Member/investment',array('filter_date'=>$tpl_one_week,'deal_status'=>$deal_status))}"  <if condition="$filter_date eq $tpl_one_week">class="to_d"</if>>最近一周</a>
+                 <a href="{:U('Member/investment',array('filter_date'=>$tpl_one_month,'deal_status'=>$deal_status))}"  <if condition="$filter_date eq $tpl_one_month">class="to_d"</if>>一个月</a>
+                 <a href="{:U('Member/investment',array('filter_date'=>$tpl_six_month,'deal_status'=>$deal_status))}"  <if condition="$filter_date eq $tpl_six_month">class="to_d"</if>>六个月</a>
+                 </span>
+             </div>
+             <div class="screening">
+                 <span class="sx_label">交易状态：</span>
+                 <span class="sx_rq">
+                 <a href="{:U('Member/investment',array('filter_date'=>$filter_date))}"  <if condition="$deal_status eq '' || $deal_status eq '0'">class="to_d"</if>>全部</a>
+                 <a href="{:U('Member/investment',array('filter_date'=>$filter_date,'deal_status'=>$tpl_deal_status['0']))}" <if condition="$deal_status eq $tpl_deal_status[0]">class="to_d"</if>>投标中</a>
+                 <a href="{:U('Member/investment',array('filter_date'=>$filter_date,'deal_status'=>$tpl_deal_status['1']))}" <if condition="$deal_status eq $tpl_deal_status[1]">class="to_d"</if>>投资满额</a>
+                 <a href="{:U('Member/investment',array('filter_date'=>$filter_date,'deal_status'=>$tpl_deal_status['3']))}" <if condition="$deal_status eq $tpl_deal_status[3]">class="to_d"</if>>回款中</a>
+                 <a href="{:U('Member/investment',array('filter_date'=>$filter_date,'deal_status'=>$tpl_deal_status['4']))}" <if condition="$deal_status eq $tpl_deal_status[4]">class="to_d"</if>>回款完毕</a>
+                 <a href="{:U('Member/investment',array('filter_date'=>$filter_date,'deal_status'=>$tpl_deal_status['2']))}" <if condition="$deal_status eq $tpl_deal_status[2]">class="to_d"</if>>投标失败</a>
+                 </span>               
+             </div>
+         </div>
+         </form>
+         <div class="record-tj">
+            <span>投资次数：共<font>{$count}</font>次</span>
+            <span>投资总额：<font>￥{$c.c}</font></span>
+            <span>累计收益：<font>￥{$c.earnings}</font></span>
+         </div>
+         
+         <div class="join-record">
+            <ul>
+            <empty name="list">
+             <li><center>暂无数据哦！~</center></li>
+            <else/>
+            <foreach name="list" item="v"> 
+               <li>
+                  <div class="join-left">
+                     <span class="record-nh">
+                        年化利率：<font><i class="list-rate">{$v.loan_rate|intval}%</i>
+                        <if condition="$v['loan_add_rate'] GT 0">
+                        <i>+{$v.loan_add_rate|intval}%</i>
+                        </if>
+                        <if condition="$v['user_add_rate'] neq ''">
+                        <i>+{$v.user_add_rate}%</i>
+                        </if>
+                        </font>
+                     </span>
+                     <span>计息日：<if condition="$v['repay_confirm_time'] neq 0">{$v.repay_confirm_time|date='Y-m-d',###}<else/>暂无</if></span>
+                     <span>到期日：<if condition="$v['expire_time'] neq 0">{$v.expire_time|date='Y-m-d',###}<else/>暂无</if></span>
+                  </div>
+                  <div class="join-right">
+                      <p class="join-name"><a href="{:U('Deal/DealContent',array('lid'=>$v['lid']))}" target="_blank">{$v.loan_title}</a>
+                      <if condition="$v['user_add_rate'] neq ''"><span>使用加息券+{$v.user_add_rate}%</span></if>
+                      <if condition="$v['repay_confirm_time'] EGT 4">
+                      <a href="{:U('invest_hetong',array('lid'=>$v['lid'],'id'=>$v['in_id']))}" target="_blank" class="contract">合同</a></p>
+                      </if>
+                      <p class="join-detail">
+                         <span>借款期限：<font>{$v.loan_deadline}<if condition="$v['loan_deadline_type'] eq 1">天<else/>个月</if></font></span>
+                         <span>交易状态：<font>
+                            <switch name="v.deal_status">
+                                <case value="1">进行中</case>
+                                <case value="2">满标</case>
+                                <case value="3">流标</case>
+                                <case value="4">还款中</case>
+                                <case value="5">已还清</case>                        
+                            </switch>                                
+                         </font></span>
+                         <span>已投资：<font>{$v.amount|format_price}</font></span>
+                         <span>已回款：<font><if condition="$v['status'] neq 1">未回款<else/>{$v.repayment_amount|format_price}</if></font></span>
+                         <span>待回款：<font><if condition="$v['status'] neq 1">{$v.repayment_amount|format_price}<else/>已还清</if></font></span>
+                         <span>投标时间：<font>{$v.in_create_time|date='Y-m-d',###}</font></span>
+                      </p>
+                  </div>
+               </li>
+              </foreach>
+              </empty>
+            </ul>
+            <div class="spacer"></div>
+         </div>
+         
+           <div class="page">
+              {$page}
+           </div>
+         <div class="spacer"></div>
+      </div>
+   </div>
+   <div class="spacer"></div>
+</div>
+
+<include file = "Common:bottom" />
+
+</body>
+</html>

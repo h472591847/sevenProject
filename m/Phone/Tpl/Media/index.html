@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>{$cate.name}_{$Think.config.web_title}</title>
+<meta name="keywords" content="{$Think.config.web_keywords}" />
+<meta name="description" content="<if condition="$cate['description'] neq ''">{$cate.description}<else/>{$Think.config.web_description}</if>" />
+
+</head>
+<link href="__PUBLIC__/css/style.css?<?php echo rand(0,1000);?>" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/css/mmenu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.mmenu.js"></script>
+
+<body>
+<div class="center">
+   <include file="Common:header"/>
+   <div class="top">
+     <a href="#menu" class="menu_button"></a>
+     <span>{$cate.name}</span>
+     <span></span>     
+    <include file="Common:ico"/>
+   </div>  
+   <div class="media">
+      <ul id="container">
+      <foreach name="list" item="v">
+         <li>
+           <span class="med_img"><img src="<if condition="$v['img'] neq ''">{$Think.config.host}{$v.img}<else/>/Public/Images/image_err.gif</if>" alt="" width="120" height="80"></span>
+           <span class="med_rig"><a href="{:U('Article/articleDetail')}?id={$v.id}">{$v.title}</a></span>
+           <span class="med_date"><font></font>{$v.time|date='Y-m-d',###}</span> 
+         </li>
+      </foreach>
+      <div id="loading" style="display:none"><img src="/Public/Images/loading.gif"></div>
+      </ul>
+      <div class="spacer"></div>
+   </div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+/*
+   滚动加载数据，加载成功则拼接html插入到页面中
+ */
+var cid = "{$cid}";
+var totalheight = 0; 
+var page = 0; 
+$(window).scroll( function() { 
+ totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());     
+   if ($(document).height() <= totalheight){     
+      page++;
+      $.ajax({
+         url:"{:U('Media/loadData')}",
+         type: "POST",
+         data: ({page:page,cid:cid}),      
+         beforeSend:function(){
+            $("#loading").show();//显示loading
+         },       
+         success:function(msg){
+            $("#loading").hide()//隐藏loading
+            if(msg.status == '1'){               
+               $container = $("#container");
+               var html = "";
+               var cover_img = "";//图片路径
+               for (var i = 0; i < msg.data.length; i++) {     
+                  if (msg.data[i].img != null){
+                    cover_img = "{$Think.config.host}"+msg.data[i].img;
+                  }else{
+                    cover_img = "/Public/Images/image_err.gif";
+                  }
+                  html = "<li><span class='med_img'><img src="+cover_img+" alt=\"\" width=\"120\" height=\"80\"></span>";
+                  html += "<span class=\"med_rig\"><a href=\"{:U('Article/articleDetail')}?id="+msg.data[i].id+"\">"+msg.data[i].title+"</a></span>";
+                  html += "<span class=\"med_date\"><font></font>"+msg.data[i].time+"</span></li>";                  
+                  $("#container").append(html);
+               };               
+               return false;
+            }
+         }          
+      });
+   } 
+}); 
+</script>
